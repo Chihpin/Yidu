@@ -1,0 +1,45 @@
+package org.yidu.novel.batch;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.yidu.novel.service.ArticleService;
+
+/**
+ * 
+ * <p>
+ * 清理统计信息
+ * </p>
+ * Copyright(c) 2013 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
+public class CleanStatisticsDataJob extends QuartzJobBean {
+    /**
+     * 输出log
+     */
+    private Log logger = LogFactory.getLog(this.getClass());
+
+    /**
+     * 小说关联操作服务
+     */
+    private ArticleService articleService;
+
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    @Override
+    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+        logger.debug("CleanStatisticsDataJob start.");
+        try {
+            articleService.cleanStatistics();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        logger.debug("CleanStatisticsDataJob normally end.");
+    }
+}

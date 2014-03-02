@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013/12/26 14:10:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.yidu.novel.entity.TSystemBlock" table="t_system_block" schema="public">
+        <comment>t_system_block</comment>
+        <id name="blockno" type="int">
+            <column name="blockno" />
+            <generator class="sequence">
+                <param name="sequence">t_system_block_blockno_seq</param>
+            </generator>
+        </id>
+        <property name="blockid" type="string">
+            <column name="blockid" length="32">
+                <comment>blockid</comment>
+            </column>
+        </property>
+        <property name="blockname" type="string">
+            <column name="blockname" length="32">
+                <comment>blockname</comment>
+            </column>
+        </property>
+        <property name="type" type="java.lang.Short">
+            <column name="type">
+                <comment>type : 10:aritcleList 20:custerartileList 20:html</comment>
+            </column>
+        </property>
+        <property name="sortcol" type="string">
+            <column name="sortcol" length="32">
+                <comment>sortcol</comment>
+            </column>
+        </property>
+        <property name="isasc" type="java.lang.Boolean">
+            <column name="isasc">
+                <comment>isasc</comment>
+            </column>
+        </property>
+        <property name="limitnum" type="java.lang.Integer">
+            <column name="limitnum">
+                <comment>limitnum</comment>
+            </column>
+        </property>
+        <property name="content" type="string">
+            <column name="content">
+                <comment>content</comment>
+            </column>
+        </property>
+        <property name="target" type="java.lang.Short">
+            <column name="target">
+                <comment>target : 1:articleList 2:info 3:contentList 4:reader 5:user page</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

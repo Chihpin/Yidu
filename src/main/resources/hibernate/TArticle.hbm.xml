@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013/12/26 14:10:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.yidu.novel.entity.TArticle" table="t_article" schema="public">
+        <comment>t_article</comment>
+        <id name="articleno" type="int">
+            <column name="articleno" />
+            <generator class="sequence">
+                 <param name="sequence">t_article_articleno_seq</param>
+            </generator>
+        </id>
+        <property name="articlename" type="string">
+            <column name="articlename" length="50">
+                <comment>articlename</comment>
+            </column>
+        </property>
+        <property name="initial" type="string">
+            <column name="initial" length="1">
+                <comment>initial</comment>
+            </column>
+        </property>
+        <property name="keywords" type="string">
+            <column name="keywords" length="500">
+                <comment>keywords</comment>
+            </column>
+        </property>
+        <property name="authorid" type="java.lang.Integer">
+            <column name="authorid">
+                <comment>authorid</comment>
+            </column>
+        </property>
+        <property name="author" type="string">
+            <column name="author" length="30">
+                <comment>author</comment>
+            </column>
+        </property>
+        <property name="category" type="java.lang.Integer">
+            <column name="category">
+                <comment>category</comment>
+            </column>
+        </property>
+        <property name="subcategory" type="java.lang.Integer">
+            <column name="subcategory">
+                <comment>subcategory</comment>
+            </column>
+        </property>
+        <property name="intro" type="string">
+            <column name="intro">
+                <comment>intro</comment>
+            </column>
+        </property>
+        <property name="lastchapterno" type="java.lang.Integer">
+            <column name="lastchapterno">
+                <comment>lastchapterno</comment>
+            </column>
+        </property>
+        <property name="lastchapter" type="string">
+            <column name="lastchapter" length="50">
+                <comment>lastchapter</comment>
+            </column>
+        </property>
+        <property name="chapters" type="java.lang.Integer">
+            <column name="chapters">
+                <comment>chapters</comment>
+            </column>
+        </property>
+        <property name="size" type="java.lang.Integer">
+            <column name="size">
+                <comment>size</comment>
+            </column>
+        </property>
+        <property name="fullflag" type="java.lang.Boolean">
+            <column name="fullflag">
+                <comment>fullflag</comment>
+            </column>
+        </property>
+        <property name="imgflag" type="java.lang.Integer">
+            <column name="imgflag">
+                <comment>imgflag</comment>
+            </column>
+        </property>
+        <property name="postdate" type="timestamp">
+            <column name="postdate" length="29">
+                <comment>postdate</comment>
+            </column>
+        </property>
+        <property name="lastupdate" type="timestamp">
+            <column name="lastupdate" length="29">
+                <comment>lastupdate</comment>
+            </column>
+        </property>
+        <property name="dayvisit" type="java.lang.Integer">
+            <column name="dayvisit">
+                <comment>dayvisit</comment>
+            </column>
+        </property>
+        <property name="weekvisit" type="java.lang.Integer">
+            <column name="weekvisit">
+                <comment>weekvisit</comment>
+            </column>
+        </property>
+        <property name="monthvisit" type="java.lang.Integer">
+            <column name="monthvisit">
+                <comment>monthvisit</comment>
+            </column>
+        </property>
+        <property name="allvisit" type="java.lang.Integer">
+            <column name="allvisit">
+                <comment>allvisit</comment>
+            </column>
+        </property>
+        <property name="dayvote" type="java.lang.Integer">
+            <column name="dayvote">
+                <comment>dayvote</comment>
+            </column>
+        </property>
+        <property name="weekvote" type="java.lang.Integer">
+            <column name="weekvote">
+                <comment>weekvote</comment>
+            </column>
+        </property>
+        <property name="monthvote" type="java.lang.Integer">
+            <column name="monthvote">
+                <comment>monthvote</comment>
+            </column>
+        </property>
+        <property name="allvote" type="java.lang.Integer">
+            <column name="allvote">
+                <comment>allvote</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="cleanStatisticsDataJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="org.yidu.novel.batch.CleanStatisticsDataJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="articleService">
+					<ref bean="articleService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="cleanStatisticsDataTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="cleanStatisticsDataJob" />
+		<property name="cronExpression" value="0 1 0 * * ?" />
+	</bean>
+
+	<bean id="createIndexJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="org.yidu.novel.batch.CreateIndexJob" />
+	</bean>
+
+
+	<bean id="createIndexTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="createIndexJob" />
+		<property name="cronExpression" value="0 */10 * * * ?" />
+	</bean>
+	
+	
+	<bean id="createSiteMapJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="org.yidu.novel.batch.CreateSiteMapJob" />
+    </bean>
+    
+    <bean id="createSiteMapTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="createSiteMapJob" />
+        <property name="cronExpression" value="0 */5 * * * ?" />
+    </bean>
+
+
+	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cleanStatisticsDataTimerTrigger" />
+				<ref bean="createIndexTimerTrigger" />
+				<ref bean="createSiteMapTimerTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

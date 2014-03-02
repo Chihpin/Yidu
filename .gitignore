@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+/jcs_swap
+/log
+/target
+/src/main/webapp/cover
+/src/main/webapp/txt
+/src/main/webapp/sitemap
+/DOC
+/conf
+/sitemap
+/txt

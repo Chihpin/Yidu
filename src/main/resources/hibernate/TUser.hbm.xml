@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013/12/26 14:10:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.yidu.novel.entity.TUser" table="t_user" schema="public">
+        <comment>&#131;&#134;&#129;[&#131;U</comment>
+        <id name="userno" type="int">
+            <column name="userno" />
+            <generator class="sequence">
+                <param name="sequence">t_user_userno_seq</param>
+            </generator>
+        </id>
+        <property name="loginid" type="string">
+            <column name="loginid" length="32" not-null="true">
+                <comment>loginid</comment>
+            </column>
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="32">
+                <comment>password</comment>
+            </column>
+        </property>
+        <property name="username" type="string">
+            <column name="username" length="32">
+                <comment>username</comment>
+            </column>
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="60">
+                <comment>email</comment>
+            </column>
+        </property>
+        <property name="regdate" type="timestamp">
+            <column name="regdate" length="29">
+                <comment>regdate</comment>
+            </column>
+        </property>
+        <property name="sex" type="java.lang.Short">
+            <column name="sex">
+                <comment>sex</comment>
+            </column>
+        </property>
+        <property name="qq" type="string">
+            <column name="qq" length="15">
+                <comment>qq</comment>
+            </column>
+        </property>
+        <property name="lastlogin" type="timestamp">
+            <column name="lastlogin" length="29">
+                <comment>lastlogin</comment>
+            </column>
+        </property>
+        <property name="lineno" type="string">
+            <column name="lineno" length="32">
+                <comment>lineno</comment>
+            </column>
+        </property>
+        <property name="type" type="java.lang.Short">
+            <column name="type">
+                <comment>type : 10:normal user 20:auther 30:system administrator</comment>
+            </column>
+        </property>
+        <property name="votecount" type="java.lang.Integer">
+            <column name="votecount">
+                <comment>votecount</comment>
+            </column>
+        </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag">
+                <comment>deleteflag</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

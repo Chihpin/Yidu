@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013/12/26 14:10:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.yidu.novel.entity.TChapter" table="t_chapter" schema="public">
+        <comment>t_chapter</comment>
+        <id name="chapterno" type="int">
+            <column name="chapterno" />
+            <generator class="sequence">
+                <param name="sequence">t_chapter_chapterno_seq</param>
+            </generator>
+        </id>
+        <property name="articleno" type="java.lang.Integer">
+            <column name="articleno">
+                <comment>articleno</comment>
+            </column>
+        </property>
+        <property name="articlename" type="string">
+            <column name="articlename" length="50">
+                <comment>articlename</comment>
+            </column>
+        </property>
+        <property name="chaptertype" type="java.lang.Short">
+            <column name="chaptertype">
+                <comment>chaptertype</comment>
+            </column>
+        </property>
+        <property name="chaptername" type="string">
+            <column name="chaptername" length="50">
+                <comment>chaptername</comment>
+            </column>
+        </property>
+        <property name="size" type="java.lang.Integer">
+            <column name="size">
+                <comment>size</comment>
+            </column>
+        </property>
+        <property name="isvip" type="java.lang.Boolean">
+            <column name="isvip">
+                <comment>isvip</comment>
+            </column>
+        </property>
+        <property name="postdate" type="timestamp">
+            <column name="postdate" length="29">
+                <comment>postdate</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

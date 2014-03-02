@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!-- Configuration file for UrlRewriteFilter http://www.tuckey.org/urlrewrite/ -->
+<urlrewrite>
+
+    <rule>
+        <note>
+            The rule means that requests to /test/status/ will be redirected to /rewrite-status
+            the url will be rewritten.
+        </note>
+        <from>/test/status/</from>
+        <to type="redirect">%{context-path}/rewrite-status</to>
+    </rule>
+
+    <outbound-rule>
+        <note>
+            The outbound-rule specifies that when response.encodeURL is called (if you are using JSTL c:url)
+            the url
+            /rewrite-status will be rewritten to /test/status/.
+
+            The above rule and this outbound-rule means that end users should
+            never see the
+            url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
+            in your pages.
+        </note>
+        <from>/rewrite-status</from>
+        <to>/test/status/</to>
+    </outbound-rule>
+    
+    <outbound-rule encodefirst="true">
+        <from>^(.*);jsessionid=.*$</from>
+        <to>$1</to>
+    </outbound-rule>
+
+    <!-- 小说列表开始 -->
+    <rule>
+        <from>^/list/(\d*)/(\d*)\.html$</from>
+        <to last="true">/articleList?category=$1&amp;page=$2</to>
+    </rule>
+
+    <rule>
+        <from>^/list/(\d*)\.html$</from>
+        <to last="true">/articleList?category=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/articleList\?category=(\d*)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/list/$1/$2\.html</to>
+    </outbound-rule>
+    
+    <outbound-rule>
+        <from>^/articleList\?category=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/list/$1\.html</to>
+    </outbound-rule>
+
+    <!-- 小说列表结束 -->
+
+    <rule>
+        <from>^/info/(\d*)\.html$</from>
+        <to last="true">/info\?articleno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/info\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/info/$1\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/info/(\d*)\.html$</from>
+        <to last="true">/info\?articleno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/info\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/info/$1\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/reader/(\d*)/(\d*)\.html$</from>
+        <to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/reader\?articleno=(\d*)\&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/reader/$1/$2\.html</to>
+    </outbound-rule>
+    
+    <rule>
+        <from>^/reader/(\d*)\.html$</from>
+        <to last="true">/reader\?chapterno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/reader\?chapterno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/reader/$1\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/author/(.+?)/(\d*)\.html$</from>
+        <to last="true">/articleList\?author=$1&amp;page=$2</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/articleList\?author=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/author/$1/$2\.html</to>
+    </outbound-rule>
+    
+    <rule>
+        <from>^/author/(.+?)\.html$</from>
+        <to last="true">/articleList\?author=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/articleList\?author=(.+?)(;jsessionid=.*)?$</from>
+        <to last="true">/author/$1\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/search/(.+?)/(\d*)\.html$</from>
+        <to last="true">/search\?key=$1&amp;page=$2</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/search\?key=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/search/$1/$2\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/wanben/(\d*)\.html$</from>
+        <to last="true">/articleList\?fullflag=true&amp;page=$1</to>
+    </rule>
+    
+    <outbound-rule>
+        <from>^/articleList\?fullflag=true&amp;page=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/wanben/$1\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/wanben/index.html$</from>
+        <to last="true">/articleList\?fullflag=true</to>
+    </rule>
+    
+    <outbound-rule>
+        <from>^/articleList\?fullflag=true(;jsessionid=.*)?$</from>
+        <to last="true">/wanben/index\.html</to>
+    </outbound-rule>
+    
+    <rule>
+        <from>^/sitemap/index.html$</from>
+        <to last="true">/siteMap</to>
+    </rule>
+    
+    <outbound-rule>
+        <from>^/siteMap(;jsessionid=.*)?$</from>
+        <to last="true">/sitemap/index\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/sitemap/index.html$</from>
+        <to last="true">/siteMap</to>
+    </rule>
+
+    <rule>
+        <from>^/addbookcase/(\d*)/(\d*)$</from>
+        <to last="true">/bookcase!add\?articleno=$1&amp;chapterno=$2</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/bookcase!add\?articleno=(\d*)&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/addbookcase/$1/$2</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/addbookcase/(\d*)$</from>
+        <to last="true">/bookcase!add\?articleno=$1</to>
+    </rule>
+    
+    <outbound-rule>
+        <from>^/bookcase!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/addbookcase/$1</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/deletebookcase/(\d*)$</from>
+        <to last="true">/bookcase!detele\?bookcaseno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/bookcase!delete\?bookcaseno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/deletebookcase/$1</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/download/(\d*).txt$</from>
+        <to last="true">/download\?articleno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/download\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/download/$1.txt</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/vote/(\d*).html$</from>
+        <to last="true">/vote\?articleno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/vote/$1.html</to>
+    </outbound-rule>   
+ 
+ <!-- 
+    INSTALLATION in your web.xml add...
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>WARN</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    EXAMPLES Redirect one url
+    <rule>
+        <from>/some/old/page.html</from>
+        <to type="redirect">/very/new/page.html</to>
+    </rule>
+    Redirect a directory
+    <rule>
+        <from>/some/olddir/(.*)</from>
+        <to type="redirect">/very/newdir/$1</to>
+    </rule>
+    Clean
+    a url
+    <rule>
+        <from>/products/([0-9]+)</from>
+        <to>/products/index.jsp?product_id=$1</to>
+    </rule>
+    eg, /products/1234 will be
+    passed on to /products/index.jsp?product_id=1234 without the user noticing. Browser detection
+    <rule>
+        <condition name="user-agent">Mozilla/[1-4]</condition>
+        <from>/some/page.html</from>
+        <to>/some/page-for-old-browsers.html</to>
+    </rule>
+    eg, will pass the request for /some/page.html
+    on to /some/page-for-old-browsers.html only for older browsers whose user agent srtings match Mozilla/1, Mozilla/2,
+    Mozilla/3
+    or Mozilla/4. Centralised browser detection
+    <rule>
+        <condition name="user-agent">Mozilla/[1-4]</condition>
+        <set type="request" name="browser">moz</set>
+    </rule>
+    eg, all requests will be checked against the condition and if matched request.setAttribute("browser",
+    "moz") will be called. 
+
+ -->
+
+</urlrewrite>
+
