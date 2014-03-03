@@ -125,12 +125,12 @@
 <tbody>
     <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.install.username" /></td>
-       <td class="even"><s:textfield name ="username" size="40" maxlength="100" cssClass="text" theme="simple"/><span class="hottext">填写绝对路径</span></td>
+       <td class="even"><s:textfield name ="username" size="40" maxlength="100" cssClass="text" theme="simple"/></td>
     </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.install.password" /></td>
-       <td class="even"><s:textfield name ="password" size="25" maxlength="100"  cssClass="text" theme="simple"/><span class="hottext">请填写相对路径</span></td>
+       <td class="even"><s:textfield name ="password" size="25" maxlength="100"  cssClass="text" theme="simple"/></td>
     </tr>
     <tr align="left" valign="middle">
        <td class="odd" colspan="2">
