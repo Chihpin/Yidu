@@ -21,27 +21,27 @@
   <header id="global-head" style="height:45px;">
     <div>
       <nav class="site-navigation cf">
-      <a class="home" href="/">网站首页</a>
-      <a href="/admin/index">管理首页</a>
+      <a class="home" href="<s:property value="contextPath" />/">网站首页</a>
+      <a href="<s:property value="contextPath" />/admin/index">管理首页</a>
       <a href="http://www.51yd.org/" target="_blank">官方论坛</a>
       </nav>
       <div class="hd-follow" style="width:300px;align:right" >
       <span id="checklogin">
-        欢迎您回来管理员同志，辛苦啦！<a href="/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>
+        欢迎您回来管理员同志，辛苦啦！<a href="<s:property value="contextPath" />/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>
       </span>
     </div>
   </header>
-  <link rel="stylesheet" type="text/css" href="/css/channel-net.css">
+  <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/channel-net.css">
     <div id="channel-header" class="clearfix">
       <div class="channel-header-wrapper">
         <nav class="channel-nav">
           <ul class="channel-nav-list">
-            <li><a href="/admin/configEdit" title="系统参数设置">系统参数设置</a></li>
-            <li><a href="/admin/languageEdit" title="语言包设置">语言包设置</a></li>
-            <li><a href="/admin/blockList" title="系区块管理">区块管理</a></li>
-            <li><a href="/admin/articleList" title="小说管理">小说管理</a></li>
-            <li><a href="/admin/userList" title="用户管理">用户管理</a></li>
-            <li><a href="/admin/messageList" title="消息管理">消息管理</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/configEdit" title="系统参数设置">系统参数设置</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/languageEdit" title="语言包设置">语言包设置</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/blockList" title="系区块管理">区块管理</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/articleList" title="小说管理">小说管理</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/userList" title="用户管理">用户管理</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/messageList" title="消息管理">消息管理</a></li>
         </ul>
       </nav>
     </div>

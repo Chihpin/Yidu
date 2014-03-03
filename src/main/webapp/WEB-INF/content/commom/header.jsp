@@ -64,7 +64,7 @@
   <header id="global-head" <s:if test="pageType==4">style="height:45px;"</s:if>>
     <div>
       <nav class="site-navigation cf">
-      <a class="home" href="/">首页</a>
+      <a class="home" href="<s:property value="contextPath" />/">首页</a>
       <a href="<s:url value="/siteMap" escapeAmp="false"></s:url>">网站地图</a>
       <a href="<s:url value="/articleList" escapeAmp="false"><s:param name="fullflag" value="true" /></s:url>">完本小说</a>
       </nav>
@@ -84,7 +84,7 @@
           <span id="checklogin"  align="right">
           <script>
             $(document).ready(function(){
-                $.post('/checklogin',function(data){
+                $.post('<s:property value="contextPath" />/checklogin',function(data){
                     if(data==null)
                     {
                         $(".hd-follow").width(197);
@@ -108,8 +108,8 @@
               {
               thisUrl = thisUrl.substring(0,thisUrl.indexOf('?backUrl'));
               }
-              logintag =" <a href=\"/login?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;";
-              registertag =" <a href=\"/register?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;";
+              logintag =" <a href=\"<s:property value="contextPath" />/login?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;";
+              registertag =" <a href=\"<s:property value="contextPath" />/register?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;";
               document.writeln(logintag);
               document.writeln(registertag);
            </script>
@@ -118,11 +118,11 @@
     </div>
     <s:if test="pageType!=4 || hasActionErrors()">
     <p class="site-logo">
-        <a href="/" title="<s:text name="label.system.title" />">
+        <a href="<s:property value="contextPath" />/" title="<s:text name="label.system.title" />">
         <img src="<s:property value="contextPath" />/images/logo-medium.png" alt="<s:text name="label.system.title" /> - logo"></a>
     </p>
     <div class="site-search">
-       <form action="search" method="get" >
+       <form action="<s:property value="contextPath" />/search" method="get" >
        <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value="这是一个神奇的搜索，请输入小说名或作者名" />
        <input type="submit" id="searchbuttom" value="" style="background:url('<s:property value="contextPath" />/images/search.jpg');border:0px solid;cursor:pointer;" />
       </form>
@@ -134,7 +134,7 @@
     <div class="channel-header-wrapper">
       <nav class="channel-nav">
         <ul class="channel-nav-list">
-            <li <s:if test="pageType==1">class="current"</s:if> ><a href="/" title="<s:text name="label.system.name" />"><s:text name="label.system.name" /></a></li>
+            <li <s:if test="pageType==1">class="current"</s:if> ><a href="<s:property value="contextPath" />/" title="<s:text name="label.system.name" />"><s:text name="label.system.name" /></a></li>
             <s:iterator value="collections['collectionProperties.article.category']" id="categoryinfo">
                 <li <s:if test="key==category">class="current"</s:if> ><a href="<s:url value="/articleList" escapeAmp="false"><s:param name="category" value="key" /></s:url>"><s:property value="value"/></a></li>
             </s:iterator>
