@@ -94,7 +94,7 @@
             <a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="backfor">返回目录</a>
             <a href="<s:if test="chapter.nextChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.nextChapterno" /></s:url></s:else>" class="next">下一章</a>
             <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
-                 <a href="/modules/article/addbookcase.php?bid=17664&cid=9608537" title="加入书签"  target="_blank">加入书签</a>
+                 <a href="<s:url value="/bookcase!add" escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.chapterno" /></s:url>" title="加入书签"  target="_blank">加入书签</a>
             </p></div>
         <script type="text/javascript" src="/ad/reader3.js"></script>
         </div>

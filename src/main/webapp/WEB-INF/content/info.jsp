@@ -6,7 +6,7 @@
     <div id="container">
     <script type="text/javascript" src="/ad/info1.js"></script>
     <div class="mainnav"><div class="main-index"> > 
-        <a href="/modules/article/articlelist.php?class=1" class="c009900">
+        <a href="<s:url value="/articleList" escapeAmp="false"><s:param name="category" value="article.category" /></s:url>" class="c009900">
         <s:property  value="collections['collectionProperties.article.category'][article.category]" /></a> > 
         <s:property  value="article.articlename" />
     </div>

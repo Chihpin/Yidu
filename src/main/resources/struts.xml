@@ -11,7 +11,7 @@
     <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
     <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
     <constant name="struts.devMode" value="false" />
-    <constant name="struts.i18n.reload" value="true" />
+    <constant name="struts.i18n.reload" value="false" />
     <constant name="struts.custom.i18n.resources" value="language.package" />
     <package name="yidu-default" extends="struts-default">
         <result-types>
