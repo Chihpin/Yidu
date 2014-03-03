@@ -43,11 +43,13 @@ public class CookieUtils {
                     String value = cookie.getValue();
                     if (StringUtils.isNotBlank(value)) {
                         String[] split = value.split(",");
-                        String loginid = split[0];
-                        String password = split[1];
-                        TUser user = userService.findByLoginInfoByJDBC(loginid, password);
-                        if (user != null) {
-                            LoginManager.doLogin(user);
+                        if (split.length == 2) {
+                            String loginid = split[0];
+                            String password = split[1];
+                            TUser user = userService.findByLoginInfoByJDBC(loginid, password);
+                            if (user != null) {
+                                LoginManager.doLogin(user);
+                            }
                         }
                     }
                 }
