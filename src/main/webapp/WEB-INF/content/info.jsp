@@ -4,7 +4,7 @@
 <html>
     <jsp:include page="/WEB-INF/content/commom/header.jsp" />
     <div id="container">
-    <script type="text/javascript" src="/ad/info1.js"></script>
+    <script type="text/javascript" src="<s:property value="contextPath" />/ad/info1.js"></script>
     <div class="mainnav"><div class="main-index"> > 
         <a href="<s:url value="/articleList" escapeAmp="false"><s:param name="category" value="article.category" /></s:url>" class="c009900">
         <s:property  value="collections['collectionProperties.article.category'][article.category]" /></a> > 
@@ -12,7 +12,7 @@
     </div>
     <section class="main b-detail">
         <div class="detail">
-            <s:if test="#article.fullflag"><img src="/images/only.png" class="leftso png_bg"></s:if><s:else><img src="/images/only2.png" class="leftso png_bg"></s:else>
+            <s:if test="#article.fullflag"><img src="<s:property value="contextPath" />/images/only.png" class="leftso png_bg"></s:if><s:else><img src="<s:property value="contextPath" />/images/only2.png" class="leftso png_bg"></s:else>
             <a href="<s:url value="/info" ><s:param name="articleno" value="article.articleno" /></s:url>"  class="l mr11">
                  <img src="<s:property value="article.imgUrl" />" style="width: 120px; height: 150px"/></a>
         <div class="b-info">
@@ -34,28 +34,28 @@
         <div class="scores">
             <h2>评分</h2>
             <p id="fenshuview">10.0<br>
-                <img src="/images/s2.png">
-                <img src="/images/s2.png">
-                <img src="/images/s2.png">
-                <img src="/images/s2.png">
-                <img src="/images/s2.png">
+                <img src="<s:property value="contextPath" />/images/s2.png">
+                <img src="<s:property value="contextPath" />/images/s2.png">
+                <img src="<s:property value="contextPath" />/images/s2.png">
+                <img src="<s:property value="contextPath" />/images/s2.png">
+                <img src="<s:property value="contextPath" />/images/s2.png">
             </p>
             <div class="sets">
                <div class="scoreSet">
                    <span>
-                        <img src="/images/s1.png">
-                        <img src="/images/s1.png">
-                        <img src="/images/s1.png">
-                        <img src="/images/s1.png">
+                        <img src="<s:property value="contextPath" />/images/s1.png">
+                        <img src="<s:property value="contextPath" />/images/s1.png">
+                        <img src="<s:property value="contextPath" />/images/s1.png">
+                        <img src="<s:property value="contextPath" />/images/s1.png">
                    </span>
                     <input type="hidden" value="8" id="fenshu" />
                     <input type="hidden" value="7940" id="articleid" />
                     <ul id="xingxing">
-                        <li value="2"><img src="/images/s1.png"></li>
-                        <li value="4"><img src="/images/s1.png"><img src="/images/s1.png"></li>
-                        <li value="6"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"></li>
-                        <li value="8"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"></li>
-                        <li value="10"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"></li>
+                        <li value="2"><img src="<s:property value="contextPath" />/images/s1.png"></li>
+                        <li value="4"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"></li>
+                        <li value="6"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"></li>
+                        <li value="8"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"></li>
+                        <li value="10"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"><img src="<s:property value="contextPath" />/images/s1.png"></li>
                     </ul>
                 </div>
                 <input type="button" id="submitfenshu" value="确定"/>
@@ -80,13 +80,13 @@
                     </dd>
                 </dl>
             </div>
-            <div class="adv"><script src="/ad/info2.js" type="text/javascript"></script></div>
+            <div class="adv"><script src="<s:property value="contextPath" />/ad/info2.js" type="text/javascript"></script></div>
             <div class="clear"></div>
         </div>
     </div>
     </section>
     </div>
-    <div class="bookNew"><script src="/ad/info3.js" type="text/javascript"></script></div>
+    <div class="bookNew"><script src="<s:property value="contextPath" />/ad/info3.js" type="text/javascript"></script></div>
     <div class="chapterNum">
         <a name="chapters"></a>
           <ul>
@@ -101,7 +101,7 @@
           </ul>
         </div>
     </div>
-    <script type="text/javascript" src="/ad/info4.js"></script>
+    <script type="text/javascript" src="<s:property value="contextPath" />/ad/info4.js"></script>
  
 <jsp:include page="/WEB-INF/content/commom/footer.jsp" />
 

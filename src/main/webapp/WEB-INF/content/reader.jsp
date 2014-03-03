@@ -28,12 +28,12 @@
     <div class="mainnav">
         <div class="main-index" id="direct">
             <span class="r mr10"> 
-                <form action="/search" method="get" >
+                <form action="<s:property value="contextPath" />/search" method="get" >
                     搜小说：<input type="text" name="key" value="" />
                     <button type="submit" >搜</button>
                 </form>
             </span>
-    位置：<a href="/" class="c009900"><s:text name="label.system.name" /></a> > 
+    位置：<a href="<s:property value="contextPath" />/" class="c009900"><s:text name="label.system.name" /></a> > 
     <a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><s:property value="chapter.articlename"/></a>  > 
     <s:property value="chapter.chaptername"/></div>
     <section class="main b-detail" id="directs">
@@ -84,11 +84,11 @@
                 </li>
             </ul>
         </div>
-        <script type="text/javascript" src="/ad/reader1.js"></script>
+        <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader1.js"></script>
         <div class="mainContenr"   id="content">
             <s:property value="chapter.content" escape="false" />
         </div>
-        <script type="text/javascript" src="/ad/reader2.js"></script>
+        <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader2.js"></script>
         <div class="backs">
             <a href="<s:if test="chapter.preChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.preChapterno" /></s:url></s:else>" class="pre">上一章</a>
             <a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="backfor">返回目录</a>
@@ -96,7 +96,7 @@
             <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
                  <a href="<s:url value="/bookcase!add" escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.chapterno" /></s:url>" title="加入书签"  target="_blank">加入书签</a>
             </p></div>
-        <script type="text/javascript" src="/ad/reader3.js"></script>
+        <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader3.js"></script>
         </div>
        </section>
        <div class="attention">
