@@ -8,7 +8,7 @@
             <center>
                 <span id="ErrorList"><s:fielderror /> <s:actionerror /></span>
             </center>
-            <table class="grid" align="center" width="400">
+            <table class="grid" align="center" width="500">
               <caption>
                 登陆<s:text name="label.system.name" />
               </caption>
