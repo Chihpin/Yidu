@@ -2,6 +2,8 @@ package org.yidu.novel.interceptor;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.action.base.AbstractUserBaseAction;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -20,55 +22,35 @@ public class MobileInterceptor extends AbstractInterceptor {
         invocation.addPreResultListener(new PreResultListener() {
             public void beforeResult(ActionInvocation invocation, String resultCode) {
 
-                // check if a wireless version of the page exists
-                // by looking for a wireless action mapping in the struts.xml
-                // Map<String, ResultConfig> results =
-                // invocation.getProxy().getConfig().getResults();
-                // System.out.println("Results:" + results.toString());
-                // if (!results.containsKey(resultCode +
-                // RESULT_CODE_SUFFIX_MOBILE)) {
-                // return;
-                // }
+                if (invocation.getAction() instanceof AbstractPublicBaseAction
+                        || invocation.getAction() instanceof AbstractUserBaseAction) {
+                    // 公众页和用户页显示手机版网页
+                    // 只过滤正常结果
+                    if (StringUtils.equalsIgnoreCase(resultCode, Action.INPUT)
+                            || StringUtils.equals(resultCode, Action.SUCCESS)
+                            || StringUtils.equals(resultCode, Action.ERROR)) {
 
-                // send to mobile version if mobile browser is used
-                // final String acceptHeader =
-                // ServletActionContext.getRequest().getHeader(REQUEST_HEADER_ACCEPT);
-                //
-                // System.out.println("acceptHeader: " + acceptHeader);
-                //
-                // if (acceptHeader != null &&
-                // acceptHeader.toLowerCase().contains(ACCEPT_HEADER_MOBILE)) {
-                // invocation.setResultCode(resultCode +
-                // RESULT_CODE_SUFFIX_MOBILE);
-                // return;
-                // }
+                        // 获取User Agent
+                        String userAgent = ServletActionContext.getRequest().getHeader("User-Agent");
+                        System.out.println("UA: " + userAgent);
 
-                if (StringUtils.equalsIgnoreCase(resultCode, Action.INPUT)
-                        || StringUtils.equals(resultCode, Action.SUCCESS)
-                        || StringUtils.equals(resultCode, Action.ERROR)) {
+                        // 手机版本标识
+                        boolean showMobileVersion = false;
 
-                    // Get User Agent String
-                    String userAgent = ServletActionContext.getRequest().getHeader("User-Agent");
-                    System.out.println("UA: " + userAgent);
-
-                    // Boolean to indicate whether to show mobile version
-                    boolean showMobileVersion = false;
-
-                    // Run through each entry in the list of browsers
-                    for (String ua : MOBILE_BROWSER_UAS) {
-                        if (userAgent.toLowerCase().matches(".*" + ua.toLowerCase() + ".*")) {
-                            showMobileVersion = true;
-                            break;
+                        // 当前userAgent是不是手机
+                        for (String ua : MOBILE_BROWSER_UAS) {
+                            if (userAgent.toLowerCase().matches(".*" + ua.toLowerCase() + ".*")) {
+                                showMobileVersion = true;
+                                break;
+                            }
                         }
-                    }
-
-                    if (showMobileVersion) {
-                        invocation.setResultCode(resultCode + RESULT_CODE_SUFFIX_MOBILE);
+                        if (showMobileVersion) {
+                            invocation.setResultCode(resultCode + RESULT_CODE_SUFFIX_MOBILE);
+                        }
                     }
                 }
             }
         });
-
         return invocation.invoke();
     }
 }

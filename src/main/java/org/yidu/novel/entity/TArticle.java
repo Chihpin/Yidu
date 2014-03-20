@@ -288,6 +288,10 @@ public class TArticle implements java.io.Serializable {
         return getIntro();
     }
 
+    public Integer getSubdir() {
+        return this.articleno / 1000;
+    }
+
     public String getLastchapterOmit() {
         if (getLastchapter() != null && getLastchapter().length() > 10) {
             return getLastchapter().substring(0, 10);

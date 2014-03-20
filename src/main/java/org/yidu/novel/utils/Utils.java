@@ -61,7 +61,13 @@ public class Utils {
     public static String getContext(int articleno, int chapterno, boolean escape) {
         StringBuilder sb = new StringBuilder();
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
+
+        // path = ServletActionContext.getServletContext().getRealPath("/") +
+        // "/" + path + "/" + articleno / 1000 + "/"
+        // + articleno + "/" + chapterno + ".txt";
+
         path = path + "/" + articleno / 1000 + "/" + articleno + "/" + chapterno + ".txt";
+
         File file = new File(path);
         try {
             if (file.isFile() && file.exists()) {
@@ -77,15 +83,15 @@ public class Utils {
                         sb.append("\n");
                     }
                 }
+                bufferedReader.close();
                 read.close();
                 if (escape) {
                     return sb.toString().replaceAll("\\s", "&nbsp;");
                 } else {
                     return sb.toString();
                 }
-
             } else {
-                logger.info("can not find chapter.");
+                logger.info("can not find chapter.articleno:" + articleno + "chapterno:" + chapterno);
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
@@ -123,14 +124,14 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
             PropertiesConfiguration languageConf = new PropertiesConfiguration(Thread.currentThread()
                     .getContextClassLoader().getResource("language/package.properties"));
 
-            languageConf.getString(YiDuConfig.TITLE, title);
-            languageConf.getString(YiDuConfig.SITEKEYWORDS, siteKeywords);
-            languageConf.getString(YiDuConfig.SITEDESCRIPTION, siteDescription);
-            languageConf.getString(YiDuConfig.NAME, name);
-            languageConf.getString(YiDuConfig.URL, url);
-            languageConf.getString(YiDuConfig.COPYRIGHT, copyright);
-            languageConf.getString(YiDuConfig.BEIANNO, beianNo);
-            languageConf.getString(YiDuConfig.ANALYTICSCODE, analyticscode);
+            languageConf.setProperty(YiDuConfig.TITLE, escape(title));
+            languageConf.setProperty(YiDuConfig.SITEKEYWORDS, escape(siteKeywords));
+            languageConf.setProperty(YiDuConfig.SITEDESCRIPTION, escape(siteDescription));
+            languageConf.setProperty(YiDuConfig.NAME, escape(name));
+            languageConf.setProperty(YiDuConfig.URL, escape(url));
+            languageConf.setProperty(YiDuConfig.COPYRIGHT, escape(copyright));
+            languageConf.setProperty(YiDuConfig.BEIANNO, escape(beianNo));
+            languageConf.setProperty(YiDuConfig.ANALYTICSCODE, escape(analyticscode));
 
             File languageFile = new File(languageConf.getPath());
             OutputStream out = new FileOutputStream(languageFile);
@@ -147,4 +148,9 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
 
     }
 
+    // 字符转义
+    private String escape(String value) {
+        // TODO 可能需要扩展
+        return StringUtils.replace(value, ",", "\\,");
+    }
 }

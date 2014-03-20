@@ -5,20 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.IndexAction;
 import org.yidu.novel.bean.ArticleSearchBean;
-import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.cache.CacheManager;
-import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.dto.ArticleDTO;
 import org.yidu.novel.entity.TArticle;
-import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.entity.TSystemBlock;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.CookieUtils;
@@ -54,8 +50,6 @@ public abstract class AbstractPublicBaseAction extends AbstractBaseAction {
      */
     private Map<String, Object> blocks = new HashMap<String, Object>();
 
-    private List<TChapter> historyList = new ArrayList<TChapter>();
-
     public Map<String, Object> getBlocks() {
         return blocks;
     }
@@ -64,49 +58,23 @@ public abstract class AbstractPublicBaseAction extends AbstractBaseAction {
         this.blocks = blocks;
     }
 
-    public List<TChapter> getHistoryList() {
-        return historyList;
-    }
-
-    public void setHistoryList(List<TChapter> historyList) {
-        this.historyList = historyList;
-    }
-
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
         loadBlock();
-        initCollections(new String[] { "collectionProperties.article.category" });
         // Cookie
         if (!LoginManager.isLoginFlag()) {
             CookieUtils.getUserCookieAndLogoin(ServletActionContext.getRequest(), userService);
         }
-
         loadData();
+        loadReadHistory();
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
+            setHasError(true);
             return ERROR;
         }
-
-        // 获得阅读履历
-        String historys = CookieUtils.getHistoryCookie(ServletActionContext.getRequest());
-        if (StringUtils.isNotEmpty(historys)) {
-            String[] acnos = StringUtils.split(historys, ",");
-            List<String> chapternoList = new ArrayList<String>();
-            for (String articleAndchapterno : acnos) {
-                String[] acnoArr = StringUtils.split(articleAndchapterno, "|");
-                if (acnoArr.length == 2) {
-                    chapternoList.add(acnoArr[1]);
-                }
-            }
-            if (chapternoList.size() > 0) {
-                ChapterSearchBean searchBean = new ChapterSearchBean();
-                searchBean.setChapternos(StringUtils.join(chapternoList, ","));
-                this.historyList = this.chapterService.find(searchBean);
-            }
-        }
         logger.debug("execute normally end.");
-        return INPUT;
+        return FREEMARKER;
     }
 
     // 初始化区块信息
@@ -204,15 +172,4 @@ public abstract class AbstractPublicBaseAction extends AbstractBaseAction {
         return LoginManager.getLoginUser();
     }
 
-    /**
-     * 
-     * <p>
-     * 获取启用广告标识
-     * </p>
-     * 
-     * @return 启用广告标识
-     */
-    public boolean getAdEffective() {
-        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.AD_EFFECTIVE, true);
-    }
 }

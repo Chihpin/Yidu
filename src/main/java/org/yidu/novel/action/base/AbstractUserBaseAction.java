@@ -1,9 +1,8 @@
 package org.yidu.novel.action.base;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 /**
- * 
- * 
  * <p>
  * 用户画面的基类
  * </p>
@@ -22,5 +21,24 @@ public abstract class AbstractUserBaseAction extends AbstractBaseAction {
      * 命名空间。
      */
     public static final String NAMESPACE = "/user";
+
+    @Override
+    @SkipValidation
+    public String execute() {
+        logger.debug("execute start.");
+        loadData();
+        loadReadHistory();
+        if (this.hasErrors()) {
+            logger.debug("execute abnormally end.");
+            setHasError(true);
+            return ERROR;
+        }
+        logger.debug("execute normally end.");
+        return FREEMARKER;
+    }
+
+    public abstract int getPageType();
+
+    public abstract String getTempName();
 
 }

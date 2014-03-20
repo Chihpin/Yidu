@@ -56,7 +56,7 @@
 		</init-param>
 		<init-param>
 			<param-name>statusEnabled</param-name>
-			<param-value>true</param-value>
+			<param-value>false</param-value>
 		</init-param>
 		<!-- <init-param> <param-name>statusEnabledOnHosts</param-name> <param-value>localhost, 
 			*.kaixinwx.com</param-value> </init-param> -->
@@ -93,5 +93,5 @@
       <error-code>404</error-code>
       <location>/error/404.html</location>
     </error-page>
-
+    
 </web-app>

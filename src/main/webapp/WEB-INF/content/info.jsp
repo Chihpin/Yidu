@@ -4,6 +4,8 @@
 <html>
     <jsp:include page="/WEB-INF/content/commom/header.jsp" />
     <div id="container">
+
+
     <script type="text/javascript" src="<s:property value="contextPath" />/ad/info1.js"></script>
     <div class="mainnav"><div class="main-index"> > 
         <a href="<s:url value="/articleList" escapeAmp="false"><s:param name="category" value="article.category" /></s:url>" class="c009900">
@@ -12,8 +14,9 @@
     </div>
     <section class="main b-detail">
         <div class="detail">
+
             <s:if test="#article.fullflag"><img src="<s:property value="contextPath" />/images/only.png" class="leftso png_bg"></s:if><s:else><img src="<s:property value="contextPath" />/images/only2.png" class="leftso png_bg"></s:else>
-            <a href="<s:url value="/info" ><s:param name="articleno" value="article.articleno" /></s:url>"  class="l mr11">
+            <a href="<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="article.subdir" /><s:param name="articleno" value="article.articleno" /></s:url>"  class="l mr11">
                  <img src="<s:property value="article.imgUrl" />" style="width: 120px; height: 150px"/></a>
         <div class="b-info">
           <h1><s:property  value="article.articlename" /></h1>
@@ -24,8 +27,8 @@
           </div>
           <div class="b-oper">
               <a href="#chapters" class="reader" title="<s:property  value="article.articlename" />免费阅读">开始阅读</a>
-              <a href="<s:url value="/bookcase!add" escapeAmp="false"><s:param name="articleno" value="article.articleno" /></s:url>" target="_blank" class="mehide" >加入书架</a>
-              <a href="<s:url value="/vote" escapeAmp="false"><s:param name="articleno" value="article.articleno" /></s:url>" target="_blank"  id="toupiao"  class="toupiao">给本书投票</a>
+              <a href="<s:url value="/user/bookcase!add" escapeAmp="false"><s:param name="articleno" value="article.articleno" /></s:url>" target="_blank" class="mehide" >加入书架</a>
+              <a href="<s:url value="/user/vote" escapeAmp="false"><s:param name="articleno" value="article.articleno" /></s:url>" target="_blank"  id="toupiao"  class="toupiao">给本书投票</a>
               <a href="#" id="toupiaonum" class="meNum"><s:property  value="article.allvote" /></a>
               <a href="javascript:;"  class="error">内容报错</a>
           </div>
@@ -34,6 +37,7 @@
         <div class="scores">
             <h2>评分</h2>
             <p id="fenshuview">10.0<br>
+
                 <img src="<s:property value="contextPath" />/images/s2.png">
                 <img src="<s:property value="contextPath" />/images/s2.png">
                 <img src="<s:property value="contextPath" />/images/s2.png">
@@ -75,17 +79,20 @@
                 <dl><dt>TXT下载：</dt><dd><a href="<s:url value="/download" escapeAmp="false"><s:param name="articleno" value="article.articleno" /></s:url>" target="_blank"><font color="red" >全本下载</font></a></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>
-                    <a href="<s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="article.articleno" /><s:param name="chapterno" value="article.lastchapterno" /></s:url>" target="_blank"><s:property value="article.lastchapter" /></a>
+
+                    <a href="<s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="article.subdir" /><s:param name="articleno" value="article.articleno" /><s:param name="chapterno" value="article.lastchapterno" /></s:url>" target="_blank"><s:property value="article.lastchapter" /></a>
                     <em>更新于:[<s:date name="article.lastupdate" format="yyyy/MM/dd HH:mm" />]</em><br />
                     </dd>
                 </dl>
             </div>
+
             <div class="adv"><script src="<s:property value="contextPath" />/ad/info2.js" type="text/javascript"></script></div>
             <div class="clear"></div>
         </div>
     </div>
     </section>
     </div>
+
     <div class="bookNew"><script src="<s:property value="contextPath" />/ad/info3.js" type="text/javascript"></script></div>
     <div class="chapterNum">
         <a name="chapters"></a>
@@ -94,13 +101,15 @@
             <s:iterator value="chapterList" id="chapter">
                 <s:if test="#chapter.chaptertype == 0">
                     <li>
-                       <a href="<s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="article.articleno" /><s:param name="chapterno" value="#chapter.chapterno" /></s:url>" title="<s:property value="#chapter.chaptername" />"><s:property value="#chapter.chaptername" /></a>
+
+                       <a href="<s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="article.subdir" /><s:param name="articleno" value="article.articleno" /><s:param name="chapterno" value="#chapter.chapterno" /></s:url>" title="<s:property value="#chapter.chaptername" />"><s:property value="#chapter.chaptername" /></a>
                     </li>
                 </s:if>
             </s:iterator>
           </ul>
         </div>
     </div>
+
     <script type="text/javascript" src="<s:property value="contextPath" />/ad/info4.js"></script>
  
 <jsp:include page="/WEB-INF/content/commom/footer.jsp" />

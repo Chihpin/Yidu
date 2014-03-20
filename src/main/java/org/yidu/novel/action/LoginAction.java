@@ -68,6 +68,10 @@ public class LoginAction extends AbstractPublicBaseAction {
         this.useCookie = useCookie;
     }
 
+    public String getTempName() {
+        return "login";
+    }
+
     @SkipValidation
     public String execute() {
         logger.info("LoginAction execute has been excuted.");
@@ -75,7 +79,7 @@ public class LoginAction extends AbstractPublicBaseAction {
         if (LoginManager.isLoginFlag()) {
             return GO_TOP;
         } else {
-            return INPUT;
+            return FREEMARKER;
         }
     }
 
@@ -98,7 +102,7 @@ public class LoginAction extends AbstractPublicBaseAction {
             addActionError(getText("errors.login.failed"));
             logger.debug("LoginAction login user is not exist. abnormally end.");
         }
-        return INPUT;
+        return FREEMARKER;
     }
 
     @Override

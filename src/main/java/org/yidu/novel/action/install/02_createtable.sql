@@ -112,7 +112,7 @@ CREATE TABLE t_bookcase
 	category int,
 	userno int,
 	username varchar(50),
-	chapterid int,
+	chapterno int,
 	chaptername varchar(100),
 	lastvisit timestamp,
 	createtime timestamp,
@@ -150,8 +150,8 @@ CREATE TABLE t_article
 	allvisit int DEFAULT 0,
 	dayvote int DEFAULT 0,
 	weekvote int DEFAULT 0,
-	monthvote int,
-	allvote int,
+	monthvote int DEFAULT 0,
+	allvote int DEFAULT 0,
 	PRIMARY KEY (articleno)
 ) WITHOUT OIDS;
 

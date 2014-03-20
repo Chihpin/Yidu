@@ -4,7 +4,7 @@
 
 <!-- Configuration file for UrlRewriteFilter http://www.tuckey.org/urlrewrite/ -->
 <urlrewrite>
-
+    <!-- 
     <rule>
         <note>
             The rule means that requests to /test/status/ will be redirected to /rewrite-status
@@ -28,204 +28,197 @@
         <from>/rewrite-status</from>
         <to>/test/status/</to>
     </outbound-rule>
-    
+     -->
     <outbound-rule encodefirst="true">
         <from>^(.*);jsessionid=.*$</from>
         <to>$1</to>
     </outbound-rule>
 
     <!-- 小说列表开始 -->
-    <rule>
-        <from>^/list/(\d*)/(\d*)\.html$</from>
-        <to last="true">/articleList?category=$1&amp;page=$2</to>
-    </rule>
 
-    <rule>
-        <from>^/list/(\d*)\.html$</from>
-        <to last="true">/articleList?category=$1</to>
-    </rule>
+	<rule>
+		<from>^/list/(\d*)\.html$</from>
+		<to last="true">/articleList?category=$1</to>
+	</rule>
+	<outbound-rule>
+		<from>^/articleList\?category=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/list/$1\.html</to>
+	</outbound-rule>
 
-    <outbound-rule>
-        <from>^/articleList\?category=(\d*)&amp;page=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/list/$1/$2\.html</to>
-    </outbound-rule>
-    
-    <outbound-rule>
-        <from>^/articleList\?category=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/list/$1\.html</to>
-    </outbound-rule>
+	<rule>
+		<from>^/list/(\d*)/(\d*)\.html$</from>
+		<to last="true">/articleList?category=$1&amp;page=$2</to>
+	</rule>
+	<outbound-rule>
+		<from>^/articleList\?category=(\d*)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/list/$1/$2\.html</to>
+	</outbound-rule>
 
-    <!-- 小说列表结束 -->
+	<!-- 小说列表结束 -->
 
-    <rule>
-        <from>^/info/(\d*)\.html$</from>
-        <to last="true">/info\?articleno=$1</to>
-    </rule>
+	<rule>
+		<from>^/info/\d*/(\d*)\.html$</from>
+		<to last="true">/info\?articleno=$1</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/info\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/info/$1\.html</to>
-    </outbound-rule>
+	<rule>
+		<from>^/info/(\d*)\.html$</from>
+		<to last="true">/info\?articleno=$1</to>
+	</rule>
 
-    <rule>
-        <from>^/info/(\d*)\.html$</from>
-        <to last="true">/info\?articleno=$1</to>
-    </rule>
+	<rule>
+		<from>^/info/(\d*)\.html$</from>
+		<to last="true">/info\?articleno=$1</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/info\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/info/$1\.html</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/info\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/info/$1/$2\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/reader/(\d*)/(\d*)\.html$</from>
-        <to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
-    </rule>
+	<rule>
+		<from>^/reader/\d*/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/reader\?articleno=(\d*)\&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/reader/$1/$2\.html</to>
-    </outbound-rule>
-    
-    <rule>
-        <from>^/reader/(\d*)\.html$</from>
-        <to last="true">/reader\?chapterno=$1</to>
-    </rule>
+	<rule>
+		<from>^/reader/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/reader\?chapterno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/reader/$1\.html</to>
-    </outbound-rule>
+	<rule>
+		<from>^/reader/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
+	</rule>
 
-    <rule>
-        <from>^/author/(.+?)/(\d*)\.html$</from>
-        <to last="true">/articleList\?author=$1&amp;page=$2</to>
-    </rule>
+	<outbound-rule>
+		<from>^/reader\?subdir=(\d*)&amp;articleno=(\d*)\&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/reader/$1/$2/$3\.html</to>
+	</outbound-rule>
 
-    <outbound-rule>
-        <from>^/articleList\?author=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/author/$1/$2\.html</to>
-    </outbound-rule>
-    
-    <rule>
-        <from>^/author/(.+?)\.html$</from>
-        <to last="true">/articleList\?author=$1</to>
-    </rule>
+	<rule>
+		<from>^/author/(.+?)/(\d*)\.html$</from>
+		<to last="true">/articleList\?author=$1&amp;page=$2</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/articleList\?author=(.+?)(;jsessionid=.*)?$</from>
-        <to last="true">/author/$1\.html</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/articleList\?author=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/author/$1/$2\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/search/(.+?)/(\d*)\.html$</from>
-        <to last="true">/search\?key=$1&amp;page=$2</to>
-    </rule>
+	<rule>
+		<from>^/author/(.+?)\.html$</from>
+		<to last="true">/articleList\?author=$1</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/search\?key=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/search/$1/$2\.html</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/articleList\?author=(.+?)(;jsessionid=.*)?$</from>
+		<to last="true">/author/$1\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/wanben/(\d*)\.html$</from>
-        <to last="true">/articleList\?fullflag=true&amp;page=$1</to>
-    </rule>
-    
-    <outbound-rule>
-        <from>^/articleList\?fullflag=true&amp;page=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/wanben/$1\.html</to>
-    </outbound-rule>
+	<rule>
+		<from>^/search/(.+?)/(\d*)\.html$</from>
+		<to last="true">/search\?key=$1&amp;page=$2</to>
+	</rule>
 
-    <rule>
-        <from>^/wanben/index.html$</from>
-        <to last="true">/articleList\?fullflag=true</to>
-    </rule>
-    
-    <outbound-rule>
-        <from>^/articleList\?fullflag=true(;jsessionid=.*)?$</from>
-        <to last="true">/wanben/index\.html</to>
-    </outbound-rule>
-    
-    <rule>
-        <from>^/sitemap/index.html$</from>
-        <to last="true">/siteMap</to>
-    </rule>
-    
-    <outbound-rule>
-        <from>^/siteMap(;jsessionid=.*)?$</from>
-        <to last="true">/sitemap/index\.html</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/search\?key=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/search/$1/$2\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/sitemap/index.html$</from>
-        <to last="true">/siteMap</to>
-    </rule>
+	<rule>
+		<from>^/wanben/(\d*)\.html$</from>
+		<to last="true">/articleList\?fullflag=true&amp;page=$1</to>
+	</rule>
 
-    <rule>
-        <from>^/addbookcase/(\d*)/(\d*)$</from>
-        <to last="true">/bookcase!add\?articleno=$1&amp;chapterno=$2</to>
-    </rule>
+	<outbound-rule>
+		<from>^/articleList\?fullflag=true&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/wanben/$1\.html</to>
+	</outbound-rule>
 
-    <outbound-rule>
-        <from>^/bookcase!add\?articleno=(\d*)&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/addbookcase/$1/$2</to>
-    </outbound-rule>
+	<rule>
+		<from>^/wanben/index.html$</from>
+		<to last="true">/articleList\?fullflag=true</to>
+	</rule>
 
-    <rule>
-        <from>^/addbookcase/(\d*)$</from>
-        <to last="true">/bookcase!add\?articleno=$1</to>
-    </rule>
-    
-    <outbound-rule>
-        <from>^/bookcase!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/addbookcase/$1</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/articleList\?fullflag=true(;jsessionid=.*)?$</from>
+		<to last="true">/wanben/index\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/deletebookcase/(\d*)$</from>
-        <to last="true">/bookcase!detele\?bookcaseno=$1</to>
-    </rule>
+	<rule>
+		<from>^/sitemap/index.html$</from>
+		<to last="true">/siteMap</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/bookcase!delete\?bookcaseno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/deletebookcase/$1</to>
-    </outbound-rule>
+	<outbound-rule>
+		<from>^/siteMap(;jsessionid=.*)?$</from>
+		<to last="true">/sitemap/index\.html</to>
+	</outbound-rule>
 
-    <rule>
-        <from>^/download/(\d*).txt$</from>
-        <to last="true">/download\?articleno=$1</to>
-    </rule>
+	<rule>
+		<from>^/sitemap/index.html$</from>
+		<to last="true">/siteMap</to>
+	</rule>
 
-    <outbound-rule>
-        <from>^/download\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/download/$1.txt</to>
-    </outbound-rule>
+	<rule>
+		<from>^/user/addbookcase/(\d*)/(\d*)$</from>
+		<to last="true">/user/bookcase!add\?articleno=$1&amp;chapterno=$2</to>
+	</rule>
 
-    <rule>
-        <from>^/vote/(\d*).html$</from>
-        <to last="true">/vote\?articleno=$1</to>
-    </rule>
+	<outbound-rule>
+		<from>^/user/bookcase!add\?articleno=(\d*)&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/user/addbookcase/$1/$2</to>
+	</outbound-rule>
 
-    <outbound-rule>
-        <from>^/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/vote/$1.html</to>
-    </outbound-rule>   
- 
+	<rule>
+		<from>^/user/addbookcase/(\d*)$</from>
+		<to last="true">/user/bookcase!add\?articleno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/user/bookcase!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/user/addbookcase/$1</to>
+	</outbound-rule>
+
+	<rule>
+		<from>^/user/deletebookcase/(\d*)$</from>
+		<to last="true">/user/bookcase!delete\?bookcaseno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/user/bookcase!delete\?bookcaseno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/user/deletebookcase/$1</to>
+	</outbound-rule>
+
+	<rule>
+		<from>^/download/(\d*).txt$</from>
+		<to last="true">/download\?articleno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/download\?articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/download/$1.txt</to>
+	</outbound-rule>
+
+	<rule>
+		<from>^/user/vote/(\d*).html$</from>
+		<to last="true">/user/vote\?articleno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/user/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/user/vote/$1.html</to>
+	</outbound-rule>
  <!-- 
-    INSTALLATION in your web.xml add...
-    <filter>
-        <filter-name>UrlRewriteFilter</filter-name>
-        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-        <init-param>
-            <param-name>logLevel</param-name>
-            <param-value>WARN</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>UrlRewriteFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+     <rule>
+	     <name>Domain Name Check</name> 
+	     <condition name="host" operator="notequal">www.yzihan.com</condition> 
+	     <from>^/(.*)</from>
+	     <to type="redirect">http://www.yzihan.com/$1</to>
+     </rule> 
+ 
+
     EXAMPLES Redirect one url
     <rule>
         <from>/some/old/page.html</from>

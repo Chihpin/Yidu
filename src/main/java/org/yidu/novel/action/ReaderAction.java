@@ -67,6 +67,10 @@ public class ReaderAction extends AbstractPublicBaseAction {
         this.chapter = chapter;
     }
 
+    public String getTempName() {
+        return "reader";
+    }
+
     @Override
     protected void loadData() {
         logger.debug("loadData start.");

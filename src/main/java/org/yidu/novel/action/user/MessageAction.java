@@ -1,10 +1,11 @@
-package org.yidu.novel.action;
+package org.yidu.novel.action.user;
 
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
 import org.yidu.novel.bean.MessageSearchBean;
+import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TMessage;
 import org.yidu.novel.utils.LoginManager;
 
@@ -43,8 +44,22 @@ public class MessageAction extends AbstractUserBaseAction {
     }
 
     @Override
+    public String getTempName() {
+        return "user/message";
+    }
+
+    @Override
+    public int getPageType() {
+        return YiDuConstants.Pagetype.PAGE_USER_MESSAGE;
+    }
+
+    @Override
     protected void loadData() {
-        messageList = this.messageService.find(new MessageSearchBean());
+        MessageSearchBean searchBean = new MessageSearchBean();
+        int userno = LoginManager.getLoginUser().getUserno();
+        searchBean.setUserno(userno);
+        searchBean.setTouserno(userno);
+        messageList = this.messageService.find(searchBean);
     }
 
     @Transactional

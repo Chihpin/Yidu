@@ -48,13 +48,11 @@
 			<version>${struts2.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.apache.struts.xwork</groupId>
 			<artifactId>xwork-core</artifactId>
 			<version>${struts2.version}</version>
 		</dependency>
-
 
 		<!-- Spring3 -->
 		<dependency>
@@ -104,8 +102,6 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-
-
 		<!-- Postgresql -->
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -132,7 +128,6 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>commons-configuration</groupId>
@@ -189,8 +184,14 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.3.2</version>
 		</dependency>
-
-
+		
+		<dependency>
+	      <groupId>com.google.code.gson</groupId>
+	      <artifactId>gson</artifactId>
+	      <version>2.2.4</version>
+	      <scope>compile</scope>
+	    </dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>YiDuNovel</finalName>
@@ -207,9 +208,6 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<!-- <configuration>
-					<scanIntervalSeconds>2</scanIntervalSeconds>
-				</configuration> -->
 			</plugin>
 		</plugins>
 	</build>

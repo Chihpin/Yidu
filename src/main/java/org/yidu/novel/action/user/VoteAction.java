@@ -1,7 +1,8 @@
-package org.yidu.novel.action;
+package org.yidu.novel.action.user;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
+import org.yidu.novel.constant.YiDuConstants;
 
 /**
  * <p>
@@ -29,6 +30,11 @@ public class VoteAction extends AbstractUserBaseAction {
         this.articleno = articleno;
     }
 
+    @Override
+    public int getPageType() {
+        return YiDuConstants.Pagetype.PAGE_OTHERS;
+    }
+
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
@@ -40,10 +46,15 @@ public class VoteAction extends AbstractUserBaseAction {
             return ERROR;
         }
         logger.debug("execute normally start.");
-        return MESSAGE;
+        return FREEMARKER;
     }
 
     @Override
     protected void loadData() {
+    }
+
+    @Override
+    public String getTempName() {
+        return "message";
     }
 }

@@ -102,6 +102,10 @@ public class YiDuConstants {
         public final static int PAGE_SEARCH = 5;
         // * 11：登录页
         public final static int PAGE_LOGIN = 11;
+
+        public final static int PAGE_USER_BOOKCASE = 21;
+        public final static int PAGE_USER_MESSAGE = 22;
+        public final static int PAGE_USER_USEREDIT = 23;
         // * 99：其他页
         public final static int PAGE_OTHERS = 99;
 
@@ -117,7 +121,7 @@ public class YiDuConstants {
         public final static int ADMINISTRATOR = 30;
 
     }
-    
+
     /**
      * 前缀
      */

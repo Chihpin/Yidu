@@ -37,13 +37,19 @@ public class InfoAction extends AbstractPublicBaseAction {
     private List<TChapter> chapterList = new ArrayList<TChapter>();
 
     public int getArticleno() {
-
         return articleno;
-
     }
 
     public void setArticleno(int articleno) {
         this.articleno = articleno;
+    }
+
+    public int getSubDir() {
+        return articleno / 1000;
+    }
+
+    public void setSubDir(int subDir) {
+        // do nothing
     }
 
     public ArticleDTO getArticle() {
@@ -60,6 +66,10 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     public void setChapterList(List<TChapter> chapterList) {
         this.chapterList = chapterList;
+    }
+
+    public String getTempName() {
+        return "info";
     }
 
     @Override

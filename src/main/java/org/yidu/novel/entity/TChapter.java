@@ -102,4 +102,8 @@ public class TChapter implements java.io.Serializable {
         this.postdate = postdate;
     }
 
+    public Integer getSubdir() {
+        return this.articleno / 1000;
+    }
+
 }

@@ -47,6 +47,10 @@ public class SiteMapAction extends AbstractPublicListBaseAction {
         return 0;
     }
 
+    public String getTempName() {
+        return "siteMap";
+    }
+
     @Override
     protected void loadData() {
         articleList = articleService.find(new ArticleSearchBean());

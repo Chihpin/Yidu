@@ -1,5 +1,8 @@
 package org.yidu.novel.action.base;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
+import com.opensymphony.xwork2.Action;
 
 /**
  * <p>
@@ -17,5 +20,19 @@ public abstract class AbstractAdminBaseAction extends AbstractBaseAction {
      * 命名空间。
      */
     public static final String NAMESPACE = "/admin";
+
+    @Override
+    @SkipValidation
+    public String execute() {
+        logger.debug("execute start.");
+        initCollections(new String[] { "collectionProperties.article.category" });
+        loadData();
+        if (this.hasErrors()) {
+            logger.debug("execute abnormally end.");
+            return ERROR;
+        }
+        logger.debug("execute normally end.");
+        return Action.INPUT;
+    }
 
 }

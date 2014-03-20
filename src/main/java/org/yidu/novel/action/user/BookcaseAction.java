@@ -1,4 +1,4 @@
-package org.yidu.novel.action;
+package org.yidu.novel.action.user;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,6 +85,16 @@ public class BookcaseAction extends AbstractUserBaseAction {
     }
 
     @Override
+    public String getTempName() {
+        return "user/bookcase";
+    }
+
+    @Override
+    public int getPageType() {
+        return YiDuConstants.Pagetype.PAGE_USER_BOOKCASE;
+    }
+
+    @Override
     protected void loadData() {
         BookcaseSearchBean searchBean = new BookcaseSearchBean();
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
@@ -151,6 +161,6 @@ public class BookcaseAction extends AbstractUserBaseAction {
             }
         }
         this.loadData();
-        return INPUT;
+        return FREEMARKER;
     }
 }

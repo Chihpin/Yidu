@@ -40,16 +40,22 @@ public class MessageServiceImpl extends HibernateSupportServiceImpl implements M
     public List<TMessage> find(MessageSearchBean searchBean) {
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
+        List<Object> params = new ArrayList<Object>();
         hql.append("From TMessage WHERE 1=1 ");
+        if (searchBean.getUserno() != 0) {
+            hql.append(" AND (userno = ? OR touserno = ? )");
+            params.add(searchBean.getUserno());
+            params.add(searchBean.getUserno());
+        }
 
         Pagination pagination = searchBean.getPagination();
         // 添加排序信息
         if (pagination != null) {
             hql.append(pagination.getSortInfo());
-            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getEnd());
+            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getEnd(), params);
         } else {
-            hql.append("ORDER BY articleno");
-            return this.find(hql.toString());
+            hql.append(" ORDER BY messageno");
+            return this.find(hql.toString(), params);
         }
     }
 

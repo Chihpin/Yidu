@@ -11,9 +11,12 @@
     
     <script type="text/javascript">
         <!--
-        var preview_page = '<s:if test="chapter.preChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.preChapterno" /></s:url></s:else>';
-        var next_page = '<s:if test="chapter.nextChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.nextChapterno" /></s:url></s:else>';
-        var index_page = '<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>';
+
+
+
+        var preview_page = '<s:if test="chapter.preChapterno ==0 "><s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.preChapterno" /></s:url></s:else>';
+        var next_page = '<s:if test="chapter.nextChapterno ==0 "><s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.nextChapterno" /></s:url></s:else>';
+        var index_page = '<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url>';
         var article_id = '<s:property value="chapter.articleno"/>';
         var chapter_id = '<s:property value="chapter.chapterno"/>';
         function jumpPage() {
@@ -28,13 +31,16 @@
     <div class="mainnav">
         <div class="main-index" id="direct">
             <span class="r mr10"> 
+
                 <form action="<s:property value="contextPath" />/search" method="get" >
                     搜小说：<input type="text" name="key" value="" />
                     <button type="submit" >搜</button>
                 </form>
             </span>
+
     位置：<a href="<s:property value="contextPath" />/" class="c009900"><s:text name="label.system.name" /></a> > 
-    <a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><s:property value="chapter.articlename"/></a>  > 
+
+    <a href="<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><s:property value="chapter.articlename"/></a>  > 
     <s:property value="chapter.chaptername"/></div>
     <section class="main b-detail" id="directs">
         <div class="bookInfo">
@@ -84,26 +90,35 @@
                 </li>
             </ul>
         </div>
+
         <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader1.js"></script>
         <div class="mainContenr"   id="content">
             <s:property value="chapter.content" escape="false" />
         </div>
+
         <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader2.js"></script>
         <div class="backs">
-            <a href="<s:if test="chapter.preChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.preChapterno" /></s:url></s:else>" class="pre">上一章</a>
-            <a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="backfor">返回目录</a>
-            <a href="<s:if test="chapter.nextChapterno ==0 "><s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.nextChapterno" /></s:url></s:else>" class="next">下一章</a>
+
+
+
+            <a href="<s:if test="chapter.preChapterno ==0 "><s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.preChapterno" /></s:url></s:else>" class="pre">上一章</a>
+            <a href="<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url>" class="backfor">返回目录</a>
+            <a href="<s:if test="chapter.nextChapterno ==0 "><s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url></s:if><s:else><s:url value="/reader"  escapeAmp="false"><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.nextChapterno" /></s:url></s:else>" class="next">下一章</a>
             <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
+
                  <a href="<s:url value="/bookcase!add" escapeAmp="false"><s:param name="articleno" value="chapter.articleno" /><s:param name="chapterno" value="chapter.chapterno" /></s:url>" title="加入书签"  target="_blank">加入书签</a>
             </p></div>
+
         <script type="text/javascript" src="<s:property value="contextPath" />/ad/reader3.js"></script>
         </div>
        </section>
        <div class="attention">
             <em>阅读提示：</em><br/>
             1、本站会员登录后，将免费体会到最顺畅的阅读方式[<em>最少广告</em>]。<br/>
-            2、<em>注册本站会员</em>，将《<a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><em><s:property value="chapter.articlename"/></em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
-            3、免费小说《<a href="<s:url value="/info" ><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><em><s:property value="chapter.articlename"/></em></a>》 <s:property value="chapter.chaptername"/> 所描述的内容只是作者 作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
+
+
+            2、<em>注册本站会员</em>，将《<a href="<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><em><s:property value="chapter.articlename"/></em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
+            3、免费小说《<a href="<s:url value="/info" escapeAmp="false" ><s:param name="subdir" value="chapter.subdir" /><s:param name="articleno" value="chapter.articleno" /></s:url>" class="article_title"><em><s:property value="chapter.articlename"/></em></a>》 <s:property value="chapter.chaptername"/> 所描述的内容只是作者 作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
         </div>
     </div>
 </div>

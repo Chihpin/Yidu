@@ -1,20 +1,24 @@
 package org.yidu.novel.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.entity.TChapter;
 
 import com.opensymphony.xwork2.Action;
 
@@ -113,32 +117,43 @@ public class DownloadAction extends AbstractPublicBaseAction {
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
-        try {
-            loadData();
-        } catch (Exception e) {
-            logger.error(getText("YIDU99999"), e);
-            logger.debug("execute abnormally end.");
-            return Action.ERROR;
-        }
-        logger.debug("execute normally end.");
-        return DOWNLOAD;
-    }
-
-    @Override
-    protected void loadData() {
-        logger.debug("loadData download file name was set,going to download.");
         setDownloadFileName(articleno + ".txt");
         long size = 0;
         try {
             Vector<InputStream> vector = new Vector<InputStream>();
+            ChapterSearchBean searchBean = new ChapterSearchBean();
+            searchBean.setArticleno(articleno);
+            List<TChapter> chapterList = this.chapterService.find(searchBean);
             File dir = new File(YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH) + "/" + (articleno / 1000) + "/"
                     + articleno);
             if (dir.isDirectory()) {
                 File[] files = dir.listFiles();
-                Arrays.sort(files, new FileSort());
+                // 对比章节数
+                // if (chapterList.size() != files.length) {
+                // addActionError("章节信息有错误！");
+                // return Action.ERROR;
+                // }
+
+                // 做成文件Map
+                Map<String, File> fileMap = new HashMap<String, File>();
                 for (File file : files) {
-                    size = size + file.length();
-                    vector.addElement(new FileInputStream(file));
+                    fileMap.put(file.getName(), file);
+                }
+
+                for (TChapter chapter : chapterList) {
+                    int chapterno = chapter.getChapterno();
+                    File file = fileMap.get(chapterno + ".txt");
+                    if (file != null) {
+                        // 添加一个换行符
+                        String chaptername = chapter.getChaptername() + "\n";
+                        size += chaptername.length();
+                        size += file.length();
+                        // convert String into InputStream
+                        InputStream chapternameis = new ByteArrayInputStream(
+                                chaptername.getBytes(YiDuConstants.ENCODING_GBK));
+                        vector.addElement(chapternameis);
+                        vector.addElement(new FileInputStream(file));
+                    }
                 }
             }
             Enumeration<InputStream> enumeration = vector.elements();
@@ -147,14 +162,15 @@ public class DownloadAction extends AbstractPublicBaseAction {
         } catch (Exception e) {
             logger.error(getText("YIDU99999"), e);
             addActionError(getText("YIDU99999"));
+            return Action.ERROR;
         }
+        logger.debug("execute normally end.");
+        return DOWNLOAD;
     }
 
-    static class FileSort implements Comparator<File> {
-        public int compare(File src, File target) {
-            int diff = src.getName().compareTo(target.getName());
-            return diff;
-        }
+    @Override
+    protected void loadData() {
+
     }
 
     @Override

@@ -16,7 +16,7 @@ public class TBookcase implements java.io.Serializable {
     private Integer category;
     private Integer userno;
     private String username;
-    private Integer chapterid;
+    private Integer chapterno;
     private String chaptername;
     private Date lastvisit;
     private Date createtime;
@@ -29,14 +29,14 @@ public class TBookcase implements java.io.Serializable {
     }
 
     public TBookcase(int bookcaseno, Integer articleno, String articlename, Integer category, Integer userno,
-            String username, Integer chapterid, String chaptername, Date lastvisit, Date createtime) {
+            String username, Integer chapterno, String chaptername, Date lastvisit, Date createtime) {
         this.bookcaseno = bookcaseno;
         this.articleno = articleno;
         this.articlename = articlename;
         this.category = category;
         this.userno = userno;
         this.username = username;
-        this.chapterid = chapterid;
+        this.chapterno = chapterno;
         this.chaptername = chaptername;
         this.lastvisit = lastvisit;
         this.createtime = createtime;
@@ -90,12 +90,12 @@ public class TBookcase implements java.io.Serializable {
         this.username = username;
     }
 
-    public Integer getChapterid() {
-        return this.chapterid;
+    public Integer getChapterno() {
+        return this.chapterno;
     }
 
-    public void setChapterid(Integer chapterid) {
-        this.chapterid = chapterid;
+    public void setChapterno(Integer chapterno) {
+        this.chapterno = chapterno;
     }
 
     public String getChaptername() {
@@ -120,6 +120,10 @@ public class TBookcase implements java.io.Serializable {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public Integer getSubdir() {
+        return this.articleno / 1000;
     }
 
 }

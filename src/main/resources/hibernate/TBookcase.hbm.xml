@@ -36,9 +36,9 @@
                 <comment>username</comment>
             </column>
         </property>
-        <property name="chapterid" type="java.lang.Integer">
-            <column name="chapterid">
-                <comment>chapterid</comment>
+        <property name="chapterno" type="java.lang.Integer">
+            <column name="chapterno">
+                <comment>chapterno</comment>
             </column>
         </property>
         <property name="chaptername" type="string">

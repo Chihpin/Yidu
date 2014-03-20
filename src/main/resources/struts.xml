@@ -38,7 +38,7 @@
                 </interceptor-ref>
                 <interceptor-ref name="errorHandle" />
                 <interceptor-ref name="authCheck" /> 
-                <!-- <interceptor-ref name="mobile" />  -->
+                <!-- <interceptor-ref name="mobile" /> -->
             </interceptor-stack>
         </interceptors>
         <default-interceptor-ref name="yidu-default" />

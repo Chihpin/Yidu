@@ -3,6 +3,7 @@ package org.yidu.novel.action;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,8 +43,8 @@ public class RegisterAction extends AbstractPublicBaseAction {
     }
 
     @RequiredStringValidator(message = "${getText(\"errors.required.input\"," + " {getText(\"label.user.loginid\")})}")
-    @StringLengthFieldValidator(maxLength = "32", message = "${getText(\"errors.maxlength\", "
-            + "{ {maxLength},getText(\"label.user.loginid\")})}")
+    @StringLengthFieldValidator(minLength = "5", maxLength = "32", message = "${getText(\"errors.lengthrange\", "
+            + "{ {minLength}, {maxLength},getText(\"label.user.loginid\")})}")
     public void setLoginid(String loginid) {
         this.loginid = loginid;
     }
@@ -54,8 +55,8 @@ public class RegisterAction extends AbstractPublicBaseAction {
 
     // 必須
     @RequiredStringValidator(message = "${getText(\"errors.required.input\"," + " {getText(\"label.user.password\")})}")
-    @StringLengthFieldValidator(maxLength = "32", message = "${getText(\"errors.maxlength\", "
-            + "{ {maxLength},getText(\"label.user.password\")})}")
+    @StringLengthFieldValidator(minLength = "6", maxLength = "32", message = "${getText(\"errors.lengthrange\", "
+            + "{ {minLength},{maxLength},getText(\"label.user.password\")})}")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -95,20 +96,38 @@ public class RegisterAction extends AbstractPublicBaseAction {
         this.qq = qq;
     }
 
+    public String getTempName() {
+        return "register";
+    }
+
     @SkipValidation
     public String execute() {
         logger.info("RegisterAction execute has been excuted.");
-        initCollections(new String[] { "collectionProperties.article.category" });
         if (LoginManager.isLoginFlag()) {
             return REDIRECT;
         } else {
-            return INPUT;
+            return FREEMARKER;
         }
     }
 
     @Transactional
     public String register() {
         logger.info("RegisterAction register started.");
+        // 密码检查
+        if (!StringUtils.equals(password, repassword)) {
+            addActionError(getText("errors.repassword"));
+            return FREEMARKER;
+        }
+        // 重复检查
+        UserSearchBean searchBean = new UserSearchBean();
+        searchBean.setLoginid(loginid);
+        searchBean.setDeleteflag(false);
+        List<TUser> userList = this.userService.find(searchBean);
+        if (userList != null && userList.size() > 0) {
+            addActionError(getText("errors.duplicate"));
+            return FREEMARKER;
+        }
+
         TUser user = new TUser();
         BeanUtils.copyProperties(this, user);
         user.setDeleteflag(false);
@@ -130,17 +149,5 @@ public class RegisterAction extends AbstractPublicBaseAction {
 
     @Override
     protected void loadData() {
-    }
-
-    @Override
-    @Transactional
-    public void validate() {
-        UserSearchBean searchBean = new UserSearchBean();
-        searchBean.setLoginid(loginid);
-        searchBean.setDeleteflag(false);
-        List<TUser> userList = this.userService.find(searchBean);
-        if (userList != null && userList.size() > 0) {
-            addActionError(getText("errors.duplicate"));
-        }
     }
 }

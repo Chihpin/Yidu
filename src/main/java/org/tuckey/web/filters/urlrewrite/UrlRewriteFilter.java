@@ -34,12 +34,14 @@
  */
 package org.tuckey.web.filters.urlrewrite;
 
-import org.tuckey.web.filters.urlrewrite.utils.Log;
-import org.tuckey.web.filters.urlrewrite.utils.ModRewriteConfLoader;
-import org.tuckey.web.filters.urlrewrite.utils.NumberUtils;
-import org.tuckey.web.filters.urlrewrite.utils.ServerNameMatcher;
-import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
-import org.yidu.novel.constant.YiDuConstants;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.Properties;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -51,14 +53,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.Properties;
+import org.tuckey.web.filters.urlrewrite.utils.Log;
+import org.tuckey.web.filters.urlrewrite.utils.ModRewriteConfLoader;
+import org.tuckey.web.filters.urlrewrite.utils.NumberUtils;
+import org.tuckey.web.filters.urlrewrite.utils.ServerNameMatcher;
+import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
+import org.yidu.novel.constant.YiDuConstants;
 
 /**
  * Based on the popular and very useful mod_rewrite for apache, UrlRewriteFilter

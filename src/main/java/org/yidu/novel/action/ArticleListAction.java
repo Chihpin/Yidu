@@ -91,6 +91,10 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         this.articleList = articleList;
     }
 
+    public String getTempName() {
+        return "articleList";
+    }
+
     @Override
     protected void loadData() {
         logger.debug("loadData start.");

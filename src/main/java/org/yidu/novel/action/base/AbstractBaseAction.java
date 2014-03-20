@@ -1,9 +1,12 @@
 package org.yidu.novel.action.base;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.LinkedMap;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
@@ -11,6 +14,10 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.constant.YiDuConfig;
+import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.service.BookcaseService;
 import org.yidu.novel.service.ChapterService;
@@ -18,7 +25,11 @@ import org.yidu.novel.service.MessageService;
 import org.yidu.novel.service.SystemBlockService;
 import org.yidu.novel.service.SystemConfigService;
 import org.yidu.novel.service.UserService;
+import org.yidu.novel.template.EncodeURLMethod;
+import org.yidu.novel.template.GetTextMethod;
+import org.yidu.novel.utils.CookieUtils;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
@@ -35,17 +46,17 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
  * @author shinpa.you
  */
 @Results({
-        @Result(name = Action.ERROR, location = "/WEB-INF/error.jsp", type = "dispatcher"),
+        @Result(name = Action.ERROR, location = "/ftl/error.ftl", type = "freemarker"),
+        @Result(name = AbstractBaseAction.MESSAGE, type = "freemarker", location = "/ftl/message.ftl"),
+        @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/ftl/${tempName}.ftl"),
         @Result(name = AbstractBaseAction.ADMIN_ERROR, location = "/WEB-INF/adminerror.jsp", type = "dispatcher"),
-        @Result(name = AbstractBaseAction.ERROR_404, params = { "status", "404" }, type = "httpheader"),
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
         @Result(name = AbstractBaseAction.STREAM_RESULT, type = "stream", params = { "inputName", "inputStream",
                 "contentType", "application/octet-stream; charset=GBK", "contentLength", "${ contentLength }",
                 "contentDisposition", "attachment; filename = ${fileName}" }),
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.GOTO_LOGIN, location = org.yidu.novel.action.LoginAction.URL, type = "redirect"),
-        @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect"),
-        @Result(name = AbstractBaseAction.MESSAGE, location = "/WEB-INF/message.jsp", type = "dispatcher") })
+        @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect") })
 public abstract class AbstractBaseAction extends ActionSupport implements ValidationWorkflowAware {
 
     private static final long serialVersionUID = 1L;
@@ -53,8 +64,6 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     protected static final String JSON_RESULT = "json";
 
     protected static final String STREAM_RESULT = "stream";
-
-    protected static final String ERROR_404 = "error404";
 
     public static final String GO_TOP = "GOTO_Top";
 
@@ -65,6 +74,8 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     public static final String MESSAGE = "message";
 
     public static final String ADMIN_ERROR = "adminerror";
+
+    public static final String FREEMARKER = "freemarker";
 
     /**
      * 输出log
@@ -133,20 +144,6 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
         return Action.INPUT;
     }
 
-    @Override
-    @SkipValidation
-    public String execute() {
-        logger.debug("execute start.");
-        initCollections(new String[] { "collectionProperties.article.category" });
-        loadData();
-        if (this.hasErrors()) {
-            logger.debug("execute abnormally end.");
-            return ERROR;
-        }
-        logger.debug("execute normally end.");
-        return Action.INPUT;
-    }
-
     protected abstract void loadData();
 
     /**
@@ -164,8 +161,6 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      * @return 系统相对路径
      */
     public String getRequestUrl() {
-        System.out.println(ServletActionContext.getRequest().getRequestURL().toString());
-
         return ServletActionContext.getRequest().getRequestURL().toString();
     }
 
@@ -204,6 +199,89 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
 
     public void setBackUrl(String backUrl) {
         this.backUrl = backUrl;
+    }
+
+    public EncodeURLMethod getEncodeURL() {
+        return new EncodeURLMethod(ServletActionContext.getResponse());
+    }
+
+    public GetTextMethod getGetText() {
+        return new GetTextMethod(this);
+    }
+
+    /**
+     * 阅读履历
+     */
+    private List<TChapter> historyList = new ArrayList<TChapter>();
+
+    public List<TChapter> getHistoryList() {
+        return historyList;
+    }
+
+    public void setHistoryList(List<TChapter> historyList) {
+        this.historyList = historyList;
+    }
+
+    protected void loadReadHistory() {
+        // 获得阅读履历
+        String historys = CookieUtils.getHistoryCookie(ServletActionContext.getRequest());
+        if (StringUtils.isNotEmpty(historys)) {
+            String[] acnos = StringUtils.split(historys, ",");
+            List<String> chapternoList = new ArrayList<String>();
+            for (String articleAndchapterno : acnos) {
+                String[] acnoArr = StringUtils.split(articleAndchapterno, "|");
+                if (acnoArr.length == 2) {
+                    chapternoList.add(acnoArr[1]);
+                }
+            }
+            if (chapternoList.size() > 0) {
+                ChapterSearchBean searchBean = new ChapterSearchBean();
+                searchBean.setChapternos(StringUtils.join(chapternoList, ","));
+                this.historyList = this.chapterService.find(searchBean);
+            }
+        }
+    }
+
+    private boolean hasError = false;
+
+    public void setHasError(boolean hasError) {
+        this.hasError = hasError;
+    }
+
+    public boolean getHasError() {
+        return hasError;
+    }
+
+    /**
+     * 公共页和用户页用类型JSON文字列
+     * 
+     * @return 类型JSON文字列
+     */
+    public String getCategoryData() {
+
+        Gson gson = new Gson();
+        LinkedMap pulldown = new LinkedMap();
+        String value = getText("collectionProperties.article.category");
+        String[] items = value.split(",");
+        for (String item : items) {
+            String[] property = item.split(":");
+            if (property.length == 2) {
+                pulldown.put(property[0], property[1]);
+            }
+        }
+        return gson.toJson(pulldown);
+    }
+    
+    /**
+     * 
+     * <p>
+     * 获取启用广告标识
+     * </p>
+     * 
+     * @return 启用广告标识
+     */
+    public boolean getAdEffective() {
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.AD_EFFECTIVE, true);
     }
 
 }
