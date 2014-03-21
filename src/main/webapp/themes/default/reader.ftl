@@ -5,11 +5,11 @@
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  
 <#macro customizeimport>  
-<link href="${contextPath}/css/readtools.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${contextPath}/js/tools.js"></script>
-<script type="text/javascript" src="${contextPath}/js/lib/jquery.cookie.js"></script>
-<script type="text/javascript" src="${contextPath}/js/style5.js"></script>
-<script type="text/javascript" src="${contextPath}/js/lib/jquery.tools.min1.2.5.js"></script>
+<link href="${contextPath}/themes/${themeName}/css/readtools.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/tools.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/style5.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
 <script type="text/javascript">
     <!--
     var preview_page = '<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>';

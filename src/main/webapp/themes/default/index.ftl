@@ -12,7 +12,7 @@
     <li>
        <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  title="${article.articlename}" class="l mr10">
            <img src="${contextPath}${article.imgUrl}" style="width: 120px; height: 150px"/></a>
-       <#if article.fullflag ><img src="${contextPath}/images/only.png" class="topss png_bg"><#else><img src="/images/only2.png" class="topss png_bg"></#if>
+       <#if article.fullflag ><img src="${contextPath}/themes/${themeName}/images/only.png" class="topss png_bg"><#else><img src="/images/only2.png" class="topss png_bg"></#if>
        <span class="l">
           <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  title="${article.articlename}" class="clearfix stitle">${article.articlename}</a>
           作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>

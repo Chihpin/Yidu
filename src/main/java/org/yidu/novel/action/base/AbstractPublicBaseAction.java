@@ -30,7 +30,7 @@ import org.yidu.novel.utils.Pagination;
  * @version 1.0.0
  * @author shinpa.you
  */
-public abstract class AbstractPublicBaseAction extends AbstractBaseAction {
+public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBaseAction {
 
     private static final long serialVersionUID = 4900892616460135567L;
     /**

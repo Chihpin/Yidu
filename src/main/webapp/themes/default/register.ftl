@@ -9,7 +9,7 @@
 <#macro content>
 
 <@s.form action="register" validate="true" method="post">
-<script type="text/javascript" src="${contextPath}/js/formcommon.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/formcommon.js"></script>
     <center>
         <span id="ErrorList"><@s.fielderror /> <@s.actionerror /></span>
     </center>

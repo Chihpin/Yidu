@@ -53,12 +53,12 @@
     <#if hasError || ( pageType?? && pageType!=4) >
     <p class="site-logo">
         <a href="${contextPath}/" title="${getText("label.system.title")}">
-        <img src="${contextPath}/images/logo-medium.png" alt="${getText("label.system.title")} - logo"></a>
+        <img src="${contextPath}/themes/${themeName}/images/logo-medium.png" alt="${getText("label.system.title")} - logo"></a>
     </p>
     <div class="site-search">
        <form action="${contextPath}/search" method="get" >
        <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value="这是一个神奇的搜索，请输入小说名或作者名" />
-       <input type="submit" id="searchbuttom" value="" style="background:url('${contextPath}/images/search.jpg');border:0px solid;cursor:pointer;" />
+       <input type="submit" id="searchbuttom" value="" style="background:url('${contextPath}/themes/${themeName}/images/search.jpg');border:0px solid;cursor:pointer;" />
       </form>
     </div>
     </#if>
@@ -66,7 +66,7 @@
 </#macro>  
 
 <#macro naviContent>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/channel-net.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/css/channel-net.css">
   <div id="channel-header" class="clearfix">
     <div class="channel-header-wrapper">
       <nav class="channel-nav">

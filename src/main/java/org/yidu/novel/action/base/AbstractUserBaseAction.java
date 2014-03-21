@@ -11,7 +11,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
  * @version 1.0.0
  * @author shinpa.you
  */
-public abstract class AbstractUserBaseAction extends AbstractBaseAction {
+public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAction {
 
     /**
      * 

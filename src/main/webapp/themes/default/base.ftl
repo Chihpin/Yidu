@@ -14,18 +14,18 @@
 </#if>
 <meta name="author" content="www.51yd.org"/>
 <!--[if lt IE 9]>
-<script src="/js/lib/html5.js"></script>
+<script src="${contextPath}/themes/${themeName}/js/lib/html5.js"></script>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/board.css">
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/common.css">
-<script type="text/javascript" src="${contextPath}/js/lib/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="${contextPath}/js/index.js"></script>
-<script type="text/javascript" src="${contextPath}/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/css/board.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/css/common.css">
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/index.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/common.js"></script>
 <#if customizeimport?exists>  
       <@customizeimport/>
 </#if>
 <!--[if IE 6]>
-<script src="/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script src="${contextPath}/themes/${themeName}/js/DD_belatedPNG_0.0.8a-min.js"></script>
 <script>
   DD_belatedPNG.fix('.png_bg');
 </script>

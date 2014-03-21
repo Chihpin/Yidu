@@ -17,7 +17,7 @@
     </div>
     <section class="main b-detail">
         <div class="detail">
-            <#if article.fullflag><img src="${contextPath}/images/only.png" class="leftso png_bg"><#else><img src="${contextPath}/images/only2.png" class="leftso png_bg"></#if>
+            <#if article.fullflag><img src="${contextPath}/themes/${themeName}/images/only.png" class="leftso png_bg"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="leftso png_bg"></#if>
             <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  class="l mr11">
                  <img src="${article.imgUrl}" style="width: 120px; height: 150px"/></a>
         <div class="b-info">
@@ -39,29 +39,29 @@
         <div class="scores">
             <h2>评分</h2>
             <p id="fenshuview">10.0<br>
-                <img src="${contextPath}/images/s2.png">
-                <img src="${contextPath}/images/s2.png">
-                <img src="${contextPath}/images/s2.png">
-                <img src="${contextPath}/images/s2.png">
-                <img src="${contextPath}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png">
             </p>
             <div class="sets">
                <div class="scoreSet">
                    <span>
-                        <img src="${contextPath}/images/s1.png">
-                        <img src="${contextPath}/images/s1.png">
-                        <img src="${contextPath}/images/s1.png">
-                        <img src="${contextPath}/images/s1.png">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
                    </span>
                     <input type="hidden" value="8" id="fenshu" />
                     <input type="hidden" value="7940" id="articleid" />
                     <ul id="xingxing">
                         <li value="10"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"></li>
-                        <li value="2"><img src="${contextPath}/images/s1.png"></li>
-                        <li value="4"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"></li>
-                        <li value="6"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"></li>
-                        <li value="8"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"></li>
-                        <li value="10"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"><img src="${contextPath}/images/s1.png"></li>
+                        <li value="2"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
+                        <li value="4"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
+                        <li value="6"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
+                        <li value="8"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
+                        <li value="10"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
                     </ul>
                 </div>
                 <input type="button" id="submitfenshu" value="确定"/>
@@ -80,7 +80,7 @@
                 <dl><dt>TXT下载：</dt><dd><a href="${encodeURL("/download?articleno=${article.articleno}")} target="_blank"><font color="red" >全本下载</font></a></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>
-                    <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}" target="_blank">${article.lastchapter}</a>
+                    <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}" target="_blank"><#if article.lastchapter?? >${article.lastchapter}</#if></a>
                     <em>更新于:[${article.lastupdate?string("MM-dd HH:mm")}]</em><br />
                     </dd>
                 </dl>
@@ -118,5 +118,5 @@
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_bottom" alt="跳至页尾"></a>
     </div>
-    <script src="${contextPath}/js/news_top.js" type="text/javascript"></script>
+    <script src="${contextPath}/themes/${themeName}/js/news_top.js" type="text/javascript"></script>
 </#macro>

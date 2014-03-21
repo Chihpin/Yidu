@@ -1,0 +1,39 @@
+/**
+ *
+ * channel-net 网络小说频道 
+ *
+ */
+
+.grid-s160m0e190 .main-wrap { margin: 0 10px 0 160px; }
+.grid-s160m0e190 .col-sub { width: 160px; margin-left: -100%; }
+.grid-s160m0e190 .col-extra { width: 190px; margin-left: -190px; }
+/**
+ * fun
+ */
+.hide { display: none; }
+/**
+ * header
+ */
+#channel-header { margin-top: -13px; margin-bottom: 13px; background: #F5F5F5; border-bottom: 1px solid #ebebeb; }
+.channel-header-wrapper { width: 960px; margin: 0 auto; }
+.channel-logo { float: left; width:75px; }
+.channel-logo a { display: block; width:75px; height: 38px; overflow: hidden; background:url(../images/channel-net-logo.png) no-repeat 0 0; text-indent: -999px; }
+.channel-nav { float: left; }
+.channel-nav-list li { display: inline; float: left; text-align: center; padding-top: 10px; padding-bottom: 4px; border-bottom: 3px solid #F5F5F5; }
+.channel-nav-list li a { padding-left: 11px; padding-right: 11px; font-size: 14px; color: #000; border-right: 1px solid #c8c8c8; }
+.channel-nav-list li a:hover { color:#ff830b; }
+.channel-nav-list .current { border-bottom-color: #ff830b; }
+.channel-nav-list .current a { font-weight: bold; color: #ff830b; text-decoration: none; }
+/**
+ * top-rank
+ */
+ .channel-netnovel-main { padding: 0 0 0 25px; }
+.top-rank { border: 1px solid #e7e7e7; }
+.top-rank h3 { padding:12px; padding-bottom: 8px; background: #f5f5f5; font-size: 14px; color:#686868; }
+.top-rank-list ul { border-bottom: 1px dotted #e7e7e7; }
+.top-rank-list ul.last { border-bottom: 0 none; }
+.top-rank-list .current { border-right: 3px solid #ff830b; }
+.top-rank-list .current a { color:#ff830b; font-weight:bold; }
+.top-rank-list a { height: 30px; line-height: 30px; padding-left: 12px; display: block; color: #333; }
+.netnovel-header { height: 42px; border-bottom: 1px solid #e7e7e7; }
+.netnovel-header h3 { float: left; padding-top: 12px; font-size: 13px; color: #686868; }
