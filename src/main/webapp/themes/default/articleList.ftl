@@ -67,7 +67,7 @@
                     </#if>
                     <#assign mxpagenum = pagenum >
                 </#list>
-                <#if (mxpagenum < pagination.totalPages)>
+                <#if mxpagenum?? && (mxpagenum < pagination.totalPages)>
                      <a href="${encodeURL(listurl + (mxpagenum+1)?c)}" class="next">&gt;</a>
                 </#if>
                 <a href="${encodeURL(listurl + pagination.totalPages)}">${pagination.totalPages}</a>
