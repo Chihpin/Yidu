@@ -12,6 +12,14 @@
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
 <script type="text/javascript">
     <!--
+    //禁止右键菜单，禁止复制等
+    document.oncontextmenu=function(e){return false;} 
+    document.ondragstart=function(e){return false;}
+    document.onselectstart=function(e){return false;}
+    document.onselect=function(e){return false;} 
+    document.oncopy=function(e){document.selection.empty();}
+    document.onbeforecopy=function(e){return false;}
+    document.onmouseup=function(e){document.selection.empty();}
     var preview_page = '<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>';
     var next_page = '<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>';
     var index_page = '${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}';
@@ -25,8 +33,8 @@
     document.onkeydown=jumpPage;
     -->
 </script>
-</#macro>
 
+</#macro>
 
 <#macro content>
 <div class="mainnav">
