@@ -57,7 +57,7 @@ public class DownloadAction extends AbstractPublicBaseAction {
     /**
      * 返回结果值
      */
-    public static final String DOWNLOAD = "download";
+    public static final String RESULT_DOWNLOAD = "download";
 
     /**
      * 下载文件名
@@ -165,7 +165,7 @@ public class DownloadAction extends AbstractPublicBaseAction {
             return Action.ERROR;
         }
         logger.debug("execute normally end.");
-        return DOWNLOAD;
+        return RESULT_DOWNLOAD;
     }
 
     @Override

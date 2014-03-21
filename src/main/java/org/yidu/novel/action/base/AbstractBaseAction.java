@@ -40,9 +40,6 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
         @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/themes/${themeName}/${tempName}.ftl"),
         @Result(name = AbstractBaseAction.ADMIN_ERROR, location = "/WEB-INF/adminerror.jsp", type = "dispatcher"),
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
-        @Result(name = AbstractBaseAction.STREAM_RESULT, type = "stream", params = { "inputName", "inputStream",
-                "contentType", "application/octet-stream; charset=GBK", "contentLength", "${ contentLength }",
-                "contentDisposition", "attachment; filename = ${fileName}" }),
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.GOTO_LOGIN, location = org.yidu.novel.action.LoginAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect") })
@@ -51,8 +48,6 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     private static final long serialVersionUID = 1L;
 
     protected static final String JSON_RESULT = "json";
-
-    protected static final String STREAM_RESULT = "stream";
 
     public static final String GO_TOP = "GOTO_Top";
 
@@ -179,8 +174,5 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
             collections.put(key, pulldown);
         }
     }
-
- 
- 
 
 }
