@@ -27,6 +27,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     private String filePath;
     private String relativeIamgePath;
+    private String themeName;
     private boolean skipAuthCheck;
     private boolean cacheEffective;
     private boolean cleanUrl;
@@ -34,6 +35,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     private boolean adEffective;
     private int countPerPage;
     private int maxBookcase;
+    private boolean createIndexPage;
+    private boolean createSiteMap;
 
     private String dburl;
     private String username;
@@ -53,6 +56,14 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     public void setRelativeIamgePath(String relativeIamgePath) {
         this.relativeIamgePath = relativeIamgePath;
+    }
+
+    public String getThemeName() {
+        return themeName;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
     }
 
     public boolean isSkipAuthCheck() {
@@ -111,6 +122,22 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.maxBookcase = maxBookcase;
     }
 
+    public boolean isCreateIndexPage() {
+        return createIndexPage;
+    }
+
+    public void setCreateIndexPage(boolean createIndexPage) {
+        this.createIndexPage = createIndexPage;
+    }
+
+    public boolean isCreateSiteMap() {
+        return createSiteMap;
+    }
+
+    public void setCreateSiteMap(boolean createSiteMap) {
+        this.createSiteMap = createSiteMap;
+    }
+
     public String getDburl() {
         return dburl;
     }
@@ -147,6 +174,9 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         adEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.AD_EFFECTIVE, true);
         countPerPage = YiDuConstants.yiduConf.getInt(YiDuConfig.COUNT_PER_PAGE, 15);
         maxBookcase = YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_BOOKCASE, 15);
+        themeName = YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME);
+        createIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_INDEXPAGE, true);
+        createSiteMap = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_SITEMAP, true);
 
         // 设定文件初期读入
         try {
@@ -173,6 +203,9 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.AD_EFFECTIVE, adEffective);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.COUNT_PER_PAGE, countPerPage);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.MAX_BOOKCASE, maxBookcase);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.THEME_NAME, themeName);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_INDEXPAGE, createIndexPage);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_SITEMAP, createSiteMap);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());
@@ -195,7 +228,6 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
             logger.error(e);
             return ADMIN_ERROR;
         }
-
         loadData();
         addActionMessage(getText("messages.save.success"));
         return INPUT;

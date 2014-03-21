@@ -19,6 +19,11 @@
     </tr>
 
     <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.themeName" /></td>
+       <td class="even"><s:textfield name ="themeName" size="25" maxlength="30"  cssClass="text" theme="simple"/></td>
+    </tr>
+
+    <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.countPerPage" /></td>
        <td class="even"><s:textfield name ="countPerPage" size="25" maxlength="100"  cssClass="text"/></td>
     </tr>
@@ -87,6 +92,20 @@
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.adEffective" /></td>
        <td class="even">
            <s:radio list="collections['collectionProperties.boolean']" name="adEffective" ></s:radio>
+       </td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.createIndexPage" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="createIndexPage" ></s:radio>
+       </td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.createSiteMap" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="createSiteMap" ></s:radio>
        </td>
     </tr>
     <tr align="left" valign="middle">

@@ -17,7 +17,8 @@ public class YiDuConfig {
     public final static String GZIP_EFFECTIVE = "gzipEffective";
     public final static String CREATE_INDEXPAGE = "createIndexPage";
     public final static String CREATE_SITEMAP = "createSiteMap";
-    
+    public final static String THEME_NAME = "themeName";
+
     // jdbc
     public final static String JDBC_URL = "jdbc.url";
     public final static String JDBC_USERNAME = "jdbc.username";
