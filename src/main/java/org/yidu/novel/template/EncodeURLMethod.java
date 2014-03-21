@@ -40,6 +40,7 @@ public class EncodeURLMethod implements TemplateMethodModel {
      * @return Object 方法返回值
      * @throws TemplateModelException
      */
+    @SuppressWarnings("rawtypes")
     public Object exec(List argList) throws TemplateModelException {
         // 限定方法中必须且只能传递一个参数
         if (argList.size() != 1) {
