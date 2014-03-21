@@ -50,9 +50,22 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
     private int page;
 
     /**
+     * 类别
+     */
+    private int category;
+
+    /**
      * 小说列表
      */
     private List<TArticle> articleList = new ArrayList<TArticle>();
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
 
     public int getArticleno() {
         return articleno;
@@ -89,13 +102,15 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
     @Override
     protected void loadData() {
         ArticleSearchBean searchBean = new ArticleSearchBean();
-        BeanUtils.copyProperties(this, searchBean);
+        BeanUtils.copyProperties(this, searchBean, new String[] { "articleno" });
         if (StringUtils.isEmpty(pagination.getSortColumn())) {
-            pagination.setSortColumn("articleno");
+            pagination.setSortColumn("lastupdate");
+            pagination.setSortOrder("DESC");
         }
         // 总件数设置
         pagination.setPreperties(articleService.getCount(searchBean));
         searchBean.setPagination(pagination);
+        searchBean.setCategory(category);
         articleList = articleService.find(searchBean);
         // Setting number of records in the particular page
         pagination.setPageRecords(articleList.size());
@@ -103,8 +118,8 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
 
     public String delete() throws Exception {
         articleService.delteByNo(articleno);
+        initCollections(new String[] { "collectionProperties.article.category" });
         loadData();
         return INPUT;
     }
-
 }

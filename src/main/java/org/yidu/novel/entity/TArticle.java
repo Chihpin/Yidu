@@ -31,6 +31,10 @@ public class TArticle implements java.io.Serializable {
     private Integer imgflag;
     private Date postdate;
     private Date lastupdate;
+    private Boolean firstflag;
+    private Integer permission;
+    private Boolean authorflag;
+    private String agent;
 
     private Integer dayvisit;
     private Integer weekvisit;
@@ -51,8 +55,9 @@ public class TArticle implements java.io.Serializable {
     public TArticle(int articleno, String articlename, String initial, String keywords, Integer authorid,
             String author, Integer category, Integer subcategory, String intro, Integer lastchapterno,
             String lastchapter, Integer chapters, Integer size, Boolean fullflag, Integer imgflag, Date postdate,
-            Date lastupdate, Integer dayvisit, Integer weekvisit, Integer monthvisit, Integer allvisit,
-            Integer dayvote, Integer weekvote, Integer monthvote, Integer allvote) {
+            Date lastupdate, Boolean firstflag, Integer permission, Boolean authorflag, String agent, Integer dayvisit,
+            Integer weekvisit, Integer monthvisit, Integer allvisit, Integer dayvote, Integer weekvote,
+            Integer monthvote, Integer allvote) {
         this.articleno = articleno;
         this.articlename = articlename;
         this.initial = initial;
@@ -70,6 +75,10 @@ public class TArticle implements java.io.Serializable {
         this.imgflag = imgflag;
         this.postdate = postdate;
         this.lastupdate = lastupdate;
+        this.firstflag = firstflag;
+        this.permission = permission;
+        this.authorflag = authorflag;
+        this.agent = agent;
 
         this.dayvisit = dayvisit;
         this.weekvisit = weekvisit;
@@ -169,6 +178,30 @@ public class TArticle implements java.io.Serializable {
         this.lastchapter = lastchapter;
     }
 
+    public Boolean getFirstflag() {
+        return firstflag;
+    }
+
+    public void setFirstflag(Boolean firstflag) {
+        this.firstflag = firstflag;
+    }
+
+    public void setPermission(Integer permission) {
+        this.permission = permission;
+    }
+
+    public Integer getPermission() {
+        return permission;
+    }
+
+    public Boolean getAuthorflag() {
+        return authorflag;
+    }
+
+    public void setAuthorflag(Boolean authorflag) {
+        this.authorflag = authorflag;
+    }
+
     public Integer getChapters() {
         return this.chapters;
     }
@@ -211,6 +244,14 @@ public class TArticle implements java.io.Serializable {
 
     public Date getLastupdate() {
         return this.lastupdate;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
     }
 
     public void setLastupdate(Date lastupdate) {

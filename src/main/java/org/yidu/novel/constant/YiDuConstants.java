@@ -81,6 +81,12 @@ public class YiDuConstants {
         public final static short USER_DETAIL = 5;
         public final static short INDEX = 6;
     }
+    
+    public final static class ImageType {
+        public final static int JPG = 1;
+        public final static int GIF = 2;
+        public final static int PNG = 3;
+    }
 
     public final static class BlockType {
         public final static short ARTICLE_LIST = 10;
@@ -155,4 +161,7 @@ public class YiDuConstants {
          */
         public static final String EMAIL = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$";
     }
+
+    public static final String[] allowTypes = new String[] { "image/jpg", "image/png", "image/gif" };
+
 }

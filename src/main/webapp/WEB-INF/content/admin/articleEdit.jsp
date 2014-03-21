@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <jsp:include page="/WEB-INF/content/admin/commom/header.jsp" />
-    <s:form namespace="/admin" action="articleEdit" method="post" validate="true">
+    <s:form namespace="/admin" action="articleEdit" method="post" validate="true" enctype="multipart/form-data">
         <jsp:include page="/WEB-INF/content/commom/common_form.jsp" />
         <s:hidden name="articleno" />
         <br>
@@ -47,6 +47,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><s:text name="label.admin.article.edit.agent" /></td>
+                    <td>
+                        <s:textfield id="agent" name="agent" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+
+                <tr>
                     <td><s:text name="label.admin.article.edit.intro" /></td>
                     <td>
                         <s:textarea id="intro" name="intro" cssClass="tb-rounded"  cols="30" rows="5"/> 
@@ -59,9 +66,33 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><s:text name="label.admin.article.edit.articlespic" /></td>
+                    <td>
+                        <s:file name="articlespic"></s:file> 
+                    </td>
+                </tr>
+                <tr>
                     <td><s:text name="label.admin.article.edit.fullflag" /></td>
                     <td>
-                        <s:checkbox name="fullflag" value="fullflag"/>
+                        <s:radio list="collections['collectionProperties.article.fullflag']" name="fullflag" ></s:radio>
+                    </td>
+                </tr>
+                                <tr>
+                    <td><s:text name="label.admin.article.edit.authorflag" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.article.authorflag']" name="authorflag" ></s:radio>
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.permission" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.article.permission']" name="permission" ></s:radio>
+                    </td>
+                </tr>
+                 <tr>
+                    <td><s:text name="label.admin.article.edit.firstflag" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.article.firstflag']" name="firstflag" ></s:radio>
                     </td>
                 </tr>
                 <tr>
@@ -70,7 +101,57 @@
                         <s:textfield id="postdateStr" name="postdateStr" cssClass="tb-rounded" /> 
                     </td>
                 </tr>
-                
+                <tr>
+                    <td colspan="2"><s:text name="label.admin.article.edit.statcaption" /></td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.dayvisit" /></td>
+                    <td>
+                        <s:textfield id="dayvisit" name="dayvisit" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.weekvisit" /></td>
+                    <td>
+                        <s:textfield id="weekvisit" name="weekvisit" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                                <tr>
+                    <td><s:text name="label.admin.article.edit.monthvisit" /></td>
+                    <td>
+                        <s:textfield id="monthvisit" name="monthvisit" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.allvisit" /></td>
+                    <td>
+                        <s:textfield id="allvisit" name="allvisit" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                                <tr>
+                    <td><s:text name="label.admin.article.edit.dayvote" /></td>
+                    <td>
+                        <s:textfield id="dayvote" name="dayvote" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.weekvote" /></td>
+                    <td>
+                        <s:textfield id="weekvote" name="weekvote" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                                <tr>
+                    <td><s:text name="label.admin.article.edit.monthvote" /></td>
+                    <td>
+                        <s:textfield id="monthvote" name="monthvote" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.allvote" /></td>
+                    <td>
+                        <s:textfield id="allvote" name="allvote" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2" style="text-align: center; padding: 2px">
                         <s:submit name="submit" value="%{getText('label.admin.edit.back')}" method="back" cssClass="submitButton" theme = "simple" onclick="goback()"/>

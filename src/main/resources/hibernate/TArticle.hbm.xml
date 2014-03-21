@@ -61,6 +61,21 @@
                 <comment>lastchapter</comment>
             </column>
         </property>
+        <property name="firstflag" type="java.lang.Boolean">
+            <column name="firstflag">
+                <comment>firstflag</comment>
+            </column>
+        </property>
+        <property name="permission" type="java.lang.Integer">
+            <column name="permission">
+                <comment>permission</comment>
+            </column>
+        </property>
+        <property name="authorflag" type="java.lang.Boolean">
+            <column name="authorflag">
+                <comment>authorflag</comment>
+            </column>
+        </property>
         <property name="chapters" type="java.lang.Integer">
             <column name="chapters">
                 <comment>chapters</comment>
@@ -89,6 +104,11 @@
         <property name="lastupdate" type="timestamp">
             <column name="lastupdate" length="29">
                 <comment>lastupdate</comment>
+            </column>
+        </property>
+        <property name="agent" type="string">
+            <column name="agent" length="32">
+                <comment>agent</comment>
             </column>
         </property>
         <property name="dayvisit" type="java.lang.Integer">
