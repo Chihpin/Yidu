@@ -18,7 +18,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.action.base.AbstractInstallBaseAction;
+import org.yidu.novel.action.base.AbstractPublicAndUserBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.utils.Utils;
 
@@ -32,10 +32,13 @@ import org.yidu.novel.utils.Utils;
  * @version 1.0.0
  * @author shinpa.you
  */
-public class IndexAction extends AbstractInstallBaseAction {
+public class IndexAction extends AbstractPublicAndUserBaseAction {
 
     private static final long serialVersionUID = -5991997032217966675L;
-
+    /**
+     * 命名空间。
+     */
+    public static final String NAMESPACE = "install";
     /**
      * 功能名称。
      */
