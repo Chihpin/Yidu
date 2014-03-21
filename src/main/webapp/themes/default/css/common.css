@@ -69,7 +69,7 @@ a:hover { text-decoration:underline }
 .shadow { border-left:0 none; border-right:0 none; position:absolute; top:30px; z-index:-1; background-color:#f5f5f5; height:120px; width:100%; border-top:1px solid #3a590b; border-bottom:1px solid #ededed }
 #global-head { height:167px; position:relative; margin-top:-32px; z-index:8; }
 .site-navigation { width:500px;height:30px; overflow:hidden; float:left }
-.site-navigation a { float:left; padding:0 15px; margin:8px 0 8px -1px; height:14px; font-size:14px; line-height:16px; _line-height:20px; color:#f0f0f0; text-align:center; border-left:1px solid #7caf3a }
+.site-navigation a { float:left; padding:0 15px; margin:8px 0 8px -1px; height:14px; font-size:12px; line-height:16px; _line-height:20px; color:#f0f0f0; text-align:center; border-left:1px solid #7caf3a }
 .site-navigation .home { padding:0 15px 0 20px; background:url(../images/home.png) no-repeat 0 50%; border-left:0 none }
 .site-logo { float:left; clear:both; padding-top:23px }
 .site-logo a { display:block; width:246px; height:81px; overflow:hidden; cursor:pointer }
@@ -165,7 +165,7 @@ table.mygrid caption, .gridtop { border: 1px solid #E7E7E7; background: #e9f1f8;
 table.mygrid th, .head { border: 1px solid #E7E7E7; background: #f5f5f5; color:#054e86; text-align: center; font-weight: bold; font-size: 12px; padding: 3px; }
 table.mygrid td { border: 1px solid #E7E7E7; padding: 3px; background-color: #ffffff !important; }
 table.mygrid .button { background: #f5f5f5; border: 1px solid #E7E7E7; height: 24px; padding: 2px 0px 0px 0px; }
-/**我的收藏 浏览记录**/
+/**謌醍噪謾ｶ阯�豬剰ｧ郁ｮｰ蠖�*/
 .myhide { float:right; position:relative; margin-left:3px; display:inline; z-index:10; width:69px; }
 .myhide a.hides { padding:0 5px; color:#fff; height:31px; line-height:31px; background: url(../images/common2.png) no-repeat right -41px; float:left; padding-right:12px; border-top:1px solid #c8c8c8; }
 .hd-follow .myhide a.select { background: url(../images/common2.png) no-repeat right -92px; color:#666; background-color:#fff; border-top:1px solid #64a60c; }

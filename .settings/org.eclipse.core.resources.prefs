@@ -1,7 +1,11 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/content/info.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/content/index_inputmobile.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/content/info_inputmobile.jsp=UTF-8
 encoding//src/main/webapp/css/board.css=UTF-8
 encoding//src/main/webapp/css/channel-net.css=UTF-8
 encoding//src/main/webapp/css/common.css=UTF-8
 encoding//src/main/webapp/css/default.css=UTF-8
+encoding//src/main/webapp/css/mobile/dialog.css=UTF-8
+encoding//src/main/webapp/css/mobile/yidumobile.css=UTF-8
+encoding//src/main/webapp/themes/default/css/common.css=UTF-8
 encoding/<project>=UTF-8

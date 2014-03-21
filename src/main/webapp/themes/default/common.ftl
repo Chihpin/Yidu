@@ -7,6 +7,7 @@
       <a class="home" href="${contextPath}/">首页</a>
       <a href="${encodeURL("/siteMap")}">网站地图</a>
       <a href="${encodeURL("/articleList?fullflag=true")}">完本小说</a>
+      <a href="${encodeURL("/saveShortcut")}" style="color:red">创建桌面快捷</a>
       </nav>
       <div class="hd-follow" style="width:197px" >
         <div class="myhide"><a href="#" class="hides">浏览记录</a>
