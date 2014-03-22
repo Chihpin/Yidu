@@ -162,7 +162,7 @@ public class DownloadAction extends AbstractPublicBaseAction {
         } catch (Exception e) {
             logger.error(getText("YIDU99999"), e);
             addActionError(getText("YIDU99999"));
-            return Action.ERROR;
+            return FREEMARKER_ERROR;
         }
         logger.debug("execute normally end.");
         return RESULT_DOWNLOAD;

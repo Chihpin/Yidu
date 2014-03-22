@@ -43,7 +43,7 @@ public class VoteAction extends AbstractUserBaseAction {
             articleService.updateVoteStatistic(articleno);
         } else {
             addActionError(getText("errors.not.exsits.article"));
-            return ERROR;
+            return FREEMARKER_ERROR;
         }
         logger.debug("execute normally start.");
         return FREEMARKER;

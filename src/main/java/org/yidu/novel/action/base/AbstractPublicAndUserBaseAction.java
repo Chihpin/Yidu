@@ -29,6 +29,9 @@ import com.google.gson.Gson;
 public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction {
 
     private static final long serialVersionUID = 6698799932081679448L;
+
+    protected abstract void loadData();
+
     /**
      * 是否存在错误
      */

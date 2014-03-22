@@ -31,7 +31,7 @@ public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAc
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
             setHasError(true);
-            return ERROR;
+            return FREEMARKER_ERROR;
         }
         logger.debug("execute normally end.");
         return FREEMARKER;

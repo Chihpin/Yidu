@@ -107,7 +107,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
         // 小说号如果没有的话，终止登录，返回错误画面
         if (articleno == 0) {
             addActionError(getText("errors.not.exsits.article"));
-            return ERROR;
+            return FREEMARKER_ERROR;
         }
 
         // 检查当前登录的最大件数
@@ -116,7 +116,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
         int bookcaseCount = this.bookcaseService.getCount(searchBean);
         if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_BOOKCASE)) {
             addActionError(getText("errors.max.bookcase"));
-            return ERROR;
+            return FREEMARKER_ERROR;
         }
 
         TBookcase bookcase = this.bookcaseService.getByArticleno(LoginManager.getLoginUser().getUserno(), articleno);
@@ -130,7 +130,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
                 BeanUtils.copyProperties(chapter, bookcase);
             } else {
                 addActionError(getText("errors.not.exsits.chapter"));
-                return ERROR;
+                return FREEMARKER_ERROR;
             }
         } else if (articleno != 0) {
             TArticle article = this.articleService.getByNo(articleno);
@@ -138,7 +138,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
                 BeanUtils.copyProperties(article, bookcase);
             } else {
                 addActionError(getText("errors.not.exsits.article"));
-                return ERROR;
+                return FREEMARKER_ERROR;
             }
         }
         bookcase.setCreatetime(new Date());
@@ -146,7 +146,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
 
         this.bookcaseService.save(bookcase);
         this.loadData();
-        return MESSAGE;
+        return FREEMARKER_MESSAGE;
     }
 
     @Transactional
@@ -157,7 +157,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
                 this.bookcaseService.delteByNo(bookcaseno);
             } else {
                 addActionError(getText("errors.unauthority.bookcase"));
-                return ERROR;
+                return FREEMARKER_ERROR;
             }
         }
         this.loadData();

@@ -21,6 +21,8 @@ public abstract class AbstractAdminBaseAction extends AbstractBaseAction {
      */
     public static final String NAMESPACE = "/admin";
 
+    protected abstract void loadData();
+
     @Override
     @SkipValidation
     public String execute() {
@@ -29,7 +31,7 @@ public abstract class AbstractAdminBaseAction extends AbstractBaseAction {
         loadData();
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
-            return ERROR;
+            return ADMIN_ERROR;
         }
         logger.debug("execute normally end.");
         return Action.INPUT;

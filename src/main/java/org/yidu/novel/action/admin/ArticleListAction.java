@@ -118,6 +118,7 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
 
     public String delete() throws Exception {
         articleService.delteByNo(articleno);
+        // TODO 删除章节文件和封面文件
         initCollections(new String[] { "collectionProperties.article.category" });
         loadData();
         return INPUT;

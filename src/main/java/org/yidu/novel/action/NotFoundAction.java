@@ -26,7 +26,7 @@ public class NotFoundAction extends AbstractPublicBaseAction {
     public String execute() {
         logger.debug("execute start.");
         addActionError(getText("errors.not.exsits.page"));
-        return ERROR;
+        return FREEMARKER_ERROR;
     }
 
     @Override

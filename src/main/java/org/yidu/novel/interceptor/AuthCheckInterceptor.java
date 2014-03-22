@@ -8,7 +8,6 @@ import org.yidu.novel.action.base.AbstractAdminBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
-import org.yidu.novel.action.install.IndexAction;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.service.UserService;
 import org.yidu.novel.utils.CookieUtils;
@@ -50,7 +49,14 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
     @Override
     public String intercept(final ActionInvocation invocation) throws Exception {
 
-        logger.debug("intercept start.");
+        logger.debug("AuthCheckInterceptor start.");
+
+        logger.debug(invocation.getAction().getClass().toString());
+
+        // 安装页面直接访问
+        if (true || invocation.getAction() instanceof org.yidu.novel.action.install.IndexAction) {
+            return invocation.invoke();
+        }
 
         boolean skipAuthCheck = YiDuConstants.yiduConf.getBoolean("skipAuthCheck", false);
         if (skipAuthCheck) {
@@ -78,21 +84,21 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
                     return invocation.invoke();
                 } else {
                     action.addActionError(action.getText(AUTH_ERROR_KEY));
-                    return Action.ERROR;
+                    return AbstractBaseAction.ADMIN_ERROR;
                 }
             } else {
                 return AbstractBaseAction.GOTO_LOGIN;
             }
         }
 
-        // 公共画面或安装页面随意访问
-        if (invocation.getAction() instanceof AbstractPublicBaseAction || invocation.getAction() instanceof IndexAction) {
+        // 公共画面页面随意访问
+        if (invocation.getAction() instanceof AbstractPublicBaseAction) {
             return invocation.invoke();
         } else {
             AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
             String errorMsg = action.getText(UNKNOWN_ERROR_KEY);
             action.addActionError(errorMsg);
-            return Action.ERROR;
+            return AbstractBaseAction.FREEMARKER_ERROR;
         }
     }
 }

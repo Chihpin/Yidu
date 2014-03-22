@@ -40,7 +40,7 @@ public class ErrorInterceptor extends AbstractInterceptor {
         if (invocation.getAction() instanceof AbstractAdminBaseAction) {
             return AbstractBaseAction.ADMIN_ERROR;
         } else {
-            return AbstractBaseAction.ERROR;
+            return AbstractBaseAction.FREEMARKER_ERROR;
         }
 
     }

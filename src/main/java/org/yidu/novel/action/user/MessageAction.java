@@ -65,7 +65,7 @@ public class MessageAction extends AbstractUserBaseAction {
     @Transactional
     public String add() {
         initCollections(new String[] { "collectionProperties.article.category" });
-        return MESSAGE;
+        return FREEMARKER_MESSAGE;
     }
 
     @Transactional
@@ -76,7 +76,7 @@ public class MessageAction extends AbstractUserBaseAction {
                 this.messageService.delteByNo(messageno);
             } else {
                 addActionError(getText("errors.unauthority.message"));
-                return ERROR;
+                return FREEMARKER_ERROR;
             }
         }
         this.loadData();

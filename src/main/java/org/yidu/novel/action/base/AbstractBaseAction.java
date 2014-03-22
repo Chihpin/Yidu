@@ -35,8 +35,8 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
  * @author shinpa.you
  */
 @Results({
-        @Result(name = Action.ERROR, location = "/themes/${themeName}/error.ftl", type = "freemarker"),
-        @Result(name = AbstractBaseAction.MESSAGE, type = "freemarker", location = "/themes/${themeName}/message.ftl"),
+        @Result(name = AbstractBaseAction.FREEMARKER_ERROR, location = "/themes/${themeName}/error.ftl", type = "freemarker"),
+        @Result(name = AbstractBaseAction.FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/message.ftl"),
         @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/themes/${themeName}/${tempName}.ftl"),
         @Result(name = AbstractBaseAction.ADMIN_ERROR, location = "/WEB-INF/error.jsp", type = "dispatcher"),
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
@@ -60,6 +60,8 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     public static final String ADMIN_ERROR = "adminerror";
 
     public static final String FREEMARKER = "freemarker";
+    public static final String FREEMARKER_ERROR = "freemarker_error";
+    public static final String FREEMARKER_MESSAGE = "freemarker_message";
 
     /**
      * 输出log
@@ -127,8 +129,6 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     public String getInputResultName() {
         return Action.INPUT;
     }
-
-    protected abstract void loadData();
 
     /**
      * 获得系统相对路径

@@ -18,7 +18,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.action.base.AbstractPublicAndUserBaseAction;
+import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.utils.Utils;
 
@@ -32,7 +32,7 @@ import org.yidu.novel.utils.Utils;
  * @version 1.0.0
  * @author shinpa.you
  */
-public class IndexAction extends AbstractPublicAndUserBaseAction {
+public class IndexAction extends AbstractBaseAction {
 
     private static final long serialVersionUID = -5991997032217966675L;
     /**
@@ -208,7 +208,8 @@ public class IndexAction extends AbstractPublicAndUserBaseAction {
             dbhost = dbinfo[0];
             dbinfo = StringUtils.split(dbinfo[1], "/");
             dbport = dbinfo[0];
-            dbname = dbinfo[1];
+            // 数据库名暂时固定
+            dbname = "yidu";
             dbusername = jdbcConf.getString(YiDuConfig.JDBC_USERNAME);
             dbpassword = jdbcConf.getString(YiDuConfig.JDBC_PASSWORD);
             PropertiesConfiguration languageConf = new PropertiesConfiguration(Thread.currentThread()
@@ -300,7 +301,7 @@ public class IndexAction extends AbstractPublicAndUserBaseAction {
 
         } catch (Exception e) {
             addActionError(e.getMessage());
-            logger.error(e);
+            logger.error(e.getMessage(), e);
             return ERROR;
         } finally {
             try {
@@ -336,7 +337,4 @@ public class IndexAction extends AbstractPublicAndUserBaseAction {
         stmt.execute(sql);
     }
 
-    @Override
-    protected void loadData() {
-    }
 }
