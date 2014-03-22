@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.entity.TUser;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -47,7 +48,7 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
     private Date regdate;
     private Short sex;
     private String qq;
-    private int type;
+    private Short type;
     private Date lastlogin;
 
     public int getUserno() {
@@ -114,11 +115,11 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
         this.qq = qq;
     }
 
-    public int getType() {
+    public Short getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Short type) {
         this.type = type;
     }
 
@@ -134,7 +135,7 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
         // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.user.sex" ,"collectionProperties.user.type"});
+        initCollections(new String[] { "collectionProperties.user.sex", "collectionProperties.user.type" });
         // 编辑
         if (userno != 0) {
             TUser user = userService.getByNo(userno);
@@ -159,7 +160,8 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
         } else {
             user.setRegdate(new Date());
         }
-        BeanUtils.copyProperties(this, user, new String[] { "regdate", "lastlogin" });
+        BeanUtils.copyProperties(this, user, new String[] { "regdate", "lastlogin", "password" });
+        user.setPassword(Utils.convert2MD5(password));
 
         userService.save(user);
         logger.debug("save normally end.");
