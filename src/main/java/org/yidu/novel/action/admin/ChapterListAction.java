@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 
 /**
@@ -43,6 +44,8 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
      */
     private int chapterno;
 
+    private TArticle article = new TArticle();
+
     private List<TChapter> chapterList = new ArrayList<TChapter>();
 
     public int getArticleno() {
@@ -51,6 +54,22 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
 
     public void setArticleno(int articleno) {
         this.articleno = articleno;
+    }
+
+    public int getChapterno() {
+        return chapterno;
+    }
+
+    public void setChapterno(int chapterno) {
+        this.chapterno = chapterno;
+    }
+
+    public TArticle getArticle() {
+        return article;
+    }
+
+    public void setArticle(TArticle article) {
+        this.article = article;
     }
 
     public List<TChapter> getChapterList() {

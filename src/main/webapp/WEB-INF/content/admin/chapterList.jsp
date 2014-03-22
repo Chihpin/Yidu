@@ -14,14 +14,13 @@
             <col width="100px">
         </colgroup>
         <tr>
-            <th class="sortable"><s:text name="label.admin.chapter.list.chapterno" /></th>
-            <th class="sortable"><s:text name="label.admin.chapter.list.articlename" /></th>
-            <th class="sortable"><s:text name="label.admin.chapter.list.chaptername" /></th>
-            <th class="sortable"><s:text name="label.admin.chapter.list.postdate" /></th>
-            <th class="sortable"><s:text name="label.admin.list.operate" /></th>
+            <td class="ac_odd" colspan="5">《太虚经》</td>
+        </tr>
+        <tr>
+            <td colspan="5" >[新建分卷] [增加章节] [编辑文章] [删除文章] [清空文章] [管理书评] </td>
         </tr>
         <s:iterator value="chapterList" id="chapter" status="rowstatus">
-        <s:if test="#rowstatus.even == true">
+        <s:if test="#rowstatus.odd == true">
         <tr class="ac_odd">
         </s:if>
         <s:else>
