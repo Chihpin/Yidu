@@ -13,7 +13,6 @@ import org.yidu.novel.service.UserService;
 import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -51,10 +50,8 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
 
         logger.debug("AuthCheckInterceptor start.");
 
-        logger.debug(invocation.getAction().getClass().toString());
-
         // 安装页面直接访问
-        if (true || invocation.getAction() instanceof org.yidu.novel.action.install.IndexAction) {
+        if (invocation.getAction() instanceof org.yidu.novel.action.install.IndexAction) {
             return invocation.invoke();
         }
 
