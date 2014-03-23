@@ -9,6 +9,7 @@ import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -82,15 +83,24 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
 
     @Override
     protected void loadData() {
+
+        article = articleService.getByNo(articleno);
         ChapterSearchBean searchBean = new ChapterSearchBean();
         BeanUtils.copyProperties(this, searchBean);
         chapterList = chapterService.find(searchBean);
+
     }
 
     public String delete() throws Exception {
+
         chapterService.delteByNo(chapterno);
+
+        // 删除封面文件
+        Utils.deleteFile(Utils.getTextFilePathByChapterno(articleno, chapterno));
+
         loadData();
         return INPUT;
+
     }
 
 }

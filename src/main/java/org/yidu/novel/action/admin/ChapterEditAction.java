@@ -2,11 +2,13 @@ package org.yidu.novel.action.admin;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
+import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.utils.Utils;
 
@@ -20,7 +22,7 @@ import org.yidu.novel.utils.Utils;
  * @author shinpa.you
  */
 @Action(value = "chapterEdit")
-@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL)
+@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL+"?articleno=${articleno}")
 public class ChapterEditAction extends AbstractAdminEditBaseAction {
 
     private static final long serialVersionUID = -6064353669030314155L;
@@ -49,6 +51,10 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
 
     public void setArticleno(Integer articleno) {
         this.articleno = articleno;
+    }
+
+    public void setArticleno(String articleno) {
+        this.articleno = Integer.parseInt(articleno);
     }
 
     public String getArticlename() {
@@ -124,23 +130,38 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         if (chapterno != 0) {
             TChapter chapter = chapterService.getByNo(chapterno);
             BeanUtils.copyProperties(chapter, this);
+            content = Utils.getContext(articleno, chapterno, false);
         }
-
-        this.content = Utils.getContext(articleno, chapterno, false);
         logger.debug("loadData normally end.");
     }
 
     public String save() {
         logger.debug("save start.");
+        // 初始化种别下拉列表选项
+        initCollections(new String[] { "collectionProperties.chapter.isvip" });
+
         TChapter chapter = new TChapter();
         if (chapterno != 0) {
+            // 获取章节信息
             chapter = chapterService.getByNo(chapterno);
+        } else {
+            // 获取小说信息
+            TArticle article = articleService.getByNo(articleno);
+            chapter.setArticleno(articleno);
+            chapter.setArticlename(article.getArticlename());
         }
-        BeanUtils.copyProperties(this, chapter);
+        BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename" });
+        chapter.setSize(StringUtils.length(content));
+        chapter.setPostdate(new Date());
         chapterService.save(chapter);
-        Utils.saveContext(articleno, chapterno, content);
+
+        try {
+            Utils.saveContext(articleno, chapterno, content);
+        } catch (Exception e) {
+            addActionError(e.getMessage());
+            return INPUT;
+        }
         logger.debug("save normally end.");
         return REDIRECT;
     }
-
 }

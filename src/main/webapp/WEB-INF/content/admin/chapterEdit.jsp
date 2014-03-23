@@ -5,7 +5,6 @@
 <jsp:include page="/WEB-INF/content/admin/commom/header.jsp" />
     <s:form namespace="/admin" action="chapterEdit" method="post" validate="true">
         <jsp:include page="/WEB-INF/content/commom/common_form.jsp" />
-        <s:hidden name="chapterno" />
         <br>
         <table class="yidu-table" align="center">
             <colgroup>
@@ -15,6 +14,12 @@
             <tbody>
                 <tr>
                     <th colspan="2"><s:text name="label.admin.chapter.edit.title" /></th>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.chapter.edit.articlename" /></td>
+                    <td>
+                        <s:property value="articlename" />
+                    </td>
                 </tr>
                 <s:if test="chapterno!=0">
                 <tr>
@@ -70,6 +75,7 @@
         </table>
         <s:hidden  name="articlename" />
         <s:hidden  name="articleno" />
+        <s:hidden name="chapterno" />
     </s:form>
     </div>
     <jsp:include page="/WEB-INF/content/admin/commom/footer.jsp" />
