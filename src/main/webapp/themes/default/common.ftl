@@ -29,7 +29,7 @@
                     if(data==null){
                         $(".hd-follow").width(197);
                     }else{
-                        var html = "你好," + data.loginid ;
+                        var html = '你好, <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
                         if(data.type==30){
                             html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>'
                         }
