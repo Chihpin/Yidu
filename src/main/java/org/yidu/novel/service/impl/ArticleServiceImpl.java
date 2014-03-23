@@ -67,8 +67,6 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
             hql.append(" AND articleno in ( " + searchBean.getArticlenos() + " )  ");
         }
 
-        hql.append(" AND lastchapterno is not null ");
-
         // 条件追加
         if (StringUtils.isNotEmpty(searchBean.getKey())) {
             // 文章名
@@ -76,9 +74,9 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
                     + StringEscapeUtils.escapeSql(searchBean.getKey().toLowerCase()) + "%' OR LOWER(author) like '%"
                     + StringEscapeUtils.escapeSql(searchBean.getKey().toLowerCase()) + "%' )");
         }
-
-        // 小说编号数组追加
+        // 过滤空章节
         hql.append(" AND lastupdate is not null ");
+        hql.append(" AND lastchapterno is not null ");
     }
 
     @Override

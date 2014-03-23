@@ -31,8 +31,8 @@
     </table>
     <div class="pages">
         <div class="pagelink" id="pagelink">
-            <#assign listurl = "/search?key=${key}&page=">
-            <#assign listurlforjs = "${contextPath}/search/${key}/" >
+            <#assign listurl = "/search?key=${key?html}&page=">
+            <#assign listurlforjs = "${contextPath}/search/${key?html}/" >
             <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages}</em>
             <a href="${encodeURL(listurl +"1")}" class="first">1</a>
             <#list pagination.pageNumberList as pagenum >
