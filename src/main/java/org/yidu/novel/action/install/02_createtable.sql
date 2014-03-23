@@ -142,6 +142,7 @@ CREATE TABLE t_article
     -- 3：PNG
     -- 10：other（l.jpg）
     imgflag smallint,
+    agent varchar(32),
     firstflag boolean DEFAULT 'false',
     -- 1:专属作品
     -- 2:驻站作品
