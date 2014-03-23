@@ -23,6 +23,12 @@ public class TUser implements java.io.Serializable {
     private Short type;
     private Integer votecount;
     private Boolean deleteflag;
+    private String realname;
+    private String id;
+    private String mobileno;
+    private String branch;
+    private String bankno;
+    private String alipayacount;
 
     public TUser() {
     }
@@ -34,7 +40,8 @@ public class TUser implements java.io.Serializable {
     }
 
     public TUser(int userno, String loginid, String password, String username, String email, Date regdate, Short sex,
-            String qq, Date lastlogin, String lineno, Short type, Integer votecount, Boolean deleteflag) {
+            String qq, Date lastlogin, String lineno, Short type, Integer votecount, Boolean deleteflag,
+            String realname, String id, String mobileno, String branch, String bankno, String alipayacount) {
         this.userno = userno;
         this.loginid = loginid;
         this.password = password;
@@ -48,6 +55,12 @@ public class TUser implements java.io.Serializable {
         this.type = type;
         this.votecount = votecount;
         this.deleteflag = deleteflag;
+        this.realname = realname;
+        this.id = id;
+        this.mobileno = mobileno;
+        this.branch = branch;
+        this.bankno = bankno;
+        this.alipayacount = alipayacount;
     }
 
     public int getUserno() {
@@ -152,6 +165,54 @@ public class TUser implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMobileno() {
+        return mobileno;
+    }
+
+    public void setMobileno(String mobileno) {
+        this.mobileno = mobileno;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBankno() {
+        return bankno;
+    }
+
+    public void setBankno(String bankno) {
+        this.bankno = bankno;
+    }
+
+    public String getAlipayacount() {
+        return alipayacount;
+    }
+
+    public void setAlipayacount(String alipayacount) {
+        this.alipayacount = alipayacount;
     }
 
 }

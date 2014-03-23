@@ -50,7 +50,6 @@
         </tr>
         <tr>
           <td class="odd" width="25%">&nbsp;
-            <input name="action" id="action" value="newuser" type="hidden"></td>
           <td class="even">
               <@s.submit method="register" cssClass="submit" name="submit" theme="simple" cssStyle="cursor:pointer;" value=" 提 交 "/>
           </td>

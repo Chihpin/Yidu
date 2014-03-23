@@ -53,7 +53,7 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
             hql.append(pagination.getSortInfo());
             return this.findByRange(hql.toString(), pagination.getStart(), pagination.getEnd(), params);
         } else {
-            hql.append("ORDER BY articleno");
+            hql.append("ORDER BY userno");
             return this.find(hql.toString(), params);
         }
     }

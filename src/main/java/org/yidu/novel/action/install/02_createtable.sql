@@ -25,6 +25,12 @@ CREATE TABLE t_user
     -- 30:system administrator
     type smallint,
     votecount int,
+    realname varchar(10),
+    id varchar(18),
+    mobileno varchar(11),
+    branch varchar(50),
+    bankno varchar(20),
+    alipayacount varchar(50),
     deleteflag boolean,
     PRIMARY KEY (userno)
 ) WITHOUT OIDS;

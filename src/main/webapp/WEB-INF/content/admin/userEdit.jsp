@@ -37,12 +37,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><s:text name="label.admin.user.edit.username" /></td>
-                    <td>
-                        <s:textfield id="username" name="username" cssClass="tb-rounded" /> 
-                    </td>
-                </tr>
-                <tr>
                     <td><s:text name="label.admin.user.edit.email" /></td>
                     <td>
                         <s:textfield id="email" name="email" cssClass="tb-rounded" /> 
@@ -79,6 +73,48 @@
                     <td>
                         <s:textfield id="lineno" name="lineno" cssClass="tb-rounded" /> 
                     </td>
+                </tr>
+                 <tr>
+                  <td><s:text name="label.admin.user.edit.realname" /></td>
+                  <td>
+                      <s:textfield name="realname" id = "realname" cssClass="tb-rounded" maxlength="10"/>
+                  </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.user.edit.username" /></td>
+                    <td>
+                        <s:textfield id="username" name="username" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                  <td><s:text name="label.admin.user.edit.id" /></td>
+                  <td>
+                    <s:textfield name="id" id = "id" cssClass="tb-rounded" maxlength="18"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td><s:text name="label.admin.user.edit.mobileno" /></td>
+                  <td>
+                    <s:textfield name="mobileno" id = "mobileno" cssClass="tb-rounded" maxlength="11"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td><s:text name="label.admin.user.edit.branch" /></td>
+                  <td>
+                      <s:textfield name="branch" id = "branch" cssClass="tb-rounded" maxlength="50"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td><s:text name="label.admin.user.edit.bankno" /></td>
+                  <td>
+                      <s:textfield name="bankno" id = "bankno" cssClass="tb-rounded" maxlength="20"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td><s:text name="label.admin.user.edit.alipayacount" /></td>
+                  <td>
+                    <s:textfield name="alipayacount" id = "alipayacount" cssClass="tb-rounded" maxlength="50"/>
+                  </td>
                 </tr>
                 <s:if test="userno!=0">
                 <tr>

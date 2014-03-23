@@ -71,5 +71,35 @@
                 <comment>deleteflag</comment>
             </column>
         </property>
+        <property name="realname" type="string">
+            <column name="realname" length="10">
+                <comment>realname</comment>
+            </column>
+        </property>
+        <property name="id" type="string">
+            <column name="id" length="18">
+                <comment>id</comment>
+            </column>
+        </property>
+        <property name="mobileno" type="string">
+            <column name="mobileno" length="11">
+                <comment>mobileno</comment>
+            </column>
+        </property>
+        <property name="branch" type="string">
+            <column name="branch" length="50">
+                <comment>branch</comment>
+            </column>
+        </property>
+        <property name="bankno" type="string">
+            <column name="bankno" length="20">
+                <comment>bankno</comment>
+            </column>
+        </property>
+        <property name="alipayacount" type="string">
+            <column name="alipayacount" length="50">
+                <comment>alipayacount</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

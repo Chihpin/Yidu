@@ -2,6 +2,7 @@ package org.yidu.novel.action.admin;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
@@ -50,6 +51,13 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
     private String qq;
     private Short type;
     private Date lastlogin;
+
+    private String realname;
+    private String id;
+    private String mobileno;
+    private String branch;
+    private String bankno;
+    private String alipayacount;
 
     public int getUserno() {
         return userno;
@@ -131,6 +139,54 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
         this.lastlogin = lastlogin;
     }
 
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMobileno() {
+        return mobileno;
+    }
+
+    public void setMobileno(String mobileno) {
+        this.mobileno = mobileno;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBankno() {
+        return bankno;
+    }
+
+    public void setBankno(String bankno) {
+        this.bankno = bankno;
+    }
+
+    public String getAlipayacount() {
+        return alipayacount;
+    }
+
+    public void setAlipayacount(String alipayacount) {
+        this.alipayacount = alipayacount;
+    }
+
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
@@ -161,7 +217,10 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
             user.setRegdate(new Date());
         }
         BeanUtils.copyProperties(this, user, new String[] { "regdate", "lastlogin", "password" });
-        user.setPassword(Utils.convert2MD5(password));
+
+        if (StringUtils.isNotEmpty(password)) {
+            user.setPassword(Utils.convert2MD5(password));
+        }
 
         userService.save(user);
         logger.debug("save normally end.");

@@ -13,6 +13,9 @@
             <ul>
                <li <#if pageType==23>class="current"</#if>><a href="${encodeURL("/user/useredit")}">编辑资料</a></li>
             </ul>
+            <ul>
+               <li <#if pageType==24>class="current"</#if>><a href="${encodeURL("/user/useredit")}">申请作者</a></li>
+            </ul>
             <ul class="last">
                <li><a href="${encodeURL("/logout")}">退出登录</a></li>
             </ul>
