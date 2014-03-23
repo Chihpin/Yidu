@@ -55,6 +55,8 @@ public class UserListAction extends AbstractAdminListBaseAction {
 
     @Override
     protected void loadData() {
+        // 初始化类别下拉列表选项
+        initCollections(new String[] { "collectionProperties.user.sex", "collectionProperties.user.type" });
         UserSearchBean searchBean = new UserSearchBean();
         if (StringUtils.isEmpty(pagination.getSortColumn())) {
             pagination.setSortColumn("userno");
@@ -68,6 +70,8 @@ public class UserListAction extends AbstractAdminListBaseAction {
     }
 
     public String delete() throws Exception {
+        // 初始化类别下拉列表选项
+        initCollections(new String[] { "collectionProperties.user.sex", "collectionProperties.user.type" });
         userService.delteByNo(userno);
         loadData();
         return INPUT;

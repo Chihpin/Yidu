@@ -2,6 +2,7 @@ package org.yidu.novel.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +35,19 @@ public class CookieUtils {
         return null;
     }
 
-    // 使用cookie信息登录
+    /**
+     * 使用cookie信息登录
+     * 
+     * @param request
+     * @param userService
+     */
     public static void getUserCookieAndLogoin(HttpServletRequest request, UserService userService) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
+            // 遍历cookie查找用户信息
             for (Cookie cookie : cookies) {
                 if (CookieUtils.USER_COOKIE.equals(cookie.getName())) {
+                    // 使用cookie内的用户信息登录
                     String value = cookie.getValue();
                     if (StringUtils.isNotBlank(value)) {
                         String[] split = value.split(",");
@@ -49,6 +57,8 @@ public class CookieUtils {
                             TUser user = userService.findByLoginInfoByJDBC(loginid, password);
                             if (user != null) {
                                 LoginManager.doLogin(user);
+                                // 更新用户最后登录时间
+                                userService.updateLastLoginDate(user.getUserno(),new Date());
                             }
                         }
                     }

@@ -21,13 +21,14 @@
   <header id="global-head" style="height:45px;">
     <div>
       <nav class="site-navigation cf">
-      <a class="home" href="<s:property value="contextPath" />/">网站首页</a>
-      <a href="<s:property value="contextPath" />/admin/index">管理首页</a>
-      <a href="http://www.51yd.org/" target="_blank">官方论坛</a>
+      <a class="home" href="<s:property value="contextPath" />/"><s:text name="label.admin.navi.home" /></a>
+      <a href="<s:property value="contextPath" />/admin/index"><s:text name="label.admin.navi.adminHome" /></a>
+      <a href="http://www.51yd.org/" target="_blank"><s:text name="label.admin.navi.forum" /></a>
       </nav>
       <div class="hd-follow" style="width:300px;align:right" >
       <span id="checklogin">
-        欢迎您回来管理员同志，辛苦啦！<a href="<s:property value="contextPath" />/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>
+        <s:text name="label.admin.navi.welcomeMeg" />
+        <a href="<s:property value="contextPath" />/logout" style="color: rgb(240, 240, 240);" class="out"><s:text name="label.admin.navi.logout" /></a>
       </span>
     </div>
   </header>
@@ -36,12 +37,13 @@
       <div class="channel-header-wrapper">
         <nav class="channel-nav">
           <ul class="channel-nav-list">
-            <li><a href="<s:property value="contextPath" />/admin/configEdit" title="系统参数设置">系统参数设置</a></li>
-            <li><a href="<s:property value="contextPath" />/admin/languageEdit" title="语言包设置">语言包设置</a></li>
-            <li><a href="<s:property value="contextPath" />/admin/blockList" title="系区块管理">区块管理</a></li>
-            <li><a href="<s:property value="contextPath" />/admin/articleList" title="小说管理">小说管理</a></li>
-            <li><a href="<s:property value="contextPath" />/admin/userList" title="用户管理">用户管理</a></li>
-            <li><a href="<s:property value="contextPath" />/admin/messageList" title="消息管理">消息管理</a></li>
+            <li><a href="<s:property value="contextPath" />/admin/configEdit" title="<s:text name="label.admin.navi.configEdit" />"><s:text name="label.admin.navi.configEdit" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/languageEdit" title="<s:text name="label.admin.navi.languageEdit" />"><s:text name="label.admin.navi.languageEdit" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/blockList" title="<s:text name="label.admin.navi.blockList" />"><s:text name="label.admin.navi.blockList" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/articleList" title="<s:text name="label.admin.navi.articleList" />"><s:text name="label.admin.navi.articleList" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/userList" title="<s:text name="label.admin.navi.userList" />"><s:text name="label.admin.navi.userList" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/messageList" title="<s:text name="label.admin.navi.messageList" />"><s:text name="label.admin.navi.messageList" /></a></li>
+            <li><a href="<s:property value="contextPath" />/admin/reviewList" title="<s:text name="label.admin.navi.reviewList" />"><s:text name="label.admin.navi.reviewList" /></a></li>
         </ul>
       </nav>
     </div>

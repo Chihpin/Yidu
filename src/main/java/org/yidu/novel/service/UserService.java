@@ -1,5 +1,6 @@
 package org.yidu.novel.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.yidu.novel.bean.UserSearchBean;
@@ -25,6 +26,14 @@ public interface UserService {
      * @return 用户信息
      */
     public TUser findByLoginInfoByJDBC(String loginid, String password);
+
+    /**
+     * 更新用户的最后登录时间
+     * 
+     * @param userno
+     * @param lastLoginDate
+     */
+    public void updateLastLoginDate(int userno, Date lastLoginDate);
 
     /**
      * 取得条件用户列表

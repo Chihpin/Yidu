@@ -1,5 +1,7 @@
 package org.yidu.novel.action;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 
 import org.apache.struts2.ServletActionContext;
@@ -91,6 +93,9 @@ public class LoginAction extends AbstractPublicBaseAction {
             logger.info("user info is " + user.toString());
             // 正常登录
             LoginManager.doLogin(user);
+            // 更新用户最后登录时间
+            user.setLastlogin(new Date());
+            userService.save(user);
             if (true) {
                 Cookie cookie = CookieUtils.addUserCookie(user);
                 // 添加cookie到response中

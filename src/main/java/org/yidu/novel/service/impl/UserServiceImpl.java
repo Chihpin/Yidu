@@ -1,6 +1,7 @@
 package org.yidu.novel.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.UserSearchBean;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.service.UserService;
+import org.yidu.novel.utils.Pagination;
 
 public class UserServiceImpl extends HibernateSupportServiceImpl implements UserService {
 
@@ -44,9 +46,16 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
         List<Object> params = new ArrayList<Object>();
         hql.append("FROM TUser WHERE 1=1 ");
         buildCondition(searchBean, hql, params);
-        hql.append(" order by userno ");
-        List<TUser> userinfoList = this.find(hql.toString(), params);
-        return userinfoList;
+
+        Pagination pagination = searchBean.getPagination();
+        // 添加排序信息
+        if (pagination != null) {
+            hql.append(pagination.getSortInfo());
+            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getEnd(), params);
+        } else {
+            hql.append("ORDER BY articleno");
+            return this.find(hql.toString(), params);
+        }
     }
 
     @Override
@@ -95,6 +104,15 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
             params.add(searchBean.getDeleteflag());
         }
 
+    }
+
+    @Override
+    public void updateLastLoginDate(int userno, Date lastLoginDate) {
+        String sql = "update t_user set lastlogin = ? where userno = ? ";
+        List<Object> params = new ArrayList<Object>();
+        params.add(lastLoginDate);
+        params.add(userno);
+        this.yiduJdbcTemplate.update(sql, params.toArray());
     }
 
 }

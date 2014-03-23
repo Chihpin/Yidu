@@ -22,8 +22,8 @@
             <th class="sortable <s:if test="pagination.sortColumn.equals('loginid')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'loginid');"><s:text name="label.admin.user.list.loginid" /></a></th>
             
-            <th class="sortable <s:if test="pagination.sortColumn.equals('username')">sorted <s:property value="pagination.sortClass"/> </s:if>">
-            <a href="#" onclick="fnPagination(6,'username');"><s:text name="label.admin.user.list.username" /></a></th>
+            <th class="sortable <s:if test="pagination.sortColumn.equals('type')">sorted <s:property value="pagination.sortClass"/> </s:if>">
+            <a href="#" onclick="fnPagination(6,'type');"><s:text name="label.admin.user.edit.type" /></a></th>
             
             <th class="sortable <s:if test="pagination.sortColumn.equals('sex')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'sex');"><s:text name="label.admin.user.list.sex" /></a></th>
@@ -42,8 +42,8 @@
         </s:else>
             <td><s:property  value="#user.userno" /></td>
             <td><s:property  value="#user.loginid" /></td>
-            <td><s:property  value="#user.username" /></td>
-            <td><s:property  value="#user.sex" /></td>
+            <td><s:property  value="collections['collectionProperties.user.type'][#user.type]" /></td>
+            <td><s:property  value="collections['collectionProperties.user.sex'][#user.sex]" /></td>
             <td><s:date name="#user.regdate" format="yyyy-MM-dd HH:mm" /></td>
             <td><s:date name="#user.lastlogin" format="yyyy-MM-dd HH:mm" /></td>
             <td>
