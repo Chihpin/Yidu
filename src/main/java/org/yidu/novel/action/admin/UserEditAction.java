@@ -215,6 +215,7 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
             user = userService.getByNo(userno);
         } else {
             user.setRegdate(new Date());
+            user.setDeleteflag(false);
         }
         BeanUtils.copyProperties(this, user, new String[] { "regdate", "lastlogin", "password" });
 
