@@ -42,14 +42,14 @@
                 <#if pagenum == pagination.pageNumber>
                     <strong>${pagenum?c}</strong>
                 <#else>
-                    <a href="${encodeURL(listurl + pagenum)}"> ${pagenum?c} </a>
+                    <a href="${encodeURL(listurl + pagenum?c)}"> ${pagenum?c} </a>
                 </#if>
                 <#assign mxpagenum = pagenum >
             </#list>
             <#if mxpagenum?? && ( mxpagenum < pagination.totalPages)>
                  <a href="${encodeURL(listurl + (mxpagenum+1)?c)}" class="next">&gt;</a>
             </#if>
-            <a href="${encodeURL(listurl + pagination.totalPages)}">${pagination.totalPages}</a>
+            <a href="${encodeURL(listurl + pagination.totalPages?c)}">${pagination.totalPages?c}</a>
             <kbd>
                 <input name="page" type="text" size="4" maxlength="6" onkeydown="if(event.keyCode==13){window.location='${listurlforjs}'+this.value+'.html'; return false;}" /></kbd>
         </div>
