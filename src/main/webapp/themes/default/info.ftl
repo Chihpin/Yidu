@@ -77,7 +77,7 @@
                     ${article.author}</a></dd></dl>
                 <dl><dt>全文长度：</dt><dd>${article.size}字</dd></dl>
                 <dl><dt>总点击量：</dt><dd>${article.allvisit}</dd></dl>
-                <dl><dt>TXT下载：</dt><dd><a href="${encodeURL("/download?articleno=${article.articleno}")} target="_blank"><font color="red" >全本下载</font></a></dd></dl>
+                <dl><dt>TXT下载：</dt><dd><a href="${encodeURL("/download?articleno=${article.articleno?c}")}" target="_blank"><font color="red" >全本下载</font></a></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>
                     <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}" target="_blank"><#if article.lastchapter?? >${article.lastchapter}</#if></a>
