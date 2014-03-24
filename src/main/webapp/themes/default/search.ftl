@@ -1,7 +1,7 @@
 <#include "common.ftl"/>
 
 <#macro titleContent>  
-<title>${key}的搜索结果|${getText("label.system.title")}</title>
+<title>${key?html}的搜索结果|${getText("label.system.title")}</title>
 <meta name="keywords" content="${getText("label.system.siteKeywords")}"/>
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  
