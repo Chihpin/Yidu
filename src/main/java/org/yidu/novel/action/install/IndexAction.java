@@ -18,7 +18,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.action.base.AbstractBaseAction;
+import org.yidu.novel.action.base.AbstractInstallBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.utils.Utils;
 
@@ -32,7 +32,7 @@ import org.yidu.novel.utils.Utils;
  * @version 1.0.0
  * @author shinpa.you
  */
-public class IndexAction extends AbstractBaseAction {
+public class IndexAction extends AbstractInstallBaseAction {
 
     private static final long serialVersionUID = -5991997032217966675L;
     /**

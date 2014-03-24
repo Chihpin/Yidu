@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.yidu.novel.action.base.AbstractAdminBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
+import org.yidu.novel.action.base.AbstractInstallBaseAction;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
@@ -51,7 +52,7 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
         logger.debug("AuthCheckInterceptor start.");
 
         // 安装页面直接访问
-        if (invocation.getAction() instanceof org.yidu.novel.action.install.IndexAction) {
+        if (invocation.getAction() instanceof AbstractInstallBaseAction) {
             return invocation.invoke();
         }
 
