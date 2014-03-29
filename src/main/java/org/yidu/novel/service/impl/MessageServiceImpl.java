@@ -32,7 +32,7 @@ public class MessageServiceImpl extends HibernateSupportServiceImpl implements M
     public int getCount(MessageSearchBean searchBean) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("SELECT count(*) FROM TMessage where 1=1");
+        hql.append("SELECT count(*) FROM TMessage where  deleteflag=false ");
         return this.getIntResult(hql.toString(), params);
     }
 
@@ -41,7 +41,7 @@ public class MessageServiceImpl extends HibernateSupportServiceImpl implements M
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("From TMessage WHERE 1=1 ");
+        hql.append("From TMessage WHERE  deleteflag=false  ");
         if (searchBean.getUserno() != 0) {
             hql.append(" AND (userno = ? OR touserno = ? )");
             params.add(searchBean.getUserno());

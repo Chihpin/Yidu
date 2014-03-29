@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
-import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -121,11 +120,9 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
 
         initCollections(new String[] { "collectionProperties.article.category" });
 
-        articleService.delteByNo(articleno);
-        // 删除章节文件
-        Utils.deleteDirectory(Utils.getTextDirectoryPathByArticleno(articleno));
-        // 删除封面文件
-        Utils.deleteDirectory(Utils.getImgDirectoryPathByArticleno(articleno));
+        TArticle article = articleService.getByNo(articleno);
+        article.setDeleteflag(true);
+        articleService.save(article);
 
         loadData();
         return INPUT;

@@ -38,6 +38,7 @@ public class ChapterEditAction extends AbstractUserBaseAction {
     private Integer size;
     private Boolean isvip;
     private Date postdate;
+    private Date publishtime;
 
     public int getChapterno() {
         return chapterno;
@@ -123,6 +124,14 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         this.postdate = postdate;
     }
 
+    public Date getPublishtime() {
+        return publishtime;
+    }
+
+    public void setPublishtime(Date publishtime) {
+        this.publishtime = publishtime;
+    }
+
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
@@ -131,8 +140,24 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         // 编辑
         if (chapterno != 0) {
             TChapter chapter = chapterService.getByNo(chapterno);
-            BeanUtils.copyProperties(chapter, this);
-            content = Utils.getContext(articleno, chapterno, false);
+            if (chapter != null) {
+
+                TArticle article = articleService.getByNo(chapter.getArticleno());
+
+                if (article == null) {
+                    addActionError(getText("errors.not.exsits.article"));
+                    return;
+                }
+                if (!checkRight(article)) {
+                    addActionError(getText("errors.right"));
+                    return;
+                }
+
+                BeanUtils.copyProperties(chapter, this);
+                content = Utils.getContext(articleno, chapterno, false);
+            } else {
+                addActionError(getText("errors.not.exsits.chapter"));
+            }
         }
         logger.debug("loadData normally end.");
     }
@@ -143,18 +168,31 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         initCollections(new String[] { "collectionProperties.chapter.isvip" });
 
         TChapter chapter = new TChapter();
+        TArticle article = articleService.getByNo(articleno);
+
+        if (article == null) {
+            addActionError(getText("errors.not.exsits.article"));
+            return FREEMARKER_ERROR;
+        }
         if (chapterno != 0) {
             // 获取章节信息
             chapter = chapterService.getByNo(chapterno);
         } else {
             // 获取小说信息
-            TArticle article = articleService.getByNo(articleno);
             chapter.setArticleno(articleno);
             chapter.setArticlename(article.getArticlename());
+            chapter.setDeleteflag(false);
+            chapter.setPostdate(new Date());
         }
-        BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename" });
+
+        if (!checkRight(article)) {
+            addActionError(getText("errors.right"));
+            return FREEMARKER_ERROR;
+        }
+
+        BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename", "postdate" });
         chapter.setSize(StringUtils.length(content));
-        chapter.setPostdate(new Date());
+
         chapterService.save(chapter);
 
         try {

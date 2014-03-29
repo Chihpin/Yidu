@@ -3,4 +3,3 @@ Disallow: /admin/
 Disallow: /user/
 Disallow: /download/
 Disallow: /*?*
-

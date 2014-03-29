@@ -18,7 +18,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
 
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
-        hql.append("From TArticle WHERE 1=1 ");
+        hql.append("From TArticle WHERE  deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
 
         buildCondtion(searchBean, hql, params);
@@ -110,7 +110,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     public Integer getCount(ArticleSearchBean searchBean) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("SELECT count(*) FROM TArticle where 1=1");
+        hql.append("SELECT count(*) FROM TArticle where deleteflag=false ");
 
         buildCondtion(searchBean, hql, params);
         return this.getIntResult(hql.toString(), params);

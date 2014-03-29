@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -98,26 +100,26 @@ public class Utils {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
 
         // path = ServletActionContext.getServletContext().getRealPath("/") +
-        // "/" + path + "/" + articleno / 1000 + "/"
+        // "/" + path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/"
         // + articleno + "/" + chapterno + ".txt";
 
-        path = path + "/" + articleno / 1000 + "/" + articleno + "/" + chapterno + ".txt";
+        path = path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/" + chapterno + ".txt";
         return path;
     }
 
     public static String getTextDirectoryPathByArticleno(int articleno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
         // path = ServletActionContext.getServletContext().getRealPath("/") +
-        // "/" + path + "/" + articleno / 1000 + "/"
+        // "/" + path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/"
         // + articleno + "/" + chapterno + ".txt";
-        path = path + "/" + articleno / 1000 + "/" + articleno + "/";
+        path = path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/";
         return path;
     }
 
     public static String getImgDirectoryPathByArticleno(int articleno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
-        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno / 1000 + "/"
-                + articleno + "/";
+        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
+                / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/";
         return path;
     }
 
@@ -132,10 +134,9 @@ public class Utils {
     public static void saveContext(int articleno, int chapterno, String content) throws IOException {
         String path = getTextFilePathByChapterno(articleno, chapterno);
         File file = new File(path);
-        
+
         File parentPath = file.getParentFile();
-        if(!parentPath.exists())
-        {
+        if (!parentPath.exists()) {
             parentPath.createNewFile();
         }
         FileWriter filewriter = null;
@@ -271,5 +272,17 @@ public class Utils {
                 return deleteDirectory(sPath);
             }
         }
+    }
+
+    public static void saveArticlespic(int articleno, File file, String fileName) throws Exception {
+        String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
+        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
+                / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/" + articleno + "s."
+                + StringUtils.substringAfterLast(fileName, ".");
+        File savefile = new File(path);
+        if (!savefile.getParentFile().exists()) {
+            savefile.getParentFile().mkdirs();
+        }
+        FileUtils.copyFile(file, savefile);
     }
 }

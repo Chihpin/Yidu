@@ -7,9 +7,9 @@
       <a class="home" href="${contextPath}/">首页</a>
       <a href="${encodeURL("/siteMap")}">网站地图</a>
       <a href="${encodeURL("/articleList?fullflag=true")}">完本小说</a>
-      <a href="${encodeURL("/saveShortcut")}" style="color:red">创建桌面快捷</a>
+      <a href="${encodeURL("/saveShortcut")}">创建桌面快捷</a>
       </nav>
-      <div class="hd-follow" style="width:197px" >
+      <div class="hd-follow" style="width:500px;text-align:right;" >
         <div class="myhide"><a href="#" class="hides">浏览记录</a>
           <div class="hideInfo">
             <ul>
@@ -22,19 +22,21 @@
             <span>浏览记录是空的</span>
           </div>
         </div>
-          <span id="checklogin"  align="right">
+          <span id="checklogin">
           <script>
             $(document).ready(function(){
                 $.post('${contextPath}/checklogin',function(data){
-                    if(data==null){
-                        $(".hd-follow").width(197);
-                    }else{
-                        var html = '你好, <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
+                    if(data!=null){
+                       var html = '你好, <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
                         if(data.type==30){
-                            html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>'
+                            html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>';
+                        }else if(data.type==20||data.type==40||data.type==41){
+                            html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/articleList")}" style="color: rgb(240, 240, 240);">小说管理</a>';
                         }
-                        $('#checklogin').html(html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/bookcase")}" style="color: rgb(240, 240, 240);">我的书架</a>&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/logout")}" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;');
-                        $(".hd-follow").width(320);
+                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/message")}" style="color: rgb(240, 240, 240);">消息管理</a>';
+                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/bookcase")}" style="color: rgb(240, 240, 240);">我的书架</a>';
+                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/logout")}" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
+                        $('#checklogin').html(html);
                     }
                 })
             })
@@ -58,9 +60,9 @@
     </p>
     <div class="site-search">
        <form action="${contextPath}/search" method="get" >
-       <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value="这是一个神奇的搜索，请输入小说名或作者名" />
+       <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value=<#if key??>${key?html}<#else>"这是一个神奇的搜索，请输入小说名或作者名"</#if> />
        <input type="submit" id="searchbuttom" value="" style="background:url('${contextPath}/themes/${themeName}/images/search.jpg');border:0px solid;cursor:pointer;" />
-      </form>
+       </form>
     </div>
     </#if>
   </header>

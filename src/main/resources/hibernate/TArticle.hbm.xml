@@ -77,17 +77,17 @@
             </column>
         </property>
         <property name="chapters" type="java.lang.Integer">
-            <column name="chapters">
+            <column name="chapters" default="0">
                 <comment>chapters</comment>
             </column>
         </property>
         <property name="size" type="java.lang.Integer">
-            <column name="size">
+            <column name="size" default="0">
                 <comment>size</comment>
             </column>
         </property>
         <property name="fullflag" type="java.lang.Boolean">
-            <column name="fullflag">
+            <column name="fullflag" default="0">
                 <comment>fullflag</comment>
             </column>
         </property>
@@ -112,43 +112,48 @@
             </column>
         </property>
         <property name="dayvisit" type="java.lang.Integer">
-            <column name="dayvisit">
+            <column name="dayvisit" default="0">
                 <comment>dayvisit</comment>
             </column>
         </property>
         <property name="weekvisit" type="java.lang.Integer">
-            <column name="weekvisit">
+            <column name="weekvisit" default="0">
                 <comment>weekvisit</comment>
             </column>
         </property>
         <property name="monthvisit" type="java.lang.Integer">
-            <column name="monthvisit">
+            <column name="monthvisit" default="0">
                 <comment>monthvisit</comment>
             </column>
         </property>
         <property name="allvisit" type="java.lang.Integer">
-            <column name="allvisit">
+            <column name="allvisit" default="0">
                 <comment>allvisit</comment>
             </column>
         </property>
         <property name="dayvote" type="java.lang.Integer">
-            <column name="dayvote">
+            <column name="dayvote" default="0">
                 <comment>dayvote</comment>
             </column>
         </property>
         <property name="weekvote" type="java.lang.Integer">
-            <column name="weekvote">
+            <column name="weekvote" default="0">
                 <comment>weekvote</comment>
             </column>
         </property>
         <property name="monthvote" type="java.lang.Integer">
-            <column name="monthvote">
+            <column name="monthvote" default="0">
                 <comment>monthvote</comment>
             </column>
         </property>
         <property name="allvote" type="java.lang.Integer">
-            <column name="allvote">
+            <column name="allvote" default="0">
                 <comment>allvote</comment>
+            </column>
+        </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag" default="false">
+                <comment>deleteflag</comment>
             </column>
         </property>
     </class>

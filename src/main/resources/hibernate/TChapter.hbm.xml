@@ -46,5 +46,15 @@
                 <comment>postdate</comment>
             </column>
         </property>
+        <property name="publishtime" type="timestamp">
+            <column name="publishtime" length="29">
+                <comment>publishtime</comment>
+            </column>
+        </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag">
+                <comment>deleteflag</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

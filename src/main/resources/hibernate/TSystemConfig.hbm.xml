@@ -44,5 +44,10 @@
                 &#149;&#182;&#140;&#143;&#142;Q&#144;&#148; ?&#149;&#170;?&#146;u</comment>
             </column>
         </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag">
+                <comment>deleteflag</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

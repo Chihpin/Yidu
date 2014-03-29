@@ -56,5 +56,10 @@
                 <comment>postdate</comment>
             </column>
         </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag">
+                <comment>deleteflag</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

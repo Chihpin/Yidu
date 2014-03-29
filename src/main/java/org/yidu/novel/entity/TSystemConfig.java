@@ -15,6 +15,7 @@ public class TSystemConfig implements java.io.Serializable {
     private Short type;
     private String options;
     private String catname;
+    private Boolean deleteflag;
 
     public TSystemConfig() {
     }
@@ -24,7 +25,7 @@ public class TSystemConfig implements java.io.Serializable {
     }
 
     public TSystemConfig(int configno, String name, String title, String description, Short type, String options,
-            String catname) {
+            String catname, Boolean deleteflag) {
         this.configno = configno;
         this.name = name;
         this.title = title;
@@ -32,6 +33,7 @@ public class TSystemConfig implements java.io.Serializable {
         this.type = type;
         this.options = options;
         this.catname = catname;
+        this.deleteflag = deleteflag;
     }
 
     public int getConfigno() {
@@ -88,6 +90,14 @@ public class TSystemConfig implements java.io.Serializable {
 
     public void setCatname(String catname) {
         this.catname = catname;
+    }
+
+    public Boolean getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Boolean deleteflag) {
+        this.deleteflag = deleteflag;
     }
 
 }

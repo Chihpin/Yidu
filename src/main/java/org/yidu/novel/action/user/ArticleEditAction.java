@@ -1,21 +1,24 @@
 package org.yidu.novel.action.user;
 
 import java.io.File;
+import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
-import org.yidu.novel.constant.YiDuConfig;
+import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.LoginManager;
+import org.yidu.novel.utils.Utils;
+
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 /**
  * <p>
@@ -35,11 +38,11 @@ public class ArticleEditAction extends AbstractUserBaseAction {
     private int articleno;
     private String articlename;
     private String keywords;
-    private Integer authorid;
-    private String author;
     private Integer category;
     private String intro;
     private Boolean fullflag;
+    private Integer permission;
+    private Boolean firstflag;
 
     private Integer dayvisit;
     private Integer weekvisit;
@@ -66,6 +69,12 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         return articlename;
     }
 
+    // 必須
+    @RequiredStringValidator(message = "${getText(\"errors.required.input\","
+            + " {getText(\"label.user.article.articlename\")})}")
+    // 长度
+    @StringLengthFieldValidator(maxLength = "50", message = "${getText(\"errors.maxlength\", "
+            + "{ {maxLength},getText(\"label.user.article.articlename\")})}")
     public void setArticlename(String articlename) {
         this.articlename = articlename;
     }
@@ -74,24 +83,11 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         return keywords;
     }
 
+    // 长度
+    @StringLengthFieldValidator(maxLength = "100", message = "${getText(\"errors.maxlength\", "
+            + "{ {maxLength},getText(\"label.user.article.keywords\")})}")
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public Integer getAuthorid() {
-        return authorid;
-    }
-
-    public void setAuthorid(Integer authorid) {
-        this.authorid = authorid;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public Integer getCategory() {
@@ -106,6 +102,9 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         return intro;
     }
 
+    // 长度
+    @StringLengthFieldValidator(maxLength = "500", message = "${getText(\"errors.maxlength\", "
+            + "{ {maxLength},getText(\"label.user.article.intro\")})}")
     public void setIntro(String intro) {
         this.intro = intro;
     }
@@ -116,6 +115,22 @@ public class ArticleEditAction extends AbstractUserBaseAction {
 
     public void setFullflag(Boolean fullflag) {
         this.fullflag = fullflag;
+    }
+
+    public Integer getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Integer permission) {
+        this.permission = permission;
+    }
+
+    public Boolean getFirstflag() {
+        return firstflag;
+    }
+
+    public void setFirstflag(Boolean firstflag) {
+        this.firstflag = firstflag;
     }
 
     public Integer getDayvisit() {
@@ -210,12 +225,17 @@ public class ArticleEditAction extends AbstractUserBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
         // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.article.fullflag" });
+        initCollections(new String[] { "collectionProperties.article.category",
+                "collectionProperties.article.fullflag", "collectionProperties.article.firstflag",
+                "collectionProperties.article.permission" });
 
         // 编辑
         if (articleno != 0) {
             TArticle article = articleService.getByNo(articleno);
-
+            if (article == null) {
+                addActionError(getText("errors.not.exsits.article"));
+                return;
+            }
             if (!checkRight(article)) {
                 addActionError(getText("errors.right"));
                 return;
@@ -225,20 +245,6 @@ public class ArticleEditAction extends AbstractUserBaseAction {
 
         }
         logger.debug("loadData normally end.");
-    }
-
-    private boolean checkRight(TArticle article) {
-        boolean hasRihgtFlag = false;
-        TUser user = LoginManager.getLoginUser();
-        // 作者
-        if (user.getType() == YiDuConstants.UserType.AUTHER && article.getAuthorid() == user.getUserno()) {
-            hasRihgtFlag = true;
-        }
-        // TODO 编辑
-        if (user.getType() == YiDuConstants.UserType.EDITOR && article.getCategory() == user.getUserno()) {
-            hasRihgtFlag = true;
-        }
-        return hasRihgtFlag;
     }
 
     /**
@@ -252,11 +258,47 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         logger.debug("save start.");
 
         // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.article.fullflag" });
+        initCollections(new String[] { "collectionProperties.article.category",
+                "collectionProperties.article.fullflag", "collectionProperties.article.firstflag",
+                "collectionProperties.article.permission" });
 
         TArticle article = new TArticle();
-        if (articleno != 0) {
+        if (articleno == 0) {
+            // 小说名重复检查
+            ArticleSearchBean searchBean = new ArticleSearchBean();
+            searchBean.setArticlename(articlename);
+            searchBean.setPageType(ArticleSearchBean.PageType.authorPage);
+            int count = articleService.getCount(searchBean);
+            if (count > 0) {
+                addActionError(this.getText("errors.duplicated",
+                        new String[] { this.getText("label.user.article.articlename") }));
+                return FREEMARKER;
+            }
+
+            TUser user = LoginManager.getLoginUser();
+            article.setAuthorid(user.getUserno());
+            article.setAuthor(user.getUsername());
+            article.setDayvisit(0);
+            article.setDayvote(0);
+            article.setWeekvisit(0);
+            article.setWeekvote(0);
+            article.setMonthvisit(0);
+            article.setMonthvote(0);
+            article.setAllvisit(0);
+            article.setAllvote(0);
+            article.setSize(0);
+            article.setChapters(0);
+            // TODO 首字母
+            article.setPostdate(new Date());
+            article.setDeleteflag(false);
+        } else {
             article = articleService.getByNo(articleno);
+
+            if (article == null) {
+                addActionError(getText("errors.not.exsits.article"));
+                return FREEMARKER_ERROR;
+            }
+
             if (!checkRight(article)) {
                 addActionError(getText("errors.right"));
                 return FREEMARKER_ERROR;
@@ -266,11 +308,13 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         BeanUtils.copyProperties(this, article, new String[] { "articleno", "dayvisit", "weekvisit", "monthvisit",
                 "allvisit", "dayvote", "weekvote", "monthvote", "allvote" });
 
+        articleService.save(article);
+
         // 保存图片文件
         if (articlespic != null) {
-            if (ArrayUtils.contains(YiDuConstants.allowSampleTypes, getArticlespicContentType())) {
+            if (ArrayUtils.contains(YiDuConstants.allowPicTypes, getArticlespicContentType())) {
                 try {
-                    saveArticlespic();
+                    Utils.saveArticlespic(article.getArticleno(), articlespic, articlespicFileName);
                 } catch (Exception e) {
                     addActionError(getText("errors.file.save"));
                     return FREEMARKER;
@@ -289,21 +333,8 @@ public class ArticleEditAction extends AbstractUserBaseAction {
             }
         }
 
-        articleService.save(article);
         logger.debug("save normally end.");
         return REDIRECT;
-    }
-
-    private void saveArticlespic() throws Exception {
-        String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
-        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno / 1000 + "/"
-                + articleno + "/" + articleno + "s." + StringUtils.substringAfterLast(getArticlespicFileName(), ".");
-
-        File savefile = new File(path);
-        if (!savefile.getParentFile().exists()) {
-            savefile.getParentFile().mkdirs();
-        }
-        FileUtils.copyFile(articlespic, savefile);
     }
 
     @Override

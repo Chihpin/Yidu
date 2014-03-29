@@ -15,7 +15,7 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
     public List<TSystemBlock> find(SystemBlockSearchBean searchBean) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("FROM TSystemBlock where 1=1");
+        hql.append("FROM TSystemBlock where  deleteflag=false ");
 
         if (searchBean.getBlockno() != 0) {
             hql.append(" AND blockno = ? ");
@@ -45,12 +45,14 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
     @Override
     public TSystemBlock getByNo(int blockno) {
         TSystemBlock systemBlock = this.get(TSystemBlock.class, blockno);
+        // TODO deleteflag
         return systemBlock;
     }
 
     @Override
     public void delteByNo(int blockno) {
         TSystemBlock systemBlock = getByNo(blockno);
+        // TODO deleteflag
         this.delete(systemBlock);
     }
 
@@ -63,7 +65,7 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
     public Integer getCount(SystemBlockSearchBean searchBean) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("Select count(*) FROM TSystemBlock where 1=1");
+        hql.append("Select count(*) FROM TSystemBlock where  deleteflag=false ");
 
         if (searchBean.getBlockno() != 0) {
             hql.append(" AND blockno = ? ");

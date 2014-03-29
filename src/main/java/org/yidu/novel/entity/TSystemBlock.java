@@ -17,6 +17,7 @@ public class TSystemBlock implements java.io.Serializable {
     private Integer limitnum;
     private String content;
     private Short target;
+    private Boolean deleteflag;
 
     public TSystemBlock() {
     }
@@ -26,7 +27,7 @@ public class TSystemBlock implements java.io.Serializable {
     }
 
     public TSystemBlock(int blockno, String blockid, String blockname, Short type, String sortcol, Boolean isasc,
-            Integer limitnum, String content, Short target) {
+            Integer limitnum, String content, Short target, Boolean deleteflag) {
         this.blockno = blockno;
         this.blockid = blockid;
         this.blockname = blockname;
@@ -36,6 +37,7 @@ public class TSystemBlock implements java.io.Serializable {
         this.limitnum = limitnum;
         this.content = content;
         this.target = target;
+        this.deleteflag = deleteflag;
     }
 
     public int getBlockno() {
@@ -108,6 +110,14 @@ public class TSystemBlock implements java.io.Serializable {
 
     public void setTarget(Short target) {
         this.target = target;
+    }
+
+    public Boolean getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Boolean deleteflag) {
+        this.deleteflag = deleteflag;
     }
 
 }

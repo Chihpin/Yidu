@@ -13,9 +13,16 @@
             <ul>
                <li <#if pageType==23>class="current"</#if>><a href="${encodeURL("/user/useredit")}">编辑资料</a></li>
             </ul>
+            <#if user.type==10>
             <ul>
-               <li <#if pageType==24>class="current"</#if>><a href="${encodeURL("/user/useredit")}">申请作者</a></li>
+               <li <#if pageType==24>class="current"</#if>><a href="${encodeURL("/user/regiauthor")}">申请作者</a></li>
             </ul>
+            </#if>
+            <#if user.type==20 || user.type==40 || user.type==41>
+            <ul>
+               <li <#if pageType==30||pageType==31||pageType==32||pageType==33>class="current"</#if>><a href="${encodeURL("/user/articleList")}">小说管理</a></li>
+            </ul>
+            </#if>
             <ul class="last">
                <li><a href="${encodeURL("/logout")}">退出登录</a></li>
             </ul>

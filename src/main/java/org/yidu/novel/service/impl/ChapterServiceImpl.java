@@ -14,7 +14,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
     public List<TChapter> find(ChapterSearchBean searchBean) {
 
         StringBuffer hql = new StringBuffer();
-        hql.append("FROM TChapter WHERE 1 = 1 ");
+        hql.append("FROM TChapter WHERE  deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
         // 追加小说ID条件
         if (searchBean.getArticleno() != 0) {
@@ -71,7 +71,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
     public Integer getCount(ChapterSearchBean searchBean) {
         StringBuffer sql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        sql.append("SELECT count(*) FROM TChapter where 1=1");
+        sql.append("SELECT count(*) FROM TChapter where  deleteflag=false ");
 
         // 小说号条件追加
         if (searchBean.getArticleno() != 0) {

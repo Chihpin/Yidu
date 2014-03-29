@@ -45,7 +45,7 @@ public class InfoAction extends AbstractPublicBaseAction {
     }
 
     public int getSubDir() {
-        return articleno / 1000;
+        return articleno / YiDuConstants.SUB_DIR_ARTICLES;
     }
 
     public void setSubDir(int subDir) {

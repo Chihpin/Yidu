@@ -16,6 +16,7 @@ public class TReview implements java.io.Serializable {
     private String username;
     private String email;
     private Date createtime;
+    private Boolean deleteflag;
 
     public TReview() {
     }
@@ -24,13 +25,15 @@ public class TReview implements java.io.Serializable {
         this.reviweno = reviweno;
     }
 
-    public TReview(int reviweno, Integer articleno, String review, String username, String email, Date createtime) {
+    public TReview(int reviweno, Integer articleno, String review, String username, String email, Date createtime,
+            Boolean deleteflag) {
         this.reviweno = reviweno;
         this.articleno = articleno;
         this.review = review;
         this.username = username;
         this.email = email;
         this.createtime = createtime;
+        this.deleteflag = deleteflag;
     }
 
     public int getReviweno() {
@@ -79,6 +82,14 @@ public class TReview implements java.io.Serializable {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public Boolean getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Boolean deleteflag) {
+        this.deleteflag = deleteflag;
     }
 
 }

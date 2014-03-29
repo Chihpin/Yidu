@@ -10,7 +10,6 @@ import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
-import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -84,8 +83,11 @@ public class ChapterListAction extends AbstractUserListBaseAction {
 
     @Override
     protected void loadData() {
-
         article = articleService.getByNo(articleno);
+        if (!checkRight(article)) {
+            addActionError(getText("errors.right"));
+            return;
+        }
         ChapterSearchBean searchBean = new ChapterSearchBean();
         BeanUtils.copyProperties(this, searchBean);
         chapterList = chapterService.find(searchBean);
@@ -93,15 +95,23 @@ public class ChapterListAction extends AbstractUserListBaseAction {
     }
 
     public String delete() throws Exception {
+        TChapter chapter = chapterService.getByNo(chapterno);
+        if (chapter != null) {
 
-        chapterService.delteByNo(chapterno);
-
-        // 删除封面文件
-        Utils.deleteFile(Utils.getTextFilePathByChapterno(articleno, chapterno));
+            articleno = chapter.getArticleno();
+            TArticle article = articleService.getByNo(chapter.getArticleno());
+            if (!checkRight(article)) {
+                addActionError(getText("errors.right"));
+                return FREEMARKER_ERROR;
+            }
+            // 更新删除标志
+            chapter.setDeleteflag(true);
+            // 保存
+            chapterService.save(chapter);
+        }
 
         loadData();
-        return INPUT;
-
+        return FREEMARKER;
     }
 
     @Override

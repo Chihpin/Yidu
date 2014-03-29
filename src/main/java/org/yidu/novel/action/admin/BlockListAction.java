@@ -70,7 +70,11 @@ public class BlockListAction extends AbstractAdminListBaseAction {
 
     public String delete() throws Exception {
         logger.debug("del start.");
-        systemBlockService.delteByNo(blockno);
+
+        TSystemBlock systemBlock = systemBlockService.getByNo(blockno);
+        systemBlock.setDeleteflag(true);
+        systemBlockService.save(systemBlock);
+
         loadData();
         logger.debug("del normally end.");
         return SUCCESS;

@@ -45,6 +45,8 @@ public class TArticle implements java.io.Serializable {
     private Integer monthvote;
     private Integer allvote;
 
+    private Boolean deleteflag;
+
     public TArticle() {
     }
 
@@ -57,7 +59,7 @@ public class TArticle implements java.io.Serializable {
             String lastchapter, Integer chapters, Integer size, Boolean fullflag, Integer imgflag, Date postdate,
             Date lastupdate, Boolean firstflag, Integer permission, Boolean authorflag, String agent, Integer dayvisit,
             Integer weekvisit, Integer monthvisit, Integer allvisit, Integer dayvote, Integer weekvote,
-            Integer monthvote, Integer allvote) {
+            Integer monthvote, Integer allvote, Boolean deleteflag) {
         this.articleno = articleno;
         this.articlename = articlename;
         this.initial = initial;
@@ -88,6 +90,7 @@ public class TArticle implements java.io.Serializable {
         this.weekvote = weekvote;
         this.monthvote = monthvote;
         this.allvote = allvote;
+        this.deleteflag = deleteflag;
     }
 
     public int getArticleno() {
@@ -322,6 +325,14 @@ public class TArticle implements java.io.Serializable {
         this.allvote = allvote;
     }
 
+    public Boolean getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Boolean deleteflag) {
+        this.deleteflag = deleteflag;
+    }
+
     public String getIntroOmit() {
         if (getIntro() != null && getIntro().length() > 60) {
             return getIntro().substring(0, 60) + "...";
@@ -330,7 +341,7 @@ public class TArticle implements java.io.Serializable {
     }
 
     public Integer getSubdir() {
-        return this.articleno / 1000;
+        return this.articleno / YiDuConstants.SUB_DIR_ARTICLES;
     }
 
     public String getLastchapterOmit() {
@@ -342,28 +353,32 @@ public class TArticle implements java.io.Serializable {
 
     public String getImgUrl() {
         String fileName = "";
-        switch (imgflag) {
-        case 1:
-            fileName = articleno + "s.jpg";
-            break;
-        case 2:
-            fileName = articleno + "s.gif";
-            break;
-        case 3:
-            fileName = articleno + "s.png";
-            break;
-        case 10:
-            fileName = articleno + "l.jpg";
-            break;
-        default:
+        if (imgflag == null) {
             fileName = "nocover.jpg";
-            break;
+        } else {
+            switch (imgflag) {
+            case 1:
+                fileName = articleno + "s.jpg";
+                break;
+            case 2:
+                fileName = articleno + "s.gif";
+                break;
+            case 3:
+                fileName = articleno + "s.png";
+                break;
+            case 10:
+                fileName = articleno + "l.jpg";
+                break;
+            default:
+                fileName = "nocover.jpg";
+                break;
+            }
         }
         String imgUrl = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH) + "/";
         if (StringUtils.equals("nocover.jpg", fileName)) {
             imgUrl = imgUrl + fileName;
         } else {
-            imgUrl = imgUrl + articleno / 1000 + "/" + articleno + "/" + fileName;
+            imgUrl = imgUrl + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/" + fileName;
         }
         return imgUrl;
     }

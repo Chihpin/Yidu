@@ -16,6 +16,8 @@ public class YiDuConstants {
 
     public static final String ENCODING_GBK = "GBK";
 
+    public static final int SUB_DIR_ARTICLES = 1000;
+
     public final static class UserGroup {
 
         /**
@@ -178,7 +180,7 @@ public class YiDuConstants {
         public static final String EMAIL = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$";
     }
 
-    public static final String[] allowPicTypes = new String[] { "image/jpg", "image/png", "image/gif" };
+    public static final String[] allowPicTypes = new String[] { "image/jpg", "image/jpeg", "image/png", "image/gif" };
 
     public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
 

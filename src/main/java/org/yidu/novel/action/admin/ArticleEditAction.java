@@ -5,18 +5,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
-import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -302,11 +300,13 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
 
         BeanUtils.copyProperties(this, article);
 
+        articleService.save(article);
+
         // 保存图片文件
         if (articlespic != null) {
-            if (ArrayUtils.contains(YiDuConstants.allowSampleTypes, getArticlespicContentType())) {
+            if (ArrayUtils.contains(YiDuConstants.allowPicTypes, getArticlespicContentType())) {
                 try {
-                    saveArticlespic();
+                    Utils.saveArticlespic(article.getArticleno(), articlespic, articlespicFileName);
                 } catch (Exception e) {
                     addActionError(getText("errors.file.save"));
                     return INPUT;
@@ -325,20 +325,8 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
             }
         }
 
-        articleService.save(article);
         logger.debug("save normally end.");
         return REDIRECT;
     }
 
-    private void saveArticlespic() throws Exception {
-        String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
-        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno / 1000 + "/"
-                + articleno + "/" + articleno + "s." + StringUtils.substringAfterLast(getArticlespicFileName(), ".");
-
-        File savefile = new File(path);
-        if (!savefile.getParentFile().exists()) {
-            savefile.getParentFile().mkdirs();
-        }
-        FileUtils.copyFile(articlespic, savefile);
-    }
 }

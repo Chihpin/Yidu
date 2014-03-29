@@ -15,7 +15,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     public List<TBookcase> find(BookcaseSearchBean searchBean) {
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
-        hql.append("From TBookcase WHERE 1=1 ");
+        hql.append("From TBookcase WHERE  deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
         buildCondtion(searchBean, hql, params);
         hql.append("ORDER BY createtime DESC");
@@ -39,7 +39,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     public Integer getCount(BookcaseSearchBean searchBean) {
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
-        hql.append("SELECT count(*)  From TBookcase WHERE 1=1 ");
+        hql.append("SELECT count(*)  From TBookcase WHERE  deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
         buildCondtion(searchBean, hql, params);
         return this.getIntResult(hql.toString(), params);

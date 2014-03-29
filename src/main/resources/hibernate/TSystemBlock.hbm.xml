@@ -51,5 +51,10 @@
                 <comment>target : 1:articleList 2:info 3:contentList 4:reader 5:user page</comment>
             </column>
         </property>
+        <property name="deleteflag" type="java.lang.Boolean">
+            <column name="deleteflag">
+                <comment>deleteflag</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

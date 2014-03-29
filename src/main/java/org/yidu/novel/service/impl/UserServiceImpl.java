@@ -44,7 +44,7 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
     public List<TUser> find(final UserSearchBean searchBean) {
         StringBuilder hql = new StringBuilder();
         List<Object> params = new ArrayList<Object>();
-        hql.append("FROM TUser WHERE 1=1 ");
+        hql.append("FROM TUser WHERE deleteflag=false ");
         buildCondition(searchBean, hql, params);
 
         Pagination pagination = searchBean.getPagination();
@@ -78,7 +78,7 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
     public int getCount(UserSearchBean searchBean) {
         StringBuilder hql = new StringBuilder();
         List<Object> params = new ArrayList<Object>();
-        hql.append("SELECT count(*) FROM TUser WHERE 1=1 ");
+        hql.append("SELECT count(*) FROM TUser WHERE deleteflag=false ");
         buildCondition(searchBean, hql, params);
         return this.getIntResult(hql.toString(), params);
     }

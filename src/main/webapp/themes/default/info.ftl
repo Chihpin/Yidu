@@ -19,7 +19,7 @@
         <div class="detail">
             <#if article.fullflag><img src="${contextPath}/themes/${themeName}/images/only.png" class="leftso png_bg"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="leftso png_bg"></#if>
             <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  class="l mr11">
-                 <img src="${article.imgUrl}" style="width: 120px; height: 150px"/></a>
+                 <img src="<#if article.imgUrl ?? >${article.imgUrl}</#if>" style="width: 120px; height: 150px"/></a>
         <div class="b-info">
           <h1>${article.articlename}</h1>
           <div class="infoDetail">

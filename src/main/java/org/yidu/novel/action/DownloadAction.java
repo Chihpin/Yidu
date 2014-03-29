@@ -124,8 +124,8 @@ public class DownloadAction extends AbstractPublicBaseAction {
             ChapterSearchBean searchBean = new ChapterSearchBean();
             searchBean.setArticleno(articleno);
             List<TChapter> chapterList = this.chapterService.find(searchBean);
-            File dir = new File(YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH) + "/" + (articleno / 1000) + "/"
-                    + articleno);
+            File dir = new File(YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH) + "/"
+                    + (articleno / YiDuConstants.SUB_DIR_ARTICLES) + "/" + articleno);
             if (dir.isDirectory()) {
                 File[] files = dir.listFiles();
                 // 对比章节数

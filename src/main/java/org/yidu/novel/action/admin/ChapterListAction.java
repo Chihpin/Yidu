@@ -9,7 +9,6 @@ import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
-import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -93,10 +92,9 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
 
     public String delete() throws Exception {
 
-        chapterService.delteByNo(chapterno);
-
-        // 删除封面文件
-        Utils.deleteFile(Utils.getTextFilePathByChapterno(articleno, chapterno));
+        TChapter chapter = chapterService.getByNo(chapterno);
+        chapter.setDeleteflag(true);
+        chapterService.save(chapter);
 
         loadData();
         return INPUT;

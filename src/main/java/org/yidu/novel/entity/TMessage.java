@@ -20,12 +20,13 @@ public class TMessage implements java.io.Serializable {
     private Short category;
     private Boolean isread;
     private Date postdate;
+    private Boolean deleteflag;
 
     public TMessage() {
     }
 
     public TMessage(Integer userno, String loginid, Integer touserno, String tologinid, String title, String content,
-            Short category, Boolean isread, Date postdate) {
+            Short category, Boolean isread, Date postdate, Boolean deleteflag) {
         this.userno = userno;
         this.loginid = loginid;
         this.touserno = touserno;
@@ -35,6 +36,7 @@ public class TMessage implements java.io.Serializable {
         this.category = category;
         this.isread = isread;
         this.postdate = postdate;
+        this.deleteflag = deleteflag;
     }
 
     public int getMessageno() {
@@ -115,6 +117,14 @@ public class TMessage implements java.io.Serializable {
 
     public void setIsread(Boolean isread) {
         this.isread = isread;
+    }
+
+    public Boolean getDeleteflag() {
+        return deleteflag;
+    }
+
+    public void setDeleteflag(Boolean deleteflag) {
+        this.deleteflag = deleteflag;
     }
 
 }

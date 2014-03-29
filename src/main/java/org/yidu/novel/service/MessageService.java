@@ -11,8 +11,8 @@ public interface MessageService {
 
     public void delteByNo(final int messageno);
 
-    public void save(final TMessage user);
-    
+    public void save(final TMessage message);
+
     public List<TMessage> find(final MessageSearchBean searchBean);
 
     public int getCount(final MessageSearchBean searchBean);

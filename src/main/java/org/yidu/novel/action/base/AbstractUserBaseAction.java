@@ -1,6 +1,10 @@
 package org.yidu.novel.action.base;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.entity.TUser;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -40,5 +44,23 @@ public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAc
     public abstract int getPageType();
 
     public abstract String getTempName();
+
+    public TUser getUser() {
+        return LoginManager.getLoginUser();
+    }
+
+    protected boolean checkRight(TArticle article) {
+        boolean hasRihgtFlag = false;
+        TUser user = LoginManager.getLoginUser();
+        // 作者
+        if (user.getType() == YiDuConstants.UserType.AUTHER && article.getAuthorid() == user.getUserno()) {
+            hasRihgtFlag = true;
+        }
+        // TODO 编辑
+        if (user.getType() == YiDuConstants.UserType.EDITOR && article.getCategory() == user.getUserno()) {
+            hasRihgtFlag = true;
+        }
+        return hasRihgtFlag;
+    }
 
 }

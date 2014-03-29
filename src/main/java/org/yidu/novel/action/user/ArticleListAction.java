@@ -10,7 +10,6 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.utils.LoginManager;
-import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -79,14 +78,21 @@ public class ArticleListAction extends AbstractUserListBaseAction {
 
     public String delete() throws Exception {
 
-        articleService.delteByNo(articleno);
-        // 删除章节文件
-        Utils.deleteDirectory(Utils.getTextDirectoryPathByArticleno(articleno));
-        // 删除封面文件
-        Utils.deleteDirectory(Utils.getImgDirectoryPathByArticleno(articleno));
+        TArticle article = articleService.getByNo(articleno);
+        if (article == null) {
+            addActionError(getText("errors.not.exsits.article"));
+            return FREEMARKER_ERROR;
+        }
+        if (!checkRight(article)) {
+            addActionError(getText("errors.right"));
+            return FREEMARKER_ERROR;
+        }
+
+        article.setDeleteflag(true);
+        articleService.save(article);
 
         loadData();
-        return INPUT;
+        return FREEMARKER;
     }
 
     @Override

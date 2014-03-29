@@ -71,7 +71,11 @@ public class MessageListAction extends AbstractAdminListBaseAction {
     }
 
     public String delete() throws Exception {
-        messageService.delteByNo(messageno);
+        TMessage message = messageService.getByNo(messageno);
+
+        message.setDeleteflag(true);
+        messageService.save(message);
+
         loadData();
         return INPUT;
     }

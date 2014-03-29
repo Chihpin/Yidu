@@ -101,6 +101,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
 
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
+        searchBean.setPageType(ArticleSearchBean.PageType.publicPage);
 
         pagination.setPageNumber(page == 0 ? 1 : page);
         pagination.setSortColumn("lastupdate");

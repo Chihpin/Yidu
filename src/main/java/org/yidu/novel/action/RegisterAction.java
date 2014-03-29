@@ -124,7 +124,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
         searchBean.setDeleteflag(false);
         List<TUser> userList = this.userService.find(searchBean);
         if (userList != null && userList.size() > 0) {
-            addActionError(getText("errors.duplicate"));
+            addActionError(this.getText("errors.duplicated", new String[] { this.getText("label.user.loginid") }));
             return FREEMARKER;
         }
 
