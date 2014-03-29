@@ -103,7 +103,6 @@ public class BookcaseAction extends AbstractUserBaseAction {
 
     @Transactional
     public String add() {
-        initCollections(new String[] { "collectionProperties.article.category" });
         // 小说号如果没有的话，终止登录，返回错误画面
         if (articleno == 0) {
             addActionError(getText("errors.not.exsits.article"));

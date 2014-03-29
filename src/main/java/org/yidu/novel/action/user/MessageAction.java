@@ -64,7 +64,6 @@ public class MessageAction extends AbstractUserBaseAction {
 
     @Transactional
     public String add() {
-        initCollections(new String[] { "collectionProperties.article.category" });
         return FREEMARKER_MESSAGE;
     }
 

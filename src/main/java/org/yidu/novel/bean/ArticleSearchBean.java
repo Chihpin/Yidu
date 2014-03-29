@@ -17,6 +17,8 @@ public class ArticleSearchBean extends BaseSearchBean {
 
     private String articlenos;
 
+    private int pageType;
+
     public int getArticleno() {
         return articleno;
     }
@@ -97,12 +99,25 @@ public class ArticleSearchBean extends BaseSearchBean {
         this.articlenos = articlenos;
     }
 
+    public int getPageType() {
+        return pageType;
+    }
+
+    public void setPageType(int pageType) {
+        this.pageType = pageType;
+    }
+
     @Override
     public String toString() {
         return "ArticleSearchBean [articleno=" + articleno + ", lastupdate=" + lastupdate + ", articlename="
                 + articlename + ", keywords=" + keywords + ", authorid=" + authorid + ", author=" + author
-                + ", category=" + category + ", searchKey=" + key + ", fullflag=" + fullflag + ", articlenos="
-                + articlenos + getPagination() + "]";
+                + ", category=" + category + ", fullflag=" + fullflag + ", key=" + key + ", articlenos=" + articlenos
+                + ", pageType=" + pageType + getPagination() + "]";
     }
 
+   public class PageType {
+        public static final int publicPage = 1;
+        public static final int authorPage = 2;
+        public static final int adminPage = 3;
+    }
 }

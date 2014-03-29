@@ -81,7 +81,7 @@ public class YiDuConstants {
         public final static short USER_DETAIL = 5;
         public final static short INDEX = 6;
     }
-    
+
     public final static class ImageType {
         public final static int JPG = 1;
         public final static int GIF = 2;
@@ -108,10 +108,22 @@ public class YiDuConstants {
         public final static int PAGE_SEARCH = 5;
         // * 11：登录页
         public final static int PAGE_LOGIN = 11;
-
+        // 书架
         public final static int PAGE_USER_BOOKCASE = 21;
+        // 消息管理
         public final static int PAGE_USER_MESSAGE = 22;
+        // 资料编辑
         public final static int PAGE_USER_USEREDIT = 23;
+        // 申请作者
+        public final static int PAGE_REGI_AUTHOR = 24;
+        // 小说列表
+        public final static int PAGE_AUTHER_ARTICLE_LIST = 30;
+        // 小说编辑
+        public final static int PAGE_AUTHER_ARTICLE_EDIT = 31;
+        // 章节列表
+        public final static int PAGE_AUTHER_CHAPTER_LIST = 32;
+        // 章节编辑
+        public final static int PAGE_AUTHER_CHAPTER_EDIT = 33;
         // * 99：其他页
         public final static int PAGE_OTHERS = 99;
 
@@ -121,10 +133,14 @@ public class YiDuConstants {
 
         // * 普通用户
         public final static short NORMAL_USER = 10;
-        // *作家
+        // * 作家
         public final static int AUTHER = 20;
+        // * VIP
+        public final static int VIP = 25;
         // * 管理员
         public final static int ADMINISTRATOR = 30;
+        // * 编辑
+        public final static int EDITOR = 40;
 
     }
 
@@ -162,6 +178,8 @@ public class YiDuConstants {
         public static final String EMAIL = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$";
     }
 
-    public static final String[] allowTypes = new String[] { "image/jpg", "image/png", "image/gif" };
+    public static final String[] allowPicTypes = new String[] { "image/jpg", "image/png", "image/gif" };
+
+    public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
 
 }

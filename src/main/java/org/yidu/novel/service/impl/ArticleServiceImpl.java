@@ -74,9 +74,19 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
                     + StringEscapeUtils.escapeSql(searchBean.getKey().toLowerCase()) + "%' OR LOWER(author) like '%"
                     + StringEscapeUtils.escapeSql(searchBean.getKey().toLowerCase()) + "%' )");
         }
-        // 过滤空章节
-        hql.append(" AND lastupdate is not null ");
-        hql.append(" AND lastchapterno is not null ");
+
+        if (searchBean.getAuthorid() != null && searchBean.getAuthorid() > 0) {
+            // 作者号指定的话，添加作者号
+            hql.append(" AND authorid = ? ");
+            params.add(searchBean.getAuthorid());
+        }
+
+        if (searchBean.getPageType() != ArticleSearchBean.PageType.authorPage
+                && searchBean.getPageType() != ArticleSearchBean.PageType.adminPage) {
+            // 非作者和管理员界面的话过滤空小说
+            hql.append(" AND lastupdate is not null ");
+            hql.append(" AND lastchapterno is not null ");
+        }
     }
 
     @Override

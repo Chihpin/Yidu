@@ -38,7 +38,6 @@ public class VoteAction extends AbstractUserBaseAction {
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
-        initCollections(new String[] { "collectionProperties.article.category" });
         if (articleno != 0) {
             articleService.updateVoteStatistic(articleno);
         } else {

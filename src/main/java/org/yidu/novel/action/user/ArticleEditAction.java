@@ -1,9 +1,6 @@
-package org.yidu.novel.action.admin;
+package org.yidu.novel.action.user;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -12,11 +9,13 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
-import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
+import org.yidu.novel.action.base.AbstractUserBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.entity.TUser;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -29,7 +28,7 @@ import org.yidu.novel.entity.TArticle;
  */
 @Action(value = "articleEdit")
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ArticleListAction.URL)
-public class ArticleEditAction extends AbstractAdminEditBaseAction {
+public class ArticleEditAction extends AbstractUserBaseAction {
 
     private static final long serialVersionUID = 822196809678036074L;
 
@@ -41,11 +40,6 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     private Integer category;
     private String intro;
     private Boolean fullflag;
-    private Date postdate;
-    private Boolean firstflag;
-    private Integer permission;
-    private Boolean authorflag;
-    private String agent;
 
     private Integer dayvisit;
     private Integer weekvisit;
@@ -59,7 +53,6 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     private File articlespic;
     private String articlespicContentType;
     private String articlespicFileName;
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     public int getArticleno() {
         return articleno;
@@ -123,50 +116,6 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
 
     public void setFullflag(Boolean fullflag) {
         this.fullflag = fullflag;
-    }
-
-    public Date getPostdate() {
-        return postdate;
-    }
-
-    public void setPostdate(Date postdate) {
-        this.postdate = postdate;
-    }
-
-    public String getPostdateStr() {
-        return sdf.format(postdate);
-    }
-
-    public Boolean getFirstflag() {
-        return firstflag;
-    }
-
-    public void setFirstflag(Boolean firstflag) {
-        this.firstflag = firstflag;
-    }
-
-    public Integer getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Integer permission) {
-        this.permission = permission;
-    }
-
-    public Boolean getAuthorflag() {
-        return authorflag;
-    }
-
-    public void setAuthorflag(Boolean authorflag) {
-        this.authorflag = authorflag;
-    }
-
-    public String getAgent() {
-        return agent;
-    }
-
-    public void setAgent(String agent) {
-        this.agent = agent;
     }
 
     public Integer getDayvisit() {
@@ -233,14 +182,6 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         this.allvote = allvote;
     }
 
-    public void setPostdateStr(String postdateStr) {
-        try {
-            this.postdate = sdf.parse(postdateStr);
-        } catch (ParseException e) {
-            this.addFieldError(postdateStr, getText("errors.format.date"));
-        }
-    }
-
     public File getArticlespic() {
         return articlespic;
     }
@@ -269,15 +210,35 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
         // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.article.category",
-                "collectionProperties.article.fullflag", "collectionProperties.article.authorflag",
-                "collectionProperties.article.permission", "collectionProperties.article.firstflag" });
+        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.article.fullflag" });
+
         // 编辑
         if (articleno != 0) {
             TArticle article = articleService.getByNo(articleno);
+
+            if (!checkRight(article)) {
+                addActionError(getText("errors.right"));
+                return;
+            }
+
             BeanUtils.copyProperties(article, this);
+
         }
         logger.debug("loadData normally end.");
+    }
+
+    private boolean checkRight(TArticle article) {
+        boolean hasRihgtFlag = false;
+        TUser user = LoginManager.getLoginUser();
+        // 作者
+        if (user.getType() == YiDuConstants.UserType.AUTHER && article.getAuthorid() == user.getUserno()) {
+            hasRihgtFlag = true;
+        }
+        // TODO 编辑
+        if (user.getType() == YiDuConstants.UserType.EDITOR && article.getCategory() == user.getUserno()) {
+            hasRihgtFlag = true;
+        }
+        return hasRihgtFlag;
     }
 
     /**
@@ -291,16 +252,19 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         logger.debug("save start.");
 
         // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.article.category",
-                "collectionProperties.article.fullflag", "collectionProperties.article.authorflag",
-                "collectionProperties.article.permission", "collectionProperties.article.firstflag" });
+        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.article.fullflag" });
 
         TArticle article = new TArticle();
         if (articleno != 0) {
             article = articleService.getByNo(articleno);
+            if (!checkRight(article)) {
+                addActionError(getText("errors.right"));
+                return FREEMARKER_ERROR;
+            }
         }
 
-        BeanUtils.copyProperties(this, article);
+        BeanUtils.copyProperties(this, article, new String[] { "articleno", "dayvisit", "weekvisit", "monthvisit",
+                "allvisit", "dayvote", "weekvote", "monthvote", "allvote" });
 
         // 保存图片文件
         if (articlespic != null) {
@@ -309,11 +273,11 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
                     saveArticlespic();
                 } catch (Exception e) {
                     addActionError(getText("errors.file.save"));
-                    return INPUT;
+                    return FREEMARKER;
                 }
             } else {
                 addActionError(getText("errors.file.type"));
-                return INPUT;
+                return FREEMARKER;
             }
 
             if (StringUtils.equals(getArticlespicContentType(), "image/jpg")) {
@@ -340,5 +304,15 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
             savefile.getParentFile().mkdirs();
         }
         FileUtils.copyFile(articlespic, savefile);
+    }
+
+    @Override
+    public int getPageType() {
+        return YiDuConstants.Pagetype.PAGE_AUTHER_ARTICLE_EDIT;
+    }
+
+    @Override
+    public String getTempName() {
+        return "user/articleEdit";
     }
 }
