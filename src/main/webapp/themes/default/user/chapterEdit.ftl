@@ -45,7 +45,7 @@
         <tr>
           <td class="odd" width="25%">定时发布时间</td>
           <td class="even">
-              <@s.textfield name="publishtime" cssStyle="160px;"  cssClass="text" size="25" maxlength="32" />
+              <@s.textfield name="publishtimeStr" cssStyle="160px;"  cssClass="text" size="25" maxlength="32" />
           </td>
         </tr>
         

@@ -67,7 +67,6 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
             CookieUtils.getUserCookieAndLogoin(ServletActionContext.getRequest(), userService);
         }
         loadData();
-        loadReadHistory();
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
             setHasError(true);

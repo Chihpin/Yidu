@@ -10,7 +10,7 @@ package org.yidu.novel.action.base;
  * @version 1.0.0
  * @author shinpa.you
  */
-public abstract class AbstractInstallBaseAction extends AbstractBaseAction {
+public abstract class AbstractInstallBaseAction extends AbstractPublicAndUserBaseAction {
 
     private static final long serialVersionUID = 1666346944096414888L;
 

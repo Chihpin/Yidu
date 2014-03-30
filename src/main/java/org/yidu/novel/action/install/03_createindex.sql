@@ -4,3 +4,4 @@
 CREATE INDEX t_article_articlename_index  ON t_article (articlename);
 CREATE INDEX t_chapter_articleno_index  ON t_chapter (articleno);
 CREATE INDEX t_chapter_chaptername_index  ON t_chapter (chaptername);
+CREATE INDEX index_credithistory_userno ON t_credit_history (userno);

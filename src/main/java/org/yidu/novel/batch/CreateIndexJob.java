@@ -1,6 +1,8 @@
 package org.yidu.novel.batch;
 
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -41,11 +43,11 @@ public class CreateIndexJob extends QuartzJobBean {
                 // 减16的字符是WEB-INF/classes/
                 String webRootPath = currentPath.substring(0, currentPath.length() - 16);
                 if (StringUtils.isNotBlank(responseBody)) {
-                    FileWriter writer;
-                    writer = new FileWriter(webRootPath + "index.html");
-                    writer.write(responseBody);
-                    writer.flush();
-                    writer.close();
+                    OutputStreamWriter outputStream = new OutputStreamWriter(new FileOutputStream(new File(webRootPath
+                            + "index.html")), YiDuConstants.ENCODING_UTF_8);
+                    outputStream.write(responseBody);
+                    outputStream.flush();
+                    outputStream.close();
                 }
                 logger.debug("CreateIndexJob normally end.");
             } catch (Exception e) {

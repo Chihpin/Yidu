@@ -12,11 +12,21 @@
       <div class="hd-follow" style="width:500px;text-align:right;" >
         <div class="myhide"><a href="#" class="hides">浏览记录</a>
           <div class="hideInfo">
-            <ul>
-            <#list historyList as chapter>
-                <li class=""><a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="f14">${chapter.articlename}</a><br>
-                  最近浏览:<a href="${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}" >${chapter.chaptername}</a></li>
-            </#list>
+            <ul id="readhistory">
+                <script>
+                $(document).ready(function(){
+                    $.post('${contextPath}/readhistory',function(data){
+                        if(data != null){
+                            var html ="";
+                           for(i=0; i < data.length;i++){
+                                html = html + ' <li class=""><a href="${contextPath}/info/'+Math.floor(data[i].articleno/1000)+'/'+data[i].articleno +'.html" class="f14">'+data[i].articlename+'</a><br>'
+                                html = html + ' 最近浏览:<a href="${contextPath}/reader/'+Math.floor(data[i].articleno/1000)+'/'+data[i].articleno+'/'+data[i].chapterno+'.html" >'+data[i].chaptername+'</a></li>'
+                           }
+                           $('#readhistory').html(html);
+                        }
+                    })
+                })
+               </script>
             </ul>
             <p>*提示：浏览记录仅放置最近浏览的10本书籍</p>
             <span>浏览记录是空的</span>
@@ -27,7 +37,7 @@
             $(document).ready(function(){
                 $.post('${contextPath}/checklogin',function(data){
                     if(data!=null){
-                       var html = '你好, <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
+                       var html = '你好   <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
                         if(data.type==30){
                             html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>';
                         }else if(data.type==20||data.type==40||data.type==41){

@@ -337,4 +337,8 @@ public class IndexAction extends AbstractInstallBaseAction {
         stmt.execute(sql);
     }
 
+    @Override
+    protected void loadData() {
+    }
+
 }

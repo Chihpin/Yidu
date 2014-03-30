@@ -31,7 +31,6 @@ public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAc
     public String execute() {
         logger.debug("execute start.");
         loadData();
-        loadReadHistory();
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
             setHasError(true);

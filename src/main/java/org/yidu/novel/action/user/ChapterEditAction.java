@@ -1,5 +1,7 @@
 package org.yidu.novel.action.user;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +41,8 @@ public class ChapterEditAction extends AbstractUserBaseAction {
     private Boolean isvip;
     private Date postdate;
     private Date publishtime;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     public int getChapterno() {
         return chapterno;
@@ -130,6 +134,20 @@ public class ChapterEditAction extends AbstractUserBaseAction {
 
     public void setPublishtime(Date publishtime) {
         this.publishtime = publishtime;
+    }
+
+    public String getPublishtimeStr() {
+        return sdf.format(publishtime);
+    }
+
+    public void setPublishtimeStr(String publishtimeStr) {
+        if (StringUtils.isNotEmpty(publishtimeStr)) {
+            try {
+                this.publishtime = sdf.parse(publishtimeStr);
+            } catch (ParseException e) {
+                this.addFieldError(publishtimeStr, getText("errors.format.date"));
+            }
+        }
     }
 
     @Override
