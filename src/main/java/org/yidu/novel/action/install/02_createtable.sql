@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS t_credit_history;
 DROP TABLE IF EXISTS t_user;
 DROP TABLE IF EXISTS t_article;
 
+
 /* Create Tables */
 
 CREATE TABLE t_system_block
@@ -42,24 +43,6 @@ CREATE TABLE t_bookcase
     createtime timestamp,
     deleteflag boolean DEFAULT 'false',
     PRIMARY KEY (bookcaseno)
-) WITHOUT OIDS;
-
-
-CREATE TABLE t_chapter
-(
-    chapterno serial NOT NULL,
-    articleno int,
-    articlename varchar(100),
-    chaptertype smallint,
-    chaptername varchar(100),
-    size int DEFAULT 0,
-    isvip boolean,
-    postdate timestamp,
-    publishtime timestamp,
-    ispublish boolean DEFAULT 'false',
-    lastchecktime timestamp,
-    deleteflag boolean DEFAULT 'false',
-    PRIMARY KEY (chapterno)
 ) WITHOUT OIDS;
 
 
@@ -139,6 +122,24 @@ CREATE TABLE t_user
 ) WITHOUT OIDS;
 
 
+CREATE TABLE t_chapter
+(
+    chapterno serial NOT NULL,
+    articleno int,
+    articlename varchar(100),
+    chaptertype smallint,
+    chaptername varchar(100),
+    size int DEFAULT 0,
+    isvip boolean,
+    postdate timestamp,
+    publishtime timestamp,
+    ispublish boolean DEFAULT 'false',
+    lastchecktime timestamp,
+    deleteflag boolean DEFAULT 'false',
+    PRIMARY KEY (chapterno)
+) WITHOUT OIDS;
+
+
 CREATE TABLE t_article
 (
     articleno serial NOT NULL,
@@ -153,7 +154,6 @@ CREATE TABLE t_article
     lastchapterno int,
     lastchapter varchar(50),
     chapters int,
-    agent varchar(32),
     size int DEFAULT 0,
     fullflag boolean,
     imgflag smallint,
@@ -171,5 +171,6 @@ CREATE TABLE t_article
     monthvote int DEFAULT 0,
     allvote int DEFAULT 0,
     deleteflag boolean DEFAULT 'false',
+    publicflag int,
     PRIMARY KEY (articleno)
 ) WITHOUT OIDS;
