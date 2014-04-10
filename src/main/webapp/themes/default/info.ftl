@@ -23,7 +23,7 @@
         <div class="b-info">
           <h1>${article.articlename}</h1>
           <div class="infoDetail">
-                <div id="waa" style="height:72px;width:520px;overflow:hidden;">介绍:${article.intro}</div>
+                <div id="waa" style="height:72px;width:520px;overflow:hidden;">介绍:${article.introForHtml}</div>
                 <a href="javascript:void(0)" id="show"  onclick="document.getElementById('waa').style.height='';document.getElementById('hidden').style.display='';document.getElementById('show').style.display='none';" style="float:right;">+ 展开全部</a>
                 <a href="javascript:void(0)" id="hidden" style="display:none;float:right;" onclick="document.getElementById('waa').style.height='72px';document.getElementById('hidden').style.display='none';document.getElementById('show').style.display='';">- 收回介绍</a> 
           </div>

@@ -29,6 +29,7 @@
                     <td class="odd"><#if article.lastchapter??>${article.lastchapter}</#if></td>
                     <td class="even" align="center">
                         <a href='${encodeURL("/user/articleEdit?articleno=${article.articleno?c}")}' >编辑</a>
+                        <a href='${encodeURL("/user/articleEdit?articleno=${article.articleno?c}")}' >申请上架</a>
                         <a href='#' >评论管理</a>
                         <a href='${encodeURL("/user/chapterList?articleno=${article.articleno?c}")}'>章节管理</a>
                         <a href="javascript:if(confirm('确实要删除这本小说么？')) document.location='${encodeURL("/user/articleList!delete?articleno=${article.articleno?c}")}';">删除</a>

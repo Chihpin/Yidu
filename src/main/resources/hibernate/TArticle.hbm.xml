@@ -156,5 +156,10 @@
                 <comment>deleteflag</comment>
             </column>
         </property>
+        <property name="publicflag" type="java.lang.Integer">
+            <column name="publicflag">
+                <comment>publicflag</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

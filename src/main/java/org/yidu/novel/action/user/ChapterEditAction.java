@@ -137,7 +137,11 @@ public class ChapterEditAction extends AbstractUserBaseAction {
     }
 
     public String getPublishtimeStr() {
-        return sdf.format(publishtime);
+        if (publishtime != null) {
+            return sdf.format(publishtime);
+        } else {
+            return "";
+        }
     }
 
     public void setPublishtimeStr(String publishtimeStr) {
@@ -213,11 +217,13 @@ public class ChapterEditAction extends AbstractUserBaseAction {
 
         chapterService.save(chapter);
 
+        // TODO 更新小说字数，最新章节等信息
+
         try {
             Utils.saveContext(articleno, chapterno, content);
         } catch (Exception e) {
             addActionError(e.getMessage());
-            return INPUT;
+            return FREEMARKER_ERROR;
         }
         logger.debug("save normally end.");
         return REDIRECT;

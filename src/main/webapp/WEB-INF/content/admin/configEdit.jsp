@@ -25,13 +25,18 @@
 
     <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.countPerPage" /></td>
-       <td class="even"><s:textfield name ="countPerPage" size="25" maxlength="100"  cssClass="text"/></td>
+       <td class="even"><s:textfield name ="countPerPage" size="25" maxlength="20"  cssClass="text"/></td>
     </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.maxBookcase" /></td>
-       <td class="even"><s:textfield name ="maxBookcase" size="25" maxlength="100"  cssClass="text"/></td>
+       <td class="even"><s:textfield name ="maxBookcase" size="25" maxlength="20"  cssClass="text"/></td>
     </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.txtEncoding" /></td>
+       <td class="even"><s:textfield name ="txtEncoding" size="25" maxlength="20"  cssClass="text"/></td>
+    </tr>
+    
 </tbody>
 </table>
 <br />

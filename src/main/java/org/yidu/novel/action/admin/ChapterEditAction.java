@@ -22,7 +22,8 @@ import org.yidu.novel.utils.Utils;
  * @author shinpa.you
  */
 @Action(value = "chapterEdit")
-@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL+"?articleno=${articleno}")
+@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL
+        + "?articleno=${articleno}")
 public class ChapterEditAction extends AbstractAdminEditBaseAction {
 
     private static final long serialVersionUID = -6064353669030314155L;
@@ -126,11 +127,20 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         logger.debug("loadData start.");
         // 初始化种别下拉列表选项
         initCollections(new String[] { "collectionProperties.chapter.isvip" });
+        if (chapterno == 0 && articleno == 0) {
+            addActionError(getText("errors.unknown"));
+            return;
+        }
+
         // 编辑
         if (chapterno != 0) {
             TChapter chapter = chapterService.getByNo(chapterno);
             BeanUtils.copyProperties(chapter, this);
             content = Utils.getContext(articleno, chapterno, false);
+        } else {
+            // 追加的话取小说信息
+            TArticle article = articleService.getByNo(articleno);
+            BeanUtils.copyProperties(article, this);
         }
         logger.debug("loadData normally end.");
     }
@@ -149,14 +159,17 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
             TArticle article = articleService.getByNo(articleno);
             chapter.setArticleno(articleno);
             chapter.setArticlename(article.getArticlename());
+            chapter.setDeleteflag(false);
+            chapter.setPostdate(new Date());
         }
         BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename" });
         chapter.setSize(StringUtils.length(content));
         chapter.setPostdate(new Date());
         chapterService.save(chapter);
 
+        // TODO 更新小说字数，最新章节等信息
         try {
-            Utils.saveContext(articleno, chapterno, content);
+            Utils.saveContext(articleno, chapter.getChapterno(), content);
         } catch (Exception e) {
             addActionError(e.getMessage());
             return INPUT;

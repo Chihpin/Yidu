@@ -11,12 +11,13 @@
 <div class="layout grid-s160m0e190 channel-netnovel">
     <div class="col-main"><div class="main-wrap channel-netnovel-main">
     <section>
-    <@s.form action="articleEdit" validate="true" method="post" enctype="multipart/form-data">
+    <@s.form action="chapterEdit" validate="true" method="post">
     <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/formcommon.js"></script>
     <center>
         <span id="ErrorList"><@s.actionerror /> <@s.actionmessage /></span>
     </center>
     <@s.hidden name="articleno" />
+    <@s.hidden name="chapterno" />
     <table class="grid" align="center" width="500">
       <tbody>
       <caption>章节信息</caption>

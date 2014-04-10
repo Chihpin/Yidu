@@ -69,7 +69,7 @@
         <s:else>
         <tr>
         </s:else>
-            <td><a href=""><s:property  value="#article.articlename" /></a></td>
+            <td><s:property  value="#article.articlename" /></td>
             <td><s:property  value="collections['collectionProperties.article.category'][#article.category]" /></td>
             <td><s:property  value="#article.author" /></td>
             <td><s:property  value="#article.lastchapter" /></td>

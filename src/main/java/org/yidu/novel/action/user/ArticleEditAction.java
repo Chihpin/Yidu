@@ -291,6 +291,7 @@ public class ArticleEditAction extends AbstractUserBaseAction {
             // TODO 首字母
             article.setPostdate(new Date());
             article.setDeleteflag(false);
+            article.setPublicflag(0);
         } else {
             article = articleService.getByNo(articleno);
 
@@ -324,11 +325,11 @@ public class ArticleEditAction extends AbstractUserBaseAction {
                 return FREEMARKER;
             }
 
-            if (StringUtils.equals(getArticlespicContentType(), "image/jpg")) {
+            if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.JPG)) {
                 article.setImgflag(YiDuConstants.ImageType.JPG);
-            } else if (StringUtils.equals(getArticlespicContentType(), "image/gif")) {
+            } else if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.GIF)) {
                 article.setImgflag(YiDuConstants.ImageType.GIF);
-            } else if (StringUtils.equals(getArticlespicContentType(), "image/png")) {
+            } else if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.PNG)) {
                 article.setImgflag(YiDuConstants.ImageType.PNG);
             }
         }

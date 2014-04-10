@@ -11,7 +11,7 @@
     <div class="col-main"><div class="main-wrap channel-netnovel-main">
     <section>
         <header class="netnovel-header">
-            <h3>${article.articlename} &nbsp;&nbsp;- 共有 ${chapterList.size()}章。  &nbsp;&nbsp;<a href='${encodeURL("/user/chapterEdit")}' ><font color=red>添加章节</font></a></h3>
+            <h3>${article.articlename} &nbsp;&nbsp;- 共有 ${chapterList.size()}章。  &nbsp;&nbsp;<a href='${encodeURL("/user/chapterEdit?articleno=${article.articleno?c}")}' ><font color=red>添加章节</font></a></h3>
         </header>
         <form action="" method="post" name="checkform" id="checkform" onSubmit="return check_confirm();">
             <table class="mygrid" width="100%" align="center" style="font-size:12px">

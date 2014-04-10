@@ -3,9 +3,10 @@ package org.yidu.novel.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 
 import org.apache.commons.io.FileUtils;
@@ -69,7 +70,8 @@ public class Utils {
         try {
             if (file.isFile() && file.exists()) {
                 // 判断文件是否存在
-                InputStreamReader read = new InputStreamReader(new FileInputStream(file), YiDuConstants.ENCODING_GBK);
+                InputStreamReader read = new InputStreamReader(new FileInputStream(file),
+                        YiDuConstants.yiduConf.getString(YiDuConfig.TXT_ENCODING));
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
@@ -137,21 +139,17 @@ public class Utils {
 
         File parentPath = file.getParentFile();
         if (!parentPath.exists()) {
-            parentPath.createNewFile();
+            parentPath.mkdirs();
         }
-        FileWriter filewriter = null;
         try {
-            filewriter = new FileWriter(file);
-            filewriter.write(content);
+            OutputStreamWriter outputStream = new OutputStreamWriter(new FileOutputStream(file),
+                    YiDuConstants.yiduConf.getString(YiDuConfig.TXT_ENCODING));
+            outputStream.write(content);
+            outputStream.flush();
+            outputStream.close();
+
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-        } finally {
-            if (filewriter != null) {
-                try {
-                    filewriter.close();
-                } catch (IOException e) {
-                }
-            }
         }
     }
 

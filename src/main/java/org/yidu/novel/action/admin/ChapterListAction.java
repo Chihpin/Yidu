@@ -82,7 +82,10 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
 
     @Override
     protected void loadData() {
-
+        if (articleno == 0) {
+            addActionError(getText("errors.required.input",
+                    new String[] { getText("label.admin.chapter.list.articleno") }));
+        }
         article = articleService.getByNo(articleno);
         ChapterSearchBean searchBean = new ChapterSearchBean();
         BeanUtils.copyProperties(this, searchBean);
@@ -91,11 +94,14 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
     }
 
     public String delete() throws Exception {
-
+        if (chapterno == 0) {
+            addActionError(getText("errors.required.input",
+                    new String[] { getText("label.admin.chapter.list.chapterno") }));
+        }
         TChapter chapter = chapterService.getByNo(chapterno);
+        articleno = chapter.getArticleno();
         chapter.setDeleteflag(true);
         chapterService.save(chapter);
-
         loadData();
         return INPUT;
 

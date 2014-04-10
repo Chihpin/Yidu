@@ -126,6 +126,8 @@ public class YiDuConstants {
         public final static int PAGE_AUTHER_CHAPTER_LIST = 32;
         // 章节编辑
         public final static int PAGE_AUTHER_CHAPTER_EDIT = 33;
+        // 章节编辑
+        public final static int PAGE_AUTHER_BILL_DETAIL = 40;
         // * 99：其他页
         public final static int PAGE_OTHERS = 99;
 
@@ -180,7 +182,15 @@ public class YiDuConstants {
         public static final String EMAIL = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$";
     }
 
-    public static final String[] allowPicTypes = new String[] { "image/jpg", "image/jpeg", "image/png", "image/gif" };
+    public final static class ImgageMateType {
+        public static final String JPG = "image/jpeg";
+        public static final String PNG = "image/png";
+        public static final String GIF = "image/gif";
+
+    }
+
+    public static final String[] allowPicTypes = new String[] { ImgageMateType.JPG, ImgageMateType.PNG,
+            ImgageMateType.GIF };
 
     public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
 

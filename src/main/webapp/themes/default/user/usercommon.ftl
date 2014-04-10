@@ -22,6 +22,9 @@
             <ul>
                <li <#if pageType==30||pageType==31||pageType==32||pageType==33>class="current"</#if>><a href="${encodeURL("/user/articleList")}">小说管理</a></li>
             </ul>
+            <ul>
+               <li <#if pageType==40>class="current"</#if>><a href="${encodeURL("/user/billdetail")}">账单详细</a></li>
+            </ul>
             </#if>
             <ul class="last">
                <li><a href="${encodeURL("/logout")}">退出登录</a></li>

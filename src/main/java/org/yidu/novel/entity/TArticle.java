@@ -4,6 +4,7 @@ package org.yidu.novel.entity;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -46,6 +47,7 @@ public class TArticle implements java.io.Serializable {
     private Integer allvote;
 
     private Boolean deleteflag;
+    private Integer publicflag;
 
     public TArticle() {
     }
@@ -59,7 +61,7 @@ public class TArticle implements java.io.Serializable {
             String lastchapter, Integer chapters, Integer size, Boolean fullflag, Integer imgflag, Date postdate,
             Date lastupdate, Boolean firstflag, Integer permission, Boolean authorflag, String agent, Integer dayvisit,
             Integer weekvisit, Integer monthvisit, Integer allvisit, Integer dayvote, Integer weekvote,
-            Integer monthvote, Integer allvote, Boolean deleteflag) {
+            Integer monthvote, Integer allvote, Boolean deleteflag, Integer publicflag) {
         this.articleno = articleno;
         this.articlename = articlename;
         this.initial = initial;
@@ -91,6 +93,7 @@ public class TArticle implements java.io.Serializable {
         this.monthvote = monthvote;
         this.allvote = allvote;
         this.deleteflag = deleteflag;
+        this.publicflag = publicflag;
     }
 
     public int getArticleno() {
@@ -159,6 +162,15 @@ public class TArticle implements java.io.Serializable {
 
     public String getIntro() {
         return this.intro;
+    }
+
+    public String getIntroForHtml() {
+        if (intro != null) {
+            // 替换换行和空格
+            String html = StringEscapeUtils.escapeHtml4(intro);
+            return html.replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>").replaceAll("\\s", "&nbsp;");
+        }
+        return null;
     }
 
     public void setIntro(String intro) {
@@ -331,6 +343,14 @@ public class TArticle implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getPublicflag() {
+        return publicflag;
+    }
+
+    public void setPublicflag(Integer publicflag) {
+        this.publicflag = publicflag;
     }
 
     public String getIntroOmit() {

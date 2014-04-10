@@ -37,6 +37,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     private int maxBookcase;
     private boolean createIndexPage;
     private boolean createSiteMap;
+    private String txtEncoding;
 
     private String dburl;
     private String username;
@@ -138,6 +139,14 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.createSiteMap = createSiteMap;
     }
 
+    public String getTxtEncoding() {
+        return txtEncoding;
+    }
+
+    public void setTxtEncoding(String txtEncoding) {
+        this.txtEncoding = txtEncoding;
+    }
+
     public String getDburl() {
         return dburl;
     }
@@ -177,6 +186,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         themeName = YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME);
         createIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_INDEXPAGE, true);
         createSiteMap = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_SITEMAP, true);
+        txtEncoding = YiDuConstants.yiduConf.getString(YiDuConfig.TXT_ENCODING);
 
         // 设定文件初期读入
         try {
@@ -206,6 +216,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.THEME_NAME, themeName);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_INDEXPAGE, createIndexPage);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_SITEMAP, createSiteMap);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.TXT_ENCODING, txtEncoding);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());

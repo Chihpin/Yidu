@@ -316,11 +316,11 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
                 return INPUT;
             }
 
-            if (StringUtils.equals(getArticlespicContentType(), "image/jpg")) {
+            if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.JPG)) {
                 article.setImgflag(YiDuConstants.ImageType.JPG);
-            } else if (StringUtils.equals(getArticlespicContentType(), "image/gif")) {
+            } else if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.GIF)) {
                 article.setImgflag(YiDuConstants.ImageType.GIF);
-            } else if (StringUtils.equals(getArticlespicContentType(), "image/png")) {
+            } else if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.PNG)) {
                 article.setImgflag(YiDuConstants.ImageType.PNG);
             }
         }

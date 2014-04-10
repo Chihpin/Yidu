@@ -18,6 +18,7 @@ public class YiDuConfig {
     public final static String CREATE_INDEXPAGE = "createIndexPage";
     public final static String CREATE_SITEMAP = "createSiteMap";
     public final static String THEME_NAME = "themeName";
+    public final static String TXT_ENCODING = "txtEncoding";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";
