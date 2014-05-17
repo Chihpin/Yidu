@@ -25,6 +25,8 @@ CREATE TABLE t_system_block
     content text,
     target smallint,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (blockno)
 ) WITHOUT OIDS;
 
@@ -42,6 +44,8 @@ CREATE TABLE t_bookcase
     lastvisit timestamp,
     createtime timestamp,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (bookcaseno)
 ) WITHOUT OIDS;
 
@@ -59,6 +63,8 @@ CREATE TABLE t_message
     isread boolean,
     postdate timestamp with time zone,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (messageno)
 ) WITHOUT OIDS;
 
@@ -75,6 +81,8 @@ CREATE TABLE t_review
     email varchar(60),
     postdate timestamp,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (reviweno)
 ) WITHOUT OIDS;
 
@@ -91,6 +99,8 @@ CREATE TABLE t_credit_history
     timestamp timestamp,
     creditpoint int,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (credithistoryno)
 ) WITHOUT OIDS;
 
@@ -118,6 +128,8 @@ CREATE TABLE t_user
     category int,
     subcategory int,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (userno)
 ) WITHOUT OIDS;
 
@@ -136,6 +148,8 @@ CREATE TABLE t_chapter
     ispublish boolean DEFAULT 'false',
     lastchecktime timestamp,
     deleteflag boolean DEFAULT 'false',
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (chapterno)
 ) WITHOUT OIDS;
 
@@ -172,5 +186,7 @@ CREATE TABLE t_article
     allvote int DEFAULT 0,
     deleteflag boolean DEFAULT 'false',
     publicflag int,
+    modifyuserno integer,
+    modifytime timestamp without time zone,
     PRIMARY KEY (articleno)
 ) WITHOUT OIDS;
