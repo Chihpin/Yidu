@@ -17,6 +17,7 @@ import java.text.MessageFormat;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.action.base.AbstractInstallBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
@@ -50,7 +51,7 @@ public class IndexAction extends AbstractInstallBaseAction {
     public static final String URL = NAMESPACE + "/" + NAME;
 
     private String prefixjdbc = "jdbc:postgresql://";
-    private static String LOCK_FILE = "install.lock";
+    private static String LOCK_FILE = ServletActionContext.getServletContext().getRealPath("/") + "/install.lock";
 
     private String title;
     private String siteKeywords;

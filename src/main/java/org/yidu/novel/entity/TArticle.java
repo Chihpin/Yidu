@@ -49,51 +49,14 @@ public class TArticle implements java.io.Serializable {
     private Boolean deleteflag;
     private Integer publicflag;
 
+    private Integer modifyuserno;
+    private Date modifytime;
+
     public TArticle() {
     }
 
     public TArticle(int articleno) {
         this.articleno = articleno;
-    }
-
-    public TArticle(int articleno, String articlename, String initial, String keywords, Integer authorid,
-            String author, Integer category, Integer subcategory, String intro, Integer lastchapterno,
-            String lastchapter, Integer chapters, Integer size, Boolean fullflag, Integer imgflag, Date postdate,
-            Date lastupdate, Boolean firstflag, Integer permission, Boolean authorflag, String agent, Integer dayvisit,
-            Integer weekvisit, Integer monthvisit, Integer allvisit, Integer dayvote, Integer weekvote,
-            Integer monthvote, Integer allvote, Boolean deleteflag, Integer publicflag) {
-        this.articleno = articleno;
-        this.articlename = articlename;
-        this.initial = initial;
-        this.keywords = keywords;
-        this.authorid = authorid;
-        this.author = author;
-        this.category = category;
-        this.subcategory = subcategory;
-        this.intro = intro;
-        this.lastchapterno = lastchapterno;
-        this.lastchapter = lastchapter;
-        this.chapters = chapters;
-        this.size = size;
-        this.fullflag = fullflag;
-        this.imgflag = imgflag;
-        this.postdate = postdate;
-        this.lastupdate = lastupdate;
-        this.firstflag = firstflag;
-        this.permission = permission;
-        this.authorflag = authorflag;
-        this.agent = agent;
-
-        this.dayvisit = dayvisit;
-        this.weekvisit = weekvisit;
-        this.monthvisit = monthvisit;
-        this.allvisit = allvisit;
-        this.dayvote = dayvote;
-        this.weekvote = weekvote;
-        this.monthvote = monthvote;
-        this.allvote = allvote;
-        this.deleteflag = deleteflag;
-        this.publicflag = publicflag;
     }
 
     public int getArticleno() {
@@ -353,6 +316,22 @@ public class TArticle implements java.io.Serializable {
         this.publicflag = publicflag;
     }
 
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
+    }
+
     public String getIntroOmit() {
         if (getIntro() != null && getIntro().length() > 60) {
             return getIntro().substring(0, 60) + "...";
@@ -402,4 +381,5 @@ public class TArticle implements java.io.Serializable {
         }
         return imgUrl;
     }
+
 }

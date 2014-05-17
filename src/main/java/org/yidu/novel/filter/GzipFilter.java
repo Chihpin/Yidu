@@ -49,14 +49,17 @@ public class GzipFilter implements Filter {
             chain.doFilter(req, res);
         } else {
             if (req instanceof HttpServletRequest) {
-                HttpServletRequest request = (HttpServletRequest) req;
-                HttpServletResponse response = (HttpServletResponse) res;
-                String ae = request.getHeader("accept-encoding");
-                if (ae != null && ae.indexOf("gzip") != -1) {
-                    GZIPResponseWrapper wrappedResponse = new GZIPResponseWrapper(response);
-                    chain.doFilter(req, wrappedResponse);
-                    wrappedResponse.finishResponse();
-                    return;
+                if (!((HttpServletRequest) req).getRequestURI().startsWith("/download")) {
+                    // download以外的请求做Gzip处理
+                    HttpServletRequest request = (HttpServletRequest) req;
+                    HttpServletResponse response = (HttpServletResponse) res;
+                    String ae = request.getHeader("accept-encoding");
+                    if (ae != null && ae.indexOf("gzip") != -1) {
+                        GZIPResponseWrapper wrappedResponse = new GZIPResponseWrapper(response);
+                        chain.doFilter(req, wrappedResponse);
+                        wrappedResponse.finishResponse();
+                        return;
+                    }
                 }
             }
             chain.doFilter(req, res);

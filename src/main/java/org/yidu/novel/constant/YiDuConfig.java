@@ -19,6 +19,7 @@ public class YiDuConfig {
     public final static String CREATE_SITEMAP = "createSiteMap";
     public final static String THEME_NAME = "themeName";
     public final static String TXT_ENCODING = "txtEncoding";
+    public final static String KEEP_DELETE_DATA_DAYS =  "keepDeleteDataDays";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

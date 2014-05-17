@@ -1,6 +1,7 @@
 package org.yidu.novel.action.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -122,6 +124,8 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
 
         TArticle article = articleService.getByNo(articleno);
         article.setDeleteflag(true);
+        article.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        article.setModifytime(new Date());
         articleService.save(article);
 
         loadData();

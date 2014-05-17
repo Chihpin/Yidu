@@ -22,21 +22,10 @@ public class TMessage implements java.io.Serializable {
     private Date postdate;
     private Boolean deleteflag;
 
-    public TMessage() {
-    }
+    private Integer modifyuserno;
+    private Date modifytime;
 
-    public TMessage(Integer userno, String loginid, Integer touserno, String tologinid, String title, String content,
-            Short category, Boolean isread, Date postdate, Boolean deleteflag) {
-        this.userno = userno;
-        this.loginid = loginid;
-        this.touserno = touserno;
-        this.tologinid = tologinid;
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.isread = isread;
-        this.postdate = postdate;
-        this.deleteflag = deleteflag;
+    public TMessage() {
     }
 
     public int getMessageno() {
@@ -125,6 +114,22 @@ public class TMessage implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
 }

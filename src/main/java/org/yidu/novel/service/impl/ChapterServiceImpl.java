@@ -38,7 +38,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
     public TChapter getNextChapter(int articleno, int chapterno, boolean isNext) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("FROM TChapter WHERE articleno = ? ");
+        hql.append("FROM TChapter WHERE deleteflag=false and articleno = ? ");
         // 追加小说号条件
         params.add(articleno);
         if (isNext) {
@@ -80,5 +80,30 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         }
 
         return this.getIntResult(sql.toString(), params);
+    }
+
+    @Override
+    public Integer getArticleSize(int articleno) {
+        StringBuffer sql = new StringBuffer();
+        List<Object> params = new ArrayList<Object>();
+        sql.append("SELECT sum(size) FROM TChapter where  deleteflag=false and chaptertype = 0 ");
+        sql.append(" AND articleno = ? ");
+        params.add(articleno);
+        return this.getIntResult(sql.toString(), params);
+    }
+
+    @Override
+    public TChapter getLastChapter(int articleno) {
+        StringBuffer hql = new StringBuffer();
+        List<Object> params = new ArrayList<Object>();
+        hql.append("FROM TChapter WHERE deleteflag=false and articleno = ? order by chapterno desc");
+        // 追加小说号条件
+        params.add(articleno);
+        // 只取一条记录
+        List<TChapter> chapterList = this.findByRange(hql.toString(), 0, 1, params);
+        if (chapterList != null && chapterList.size() > 0) {
+            return chapterList.get(0);
+        }
+        return null;
     }
 }

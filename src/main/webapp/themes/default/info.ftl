@@ -75,7 +75,7 @@
                 <dl><dt>状态：</dt><dd><#if article.fullflag>完结<#else>连载中</#if></dd></dl>
                 <dl class="bookso"><dt>作      者：</dt><dd> <a href="${encodeURL("/articleList?author=${article.author}")}">
                     ${article.author}</a></dd></dl>
-                <dl><dt>全文长度：</dt><dd>${article.size}字</dd></dl>
+                <dl><dt>全文长度：</dt><dd><#if article.size ??>${article.size}<#else>0</#if>字</dd></dl>
                 <dl><dt>总点击量：</dt><dd>${article.allvisit}</dd></dl>
                 <dl><dt>TXT下载：</dt><dd><a href="${encodeURL("/download?articleno=${article.articleno?c}")}" target="_blank"><font color="red" >全本下载</font></a></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>

@@ -22,26 +22,14 @@ public class TChapter implements java.io.Serializable {
     private Date postdate;
     private Date publishtime;
     private Boolean deleteflag;
+    private Integer modifyuserno;
+    private Date modifytime;
 
     public TChapter() {
     }
 
     public TChapter(int chapterno) {
         this.chapterno = chapterno;
-    }
-
-    public TChapter(int chapterno, Integer articleno, String articlename, Short chaptertype, String chaptername,
-            Integer size, Boolean isvip, Date postdate, Date publishtime, Boolean deleteflag) {
-        this.chapterno = chapterno;
-        this.articleno = articleno;
-        this.articlename = articlename;
-        this.chaptertype = chaptertype;
-        this.chaptername = chaptername;
-        this.size = size;
-        this.isvip = isvip;
-        this.postdate = postdate;
-        this.publishtime = publishtime;
-        this.deleteflag = deleteflag;
     }
 
     public int getChapterno() {
@@ -122,6 +110,22 @@ public class TChapter implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
     public Integer getSubdir() {

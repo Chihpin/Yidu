@@ -1,6 +1,7 @@
 package org.yidu.novel.action.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -9,6 +10,7 @@ import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -101,7 +103,20 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         TChapter chapter = chapterService.getByNo(chapterno);
         articleno = chapter.getArticleno();
         chapter.setDeleteflag(true);
+        chapter.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        chapter.setModifytime(new Date());
         chapterService.save(chapter);
+        // 更新最新章节信息
+        TArticle article = articleService.getByNo(articleno);
+        article.setSize(chapterService.getArticleSize(articleno));
+        TChapter lastChapter = chapterService.getLastChapter(articleno);
+        if (lastChapter != null) {
+            article.setLastchapterno(lastChapter.getChapterno());
+            article.setLastchapter(lastChapter.getChaptername());
+            article.setLastupdate(lastChapter.getPostdate());
+        }
+        article.setSize(chapterService.getArticleSize(articleno));
+        articleService.save(article);
         loadData();
         return INPUT;
 

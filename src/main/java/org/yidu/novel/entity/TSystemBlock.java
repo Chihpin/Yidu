@@ -1,5 +1,7 @@
 package org.yidu.novel.entity;
 
+import java.util.Date;
+
 // Generated 2013/12/26 20:57:47 by Hibernate Tools 3.4.0.CR1
 
 /**
@@ -18,26 +20,14 @@ public class TSystemBlock implements java.io.Serializable {
     private String content;
     private Short target;
     private Boolean deleteflag;
+    private Integer modifyuserno;
+    private Date modifytime;
 
     public TSystemBlock() {
     }
 
     public TSystemBlock(int blockno) {
         this.blockno = blockno;
-    }
-
-    public TSystemBlock(int blockno, String blockid, String blockname, Short type, String sortcol, Boolean isasc,
-            Integer limitnum, String content, Short target, Boolean deleteflag) {
-        this.blockno = blockno;
-        this.blockid = blockid;
-        this.blockname = blockname;
-        this.type = type;
-        this.sortcol = sortcol;
-        this.isasc = isasc;
-        this.limitnum = limitnum;
-        this.content = content;
-        this.target = target;
-        this.deleteflag = deleteflag;
     }
 
     public int getBlockno() {
@@ -118,6 +108,22 @@ public class TSystemBlock implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
 }

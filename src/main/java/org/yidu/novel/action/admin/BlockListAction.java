@@ -1,6 +1,7 @@
 package org.yidu.novel.action.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.entity.TSystemBlock;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -73,6 +75,8 @@ public class BlockListAction extends AbstractAdminListBaseAction {
 
         TSystemBlock systemBlock = systemBlockService.getByNo(blockno);
         systemBlock.setDeleteflag(true);
+        systemBlock.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        systemBlock.setModifytime(new Date());
         systemBlockService.save(systemBlock);
 
         loadData();

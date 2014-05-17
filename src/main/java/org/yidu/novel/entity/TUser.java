@@ -30,6 +30,9 @@ public class TUser implements java.io.Serializable {
     private String bankno;
     private String alipayacount;
 
+    private Integer modifyuserno;
+    private Date modifytime;
+
     public TUser() {
     }
 
@@ -37,30 +40,6 @@ public class TUser implements java.io.Serializable {
         this.userno = userno;
         this.loginid = loginid;
         this.username = username;
-    }
-
-    public TUser(int userno, String loginid, String password, String username, String email, Date regdate, Short sex,
-            String qq, Date lastlogin, String lineno, Short type, Integer votecount, Boolean deleteflag,
-            String realname, String id, String mobileno, String branch, String bankno, String alipayacount) {
-        this.userno = userno;
-        this.loginid = loginid;
-        this.password = password;
-        this.username = username;
-        this.email = email;
-        this.regdate = regdate;
-        this.sex = sex;
-        this.qq = qq;
-        this.lastlogin = lastlogin;
-        this.lineno = lineno;
-        this.type = type;
-        this.votecount = votecount;
-        this.deleteflag = deleteflag;
-        this.realname = realname;
-        this.id = id;
-        this.mobileno = mobileno;
-        this.branch = branch;
-        this.bankno = bankno;
-        this.alipayacount = alipayacount;
     }
 
     public int getUserno() {
@@ -213,6 +192,22 @@ public class TUser implements java.io.Serializable {
 
     public void setAlipayacount(String alipayacount) {
         this.alipayacount = alipayacount;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
 }

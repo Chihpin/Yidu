@@ -32,6 +32,7 @@ public class ErrorInterceptor extends AbstractInterceptor {
             String rtn = invocation.invoke();
             return rtn;
         } catch (Throwable th) {
+            
             AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
             logger.error(action, th);
             String errorMsg = action.getText(UNKNOWN_ERROR_KEY);

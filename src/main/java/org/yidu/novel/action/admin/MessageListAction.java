@@ -1,6 +1,7 @@
 package org.yidu.novel.action.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.MessageSearchBean;
 import org.yidu.novel.entity.TMessage;
+import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
@@ -74,6 +76,9 @@ public class MessageListAction extends AbstractAdminListBaseAction {
         TMessage message = messageService.getByNo(messageno);
 
         message.setDeleteflag(true);
+
+        message.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        message.setModifytime(new Date());
         messageService.save(message);
 
         loadData();

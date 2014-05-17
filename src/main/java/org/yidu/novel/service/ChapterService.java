@@ -16,6 +16,10 @@ public interface ChapterService {
 
     public Integer getCount(final ChapterSearchBean searchBean);
 
+    public TChapter getLastChapter(final int articleno);
+
+    public Integer getArticleSize(final int articleno);
+
     public TChapter getNextChapter(final int articleno, final int chapterno, final boolean isNext);
 
     public TChapter getByNo(final int chapterno);

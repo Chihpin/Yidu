@@ -151,14 +151,15 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         initCollections(new String[] { "collectionProperties.chapter.isvip" });
 
         TChapter chapter = new TChapter();
+        TArticle article = articleService.getByNo(articleno);
         if (chapterno != 0) {
             // 获取章节信息
             chapter = chapterService.getByNo(chapterno);
         } else {
             // 获取小说信息
-            TArticle article = articleService.getByNo(articleno);
             chapter.setArticleno(articleno);
             chapter.setArticlename(article.getArticlename());
+            chapter.setChaptertype((short) 0);
             chapter.setDeleteflag(false);
             chapter.setPostdate(new Date());
         }
@@ -167,13 +168,24 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         chapter.setPostdate(new Date());
         chapterService.save(chapter);
 
-        // TODO 更新小说字数，最新章节等信息
         try {
             Utils.saveContext(articleno, chapter.getChapterno(), content);
         } catch (Exception e) {
             addActionError(e.getMessage());
             return INPUT;
         }
+        // 最新章节等信息
+        if (chapterno == 0) {
+            // 更新
+            article.setLastchapterno(chapter.getChapterno());
+            article.setLastchapter(chapter.getChaptername());
+            article.setLastupdate(new Date());
+        }
+        // 更新小说字数
+        article.setSize(this.chapterService.getArticleSize(articleno));
+
+        this.articleService.save(article);
+
         logger.debug("save normally end.");
         return REDIRECT;
     }

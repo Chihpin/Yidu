@@ -23,27 +23,14 @@ public class TBookcase implements java.io.Serializable {
     private Date lastvisit;
     private Date createtime;
     private Boolean deleteflag;
+    private Integer modifyuserno;
+    private Date modifytime;
 
     public TBookcase() {
     }
 
     public TBookcase(int bookcaseno) {
         this.bookcaseno = bookcaseno;
-    }
-
-    public TBookcase(int bookcaseno, Integer articleno, String articlename, Integer category, Integer userno,
-            String username, Integer chapterno, String chaptername, Date lastvisit, Date createtime,Boolean deleteflag) {
-        this.bookcaseno = bookcaseno;
-        this.articleno = articleno;
-        this.articlename = articlename;
-        this.category = category;
-        this.userno = userno;
-        this.username = username;
-        this.chapterno = chapterno;
-        this.chaptername = chaptername;
-        this.lastvisit = lastvisit;
-        this.createtime = createtime;
-        this.deleteflag = deleteflag;
     }
 
     public int getBookcaseno() {
@@ -132,6 +119,22 @@ public class TBookcase implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
     public Integer getSubdir() {

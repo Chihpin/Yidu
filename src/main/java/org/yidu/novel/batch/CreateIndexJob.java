@@ -36,6 +36,32 @@ public class CreateIndexJob extends QuartzJobBean {
         logger.debug("CreateIndexJob start.");
         boolean createindexFlag = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_INDEXPAGE, false);
         if (createindexFlag) {
+            // try {
+            //
+            // Map<String, Object> root = new HashMap<String, Object>();
+            //
+            // //root.put("encodeURL", new );
+            //
+            //
+            // String currentPath =
+            // CreateSiteMapJob.class.getClassLoader().getResource("").getPath();
+            // // 减16的字符是WEB-INF/classes/
+            // String webRootPath = currentPath.substring(0,
+            // currentPath.length() - 16);
+            // FreeMarkertUtil.initConfig(webRootPath + "themes/"
+            // + YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME));
+            // Writer out = new OutputStreamWriter(new
+            // FileOutputStream(webRootPath + "index.html"), "UTF-8");
+            //
+            // // 生成html文件
+            // FreeMarkertUtil.processTemplate("index.ftl", root, out);
+            // logger.debug("CreateIndexJob normally end.");
+            // } catch (Exception e) {
+            // logger.error(e);
+            // logger.debug("CreateIndexJob abnormally end.");
+            // }
+
+            // 通过HTTP CLient去获取主页内容，然后保存到html文件中
             String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
             String responseBody = Utils.getContentFromUri(uri + IndexAction.URL);
             try {

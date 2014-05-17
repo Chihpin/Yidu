@@ -1,5 +1,7 @@
 package org.yidu.novel.entity;
 
+import java.util.Date;
+
 // Generated 2013/12/26 20:57:47 by Hibernate Tools 3.4.0.CR1
 
 /**
@@ -16,24 +18,14 @@ public class TSystemConfig implements java.io.Serializable {
     private String options;
     private String catname;
     private Boolean deleteflag;
+    private Integer modifyuserno;
+    private Date modifytime;
 
     public TSystemConfig() {
     }
 
     public TSystemConfig(int configno) {
         this.configno = configno;
-    }
-
-    public TSystemConfig(int configno, String name, String title, String description, Short type, String options,
-            String catname, Boolean deleteflag) {
-        this.configno = configno;
-        this.name = name;
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.options = options;
-        this.catname = catname;
-        this.deleteflag = deleteflag;
     }
 
     public int getConfigno() {
@@ -98,6 +90,22 @@ public class TSystemConfig implements java.io.Serializable {
 
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    public Integer getModifyuserno() {
+        return modifyuserno;
+    }
+
+    public void setModifyuserno(Integer modifyuserno) {
+        this.modifyuserno = modifyuserno;
+    }
+
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
     }
 
 }

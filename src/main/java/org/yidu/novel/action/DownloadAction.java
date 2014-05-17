@@ -128,11 +128,6 @@ public class DownloadAction extends AbstractPublicBaseAction {
                     + (articleno / YiDuConstants.SUB_DIR_ARTICLES) + "/" + articleno);
             if (dir.isDirectory()) {
                 File[] files = dir.listFiles();
-                // 对比章节数
-                // if (chapterList.size() != files.length) {
-                // addActionError("章节信息有错误！");
-                // return Action.ERROR;
-                // }
 
                 // 做成文件Map
                 Map<String, File> fileMap = new HashMap<String, File>();

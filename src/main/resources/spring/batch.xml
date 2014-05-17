@@ -22,6 +22,24 @@
 		<property name="jobDetail" ref="cleanStatisticsDataJob" />
 		<property name="cronExpression" value="0 1 0 * * ?" />
 	</bean>
+	
+	
+	<bean id="cleanDeleteDataJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="org.yidu.novel.batch.CleanDeleteDataJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="cleanDeleteDataService">
+                    <ref bean="cleanDeleteDataService" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="cleanDeleteDataTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="cleanDeleteDataJob" />
+        <property name="cronExpression" value="0 5 0 * * ?" />
+    </bean>
 
 	<bean id="createIndexJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="org.yidu.novel.batch.CreateIndexJob" />
@@ -48,6 +66,7 @@
 		<property name="triggers">
 			<list>
 				<ref bean="cleanStatisticsDataTimerTrigger" />
+				<ref bean="cleanDeleteDataTimerTrigger" />
 				<ref bean="createIndexTimerTrigger" />
 				<ref bean="createSiteMapTimerTrigger" />
 			</list>

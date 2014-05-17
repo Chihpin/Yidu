@@ -203,6 +203,7 @@ public class ChapterEditAction extends AbstractUserBaseAction {
             // 获取小说信息
             chapter.setArticleno(articleno);
             chapter.setArticlename(article.getArticlename());
+            chapter.setChaptertype((short) 0);
             chapter.setDeleteflag(false);
             chapter.setPostdate(new Date());
         }
