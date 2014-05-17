@@ -309,6 +309,9 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         BeanUtils.copyProperties(this, article, new String[] { "articleno", "dayvisit", "weekvisit", "monthvisit",
                 "allvisit", "dayvote", "weekvote", "monthvote", "allvote" });
 
+        article.setModifytime(new Date());
+        article.setModifyuserno(LoginManager.getLoginUser().getUserno());
+
         articleService.save(article);
 
         // 保存图片文件

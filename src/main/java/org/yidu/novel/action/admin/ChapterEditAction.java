@@ -10,6 +10,7 @@ import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -166,6 +167,8 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename" });
         chapter.setSize(StringUtils.length(content));
         chapter.setPostdate(new Date());
+        chapter.setModifytime(new Date());
+        chapter.setModifyuserno(LoginManager.getLoginUser().getUserno());
         chapterService.save(chapter);
 
         try {
@@ -183,6 +186,9 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         }
         // 更新小说字数
         article.setSize(this.chapterService.getArticleSize(articleno));
+
+        article.setModifytime(new Date());
+        article.setModifyuserno(LoginManager.getLoginUser().getUserno());
 
         this.articleService.save(article);
 

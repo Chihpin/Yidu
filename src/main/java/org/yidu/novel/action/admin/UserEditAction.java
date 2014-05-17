@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.entity.TUser;
+import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -222,7 +223,8 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
         if (StringUtils.isNotEmpty(password)) {
             user.setPassword(Utils.convert2MD5(password));
         }
-
+        user.setModifytime(new Date());
+        user.setModifyuserno(LoginManager.getLoginUser().getUserno());
         userService.save(user);
         logger.debug("save normally end.");
         return REDIRECT;

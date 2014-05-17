@@ -1,11 +1,14 @@
 package org.yidu.novel.action.admin;
 
+import java.util.Date;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.entity.TSystemBlock;
+import org.yidu.novel.utils.LoginManager;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -151,6 +154,8 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
             systemBlock = systemBlockService.getByNo(blockno);
         }
         BeanUtils.copyProperties(this, systemBlock);
+        systemBlock.setModifytime(new Date());
+        systemBlock.setModifyuserno(LoginManager.getLoginUser().getUserno());
         systemBlockService.save(systemBlock);
         logger.debug("save normally end.");
         return REDIRECT;

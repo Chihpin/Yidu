@@ -13,6 +13,7 @@ import org.yidu.novel.action.base.AbstractUserBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -216,6 +217,9 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         BeanUtils.copyProperties(this, chapter, new String[] { "articleno", "articlename", "postdate" });
         chapter.setSize(StringUtils.length(content));
 
+        chapter.setModifytime(new Date());
+        chapter.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        
         chapterService.save(chapter);
 
         // TODO 更新小说字数，最新章节等信息

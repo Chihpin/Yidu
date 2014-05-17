@@ -1,6 +1,7 @@
 package org.yidu.novel.action.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -277,6 +278,9 @@ public class UserEditAction extends AbstractUserBaseAction {
         if (StringUtils.isNotEmpty(password)) {
             user.setPassword(Utils.convert2MD5(password));
         }
+        user.setModifytime(new Date());
+        user.setModifyuserno(LoginManager.getLoginUser().getUserno());
+        
         userService.save(user);
         addActionMessage(getText("messages.save.success"));
         loadData();

@@ -14,6 +14,7 @@ import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -299,6 +300,8 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         }
 
         BeanUtils.copyProperties(this, article);
+        article.setModifytime(new Date());
+        article.setModifyuserno(LoginManager.getLoginUser().getUserno());
 
         articleService.save(article);
 
