@@ -152,6 +152,8 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         TSystemBlock systemBlock = new TSystemBlock();
         if (blockno != 0) {
             systemBlock = systemBlockService.getByNo(blockno);
+        }else{
+            systemBlock.setDeleteflag(false);
         }
         BeanUtils.copyProperties(this, systemBlock);
         systemBlock.setModifytime(new Date());

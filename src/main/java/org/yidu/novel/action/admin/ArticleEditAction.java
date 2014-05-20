@@ -297,6 +297,8 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         TArticle article = new TArticle();
         if (articleno != 0) {
             article = articleService.getByNo(articleno);
+        }else{
+            article.setDeleteflag(false);
         }
 
         BeanUtils.copyProperties(this, article);
