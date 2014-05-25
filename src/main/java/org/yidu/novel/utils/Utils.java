@@ -62,7 +62,7 @@ public class Utils {
      * @param chapterno
      * @return 章节内容
      */
-    public static String getContext(int articleno, int chapterno, boolean escape) {
+    public static String getContext(TChapter chapter, boolean escape) {
         StringBuilder sb = new StringBuilder();
         String path = getTextFilePathByChapterno(articleno, chapterno);
 

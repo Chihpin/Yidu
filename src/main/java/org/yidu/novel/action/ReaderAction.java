@@ -95,7 +95,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
         }
         chapter = chapterDto;
         if (chapter != null && chapter.getChapterno() != 0) {
-            chapter.setContent(Utils.getContext(chapter.getArticleno(), chapterno, true));
+            chapter.setContent(Utils.getContext(chapter, true));
         }
         // 更新统计信息
         if (articleno != 0) {

@@ -177,7 +177,7 @@ public class ChapterEditAction extends AbstractUserBaseAction {
                 }
 
                 BeanUtils.copyProperties(chapter, this);
-                content = Utils.getContext(articleno, chapterno, false);
+                content = Utils.getContext(chapter, false);
             } else {
                 addActionError(getText("errors.not.exsits.chapter"));
             }

@@ -137,7 +137,7 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
         if (chapterno != 0) {
             TChapter chapter = chapterService.getByNo(chapterno);
             BeanUtils.copyProperties(chapter, this);
-            content = Utils.getContext(articleno, chapterno, false);
+            content = Utils.getContext(chapter, false);
         } else {
             // 追加的话取小说信息
             TArticle article = articleService.getByNo(articleno);
