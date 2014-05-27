@@ -24,6 +24,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.entity.TChapter;
 
 public class Utils {
 
@@ -64,7 +65,7 @@ public class Utils {
      */
     public static String getContext(TChapter chapter, boolean escape) {
         StringBuilder sb = new StringBuilder();
-        String path = getTextFilePathByChapterno(articleno, chapterno);
+        String path = getTextFilePathByChapterno(chapter.getArticleno(), chapter.getChapterno());
 
         File file = new File(path);
         try {
@@ -90,7 +91,8 @@ public class Utils {
                     return sb.toString();
                 }
             } else {
-                logger.info("can not find chapter. articleno:" + articleno + " chapterno:" + chapterno);
+                logger.info("can not find chapter. articleno:" + chapter.getArticleno() + " chapterno:"
+                        + chapter.getChapterno());
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -249,29 +251,6 @@ public class Utils {
         return flag;
     }
 
-    /**
-     * 根据路径删除指定的目录或文件，无论存在与否
-     * 
-     * @param sPath
-     *            要删除的目录或文件
-     * @return 删除成功返回 true，否则返回 false。
-     */
-    public static boolean DeleteFolder(String sPath) {
-        boolean flag = false;
-        File file = new File(sPath);
-        // 判断目录或文件是否存在
-        if (!file.exists()) { // 不存在返回 false
-            return flag;
-        } else {
-            // 判断是否为文件
-            if (file.isFile()) { // 为文件时调用删除文件方法
-                return deleteFile(sPath);
-            } else { // 为目录时调用删除目录方法
-                return deleteDirectory(sPath);
-            }
-        }
-    }
-
     public static void saveArticlespic(int articleno, File file, String fileName) throws Exception {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
@@ -283,4 +262,12 @@ public class Utils {
         }
         FileUtils.copyFile(file, savefile);
     }
+
+    public static String getArticlePicPath(int articleno) {
+        String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
+        path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
+                / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/";
+        return path;
+    }
+
 }
