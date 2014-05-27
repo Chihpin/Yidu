@@ -171,6 +171,7 @@ CREATE TABLE t_article
     size int DEFAULT 0,
     fullflag boolean,
     imgflag smallint,
+    agent varchar(50),
     firstflag boolean DEFAULT 'false',
     permission int,
     authorflag boolean DEFAULT 'false',
