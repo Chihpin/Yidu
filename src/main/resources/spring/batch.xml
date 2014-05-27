@@ -38,7 +38,7 @@
 
     <bean id="cleanDeleteDataTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="cleanDeleteDataJob" />
-        <property name="cronExpression" value="0 5 0 * * ?" />
+        <property name="cronExpression" value="15 */2 * * * ?" />
     </bean>
 
 	<bean id="createIndexJob" class="org.springframework.scheduling.quartz.JobDetailBean">
