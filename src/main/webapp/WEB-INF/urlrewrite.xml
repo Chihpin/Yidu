@@ -210,14 +210,14 @@
 		<from>^/user/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/user/vote/$1.html</to>
 	</outbound-rule>
- <!-- 
+  <!-- 
      <rule>
 	     <name>Domain Name Check</name> 
-	     <condition name="host" operator="notequal">www.yzihan.com</condition> 
+	     <condition name="host" operator="notequal">www.51yd.org</condition> 
+	     <condition name="host" operator="notequal">m.51yd.org</condition>
 	     <from>^/(.*)</from>
-	     <to type="redirect">http://www.yzihan.com/$1</to>
+	     <to type="redirect">http://www.51yd.org/$1</to>
      </rule> 
- 
 
     EXAMPLES Redirect one url
     <rule>

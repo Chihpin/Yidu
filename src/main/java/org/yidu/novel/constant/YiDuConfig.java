@@ -20,6 +20,8 @@ public class YiDuConfig {
     public final static String THEME_NAME = "themeName";
     public final static String TXT_ENCODING = "txtEncoding";
     public final static String KEEP_DELETE_DATA_DAYS =  "keepDeleteDataDays";
+    public final static String JUDG_MOBILESITE_BY_DOMIAN = "judgmobilesitebydomian";
+    public final static String MOBILESITE_DOMIAN = "mobilesitedomian";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

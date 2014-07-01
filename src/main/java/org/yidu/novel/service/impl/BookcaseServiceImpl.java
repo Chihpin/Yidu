@@ -62,15 +62,21 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     }
 
     @Override
-    public List<BookcaseDTO> findBySql(BookcaseSearchBean searchBean) {
+    public List<BookcaseDTO> findWithArticleInfo(BookcaseSearchBean searchBean) {
         // 初期SQL做成
         StringBuffer sql = new StringBuffer();
-        sql.append("Select tb.*,ta.lastchapterno,ta.lastchapter,ta.chapters,ta.size,ta.fullflag,ta.lastupdate   "
+        sql.append("Select tb.*,ta.lastchapterno,ta.lastchapter,ta.chapters,ta.size,ta.fullflag,ta.lastupdate "
+                + " ,ta.imgflag "
                 + "      FROM t_bookcase tb                                                                     "
                 + "      LEFT JOIN t_article ta ON tb.articleno = ta.articleno                                  "
                 + "WHERE tb.userno= ");
         sql.append(searchBean.getUserno());
-        sql.append("ORDER BY ta.lastupdate DESC");
+        // 添加排序信息
+        if (searchBean.getPagination() != null) {
+            sql.append(searchBean.getPagination().getSortInfo());
+        } else {
+            sql.append("ORDER BY ta.lastupdate DESC");
+        }
         return yiduJdbcTemplate.query(sql.toString(), new BeanPropertyRowMapper<BookcaseDTO>(BookcaseDTO.class));
     }
 
@@ -84,6 +90,29 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public void batchdeleteByNo(String bookcasenos, int userno) {
+        // 初期SQL做成
+        StringBuffer sql = new StringBuffer();
+        sql.append("delete from  t_bookcase   " + "WHERE userno= ");
+        sql.append(userno);
+        sql.append("  AND bookcaseno in (");
+        sql.append(bookcasenos);
+        sql.append("  )");
+        yiduJdbcTemplate.execute(sql.toString());
+    }
+
+    @Override
+    public void deleteByArticleno(int articleno, int userno) {
+        // 初期SQL做成
+        StringBuffer sql = new StringBuffer();
+        sql.append("delete from  t_bookcase   " + "WHERE userno= ");
+        sql.append(userno);
+        sql.append("  AND articleno =  ");
+        sql.append(articleno);
+        yiduJdbcTemplate.execute(sql.toString());
     }
 
 }

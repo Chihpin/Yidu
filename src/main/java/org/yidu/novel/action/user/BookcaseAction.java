@@ -98,7 +98,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
     protected void loadData() {
         BookcaseSearchBean searchBean = new BookcaseSearchBean();
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
-        bookcaseList = this.bookcaseService.findBySql(searchBean);
+        bookcaseList = this.bookcaseService.findWithArticleInfo(searchBean);
     }
 
     @Transactional

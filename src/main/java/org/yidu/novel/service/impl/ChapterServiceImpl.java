@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.ChapterService;
+import org.yidu.novel.utils.Pagination;
 
 public class ChapterServiceImpl extends HibernateSupportServiceImpl implements ChapterService {
 
@@ -24,9 +25,16 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         if (StringUtils.isNotEmpty(searchBean.getChapternos())) {
             hql.append(" AND chapterno in ( " + searchBean.getChapternos() + ") ");
         }
-        hql.append("ORDER BY chapterno ASC ");
-        List<TChapter> chapterList = this.find(hql.toString(), params);
-        return chapterList;
+
+        Pagination pagination = searchBean.getPagination();
+        // 添加排序信息
+        if (pagination != null) {
+            hql.append(pagination.getSortInfo());
+            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getPageSize(), params);
+        } else {
+            hql.append("ORDER BY chapterno ASC ");
+            return this.find(hql.toString(), params);
+        }
     }
 
     @Override

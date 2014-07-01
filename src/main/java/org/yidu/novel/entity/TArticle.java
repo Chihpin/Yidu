@@ -2,6 +2,7 @@ package org.yidu.novel.entity;
 
 // Generated 2013/12/26 20:57:47 by Hibernate Tools 3.4.0.CR1
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -348,6 +349,17 @@ public class TArticle implements java.io.Serializable {
             return getLastchapter().substring(0, 10);
         }
         return getLastchapter();
+    }
+
+    public String getLastupdateMin() {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+        return sdf1.format(this.lastupdate);
+    }
+
+    public String getCategoryStr() {
+        String[] categoryArr = new String[] { "玄幻魔法", "武侠修真", "都市言情", "历史军事", "侦探推理", "网游动漫", "科幻小说", "恐怖灵异", "散文诗词",
+                "其他类型" };
+        return categoryArr[category - 1];
     }
 
     public String getImgUrl() {

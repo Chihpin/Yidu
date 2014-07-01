@@ -10,7 +10,7 @@ public interface BookcaseService {
 
     public List<TBookcase> find(final BookcaseSearchBean searchBean);
 
-    public List<BookcaseDTO> findBySql(final BookcaseSearchBean searchBean);
+    public List<BookcaseDTO> findWithArticleInfo(final BookcaseSearchBean searchBean);
 
     public Integer getCount(final BookcaseSearchBean searchBean);
 
@@ -18,8 +18,12 @@ public interface BookcaseService {
 
     public void delteByNo(final int bookcaseno);
 
+    public void batchdeleteByNo(final String bookcasenos, final int userno);
+
     public void save(final TBookcase bookcase);
 
     public TBookcase getByArticleno(final int userno, final int articleno);
+
+    public void deleteByArticleno(int articleno, int userno);
 
 }

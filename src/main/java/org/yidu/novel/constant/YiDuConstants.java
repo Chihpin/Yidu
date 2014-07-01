@@ -108,8 +108,16 @@ public class YiDuConstants {
         public final static int PAGE_READER = 4;
         // * 5：搜索页
         public final static int PAGE_SEARCH = 5;
+
+        // * 手机分类
+        public final static int PAGE_CATEGORY = 6;
+        // * 手机排行
+        public final static int PAGE_TOP = 7;
+
         // * 11：登录页
         public final static int PAGE_LOGIN = 11;
+        // * 11：注册页
+        public final static int PAGE_REGEDIT = 12;
         // 书架
         public final static int PAGE_USER_BOOKCASE = 21;
         // 消息管理
@@ -118,6 +126,10 @@ public class YiDuConstants {
         public final static int PAGE_USER_USEREDIT = 23;
         // 申请作者
         public final static int PAGE_REGI_AUTHOR = 24;
+        // 用户中心
+        public final static int PAGE_USER_CENTER = 25;
+        // 手机书架
+        public final static int PAGE_BOOKCASE = 26;
         // 小说列表
         public final static int PAGE_AUTHER_ARTICLE_LIST = 30;
         // 小说编辑

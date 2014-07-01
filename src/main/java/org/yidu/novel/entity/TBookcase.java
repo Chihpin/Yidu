@@ -140,5 +140,4 @@ public class TBookcase implements java.io.Serializable {
     public Integer getSubdir() {
         return this.articleno / YiDuConstants.SUB_DIR_ARTICLES;
     }
-
 }

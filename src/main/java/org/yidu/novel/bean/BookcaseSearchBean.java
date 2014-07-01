@@ -2,7 +2,7 @@ package org.yidu.novel.bean;
 
 import java.util.Date;
 
-public class BookcaseSearchBean {
+public class BookcaseSearchBean extends BaseSearchBean{
 
     private int caseno;
     private Integer articleno;

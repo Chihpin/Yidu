@@ -27,7 +27,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         // 添加排序信息
         if (pagination != null) {
             hql.append(pagination.getSortInfo());
-            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getEnd(), params);
+            return this.findByRange(hql.toString(), pagination.getStart(), pagination.getPageSize(), params);
         } else {
             hql.append("ORDER BY articleno");
             return this.find(hql.toString(), params);

@@ -144,7 +144,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
 
     @Override
     public int getPageType() {
-        return YiDuConstants.Pagetype.PAGE_LOGIN;
+        return YiDuConstants.Pagetype.PAGE_REGEDIT;
     }
 
     @Override
