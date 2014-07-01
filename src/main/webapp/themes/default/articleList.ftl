@@ -27,8 +27,8 @@
         <#list articleList as article>
         <li>
            <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  title="${article.articlename}" class="l mr10">
-                <img src="${article.imgUrl}" style="width: 120px; height: 150px"/></a>
-           <#if article.fullflag ><img src="${contextPath}/themes/${themeName}/images/only.png" class="topss png_bg"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="topss png_bg"></#if>
+                <img src="${article.imgUrl}" style="width: 120px; height: 150px" alt="${article.articlename}"/></a>
+           <#if article.fullflag ><img src="${contextPath}/themes/${themeName}/images/only.png" class="topss png_bg" alt="完本图标"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="topss png_bg" alt="连载中图标"></#if>
            <span class="l">
               <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  title="${article.articlename}" class="clearfix stitle">${article.articlename}</a>
               作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>

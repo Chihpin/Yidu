@@ -17,9 +17,9 @@
     </div>
     <section class="main b-detail">
         <div class="detail">
-            <#if article.fullflag><img src="${contextPath}/themes/${themeName}/images/only.png" class="leftso png_bg"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="leftso png_bg"></#if>
+            <#if article.fullflag><img src="${contextPath}/themes/${themeName}/images/only.png" class="leftso png_bg" alt="完本图标"><#else><img src="${contextPath}/themes/${themeName}/images/only2.png" class="leftso png_bg"  alt="连载中图标"></#if>
             <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  class="l mr11">
-                 <img src="<#if article.imgUrl ?? >${article.imgUrl}</#if>" style="width: 120px; height: 150px"/></a>
+                 <img src="<#if article.imgUrl ?? >${article.imgUrl}</#if>" style="width: 120px; height: 150px" alt="${article.articlename}"/></a>
         <div class="b-info">
           <h1>${article.articlename}</h1>
           <div class="infoDetail">
@@ -39,29 +39,29 @@
         <div class="scores">
             <h2>评分</h2>
             <p id="fenshuview">10.0<br>
-                <img src="${contextPath}/themes/${themeName}/images/s2.png">
-                <img src="${contextPath}/themes/${themeName}/images/s2.png">
-                <img src="${contextPath}/themes/${themeName}/images/s2.png">
-                <img src="${contextPath}/themes/${themeName}/images/s2.png">
-                <img src="${contextPath}/themes/${themeName}/images/s2.png">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png" alt="评分图标">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png" alt="评分图标">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png" alt="评分图标">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png" alt="评分图标">
+                <img src="${contextPath}/themes/${themeName}/images/s2.png" alt="评分图标">
             </p>
             <div class="sets">
                <div class="scoreSet">
                    <span>
-                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
-                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
-                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
-                        <img src="${contextPath}/themes/${themeName}/images/s1.png">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标">
+                        <img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标">
                    </span>
                     <input type="hidden" value="8" id="fenshu" />
                     <input type="hidden" value="7940" id="articleid" />
                     <ul id="xingxing">
-                        <li value="10"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"><img src="/images/s1.png"></li>
-                        <li value="2"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
-                        <li value="4"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
-                        <li value="6"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
-                        <li value="8"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
-                        <li value="10"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"><img src="${contextPath}/themes/${themeName}/images/s1.png"></li>
+                        <li value="10"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"></li>
+                        <li value="2"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"></li>
+                        <li value="4"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"></li>
+                        <li value="6"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"></li>
+                        <li value="8"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"></li>
+                        <li value="10"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/images/s1.png" alt="评分图标"></li>
                     </ul>
                 </div>
                 <input type="button" id="submitfenshu" value="确定"/>
