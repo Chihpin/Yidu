@@ -1,7 +1,7 @@
 # DEFAULT CACHE REGION
 jcs.default=DC
 jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
-jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MaxObjects=100
 jcs.default.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
 jcs.default.cacheattributes.UseMemoryShrinker=true
 jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds=600
@@ -18,8 +18,8 @@ jcs.default.elementattributes.IsLateral=true
 jcs.auxiliary.DC=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
 jcs.auxiliary.DC.attributes=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
 jcs.auxiliary.DC.attributes.DiskPath=${user.dir}/jcs_swap
-jcs.auxiliary.DC.attributes.MaxPurgatorySize=10000
-jcs.auxiliary.DC.attributes.MaxKeySize=10000
-jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount=300000
+jcs.auxiliary.DC.attributes.MaxPurgatorySize=5000
+jcs.auxiliary.DC.attributes.MaxKeySize=5000
+jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount=150000
 jcs.auxiliary.DC.attributes.OptimizeOnShutdown=true
-jcs.auxiliary.DC.attributes.MaxRecycleBinSize=7500
+jcs.auxiliary.DC.attributes.MaxRecycleBinSize=3500
