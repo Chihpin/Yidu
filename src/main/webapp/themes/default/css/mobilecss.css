@@ -105,7 +105,7 @@ select {
 }
 
 .ldg {
-	background: #FFF url(images/newload.gif) 10px center no-repeat;
+	background: #FFF url(../images/newload.gif) 10px center no-repeat;
 	background-size: 32px auto;
 }
 
@@ -1127,7 +1127,7 @@ select {
 	height: 60px;
 	padding: 5px;
 	margin: 0 auto;
-	background: rgba(255, 255, 255, 0.3) url(images/newload.gif) center
+	background: rgba(255, 255, 255, 0.3) url(../images/newload.gif) center
 		no-repeat;
 	background-size: 60px auto;
 	border-radius: 5px;
@@ -1898,7 +1898,7 @@ select {
 	height: 19px;
 	vertical-align: text-bottom;
 	margin: 0 2px;
-	background: url(images/ping.gif) no-repeat;
+	background: url(../images/ping.gif) no-repeat;
 	background-size: 19px auto;
 }
 
@@ -1908,7 +1908,7 @@ select {
 	height: 22px;
 	vertical-align: text-bottom;
 	margin: 0 2px;
-	background: url(images/yue.gif) no-repeat;
+	background: url(../images/yue.gif) no-repeat;
 	background-size: 22px auto;
 }
 
@@ -1918,6 +1918,6 @@ select {
 	height: 20px;
 	vertical-align: text-bottom;
 	margin: 0 2px;
-	background: url(images/zheng.gif) no-repeat;
+	background: url(../images/zheng.gif) no-repeat;
 	background-size: 20px auto;
 }
