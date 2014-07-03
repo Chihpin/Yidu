@@ -39,6 +39,7 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     public static final String NAMESPACE = "";
 
     protected static final String CACHE_KEY_INDEX_BLOCK = "CacheKey_indexBlock";
+    protected static final String CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_LIST_COUNT";
     protected static final String CACHE_KEY_ARTICEL_LIST_PREFIX = "CacheKey_ARTICLE_LIST";
     protected static final String CACHE_KEY_ARTICEL_PREFIX = "CacheKey_ARTICLE";
     protected static final String CACHE_KEY_CHAPTER_LIST_PREFIX = "CacheKey_CHAPTER_LIST";

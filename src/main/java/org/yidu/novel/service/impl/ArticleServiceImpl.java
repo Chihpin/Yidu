@@ -110,8 +110,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     public Integer getCount(ArticleSearchBean searchBean) {
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
-        hql.append("SELECT count(*) FROM TArticle where deleteflag=false ");
-
+        hql.append("SELECT count(*) FROM TArticle where deleteflag = false ");
         buildCondtion(searchBean, hql, params);
         return this.getIntResult(hql.toString(), params);
     }

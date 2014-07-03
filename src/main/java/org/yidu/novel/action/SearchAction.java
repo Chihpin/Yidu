@@ -75,8 +75,16 @@ public class SearchAction extends AbstractPublicListBaseAction {
         pagination.setSortColumn("lastupdate");
         pagination.setSortOrder("ASC");
 
+        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+        int count;
+        if (countInfo == null) {
+            count = articleService.getCount(searchBean);
+            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        } else {
+            count = Integer.parseInt(countInfo.toString());
+        }
         // 总件数设置
-        pagination.setPreperties(articleService.getCount(searchBean));
+        pagination.setPreperties(count);
         searchBean.setPagination(pagination);
 
         articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());
