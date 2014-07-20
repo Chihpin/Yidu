@@ -475,7 +475,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         // 取章节信息
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
-        int count = articleService.getCount(searchBean);
+
+        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+        int count = 0;
+        if (countInfo == null) {
+            count = articleService.getCount(searchBean);
+            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        } else {
+            count = Integer.parseInt(countInfo.toString());
+        }
         dto.setTotal(count);
         int pages = count / size;
         if (count % size > 0) {
@@ -525,7 +533,14 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         // 取章节信息
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
-        int count = articleService.getCount(searchBean);
+        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+        int count = 0;
+        if (countInfo == null) {
+            count = articleService.getCount(searchBean);
+            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        } else {
+            count = Integer.parseInt(countInfo.toString());
+        }
         dto.setTotal(count);
         int pages = count / size;
         if (count % size > 0) {
@@ -538,11 +553,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         // 添加page信息
         Pagination pagination = new Pagination(size, index + 1);
         pagination.setSortColumn("lastupdate");
-        if (sort == 0) {
-            pagination.setSortOrder("DESC");
-        } else {
-            pagination.setSortOrder("ASC");
-        }
+        pagination.setSortOrder("DESC");
         searchBean.setPagination(pagination);
 
         List<TArticle> articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());

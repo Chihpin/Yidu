@@ -76,7 +76,7 @@ public class SearchAction extends AbstractPublicListBaseAction {
         pagination.setSortOrder("ASC");
 
         Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
-        int count;
+        int count = 0;
         if (countInfo == null) {
             count = articleService.getCount(searchBean);
             CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
