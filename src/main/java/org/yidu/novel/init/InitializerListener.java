@@ -33,6 +33,11 @@ public class InitializerListener implements ServletContextListener {
             FileChangedReloadingStrategy reloadStrategy = new FileChangedReloadingStrategy();
             yiduConf.setReloadingStrategy(reloadStrategy);
             YiDuConstants.yiduConf = yiduConf;
+            
+            //加载伪原创设置
+            YiDuConstants.pseudoConf = new PropertiesConfiguration("pseudo.properties");
+            YiDuConstants.pseudoConf.setReloadingStrategy(reloadStrategy);
+            
             // 初始化缓存
             CacheManager.initCacheManager();
             // 初始化选项列表

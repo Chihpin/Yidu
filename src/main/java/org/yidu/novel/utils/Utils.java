@@ -64,6 +64,21 @@ public class Utils {
      * @return 章节内容
      */
     public static String getContext(TChapter chapter, boolean escape) {
+        return getContext(chapter, escape, false);
+    }
+    
+    /**
+     * 取得章节信息
+     * 
+     * @param articleno
+     * @param chapterno
+     * @param pseudo 	是否进行伪原创
+     * @return 章节内容
+     */
+    public static String getContext(TChapter chapter, boolean escape, boolean pseudo) {
+    	
+    	String result = null;
+    	
         StringBuilder sb = new StringBuilder();
         String path = getTextFilePathByChapterno(chapter.getArticleno(), chapter.getChapterno());
 
@@ -85,10 +100,26 @@ public class Utils {
                 }
                 bufferedReader.close();
                 read.close();
+                
                 if (escape) {
-                    return sb.toString().replaceAll("\\s", "&nbsp;");
+                	result = sb.toString().replaceAll("\\s", "&nbsp;");
                 } else {
-                    return sb.toString();
+                	result = sb.toString();
+                }
+                //根据配置决定是否采用伪原创
+                if(pseudo) {
+                	if(YiDuConstants.pseudoConf.getBoolean("replace_keywords")) {
+                    	result = PseudoUtils.replaceKeywords(result);
+                    }
+    				if(YiDuConstants.pseudoConf.getBoolean("is_top_append")) {
+    					result = PseudoUtils.topAppend(result);
+    				}
+    				if(YiDuConstants.pseudoConf.getBoolean("is_bottom_append")) {
+    					result = PseudoUtils.bottomAppend(chapter, result);
+    				}
+    				if(YiDuConstants.pseudoConf.getBoolean("fetch_keywords_from_chapter")) {
+    					result = PseudoUtils.fetchKeywords(result);
+    				}
                 }
             } else {
                 logger.info("can not find chapter. articleno:" + chapter.getArticleno() + " chapterno:"
@@ -97,7 +128,7 @@ public class Utils {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        return null;
+        return result;
     }
 
     public static String getTextFilePathByChapterno(int articleno, int chapterno) {

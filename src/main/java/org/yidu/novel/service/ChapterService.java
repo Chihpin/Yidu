@@ -28,4 +28,14 @@ public interface ChapterService {
 
     public void delteByNo(final int chapterno);
 
+    /**
+     * 获取一个区间段内的章节, 用于全文阅读
+     * @param articleno
+     * @param chapterno
+     * @param toChapterno
+     * @return
+     */
+	public List<TChapter> getChapterInSegement(Integer articleno,
+			Integer chapterno, Integer toChapterno);
+
 }

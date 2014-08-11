@@ -7,7 +7,6 @@
 <title>易读小说管理后台</title>
 <meta name="keywords" content="易读小说系统管理后台" />
 <meta name="description" content="易读小说系统是开源的JAVA项目，可以帮你快速搭建自己的小说系统!" />
-<meta name="author" content="www.51yd.org"/> 
 <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/board.css">
 <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/common.css">
 <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/styles.css">

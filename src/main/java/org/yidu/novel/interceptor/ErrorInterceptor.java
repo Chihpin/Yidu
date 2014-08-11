@@ -1,5 +1,7 @@
 package org.yidu.novel.interceptor;
 
+import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.yidu.novel.action.base.AbstractAdminBaseAction;
@@ -32,11 +34,15 @@ public class ErrorInterceptor extends AbstractInterceptor {
             String rtn = invocation.invoke();
             return rtn;
         } catch (Throwable th) {
-            
-            AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
-            logger.error(action, th);
-            String errorMsg = action.getText(UNKNOWN_ERROR_KEY);
-            action.addActionError(errorMsg);
+        	AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
+        	if(th instanceof IOException) {
+        		logger.warn(th.getMessage());
+        		return null;
+        	} else {
+        		logger.error(action, th);
+                String errorMsg = action.getText(UNKNOWN_ERROR_KEY);
+                action.addActionError(errorMsg);
+        	}
         }
         if (invocation.getAction() instanceof AbstractAdminBaseAction) {
             return AbstractBaseAction.ADMIN_ERROR;

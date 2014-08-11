@@ -191,6 +191,12 @@
 	      <version>2.2.4</version>
 	      <scope>compile</scope>
 	    </dependency>
+	    
+	    <dependency>
+            <groupId>org.wltea.analyzer</groupId>
+            <artifactId>IKAnalyzer</artifactId>
+            <version>3.2.8</version>
+        </dependency>
 		
 	</dependencies>
 	<build>

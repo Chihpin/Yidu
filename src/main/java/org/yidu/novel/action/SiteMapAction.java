@@ -53,6 +53,7 @@ public class SiteMapAction extends AbstractPublicListBaseAction {
 
     @Override
     protected void loadData() {
-        articleList = articleService.find(new ArticleSearchBean());
+    	articleList = articleService.find(new ArticleSearchBean());
     }
+	
 }

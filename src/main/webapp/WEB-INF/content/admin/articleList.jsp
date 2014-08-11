@@ -36,16 +36,32 @@
             </td>
         </tr>
     </table>
+    <table align="center">
+    	<tr>
+    		<td style="width:180px;">
+	    	<s:select list="#{1:'删除'}" listKey="key" listValue="value" style="width:90%;"
+	    			headerKey="" headerValue="选择操作" id="operate"></s:select>
+	    	</td>
+	    	<td><input type="button" name="oper_apply" id="oper_apply" value="应用"/></td>
+	    	<td style="width:180px;"></td>
+	    	<td style="width:180px;"></td>
+	    	<td style="width:180px;"></td>
+	    	<td style="width:180px;"></td>
+    	</tr>
+    </table>
     <table class="yidu-table" align="center">
         <colgroup>
+        	<col width="30px">
             <col width="150px">
             <col width="100px">
-            <col width="150px">
+            <col width="120px">
             <col width="200px">
             <col width="120px">
             <col width="230px">
         </colgroup>
         <tr>
+        	<th><input type="checkbox" id="selectAll" /></th>
+        
             <th class="sortable <s:if test="pagination.sortColumn.equals('articlename')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'articlename');"><s:text name="label.admin.article.list.articlename" /></a></th>
 
@@ -69,10 +85,11 @@
         <s:else>
         <tr>
         </s:else>
-            <td><s:property  value="#article.articlename" /></td>
-            <td><s:property  value="collections['collectionProperties.article.category'][#article.category]" /></td>
-            <td><s:property  value="#article.author" /></td>
-            <td><s:property  value="#article.lastchapter" /></td>
+        	<td><s:checkbox name="article_articleno" fieldValue="%{#article.articleno }"/> </td>
+            <td><s:property value="#article.articlename" /></td>
+            <td><s:property value="collections['collectionProperties.article.category'][#article.category]" /></td>
+            <td><s:property value="#article.author" /></td>
+            <td><s:property value="#article.lastchapter" /></td>
             <td><s:date name="#article.lastupdate" format="yyyy/MM/dd HH:mm" /></td>
             <td>待审 推荐/不荐
                 <a href="<s:property value="contextPath" />/admin/articleEdit?articleno=<s:property value='#article.articleno' />"><s:text name="label.admin.list.modify" /></a>

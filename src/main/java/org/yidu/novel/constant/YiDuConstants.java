@@ -6,6 +6,8 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 public class YiDuConstants {
 
     public static PropertiesConfiguration yiduConf;
+    
+    public static PropertiesConfiguration pseudoConf;
 
     public static LinkedMap categoryMap;
 
@@ -205,5 +207,21 @@ public class YiDuConstants {
             ImgageMateType.GIF };
 
     public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
+    
+	public enum SiteMapType{
+    	HTML("html"), 
+    	XML("xml");
+    	
+    	private String name;
+    	
+    	private SiteMapType(String name) {
+    		this.name = name;
+    	}
+
+		public String getName() {
+			return name;
+		}
+    	
+    }
 
 }

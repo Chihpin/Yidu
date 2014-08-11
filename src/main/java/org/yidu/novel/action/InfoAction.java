@@ -105,7 +105,6 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     @Override
     public int getPageType() {
-        // TODO Auto-generated method stub
         return YiDuConstants.Pagetype.PAGE_ARTICLE_INFO;
     }
 

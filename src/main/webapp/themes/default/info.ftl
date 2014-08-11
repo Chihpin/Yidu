@@ -96,11 +96,23 @@
     <div class="chapterNum">
         <a name="chapters"></a>
           <ul>
-            <h1>章节列表</h1>
+            <h1>${article.articlename}全文阅读([<a href="${contextPath}/login">登陆</a>]后开放)</h1>
+			
             <#list chapterList as chapter>
                 <#if chapter.chaptertype == 0>
+					<#if loginFlag>
+						<#if chapter_index % 30 == 0>
+							<li style="width:100%;background-color:#f2f9f1;margin-left:0;text-align:center;">
+								<#if (chapter_index + 30 lt chapterList?size)>
+									<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapterList[chapter_index].chapterno?c}&toChapterno=${chapterList[chapter_index+30].chapterno?c}")}">分段阅读</a>
+								<#else>
+									<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapterList[chapter_index].chapterno?c}&toChapterno=${chapterList[chapterList?size-1].chapterno?c}")}">分段阅读</a>
+								</#if>
+							</li>
+						</#if>
+					</#if>
                     <li>
-                       <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="${chapter.chaptername}">${chapter.chaptername}</a>
+                    <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="${chapter.chaptername}">${chapter.chaptername}</a>
                     </li>
                 </#if>
             </#list>

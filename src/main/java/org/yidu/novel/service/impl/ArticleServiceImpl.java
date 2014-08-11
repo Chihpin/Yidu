@@ -6,19 +6,23 @@ import java.util.List;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
 
 public class ArticleServiceImpl extends HibernateSupportServiceImpl implements ArticleService {
+	
+	private static final Log log = LogFactory.getLog(ArticleServiceImpl.class);
 
     @Override
     public List<TArticle> find(final ArticleSearchBean searchBean) {
 
         // 初期SQL做成
         StringBuffer hql = new StringBuffer();
-        hql.append("From TArticle WHERE  deleteflag=false  ");
+        hql.append("From TArticle WHERE deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
 
         buildCondtion(searchBean, hql, params);
@@ -131,7 +135,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
 
     @Override
     public void cleanStatistics() {
-        System.out.println("cleanStatistics start");
+    	log.info("cleanStatistics start");
         String sql = "update t_article set dayvote = 0 ,dayvisit = 0";
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
@@ -146,7 +150,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         }
         System.out.println(sql);
         this.yiduJdbcTemplate.update(sql);
-        System.out.println("cleanStatistics end");
+        log.info("cleanStatistics end");
 
     }
 }

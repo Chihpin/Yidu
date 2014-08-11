@@ -40,8 +40,21 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
      * 检索关键字
      */
     private int articleno;
-
+    
     /**
+     * 批量操作参数值
+     */
+    private String articleNoList;
+
+    public String getArticleNoList() {
+		return articleNoList;
+	}
+
+	public void setArticleNoList(String articleNoList) {
+		this.articleNoList = articleNoList;
+	}
+
+	/**
      * 检索关键字
      */
     private String key;
@@ -121,12 +134,22 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
     public String delete() throws Exception {
 
         initCollections(new String[] { "collectionProperties.article.category" });
-
-        TArticle article = articleService.getByNo(articleno);
-        article.setDeleteflag(true);
-        article.setModifyuserno(LoginManager.getLoginUser().getUserno());
-        article.setModifytime(new Date());
-        articleService.save(article);
+        if(StringUtils.isNotBlank(articleNoList)) {
+        	String[] articleNo = articleNoList.split(",");
+        	for(String ano : articleNo) {
+        		TArticle article = articleService.getByNo(Integer.valueOf(ano));
+                article.setDeleteflag(true);
+                article.setModifyuserno(LoginManager.getLoginUser().getUserno());
+                article.setModifytime(new Date());
+                articleService.save(article);
+        	}
+        } else {
+        	TArticle article = articleService.getByNo(articleno);
+            article.setDeleteflag(true);
+            article.setModifyuserno(LoginManager.getLoginUser().getUserno());
+            article.setModifytime(new Date());
+            articleService.save(article);
+        }
 
         loadData();
         return INPUT;

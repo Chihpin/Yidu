@@ -22,6 +22,9 @@ public class YiDuConfig {
     public final static String KEEP_DELETE_DATA_DAYS =  "keepDeleteDataDays";
     public final static String JUDG_MOBILESITE_BY_DOMIAN = "judgmobilesitebydomian";
     public final static String MOBILESITE_DOMIAN = "mobilesitedomian";
+    public final static String SITEMAP_TYPE = "siteMapType";
+    public final static String XML_SITEMAP_ARTICLE_URL = "xmlSiteMapArticleURL";
+    public final static String XML_SITEMAP_CHAPTER_URL = "xmlSiteMapChapterURL";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

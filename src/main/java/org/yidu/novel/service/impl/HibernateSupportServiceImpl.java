@@ -67,7 +67,17 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
     }
 
     protected final Query getQuery(final String hql, final Object... params) {
-        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+//    	Session session = null;
+//    	try {
+//    		session = this.sessionFactory.getCurrentSession();
+//    	} catch (HibernateException e) {
+//    		session = sessionFactory.openSession();
+//    	}
+//    	if(session != null && !session.getTransaction().isActive()) {
+//    		session = sessionFactory.openSession();
+//    	}
+//        Query query = session.createQuery(hql);
+    	Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
         if (params != null && params.length != 0) {
             for (int i = 0; i < params.length; i++) {
                 query.setParameter(i, params[i]);

@@ -36,7 +36,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
             return this.find(hql.toString(), params);
         }
     }
-
+    
     @Override
     public TChapter getByNo(int chapterno) {
         return this.get(TChapter.class, chapterno);
@@ -114,4 +114,18 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         }
         return null;
     }
+
+	@Override
+	public List<TChapter> getChapterInSegement(Integer articleno,
+			Integer chapterno, Integer toChapterno) {
+		StringBuffer hql = new StringBuffer("FROM TChapter "
+				+ "WHERE deleteflag=false and articleno = ? and chapterno>=? and chapterno<=? "
+				+ "order by chapterno asc");
+        List<Object> params = new ArrayList<Object>();
+        // 追加小说号条件
+        params.add(articleno);
+        params.add(chapterno);
+        params.add(toChapterno);
+        return this.find(hql.toString(), params);
+	}
 }

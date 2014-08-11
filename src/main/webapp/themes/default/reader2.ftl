@@ -10,21 +10,6 @@
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/style5.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
-<script type="text/javascript">
-    <!--
-    var preview_page = '<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>';
-    var next_page = '<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>';
-    var index_page = '${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}';
-    var article_id = '${chapter.articleno?c}';
-    var chapter_id = '${chapter.chapterno?c}';
-    function jumpPage() {
-      var event = document.all ? window.event : arguments[0];
-      if (event.keyCode == 37) document.location = preview_page;
-      if (event.keyCode == 39) document.location = next_page;
-    }
-    document.onkeydown=jumpPage;
-    -->
-</script>
 
 </#macro>
 
@@ -43,13 +28,14 @@
     ${chapter.chaptername}</div>
     <section class="main b-detail" id="directs">
         <div class="bookInfo">
-            <h1>
-                <span class="r"></span>
-                <h6>${chapter.chaptername} - ${chapter.articlename}</h6>
-                <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}"  target="_blank" title="加入书签" class="l">加入书签</a>
-                <a href="${encodeURL("/user/vote?articleno=${chapter.articleno?c}")}"  target="_blank" title="推荐本书" class="l">推荐本书</a>
+                <div>
+					<ul>
+					<#list fullReadChapterList as c >
+						<li style="float:left;width:28%;padding:5px 20px;font-size:14px;"><a href="#${c.chapterno}">${c.chaptername}</a></li>
+					</#list>
+					</ul>
+				</div>
                 <div class="clear"></div>
-            </h1>
             <div class="toolbar">
             <ul>
                 <li>
@@ -87,55 +73,28 @@
                     <a id="sudu150" href="javascript:setSpeed(150);">慢</a>
                 </li>
             </ul>
+			<div style="clear:both;"></div>
         </div>
         <#if adEffective?? && adEffective>
         <script type="text/javascript" src="${contextPath}/ad/reader1.js"></script>
         </#if>
-        <div class="mainContenr"   id="content">
-            <#if chapter.content??>${chapter.content}</#if>
+        <div class="mainContenr"   id="content" style="overflow:hidden">
+			<#list fullReadChapterList as c >
+                <a name="${c.chapterno}">${c.chaptername}</a><br/>
+				<#if c.content??>${c.content}<br/></#if>
+				<hr/><br/>				
+            </#list>
         </div>
         <#if adEffective?? && adEffective>
         <script type="text/javascript" src="${contextPath}/ad/reader2.js"></script>
         </#if>
-        <div class="backs">
-            <a href="<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>" class="pre">上一章</a>
-            <a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="backfor">返回目录</a>
-            <a href="<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>" class="next">下一章</a>
-            <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
-                 <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="加入书签"  target="_blank">加入书签</a>
-            </p></div>
         <#if adEffective?? && adEffective>
         <script type="text/javascript" src="${contextPath}/ad/reader3.js"></script>
         </#if>
         </div>
        </section>
-       <div class="attention">
-            <em>阅读提示：</em><br/>
-            1、本站会员登录后，将免费体会到最顺畅的阅读方式[<em>最少广告</em>]。<br/>
-            2、<em>注册本站会员</em>，将《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
-            3、免费小说《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》 ${chapter.chaptername}所描述的内容只是作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
-        </div>
     </div>
 </div>
-<script language="JavaScript" type="text/JavaScript"> 
-
-    window.onload = function() {
-        var str = document.getElementById("content").innerHTML;//这里是整个页面代码 ,也可以指定id
-        str = str.replace(/\<script[\s\S]+?\<\/script\>/gi, "");
-        str = str.replace(/\<styltyp[\s\S]+?\<\/styl\>/gi, "");
-        str = str.replace(/\<style[\s\S]+?\<\/style\>/gi, "");
-        str = str.replace(/\<a[\s\S].+?\<\/a\>/gi, "");
-        str = str.replace(/Www.+?ggyy\.net/gi, "");
-        str = str.replace(/Www.+?Com/gi, "");
-        str = str.replace(/Www.+?net/gi, "");
-        str = str.replace(/Www.+?cc/gi, "");
-        str = str.replace(/&lt;br.+?&gt;/gi, "<br />");
-        str = str.replace(/&amp;hllp;/gi, "&hellip;").replace(/&amp;ldqo;/gi,
-                "&ldquo;").replace(/ldqo/gi, "ldquo").replace(/&amp;rdqo;/gi,
-                "&rdquo;").replace(/&amp;dash;/gi, "&mdash;");
-        document.getElementById("content").innerHTML = str;
-    }
-</script>
 </#macro>
 
 <#macro customizefooter> 

@@ -25,6 +25,8 @@ $(document).ready(function() {
 		form_submit("save");
 		return false;
 	});
+	$("#selectAll").bind("click", selectAll);
+	$("#oper_apply").click(operApply);
 });
 
 // Validate
@@ -79,4 +81,25 @@ function confirmDelete(delUrl) {
 	if (confirm("确认删除这条记录吗？")) {
 		document.location = delUrl;
 	}
+}
+
+function selectAll() {
+	if($("#selectAll").attr("checked")) {
+		$("input[name='article_articleno']").attr("checked",true);
+	} else {
+		$("input[name='article_articleno']").attr("checked",false);
+	}
+}
+
+function operApply() {
+	var _oper = $("#operate").val();
+	if(_oper != "") {
+		var arrChk=$("input[name='article_articleno']:checked");
+		var params = "";
+	    $(arrChk).each(function(){
+	       params = params + this.value + ",";                        
+	    }); 
+	    document.location = '/admin/articleList!delete?articleNoList='+params;
+	}
+	
 }
