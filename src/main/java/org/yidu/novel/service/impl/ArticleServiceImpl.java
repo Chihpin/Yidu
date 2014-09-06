@@ -148,9 +148,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         if (dayOfMonth == 1) {
             sql += ",monthvote = 0,monthvisit=0";
         }
-        System.out.println(sql);
         this.yiduJdbcTemplate.update(sql);
         log.info("cleanStatistics end");
-
     }
 }

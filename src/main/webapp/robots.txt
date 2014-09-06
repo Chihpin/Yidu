@@ -3,3 +3,4 @@ Disallow: /admin/
 Disallow: /user/
 Disallow: /download/
 Disallow: /*?*
+Disallow: /themes/

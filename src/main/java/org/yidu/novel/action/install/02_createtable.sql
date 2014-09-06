@@ -39,7 +39,7 @@ CREATE TABLE t_bookcase
     category int,
     userno int,
     username varchar(50),
-    chapterid int,
+    chapterno int,
     chaptername varchar(100),
     lastvisit timestamp,
     createtime timestamp,
@@ -71,11 +71,13 @@ CREATE TABLE t_message
 
 CREATE TABLE t_review
 (
-    reviweno serial NOT NULL,
+    reviewno serial NOT NULL,
     userno int,
-    username varchar(50),
+    loginid varchar(50),
     articleno int,
     articlename varchar(100),
+    chapterno int,
+    chaptername varchar(100),
     title varchar(30),
     review varchar(500),
     email varchar(60),
@@ -83,7 +85,7 @@ CREATE TABLE t_review
     deleteflag boolean DEFAULT 'false',
     modifyuserno integer,
     modifytime timestamp without time zone,
-    PRIMARY KEY (reviweno)
+    PRIMARY KEY (reviewno)
 ) WITHOUT OIDS;
 
 
@@ -127,6 +129,8 @@ CREATE TABLE t_user
     alipayacount varchar(50),
     category int,
     subcategory int,
+    openid varchar(50),
+    activedflag boolean DEFAULT 'true',
     deleteflag boolean DEFAULT 'false',
     modifyuserno integer,
     modifytime timestamp without time zone,
@@ -158,6 +162,7 @@ CREATE TABLE t_article
 (
     articleno serial NOT NULL,
     articlename varchar(100),
+    pinyin varchar(400),
     initial char(1),
     keywords varchar(500),
     authorid int,
@@ -187,6 +192,8 @@ CREATE TABLE t_article
     allvote int DEFAULT 0,
     deleteflag boolean DEFAULT 'false',
     publicflag int,
+    createuserno integer,
+    createtime timestamp without time zone,
     modifyuserno integer,
     modifytime timestamp without time zone,
     PRIMARY KEY (articleno)

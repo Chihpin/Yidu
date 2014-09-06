@@ -6,6 +6,7 @@ import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.template.EncodeURLMethod;
 import org.yidu.novel.template.GetTextMethod;
+import org.yidu.novel.template.UpperNumMethod;
 
 import com.google.gson.Gson;
 
@@ -71,19 +72,6 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
     }
 
     /**
-     * 回退URL
-     */
-    private String backUrl;
-
-    public String getBackUrl() {
-        return backUrl;
-    }
-
-    public void setBackUrl(String backUrl) {
-        this.backUrl = backUrl;
-    }
-
-    /**
      * 取得自定义的freemarker方法 <br>
      * 实现encodeURL
      * 
@@ -101,6 +89,16 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      */
     public GetTextMethod getGetText() {
         return new GetTextMethod(this);
+    }
+
+    /**
+     * 取得自定义的freemarker方法 <br>
+     * 实现struts的gettxt
+     * 
+     * @return GetText
+     */
+    public UpperNumMethod getUpperNum() {
+        return new UpperNumMethod();
     }
 
     /**

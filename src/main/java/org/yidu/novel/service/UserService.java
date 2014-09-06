@@ -28,6 +28,14 @@ public interface UserService {
     public TUser findByLoginInfoByJDBC(String loginid, String password);
 
     /**
+     * 根据QQ的OpenID取得用户信息，如果取不到就返回NULL
+     * 
+     * @param openid
+     * @return 用户信息
+     */
+    public TUser findByOpenid(final String openid);
+
+    /**
      * 更新用户的最后登录时间
      * 
      * @param userno

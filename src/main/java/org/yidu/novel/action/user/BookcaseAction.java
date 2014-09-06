@@ -29,6 +29,16 @@ import org.yidu.novel.utils.LoginManager;
 public class BookcaseAction extends AbstractUserBaseAction {
 
     private static final long serialVersionUID = 366181195078436796L;
+
+    /**
+     * 功能名称。
+     */
+    public static final String NAME = "bookcase";
+
+    /**
+     * 访问URL。
+     */
+    public static final String URL = NAMESPACE + "/" + NAME;
     /**
      * 书签号
      */

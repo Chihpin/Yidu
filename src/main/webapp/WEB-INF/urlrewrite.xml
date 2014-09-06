@@ -57,24 +57,25 @@
 	<!-- 小说列表结束 -->
 
 	<rule>
-		<from>^/info/\d*/(\d*)\.html$</from>
+		<from>^/book/\d*/(\d*)\.html$</from>
 		<to last="true">/info\?articleno=$1</to>
 	</rule>
 
 	<rule>
-		<from>^/info/(\d*)\.html$</from>
-		<to last="true">/info\?articleno=$1</to>
-	</rule>
-
-	<rule>
-		<from>^/info/(\d*)\.html$</from>
+		<from>^/book/(\d*)\.html$</from>
 		<to last="true">/info\?articleno=$1</to>
 	</rule>
 
 	<outbound-rule>
 		<from>^/info\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/info/$1/$2\.html</to>
+		<to last="true">/book/$1/$2\.html</to>
 	</outbound-rule>
+	
+	<rule>
+        <from>^/reader/(\d*)/index\.html$</from>
+        <to last="true">/info\?articleno=$1</to>
+    </rule>
+	
 
 	<rule>
 		<from>^/reader/\d*/(\d*)/(\d*)\.html$</from>
@@ -210,14 +211,78 @@
 		<from>^/user/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/user/vote/$1.html</to>
 	</outbound-rule>
-  <!-- 
+
+	<rule>
+		<from>^/top/(.+?)/(\d*)\.html$</from>
+		<to last="true">/top\?sortColumn=$1&amp;page=$2</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/top\?sortColumn=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/top/$1/$2\.html</to>
+	</outbound-rule>
+
+	<rule>
+		<from>^/top/(.+?)\.html$</from>
+		<to last="true">/top\?sortColumn=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/top\?sortColumn=(.+?)(;jsessionid=.*)?$</from>
+		<to last="true">/top/$1\.html</to>
+	</outbound-rule>
+	
+	<!-- 评论页 -->
+	<rule>
+		<from>^/reviewList/(\d*)/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reviewList\?subdir=$1&amp;articleno=$2&amp;page=$3</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/reviewList\?subdir=(\d*)&amp;articleno=(\d*)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/reviewList/$1/$2/$3\.html</to>
+	</outbound-rule>
+
+	<rule>
+		<from>^/reviewList/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reviewList\?subdir=$1&amp;articleno=$2</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/reviewList\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/reviewList/$1/$2\.html</to>
+	</outbound-rule>
+
+	<!-- 用户信息 -->
+
+	<rule>
+		<from>^/userInfo/(\d*)\.html$</from>
+		<to last="true">/userInfo\?userno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/userInfo\?userno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/userInfo/$1\.html</to>
+	</outbound-rule>
+	<!-- 分段阅读 -->
+	<rule>
+		<from>^/reader/(\d*)/(\d*)/(\d*)/(\d*)\.html$</from>
+		<to last="true">/reader\?subdir=$1&amp;articleno=$2&amp;chapterno=$3&amp;toChapterno=$4</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/reader\?subdir=(\d*)&amp;articleno=(\d*)&amp;chapterno=(\d*)&amp;toChapterno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/reader/$1/$2/$3/$4\.html</to>
+	</outbound-rule>
+	
+ <!-- 
      <rule>
 	     <name>Domain Name Check</name> 
-	     <condition name="host" operator="notequal">www.51yd.org</condition> 
-	     <condition name="host" operator="notequal">m.51yd.org</condition>
+	     <condition name="host" operator="notequal">www.yzihan.com</condition> 
 	     <from>^/(.*)</from>
-	     <to type="redirect">http://www.51yd.org/$1</to>
+	     <to type="redirect">http://www.yzihan.com/$1</to>
      </rule> 
+ 
 
     EXAMPLES Redirect one url
     <rule>

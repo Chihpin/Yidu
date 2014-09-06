@@ -297,11 +297,14 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         TArticle article = new TArticle();
         if (articleno != 0) {
             article = articleService.getByNo(articleno);
-        }else{
+        } else {
             article.setDeleteflag(false);
         }
 
         BeanUtils.copyProperties(this, article);
+
+        // TODO 重复处理
+        article.setPinyin(Utils.getPinYin(articlename));
         article.setModifytime(new Date());
         article.setModifyuserno(LoginManager.getLoginUser().getUserno());
 

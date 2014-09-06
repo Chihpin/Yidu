@@ -45,6 +45,8 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     protected static final String CACHE_KEY_CHAPTER_LIST_PREFIX = "CacheKey_CHAPTER_LIST";
     protected static final String CACHE_KEY_CHAPTER_PREFIX = "CacheKey_CHAPTER";
     protected static final String CACHE_KEY_HISTORY_PREFIX = "CacheKey_HISTORY";
+    protected static final String CACHE_KEY_ARTICEL_TOP_LIST_PREFIX = "CacheKey_ARTICLE_TOP_LIST";
+    protected static final String CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_TOP_COUNT";
 
     /**
      * 区块信息

@@ -14,18 +14,40 @@
           <div class="hideInfo">
             <ul id="readhistory">
                 <script>
-                $(document).ready(function(){
-                    $.post('${contextPath}/readhistory',function(data){
-                        if(data != null){
-                            var html ="";
-                           for(i=0; i < data.length;i++){
-                                html = html + ' <li class=""><a href="${contextPath}/info/'+Math.floor(data[i].articleno/1000)+'/'+data[i].articleno +'.html" class="f14">'+data[i].articlename+'</a><br>'
-                                html = html + ' 最近浏览:<a href="${contextPath}/reader/'+Math.floor(data[i].articleno/1000)+'/'+data[i].articleno+'/'+data[i].chapterno+'.html" >'+data[i].chaptername+'</a></li>'
-                           }
-                           $('#readhistory').html(html);
-                        }
+                    $(document).ready(function(){
+                       var readhistory = $.cookie("readhistory");
+                       if(! readhistory ){
+                            readhistory = new Array();
+                       }else{
+                            readhistory = JSON.parse(readhistory);
+                       }
+                       var html ="";
+                       for(i=0; i < readhistory.length;i++){
+                            html = html + ' <li class=""><a class="close" href = "javascript:return false" articleno = '+readhistory[i].articleno+' ></a><a href="${contextPath}/info/'+Math.floor(readhistory[i].articleno/1000)+'/'+readhistory[i].articleno +'.html" class="f14">'+readhistory[i].articlename+'</a><br>'
+                            html = html + ' 最近浏览:<a href="${contextPath}/reader/'+Math.floor(readhistory[i].articleno/1000)+'/'+readhistory[i].articleno+'/'+readhistory[i].chapterno+'.html" >'+readhistory[i].chaptername+'</a></li>'
+                       }
+                       $('#readhistory').html(html);
+                       
+                       $('.hideInfo ul li').hover(function(){
+                            $(this).addClass('hover');
+                        },function(){
+                            $(this).removeClass('hover');
+                        })
+                        $('.hideInfo .close').click(function(){
+                            var articleno = $(this).attr('articleno');
+                            var index = articleno.in_array(readhistory);
+                            if(index != -1){
+                                readhistory.splice(index,1);
+                            }
+                            $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
+                            
+                            var len=$(this).parents("ul").children("li").length;
+                            if(len!=1){$(this).parent("li").remove();}
+                            else{$(this).parents(".hideInfo").children("p").remove();
+                            $(this).parents(".hideInfo").children("span").show();
+                            $(this).parent("li").remove();}
+                            });
                     })
-                })
                </script>
             </ul>
             <p>*提示：浏览记录仅放置最近浏览的10本书籍</p>
@@ -34,10 +56,21 @@
         </div>
           <span id="checklogin">
           <script>
+            thisUrl = window.location.href;
+            if(thisUrl.indexOf('?backUrl') != -1){
+                thisUrl = thisUrl.substring(0,thisUrl.indexOf('?backUrl'));
+            }
+            document.writeln("<a href=\"${contextPath}/gotoQQLogin?backUrl="+thisUrl+" \"><img src=\"${contextPath}/themes/${themeName}/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
+            document.writeln("<a href=\"${contextPath}/login?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
+            document.writeln("<a href=\"${contextPath}/register?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
+          
             $(document).ready(function(){
                 $.post('${contextPath}/checklogin',function(data){
                     if(data!=null){
                        var html = '你好   <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
+                        if(data.openid==null){
+                            html = html + '&nbsp;&nbsp;&nbsp;<a href=\"${contextPath}/gotoQQLogin?backUrl='+thisUrl+'" \"><img src=\"${contextPath}/themes/${themeName}/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
+                        }
                         if(data.type==30){
                             html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>';
                         }else if(data.type==20||data.type==40||data.type==41){
@@ -50,14 +83,7 @@
                     }
                 })
             })
-           </script>
-           <script>
-            thisUrl = window.location.href;
-            if(thisUrl.indexOf('?backUrl') != -1){
-                thisUrl = thisUrl.substring(0,thisUrl.indexOf('?backUrl'));
-            }
-            document.writeln("<a href=\"${contextPath}/login?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
-            document.writeln("<a href=\"${contextPath}/register?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
+           
           </script>
           </span>
         </div>
@@ -88,6 +114,7 @@
             <#list categorymap?keys as categorykey>
             <li <#if category??><#if categorykey==category?c>class="current"</#if></#if>><a href="${encodeURL("/articleList?category=${categorykey}")}">${categorymap[categorykey]}</a></li>
             </#list>
+            <li <#if pageType ?? && pageType==7>class="current"</#if>><a href="${encodeURL("/top?sortColumn=lastupdate")}">排行榜</a></li>
         </ul>
       </nav>
     </div>

@@ -35,7 +35,7 @@
         <ul>
             <li class="curr"><a href="${contextPath}/">首页</a></li>
             <li><a href="${encodeURL("/top")}">排行</a></li>
-            <li><a href="${encodeURL("/category")}">分类</a></li>
+            <li><a href="${encodeURL("/mobileCategory")}">分类</a></li>
             <li><a href="${encodeURL("/user/bookcase")}">书架</a></li>
         </ul>
     </div>

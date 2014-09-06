@@ -7,8 +7,6 @@
 <#macro customizeimport>  
 <link href="${contextPath}/themes/${themeName}/css/readtools.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/tools.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.cookie.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/style5.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
 <script type="text/javascript">
     <!--
@@ -23,6 +21,29 @@
       if (event.keyCode == 39) document.location = next_page;
     }
     document.onkeydown=jumpPage;
+
+    $(document).ready(function(){
+       var readhistory = $.cookie("readhistory");
+       if(! readhistory ){
+            readhistory = new Array();
+       }else{
+            readhistory = JSON.parse(readhistory);
+       }
+       var readObject = new Object();
+       readObject.chapterno = ${chapter.chapterno?c};
+       readObject.articleno = ${chapter.articleno?c};
+       readObject.chaptername = "${chapter.chaptername}";
+       readObject.articlename = "${chapter.articlename}";
+       var index = readObject.articleno.in_array(readhistory);
+       if(index != -1){
+            readhistory.splice(index,1);
+       }
+       readhistory.splice(0,0,readObject);
+       if(readhistory.length > 10 ){
+            readhistory.splice(9,readhistory.length - 10);
+       }
+       $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
+    })
     -->
 </script>
 
@@ -37,7 +58,7 @@
                     <button type="submit" >搜</button>
                 </form>
             </span>
-    位置：<a href="${contextPath}/" class="c009900">${getText("label.system.name")}</a> > 
+    位置：&nbsp; > &nbsp; <a href="${contextPath}/" class="c009900">${getText("label.system.name")}</a> > 
 
     <a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title">${chapter.articlename}</a>  > 
     ${chapter.chaptername}</div>
@@ -45,7 +66,8 @@
         <div class="bookInfo">
             <h1>
                 <span class="r"></span>
-                <h6>${chapter.chaptername} - ${chapter.articlename}</h6>
+                <em class="l">《${chapter.articlename}》</em>
+                <strong class="l jieqi_title">${chapter.chaptername}</strong>
                 <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}"  target="_blank" title="加入书签" class="l">加入书签</a>
                 <a href="${encodeURL("/user/vote?articleno=${chapter.articleno?c}")}"  target="_blank" title="推荐本书" class="l">推荐本书</a>
                 <div class="clear"></div>
@@ -142,7 +164,6 @@
     <div id="full2" style="width:37px; height:22px; position:fixed; left:50%; top:425px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_top" alt="返回顶部"></a>
     </div>
-    
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_bottom" alt="跳至页尾"></a>
     </div>

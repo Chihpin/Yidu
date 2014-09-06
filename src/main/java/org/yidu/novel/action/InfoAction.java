@@ -6,10 +6,14 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.dto.ArticleDTO;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.entity.TReview;
+import org.yidu.novel.utils.Pagination;
 
 /**
  * <p>
@@ -28,6 +32,16 @@ public class InfoAction extends AbstractPublicBaseAction {
     private static final long serialVersionUID = -4215796997609788238L;
 
     /**
+     * 功能名称。
+     */
+    public static final String NAME = "info";
+
+    /**
+     * 访问URL。
+     */
+    public static final String URL = NAMESPACE + "/" + NAME;
+
+    /**
      * 小说编号
      */
     private int articleno;
@@ -35,6 +49,10 @@ public class InfoAction extends AbstractPublicBaseAction {
     private ArticleDTO article = new ArticleDTO();
 
     private List<TChapter> chapterList = new ArrayList<TChapter>();
+
+    private int reviewCount;
+
+    private List<TReview> reviewList = new ArrayList<TReview>();
 
     public int getArticleno() {
         return articleno;
@@ -46,10 +64,6 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     public int getSubDir() {
         return articleno / YiDuConstants.SUB_DIR_ARTICLES;
-    }
-
-    public void setSubDir(int subDir) {
-        // do nothing
     }
 
     public ArticleDTO getArticle() {
@@ -68,6 +82,22 @@ public class InfoAction extends AbstractPublicBaseAction {
         this.chapterList = chapterList;
     }
 
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public List<TReview> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<TReview> reviewList) {
+        this.reviewList = reviewList;
+    }
+
     public String getTempName() {
         return "info";
     }
@@ -84,7 +114,7 @@ public class InfoAction extends AbstractPublicBaseAction {
         }
 
         if (article != null) {
-            // 取章节信息
+            // 获取章节信息
             ChapterSearchBean searchBean = new ChapterSearchBean();
             BeanUtils.copyProperties(this, searchBean);
             chapterList = CacheManager.getObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString());
@@ -94,6 +124,19 @@ public class InfoAction extends AbstractPublicBaseAction {
                     CacheManager.putObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString(), chapterList);
                 }
             }
+
+            // 获取评论信息
+            ReviewSearchBean reviewSearchBean = new ReviewSearchBean();
+            reviewSearchBean.setArticleno(articleno);
+            // 获取评论件数
+            reviewCount = reviewService.getCount(reviewSearchBean);
+            // 获取评论
+            Pagination pagination = new Pagination(YiDuConstants.yiduConf.getInt(YiDuConfig.REVIEW_NUM, 5), 1);
+            pagination.setSortColumn(TChapter.PROP_POSTDATE);
+            pagination.setSortOrder("DESC");
+            reviewSearchBean.setPagination(pagination);
+            this.reviewList = reviewService.find(reviewSearchBean);
+
         } else {
             addActionError(getText("errors.not.exsits.article"));
         }

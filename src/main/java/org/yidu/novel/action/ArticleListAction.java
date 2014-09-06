@@ -27,6 +27,16 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     private static final long serialVersionUID = -4215796997609788238L;
 
     /**
+     * 功能名称。
+     */
+    public static final String NAME = "articleList";
+
+    /**
+     * 访问URL。
+     */
+    public static final String URL = NAMESPACE + "/" + NAME;
+
+    /**
      * 小说种类
      */
     private Integer category;
@@ -104,7 +114,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         searchBean.setPageType(ArticleSearchBean.PageType.publicPage);
 
         pagination.setPageNumber(page == 0 ? 1 : page);
-        pagination.setSortColumn("lastupdate");
+        pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
         pagination.setSortOrder("DESC");
 
         Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());

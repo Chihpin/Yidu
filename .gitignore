@@ -1,7 +1,6 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
 /jcs_swap
@@ -13,3 +12,4 @@
 /src/main/webapp/html
 /files
 /sitemap
+/target

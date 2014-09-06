@@ -15,8 +15,8 @@ import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.service.BookcaseService;
 import org.yidu.novel.service.ChapterService;
 import org.yidu.novel.service.MessageService;
+import org.yidu.novel.service.ReviewService;
 import org.yidu.novel.service.SystemBlockService;
-import org.yidu.novel.service.SystemConfigService;
 import org.yidu.novel.service.UserService;
 
 import com.opensymphony.xwork2.Action;
@@ -65,7 +65,7 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     public static final String FREEMARKER = "freemarker";
     public static final String FREEMARKER_ERROR = "freemarker_error";
     public static final String FREEMARKER_MESSAGE = "freemarker_message";
-    
+
     public static final String MOBILE_FREEMARKER = "mobile_freemarker";
     public static final String MOBILE_FREEMARKER_ERROR = "mobile_freemarker_error";
     public static final String MOBILE_FREEMARKER_MESSAGE = "mobile_freemarker_message";
@@ -93,18 +93,13 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
 
     protected SystemBlockService systemBlockService;
 
-    protected SystemConfigService systemConfigService;
-
     protected MessageService messageService;
+
+    protected ReviewService reviewService;
 
     @Autowired
     public void setSystemBlockService(SystemBlockService systemBlockService) {
         this.systemBlockService = systemBlockService;
-    }
-
-    @Autowired
-    public void setSystemConfigService(SystemConfigService systemConfigService) {
-        this.systemConfigService = systemConfigService;
     }
 
     @Autowired
@@ -132,6 +127,11 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
         this.messageService = messageService;
     }
 
+    @Autowired
+    public void setReviewService(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
     @Override
     public String getInputResultName() {
         return Action.INPUT;
@@ -153,6 +153,20 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      */
     public String getRequestUrl() {
         return ServletActionContext.getRequest().getRequestURL().toString();
+    }
+
+    protected static final String BACK_URL = "backUrl";
+    /**
+     * 回退URL
+     */
+    private String backUrl;
+
+    public String getBackUrl() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
     }
 
     @SkipValidation

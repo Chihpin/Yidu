@@ -115,4 +115,16 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
         this.yiduJdbcTemplate.update(sql, params.toArray());
     }
 
+    @Override
+    public TUser findByOpenid(String openid) {
+        String sql = "FROM TUser where openid = ? AND deleteflag=false";
+        List<Object> params = new ArrayList<Object>();
+        params.add(openid);
+        List<TUser> userinfoList = this.find(sql, params);
+        if (userinfoList.size() > 0) {
+            return userinfoList.get(0);
+        }
+        return null;
+    }
+
 }

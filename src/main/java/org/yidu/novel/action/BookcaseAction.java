@@ -18,7 +18,7 @@ import org.yidu.novel.utils.LoginManager;
 public class BookcaseAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = 366181195078436796L;
-
+    
     public String getTempName() {
         return "bookcase";
     }

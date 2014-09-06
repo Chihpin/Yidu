@@ -18,6 +18,16 @@ public class VoteAction extends AbstractUserBaseAction {
     private static final long serialVersionUID = -2984522801349519469L;
 
     /**
+     * 功能名称。
+     */
+    public static final String NAME = "vote";
+
+    /**
+     * 访问URL。
+     */
+    public static final String URL = NAMESPACE + "/" + NAME;
+
+    /**
      * 小说编号
      */
     private int articleno;

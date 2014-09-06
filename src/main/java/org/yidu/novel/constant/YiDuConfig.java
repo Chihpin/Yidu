@@ -19,12 +19,16 @@ public class YiDuConfig {
     public final static String CREATE_SITEMAP = "createSiteMap";
     public final static String THEME_NAME = "themeName";
     public final static String TXT_ENCODING = "txtEncoding";
-    public final static String KEEP_DELETE_DATA_DAYS =  "keepDeleteDataDays";
+    public final static String KEEP_DELETE_DATA_DAYS = "keepDeleteDataDays";
     public final static String JUDG_MOBILESITE_BY_DOMIAN = "judgmobilesitebydomian";
+    public final static String ENABLE_MOBILE_SITE = "enableMobileSite";
     public final static String MOBILESITE_DOMIAN = "mobilesitedomian";
     public final static String SITEMAP_TYPE = "siteMapType";
     public final static String XML_SITEMAP_ARTICLE_URL = "xmlSiteMapArticleURL";
     public final static String XML_SITEMAP_CHAPTER_URL = "xmlSiteMapChapterURL";
+    public final static String REVIEW_NUM = "reviewnum";
+    public final static String ADD_REVIEW_WITHOUT_LOGIN = "addReviewWithoutLogin";
+    public final static String ENABLE_PSEUDO = "enablePseudo";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

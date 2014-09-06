@@ -89,7 +89,8 @@
     <tr align="left" valign="middle">
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.gzipEffective" /></td>
        <td class="even">
-           <s:radio list="collections['collectionProperties.boolean']" name="gzipEffective" theme = "simple"></s:radio> <span class="hottext">压缩输出有利于提高浏览速度</span>
+           <s:radio list="collections['collectionProperties.boolean']" name="gzipEffective" theme = "simple"></s:radio> 
+           &nbsp;&nbsp;<span class="hottext">压缩输出有利于提高浏览速度</span>
        </td>
     </tr>
     
@@ -113,6 +114,39 @@
            <s:radio list="collections['collectionProperties.boolean']" name="createSiteMap" ></s:radio>
        </td>
     </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.addReviewWithoutLogin" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="addReviewWithoutLogin" ></s:radio>
+       </td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.enableMobileSite" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="enableMobileSite" ></s:radio>
+       </td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.judgmobilesitebydomian" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="judgmobilesitebydomian"  theme = "simple"></s:radio>
+           &nbsp;&nbsp;<span class="hottext">否的话通过手机来判断</span>
+       </td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.mobilesitedomian" /></td>
+       <td class="even"><s:textfield name ="mobilesitedomian" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.enablePseudo" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enablePseudo" ></s:radio></td>
+    </tr>
+
     <tr align="left" valign="middle">
        <td class="odd" colspan="2">
             <s:submit name="submit" value="%{getText('label.admin.edit.add')}" method="save" cssClass="submitButton" theme = "simple"/>

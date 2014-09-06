@@ -29,7 +29,6 @@
 .board-switch a { background-image:url(spring/reload.png); background-repeat:no-repeat; display:inline-block; width:90px; height:32px; line-height: 25px; overflow:hidden; text-indent:30px; color:#fff; cursor:pointer; _display:inline; _zoom:1; _float:left; }
 .b-all-switch .b-all { float:right; color:#4a8d2d; margin-top:2px; font-size:14px; }
 .b-all-switch, .board .box h2 { height:30px; color:#f17f2c; font-size:18px; border-bottom:1px solid #ededed; padding-bottom:10px; }
-/**首页热门推荐**/
 .b-all-content li { float:left; width:126px; color:#666; margin-right:36px; display:inline; position:relative; line-height:200%; }
 .b-all-content li a.clearfix { font-size:15px; color:#4a8d2d; display:block; overflow:hidden; }
 .msgBorder, .seeWell li a.mr10 { padding:2px; display:block; border:1px solid #e0e0e0; width:120px; height:150px; }
@@ -81,7 +80,6 @@
 .myhide .hideInfo ul{ border:1px solid #fff;}
 .myhide:hover .hideInfo { display:block; }
 .myhide .hideInfo span { margin:0 auto; background:url(../images/common2.png) no-repeat; padding-left:25px; color:#666; padding-bottom:5px; display:none;}
-/**介绍**/
 .main-index { padding-left:38px; height:37px; line-height:37px; background:url(../images/stitle.png) no-repeat 10px 8px; color:#999; border-left:1px solid #dbdcde; border-right:1px solid #dbdcde; }
 .main-index a { color:#666; padding:0 5px; }
 .introduct { padding:0 15px; }
@@ -134,7 +132,7 @@
 #navList .board-list ul li { margin-left:15px; margin-right:0; color:#999; position:relative; }
 #navList .seeWell li a { color:#666; }
 #navList .seeWell li a.stitle, .topRight ul.seeWell li span.l a.stitle { color:#339900; font-weight:bold; font-size:13px; }
-#navList .seeWell li span em.clearfix { background:#f9f9f9; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; padding:3px; margin:5px 0; letter-spacing:1px;word-wrap:normal; overflow:hidden; display:block; width:154px;height:71px;}
+#navList .seeWell li span em.clearfix { background:#f9f9f9; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; padding:3px; margin:5px 0; letter-spacing:1px;word-wrap:normal; overflow:hidden; display:block; width:154px;height:50px;}
 .pages { clear:both; margin:20px 0; text-align:center; }
 #navList .pages a { background:#efefef; border:1px solid #ccc; padding:2px; color:#000; margin-left:10px; }
 #navList .pages a:hover { background:#009900; border:1px solid #009900; color:#fff; }
@@ -162,8 +160,9 @@
 .allList dl { float:left; width:738px; line-height:33px; padding:0 20px; color:#666; }
 .allList dl dt em { background:url(../images/shu.png) no-repeat; float:left; width:14px; height:14px; line-height:14px; text-align:center; font-size:12px; color:#fff; margin-top:9px; font-weight:bold; margin-right:10px; display:inline; }
 .allList dl dt, .allList dl dd.title { width:100px; padding-right:10px; }
-.allList dl dd.title { width:140px; }
-.allList dl dd.state { width:350px; padding-right:10px; }
+.allList dl dd.title { width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.allList dl dd.state { width:350px; padding-right:10px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.allList dl dd.authors { width:100px; padding-right:10px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .allList dl dt { color:#999; }
 /**top**/
 .sort ul { float:left; width:234px; border:1px solid #d9d9d9; line-height:35px; margin-left:14px; display:inline; margin-right:5px; }
@@ -182,7 +181,7 @@
 .bookInfo h1 em { font-size:18px; color:#333; }
 .bookInfo h1 select { margin-left:10px; border:1px solid #707070; }
 .bookInfo h1 strong { font-size:18px; padding:0 10px; }
-.bookInfo h1 a.l { width:72px; height:24px; line-height:24px; text-align:center; color:#fff; background:url(../images/all.png) no-repeat -6px -117px; }
+.bookInfo h1 a.l { width:72px; height:24px; line-height:24px; text-align:center; margin-right: 10px; color:#fff; background:url(../images/all.png) no-repeat -6px -117px; }
 #directs { padding:0; }
 .mainContenr { padding:20px 30px; font-size:16px; line-height:35px; color:#000; }
 .backs { text-align:center; line-height:30px; width:400px; margin:0 auto; display:block; overflow:hidden; }
@@ -209,6 +208,47 @@
 .chapName span.r { margin-top:15px; }
 .chapName span.l { margin-top:15px; }
 .addTo { padding-left:40px; background:url(../images/all.png) no-repeat -74px -276px; }
+
+.comment_left{ width: 958px;  border: 1px solid #BEDFBE; float:left;}
+
+/*封面页评论*/
+.commenthead{height:40px; overflow:hidden; background:#fff; float:left;width: 100%;}
+.commenthead .ti{ background: url(../images/modbg.png) repeat-x left -142px; height:23px; padding:9px 10px;}
+.commenthead .ti h2{float:left; font-size:16px; font-weight:bold; color: #339900;}
+.commenthead .ti h2 a{ font-size:16px; font-weight:bold; color:#060;}
+.commenthead .ti .par{ float:left; overflow:hidden; color:#888; padding-left:20px }
+.commenthead .ti .par a{ color:#f60; font-weight:bold;  padding:0 3px}
+.commenthead .bazhu{ height:24px; padding:4px 8px 2px 5px; overflow:hidden}
+.commenthead .bazhu .ico{ background:url(../images/actionsbtn.png) no-repeat 0 -474px; width:39px; height:24px; padding-left:11px; color:#fff; float:left; overflow:hidden}
+.commenthead .bazhu .username{ float:left; overflow:hidden; padding-left:10px;  width:450px;}
+.commenthead .bazhu .box_r{ color:#ccc;}
+.commenthead .ti .par2{ float:left; margin-left:5px}
+.commenthead .ti .par2 a{ color:#390;}
+
+.commentslist{overflow:hidden; border-top:#d1e2d1 1px solid; float:left;width: 958px;}
+.commentslist li.line{ padding:14px 0px 16px 12px; float:left; border-bottom:#e3eee3 1px solid;margin-bottom:-1px; zoom:1;overflow:hidden; width: 958px;}
+.commentslist .has_avatar{ padding:0 16px 0 3px; width:58px; float:left;overflow:hidden}
+.commentslist .a_avatar50{ float:left;margin-top:3px;}
+.commentslist .replycontent{float:left; width: 700px; overflow:hidden; background:url(../images/plbg.gif) no-repeat;padding-left:20px;padding-top:5px}
+.commentslist .replycontent .time{ display:block;overflow:hidden;color:#7f7f7f;font-size:12px}
+.commentslist .replycontent .t_t .commenter{ color:#390; padding-right:8px; float:left; font-weight:bold}
+.commentslist .replycontent p{color:#333; font-size:14px; line-height:26px;}
+
+.talker_form .form_t,.talker_form .form_b{float:left;overflow:hidden; padding-top:20px}
+.talker_form{ background:#f5fbf5; width: 912px;padding:10px 20px 30px 25px; overflow:hidden; border-top:#d1e2d1 1px solid;border-bottom:none}
+.talker_form .form_t{font-weight:bold; width:68px; color:#333}
+.talker_form .form_b{ width: 835px;}
+.talker_form .smtextarea textarea{width: 820px; height:120px;border:1px solid #DFE1E0;color:#666666;font-size:12px;height:120px;line-height:20px;margin-bottom:8px;padding:5px; overflow:auto}
+.talker_form .form_f{height:40px;width: 830px;font-family:tahoma;}
+.talker_form .form_f .box_l{ color:#999; padding:1px 0 0 10px; float:left; overflow:hidden}
+.talker_form .release_btn{background:url(../images/comment.png) no-repeat 0px -112px;height:40px; width:120px; border:none; cursor:pointer;float:right;}
+.talker_form .release_btn:hover{background-position:0px -152px; }
+.talker_form .smbtn{ width:525px}
+
+.logintip{ background:#fffef1; border:#fad8b7 1px dotted; padding:6px; text-align:center; color:#999; width: 890px;}
+.logintip a{ text-decoration:underline; padding:0 3px}
+.logintip a:hover{ text-decoration:none}
+
 .chapterNum h1 { background:url(../images/small.png) no-repeat 0 -140px; background-color:#f2f9f1; border:1px solid #d2e2d1; height:37px; line-height:37px; font-size:18px; color:#339900; padding-left:20px; margin-top:-1px; clear:both; width:910px; margin-top:5px;}
 .chapterNum ul { border:1px solid #d1e2d1; background:#fcfefb; padding:14px; margin-top:0px; clear:both; display:block; overflow:hidden; width:930px; }
 .chapterNum ul li { float:left; width:280px;height:20px; border-bottom:1px solid #ecf3ec; line-height:21px; padding:7px 0;overflow:hidden;margin-left:22px;}
@@ -217,7 +257,6 @@
 .chapterNum ul li em { font-size:12px; color:#ccc; padding-left:10px; }
 #waa { line-height:24px; }
 #checklogin a.out { padding-left:15px; background:url(../images/out.png) no-repeat 0 3px; }
-/**添加20120522**/
 .nothing { display:block; padding-bottom:20px; overflow:hidden; }
 .nothing dl dt h1 { float:left; width:30px; height:98px; color:#fff; font-size:16px; font-weight:bold; text-align:center; background:#4a8d2d; padding-top:22px; position:relative; line-height:20px; }
 .nothing dl dt h1 em { background:#ff830b; height:22px; display:block; line-height:22px; font-weight:normal; font-size:14px; white-space:nowrap; position:absolute; left:0; top:0; width:30px; }

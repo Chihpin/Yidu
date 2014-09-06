@@ -9,6 +9,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#assign categorymap = categoryData?eval>
+ 
+<#if assignContent?exists>  
+      <@assignContent/>
+</#if>
 
 <#if titleContent?exists>  
       <@titleContent/>
@@ -20,6 +24,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/css/board.css">
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/css/common.css">
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/index.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/common.js"></script>
 <#if customizeimport?exists>  

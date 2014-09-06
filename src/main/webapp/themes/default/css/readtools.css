@@ -70,7 +70,7 @@ width:width:768px; border:1px solid #d5d5d5; float:left; overflow:hidden; }
 
 /* slider root element */
 .slider { 
-    url(h30.png) repeat-x 0 0; 
+    url(../images/h30.png) repeat-x 0 0; 
     background-color:#ABABAB;
 	height:9px;
 	position:relative; 
@@ -93,7 +93,7 @@ width:width:768px; border:1px solid #d5d5d5; float:left; overflow:hidden; }
 }
 /* drag handle */
 .handle { 
-    background:#fff url(h30.png) repeat-x 0 0; 
+    background:#fff url(../images/h30.png) repeat-x 0 0; 
     border: 1px solid #000000;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 0 6px #000000;

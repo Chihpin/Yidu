@@ -1,7 +1,7 @@
 <#include "usercommon.ftl"/>
 
 <#macro titleContent>  
-<title>我的消息|${getText("label.system.title")}</title>
+<title>用户信息编辑|${getText("label.system.title")}</title>
 <meta name="keywords" content="${getText("label.system.siteKeywords")}"/>
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  

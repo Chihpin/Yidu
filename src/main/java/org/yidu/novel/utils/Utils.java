@@ -8,7 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
+import java.util.Collection;
+import java.util.Random;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -66,19 +76,20 @@ public class Utils {
     public static String getContext(TChapter chapter, boolean escape) {
         return getContext(chapter, escape, false);
     }
-    
+
     /**
      * 取得章节信息
      * 
      * @param articleno
      * @param chapterno
-     * @param pseudo 	是否进行伪原创
+     * @param pseudo
+     *            是否进行伪原创
      * @return 章节内容
      */
     public static String getContext(TChapter chapter, boolean escape, boolean pseudo) {
-    	
-    	String result = null;
-    	
+
+        String result = null;
+
         StringBuilder sb = new StringBuilder();
         String path = getTextFilePathByChapterno(chapter.getArticleno(), chapter.getChapterno());
 
@@ -100,26 +111,26 @@ public class Utils {
                 }
                 bufferedReader.close();
                 read.close();
-                
+
                 if (escape) {
-                	result = sb.toString().replaceAll("\\s", "&nbsp;");
+                    result = sb.toString().replaceAll("\\s", "&nbsp;");
                 } else {
-                	result = sb.toString();
+                    result = sb.toString();
                 }
-                //根据配置决定是否采用伪原创
-                if(pseudo) {
-                	if(YiDuConstants.pseudoConf.getBoolean("replace_keywords")) {
-                    	result = PseudoUtils.replaceKeywords(result);
+                // 根据配置决定是否采用伪原创
+                if (pseudo) {
+                    if (YiDuConstants.pseudoConf.getBoolean("replace_keywords")) {
+                        result = PseudoUtils.replaceKeywords(result);
                     }
-    				if(YiDuConstants.pseudoConf.getBoolean("is_top_append")) {
-    					result = PseudoUtils.topAppend(result);
-    				}
-    				if(YiDuConstants.pseudoConf.getBoolean("is_bottom_append")) {
-    					result = PseudoUtils.bottomAppend(chapter, result);
-    				}
-    				if(YiDuConstants.pseudoConf.getBoolean("fetch_keywords_from_chapter")) {
-    					result = PseudoUtils.fetchKeywords(result);
-    				}
+                    if (YiDuConstants.pseudoConf.getBoolean("is_top_append")) {
+                        result = PseudoUtils.topAppend(result);
+                    }
+                    if (YiDuConstants.pseudoConf.getBoolean("is_bottom_append")) {
+                        result = PseudoUtils.bottomAppend(chapter, result);
+                    }
+                    if (YiDuConstants.pseudoConf.getBoolean("fetch_keywords_from_chapter")) {
+                        result = PseudoUtils.fetchKeywords(result);
+                    }
                 }
             } else {
                 logger.info("can not find chapter. articleno:" + chapter.getArticleno() + " chapterno:"
@@ -299,6 +310,84 @@ public class Utils {
         path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
                 / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/";
         return path;
+    }
+
+    /**
+     * * 将汉字转换为全拼 * *
+     * 
+     * @param src
+     * @return String
+     */
+    public static String getPinYin(String src) {
+
+        char[] charArray = null;
+        charArray = src.toCharArray();
+        String[] strArr = new String[charArray.length];
+        // 设置汉字拼音输出的格式
+        HanyuPinyinOutputFormat pinyinFormat = new HanyuPinyinOutputFormat();
+        pinyinFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+        pinyinFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+        pinyinFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
+        String retStr = "";
+        try {
+            for (int i = 0; i < charArray.length; i++) {
+                // 判断是否为汉字字符
+                if (Character.toString(charArray[i]).matches("[\\u4E00-\\u9FA5]+")) {
+                    strArr = PinyinHelper.toHanyuPinyinStringArray(charArray[i], pinyinFormat);
+                    // 将汉字的几种全拼都存到t2数组中
+                    retStr += strArr[0];
+                    // 取出该汉字全拼的第一种读音并连接到字符串retStr后
+                } else {
+                    // 如果不是汉字字符，直接取出字符并连接到字符串retStr后
+                    retStr += Character.toString(charArray[i]);
+                }
+            }
+        } catch (BadHanyuPinyinOutputFormatCombination e) {
+            e.printStackTrace();
+        }
+        return retStr;
+    }
+
+    public static boolean isDefined(Object obj) {
+        if (obj instanceof Collection) {
+            return CollectionUtils.isNotEmpty((Collection<?>) obj);
+        }
+
+        if (obj instanceof String) {
+            return org.apache.commons.lang3.StringUtils.isNotEmpty((String) obj);
+        }
+
+        if (obj instanceof Integer) {
+            return obj != null && (Integer) obj != 0;
+        }
+
+        return obj != null;
+    }
+
+    /**
+     * 生成随机字符串
+     * 
+     * @param length
+     *            字符串长度
+     * @return 随机字符串
+     */
+    public static final String getRandomString(int length) {
+
+        Random randGen = null;
+        char[] numbersAndLetters = null;
+        if (length < 1) {
+            return null;
+        }
+        if (randGen == null) {
+            randGen = new Random();
+            numbersAndLetters = ("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()'")
+                    .toCharArray();
+        }
+        char[] randBuffer = new char[length];
+        for (int i = 0; i < randBuffer.length; i++) {
+            randBuffer[i] = numbersAndLetters[randGen.nextInt(numbersAndLetters.length)];
+        }
+        return new String(randBuffer);
     }
 
 }

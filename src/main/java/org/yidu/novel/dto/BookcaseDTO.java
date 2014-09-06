@@ -2,7 +2,11 @@ package org.yidu.novel.dto;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
+import org.yidu.novel.action.ReaderAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TBookcase;
@@ -104,6 +108,17 @@ public class BookcaseDTO extends TBookcase {
             imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "/" + getArticleno() + "/" + fileName;
         }
         return imgUrl;
+    }
+
+    /**
+     * 获取最新章节URL
+     * 
+     * @return 最新章节URL
+     */
+    public String getLastChapterUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+                + "&chapterno=" + getLastchapterno());
     }
 
 }

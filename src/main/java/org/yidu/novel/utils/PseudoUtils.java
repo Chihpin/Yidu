@@ -125,6 +125,8 @@ public class PseudoUtils {
 	 * @return
 	 */
 	public static String bottomAppend(TChapter chapter, String content) {
+	    
+	    //TODO URL变成动态的
 		String bottomAppend = YiDuConstants.pseudoConf.getString("bottom_append_text", "");
 		
 		String baseUrl = YiDuConstants.yiduConf.getString("uri");

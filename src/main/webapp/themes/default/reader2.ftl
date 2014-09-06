@@ -7,7 +7,6 @@
 <#macro customizeimport>  
 <link href="${contextPath}/themes/${themeName}/css/readtools.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/tools.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/style5.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
 
@@ -31,7 +30,7 @@
                 <div>
 					<ul>
 					<#list fullReadChapterList as c >
-						<li style="float:left;width:28%;padding:5px 20px;font-size:14px;"><a href="#${c.chapterno}">${c.chaptername}</a></li>
+						<li style="float:left;width:28%;padding:5px 20px;font-size:14px;"><a href="#${c.chapterno?c}">${c.chaptername}</a></li>
 					</#list>
 					</ul>
 				</div>
@@ -80,7 +79,7 @@
         </#if>
         <div class="mainContenr"   id="content" style="overflow:hidden">
 			<#list fullReadChapterList as c >
-                <a name="${c.chapterno}">${c.chaptername}</a><br/>
+                <a name="${c.chapterno?c}">${c.chaptername}</a><br/>
 				<#if c.content??>${c.content}<br/></#if>
 				<hr/><br/>				
             </#list>

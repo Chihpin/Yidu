@@ -13,9 +13,9 @@
 	<bean id="articleService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.ArticleServiceImpl" />
 	<bean id="chapterService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.ChapterServiceImpl" />
 	<bean id="systemBlockService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.SystemBlockServiceImpl" />
-	<bean id="systemConfigService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.SystemConfigServiceImpl" />
 	<bean id="bookcaseService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.BookcaseServiceImpl" />
 	<bean id="messageService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.MessageServiceImpl" />
     <bean id="cleanDeleteDataService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.CleanDeleteDataServiceImpl" />
+    <bean id="reviewService" parent="yiduServiceParent" class="org.yidu.novel.service.impl.ReviewServiceImpl" />
 
 </beans>

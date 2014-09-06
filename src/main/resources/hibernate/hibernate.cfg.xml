@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory name="yiduSessionFactory">
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -11,7 +11,6 @@
         <mapping class="org.yidu.novel.entity.TChapter" resource="hibernate/TChapter.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TSystemBlock" resource="hibernate/TSystemBlock.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TUser" resource="hibernate/TUser.hbm.xml" />
-        <mapping class="org.yidu.novel.entity.TSystemConfig" resource="hibernate/TSystemConfig.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TReview" resource="hibernate/TReview.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TMessage" resource="hibernate/TMessage.hbm.xml" />
     </session-factory>

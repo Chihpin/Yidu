@@ -6,7 +6,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 public class YiDuConstants {
 
     public static PropertiesConfiguration yiduConf;
-    
+
     public static PropertiesConfiguration pseudoConf;
 
     public static LinkedMap categoryMap;
@@ -87,9 +87,9 @@ public class YiDuConstants {
     }
 
     public final static class ImageType {
-        public final static int JPG = 1;
-        public final static int GIF = 2;
-        public final static int PNG = 3;
+        public final static short JPG = 1;
+        public final static short GIF = 2;
+        public final static short PNG = 3;
     }
 
     public final static class BlockType {
@@ -115,6 +115,12 @@ public class YiDuConstants {
         public final static int PAGE_CATEGORY = 6;
         // * 手机排行
         public final static int PAGE_TOP = 7;
+
+        // * 8：评论页
+        public final static int PAGE_REVIEW = 8;
+
+        // * 9：用户信息页
+        public final static int PAGE_USER_INFO = 9;
 
         // * 11：登录页
         public final static int PAGE_LOGIN = 11;
@@ -207,21 +213,20 @@ public class YiDuConstants {
             ImgageMateType.GIF };
 
     public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
-    
-	public enum SiteMapType{
-    	HTML("html"), 
-    	XML("xml");
-    	
-    	private String name;
-    	
-    	private SiteMapType(String name) {
-    		this.name = name;
-    	}
 
-		public String getName() {
-			return name;
-		}
-    	
+    public enum SiteMapType {
+        HTML("html"), XML("xml");
+
+        private String name;
+
+        private SiteMapType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
     }
 
 }

@@ -128,7 +128,7 @@
         <ul>
             <li <#if pageType == 1 > class="curr"</#if>><a href="${contextPath}/">首页</a></li>
             <li <#if pageType == 7 > class="curr"</#if>><a href="${encodeURL("/top")}">排行</a></li>
-            <li <#if pageType == 6 > class="curr"</#if>><a href="${encodeURL("/category")}">分类</a></li>
+            <li <#if pageType == 6 > class="curr"</#if>><a href="${encodeURL("/mobileCategory")}">分类</a></li>
             <li <#if pageType == 26 > class="curr"</#if>><a href="${encodeURL("/bookcase")}">书架</a></li>
         </ul>
     </div>

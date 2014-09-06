@@ -25,6 +25,12 @@ public class MobileInterceptor extends AbstractInterceptor {
     public String intercept(ActionInvocation invocation) throws Exception {
         logger.debug("AuthCheckInterceptor start.");
 
+        // 禁止手机功能
+        if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_MOBILE_SITE, false)) {
+            logger.debug("AuthCheckInterceptor normally end.");
+            return invocation.invoke();
+        }
+
         invocation.addPreResultListener(new PreResultListener() {
             public void beforeResult(ActionInvocation invocation, String resultCode) {
 

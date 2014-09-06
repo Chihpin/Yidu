@@ -4,15 +4,36 @@
 <title>${article.articlename}|${article.articlename}最新章节|${article.articlename}TXT下载</title>
 <meta name="keywords" content="${article.articlename},${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
 <meta name="description" content="《${article.articlename}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${categorymap[article.category?c]}</#if>小说，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
+  <!--360结构化-->
+   <meta property="og:type" content="novel"/>
+   <meta property="og:title" content="${article.articlename?html}"/>
+   <meta property="og:description" content="<#if (article.intro ?length != 0)>${article.intro?html}<#else>暂无简介</#if>"/>
+   <meta property="og:image" content="${article.imgUrl}"/>
+   <meta property="og:novel:category" content="<#if article.category!=0>${categorymap[article.category?c]}</#if>"/>
+   <meta property="og:novel:author" content="${article.author?html}"/>
+   <meta property="og:novel:book_name" content="${article.articlename?html}"/>
+   <meta property="og:novel:read_url" content="${article.url}"/>
+
+   <!--选填-->
+   <meta property="og:novel:status" content="<#if article.fullflag>完结<#else>连载中</#if>"/>
+   <meta property="og:novel:update_time" content="${article.lastupdate?string("yyyy-MM-dd HH:mm")}"/>
+   <meta property="og:novel:click_cnt" content="${article.allvisit?c}"/>
+   <meta property="og:novel:latest_chapter_name" content="${article.lastchapter}"/>
+   <meta property="og:novel:latest_chapter_url" content="${article.lastChapterUrl}"/>
+
+</#macro>
+
+<#macro customizeimport>  
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/js/review.js"></script>
 </#macro>
 
 <#macro content>
     <#if adEffective?? && adEffective>
     <script type="text/javascript" src="${contextPath}/ad/info1.js"></script>
     </#if>
-    <div class="mainnav"><div class="main-index"> > 
+    <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
         <a href="${encodeURL("/articleList?category=${article.category}")}" class="c009900">
-        ${categorymap[article.category?c]}</a> > 
+        ${categorymap[article.category?c]}</a> &nbsp; > &nbsp; 
         ${article.articlename}
     </div>
     <section class="main b-detail">
@@ -93,18 +114,73 @@
     <#if adEffective?? && adEffective>
     <div class="bookNew"><script src="${contextPath}/ad/info3.js" type="text/javascript"></script></div>
     </#if>
+    <div class="clear"></div>
+    <div class="comment_left">
+        <div class="commenthead">
+            <div class="ti">
+                <h2>《${article.articlename}》的评论</h2>
+                <div class="par">共有评论<a target="blank" href="${encodeURL("/reviewList?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">${reviewCount?c}</a>条</div>
+                <div class="par2"><a target="_blank" href="${encodeURL("/reviewList?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">[全部评论]</a></div>
+            </div>
+        </div>
+        <ul class="commentslist">
+            <#list reviewList as review>
+                <li class="line">
+                <div class="has_avatar">
+                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/images/90_avatar_middle.jpg"></a>
+                </div>
+                <div class="replycontent">
+                    <div class="t_t">
+                        <div>
+                            <a target="_blank" title="${review.loginid}" class="commenter" href="${encodeURL("/userInfo?userno=${review.userno}")}">${review.loginid}</a>
+                            <span class="time">评论于：${review.postdate?string("yyyy-MM-dd HH:mm")}</span>
+                        </div>
+                    </div>
+                    <ul class="Reviewer">
+                        <li class="txt">${review.review?html}
+                        </li>
+                    </ul>
+                  </div>
+                </li>
+            </#list>
+        </ul>
+        <div class="blank"></div>
+        <!-- 我的回复框 -->
+        <div id="commentbox" class="talker_form">
+            <#if !loginFlag>
+            <div class="logintip">您还未登录，请登录或注册后再发表回复</div>
+            </#if>
+            <div class="form_t"> 评论内容： </div>
+            <div class="form_b">
+                <div class="smtextarea">
+                    <textarea class="comment_content" onkeyup="stat_text_word(this);" rows="5" cols="60" name="review" id="review">既然来了，就留下几句话吧</textarea>
+                    <input type="hidden" value="${articleno?c}" id="articleno" name="articleno">
+                    <input type="hidden" value="false" name="isFromForm" id="isFromForm" >
+                </div>
+                <div class="form_f">
+                    <div class="box_l"> 
+                        <div>已输入字数：<span id="comment_text_word">0</span>  (评论最少5字最多500字) </div>
+                    </div>
+                    <input type="submit" class="release_btn submit_comment_btn" value=" " id= "submitbtn" name="submitbtn">
+                </div>
+            </div>
+        </div>
+    </div>
+    <#if adEffective?? && adEffective>
+    <div class="bookNew"><script src="${contextPath}/ad/info4.js" type="text/javascript"></script></div>
+    </#if>
+    <div class="clear"></div>
     <div class="chapterNum">
         <a name="chapters"></a>
           <ul>
-            <h1>${article.articlename}全文阅读([<a href="${contextPath}/login">登陆</a>]后开放)</h1>
-			
+            <h1>《${article.articlename}》分卷阅读<#if !loginFlag>([<a href="${encodeURL("/login")}">登陆</a>]后开放)</#if></h1>
             <#list chapterList as chapter>
                 <#if chapter.chaptertype == 0>
 					<#if loginFlag>
 						<#if chapter_index % 30 == 0>
 							<li style="width:100%;background-color:#f2f9f1;margin-left:0;text-align:center;">
 								<#if (chapter_index + 30 lt chapterList?size)>
-									<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapterList[chapter_index].chapterno?c}&toChapterno=${chapterList[chapter_index+30].chapterno?c}")}">分段阅读</a>
+									<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapterList[chapter_index].chapterno?c}&toChapterno=${chapterList[chapter_index+29].chapterno?c}")}">分段阅读</a>
 								<#else>
 									<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapterList[chapter_index].chapterno?c}&toChapterno=${chapterList[chapterList?size-1].chapterno?c}")}">分段阅读</a>
 								</#if>
@@ -112,14 +188,14 @@
 						</#if>
 					</#if>
                     <li>
-                    <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="${chapter.chaptername}">${chapter.chaptername}</a>
+                    <a href="${chapter.url}" title="${chapter.chaptername}">${chapter.chaptername}</a>
                     </li>
                 </#if>
             </#list>
           </ul>
         </div>
     </div>
-    <script type="text/javascript" src="${contextPath}/ad/info4.js"></script>
+    <script type="text/javascript" src="${contextPath}/ad/info5.js"></script>
 </#macro>
 
 <#macro customizefooter> 
