@@ -156,6 +156,8 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
         if (articleno != 0) {
             // 获取小说信息
             article = articleService.getByNo(articleno);
+        } else {
+            addActionError(getText("errors.not.exsits.article"));
         }
 
         ReviewSearchBean searchBean = new ReviewSearchBean();
