@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.map.LinkedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
@@ -29,23 +28,6 @@ public class TopAction extends AbstractPublicListBaseAction {
 
     private static final long serialVersionUID = -4123651229405239412L;
 
-    private static final Map<String, String> topNameMap = new LinkedMap() {
-        private static final long serialVersionUID = 2390455878552118167L;
-        {
-            put("lastupdate", "最近更新");
-            put("allvisit", "总排行榜");
-            put("allvote", "总推荐榜");
-            put("monthvisit", "月排行榜");
-            put("monthvote", "月推荐榜");
-            put("weekvisit", "周排行榜");
-            put("weekvote", "周推荐榜");
-            put("dayvisit", "日排行榜");
-            put("dayvote", "日推荐榜");
-            put("postdate", "最新入库");
-            put("size", "字数排行");
-        }
-    };
-
     /**
      * 页号
      */
@@ -62,7 +44,7 @@ public class TopAction extends AbstractPublicListBaseAction {
 
     public String getTopNameJsonData() {
         Gson gson = new Gson();
-        return gson.toJson(topNameMap, Map.class);
+        return gson.toJson(YiDuConstants.topNameMap, Map.class);
     }
 
     public int getPage() {
@@ -110,7 +92,7 @@ public class TopAction extends AbstractPublicListBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
 
-        if (!topNameMap.containsKey(sortColumn)) {
+        if (!YiDuConstants.topNameMap.containsKey(sortColumn)) {
             // 默认最近更新
             sortColumn = "lastupdate";
         }

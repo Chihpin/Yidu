@@ -1,6 +1,8 @@
 package org.yidu.novel.constant;
 
-import org.apache.commons.collections.map.LinkedMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 public class YiDuConstants {
@@ -9,7 +11,22 @@ public class YiDuConstants {
 
     public static PropertiesConfiguration pseudoConf;
 
-    public static LinkedMap categoryMap;
+    public static final Map<String, String> topNameMap = new LinkedHashMap<String, String>() {
+        private static final long serialVersionUID = -2355068040470822368L;
+        {
+            put("lastupdate", "最近更新");
+            put("allvisit", "总排行榜");
+            put("allvote", "总推荐榜");
+            put("monthvisit", "月排行榜");
+            put("monthvote", "月推荐榜");
+            put("weekvisit", "周排行榜");
+            put("weekvote", "周推荐榜");
+            put("dayvisit", "日排行榜");
+            put("dayvote", "日推荐榜");
+            put("postdate", "最新入库");
+            put("size", "字数排行");
+        }
+    };
 
     /**
      * UTF-8字符串
@@ -226,7 +243,6 @@ public class YiDuConstants {
         public String getName() {
             return name;
         }
-
     }
 
 }
