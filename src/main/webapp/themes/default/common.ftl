@@ -39,8 +39,8 @@
                             if(index != -1){
                                 readhistory.splice(index,1);
                             }
-                            $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
-                            
+                            $.cookie("readhistory",JSON.stringify(readhistory),{path:"/",expires: 365});
+
                             var len=$(this).parents("ul").children("li").length;
                             if(len!=1){$(this).parent("li").remove();}
                             else{$(this).parents(".hideInfo").children("p").remove();

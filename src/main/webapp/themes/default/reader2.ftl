@@ -25,7 +25,7 @@
             readhistory = JSON.parse(readhistory);
        }
        var readObject = new Object();
-       readObject.chapterno = ${chapter.chapterno?c};
+       readObject.chapterno = ${toChapterno?c};
        readObject.articleno = ${chapter.articleno?c};
        readObject.chaptername = "${chapter.chaptername}";
        readObject.articlename = "${chapter.articlename}";
@@ -37,7 +37,7 @@
        if(readhistory.length > 10 ){
             readhistory.splice(9,readhistory.length - 10);
        }
-       $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
+       $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' , expires: 365});
     })
     -->
 </script>

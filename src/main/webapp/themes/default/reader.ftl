@@ -48,7 +48,7 @@
        if(readhistory.length > 10 ){
             readhistory.splice(9,readhistory.length - 10);
        }
-       $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
+       $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
     })
     -->
 </script>
