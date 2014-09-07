@@ -9,7 +9,16 @@
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/tools.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/style5.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/js/lib/jquery.tools.min1.2.5.js"></script>
-
+<script type="text/javascript">
+    <!--
+    document.oncontextmenu=function(e){return false;} 
+    document.ondragstart=function(e){return false;}
+    document.onselectstart=function(e){return false;}
+    document.onselect=function(e){return false;} 
+    document.oncopy=function(e){document.selection.empty();}
+    document.onbeforecopy=function(e){return false;}
+    -->
+</script>
 </#macro>
 
 <#macro content>
