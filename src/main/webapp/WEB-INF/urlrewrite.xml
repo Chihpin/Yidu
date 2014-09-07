@@ -29,12 +29,12 @@
         <to>/test/status/</to>
     </outbound-rule>
      -->
-    <outbound-rule encodefirst="true">
-        <from>^(.*);jsessionid=.*$</from>
-        <to>$1</to>
-    </outbound-rule>
+	<outbound-rule encodefirst="true">
+		<from>^(.*);jsessionid=.*$</from>
+		<to>$1</to>
+	</outbound-rule>
 
-    <!-- 小说列表开始 -->
+	<!-- 小说列表开始 -->
 
 	<rule>
 		<from>^/list/(\d*)\.html$</from>
@@ -57,25 +57,19 @@
 	<!-- 小说列表结束 -->
 
 	<rule>
-		<from>^/book/\d*/(\d*)\.html$</from>
-		<to last="true">/info\?articleno=$1</to>
-	</rule>
-
-	<rule>
-		<from>^/book/(\d*)\.html$</from>
+		<from>^/info/\d*/(\d*)\.html$</from>
 		<to last="true">/info\?articleno=$1</to>
 	</rule>
 
 	<outbound-rule>
 		<from>^/info\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/book/$1/$2\.html</to>
+		<to last="true">/info/$1/$2\.html</to>
 	</outbound-rule>
-	
+
 	<rule>
-        <from>^/reader/(\d*)/index\.html$</from>
-        <to last="true">/info\?articleno=$1</to>
-    </rule>
-	
+		<from>^/reader/(\d*)/index\.html$</from>
+		<to last="true">/info\?articleno=$1</to>
+	</rule>
 
 	<rule>
 		<from>^/reader/\d*/(\d*)/(\d*)\.html$</from>
@@ -231,7 +225,7 @@
 		<from>^/top\?sortColumn=(.+?)(;jsessionid=.*)?$</from>
 		<to last="true">/top/$1\.html</to>
 	</outbound-rule>
-	
+
 	<!-- 评论页 -->
 	<rule>
 		<from>^/reviewList/(\d*)/(\d*)/(\d*)\.html$</from>
