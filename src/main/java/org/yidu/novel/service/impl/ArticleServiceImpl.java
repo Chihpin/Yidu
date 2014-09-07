@@ -14,8 +14,8 @@ import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
 
 public class ArticleServiceImpl extends HibernateSupportServiceImpl implements ArticleService {
-	
-	private static final Log log = LogFactory.getLog(ArticleServiceImpl.class);
+
+    private static final Log log = LogFactory.getLog(ArticleServiceImpl.class);
 
     @Override
     public List<TArticle> find(final ArticleSearchBean searchBean) {
@@ -135,7 +135,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
 
     @Override
     public void cleanStatistics() {
-    	log.info("cleanStatistics start");
+        log.info("cleanStatistics start");
         String sql = "update t_article set dayvote = 0 ,dayvisit = 0";
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
@@ -150,5 +150,16 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         }
         this.yiduJdbcTemplate.update(sql);
         log.info("cleanStatistics end");
+    }
+
+    @Override
+    public TArticle findByPinyin(String pinyin) {
+        String sql = "SELECT count(*) FROM TArticle where pinyin ~ '^" + pinyin + "[\\d]*$' order by pinyin desc;";
+
+        List<TArticle> articleList = this.find(sql);
+        if (articleList != null && articleList.size() > 0) {
+            return articleList.get(0);
+        }
+        return null;
     }
 }

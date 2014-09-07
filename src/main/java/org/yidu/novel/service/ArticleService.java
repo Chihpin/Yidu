@@ -18,6 +18,15 @@ public interface ArticleService {
     public Integer getCount(final ArticleSearchBean searchBean);
 
     /**
+     * 通过拼音查找
+     * 
+     * @param pinyin
+     *            拼音
+     * @return 小说
+     */
+    public TArticle findByPinyin(final String pinyin);
+
+    /**
      * 
      * 小说信息取得
      * 

@@ -275,6 +275,22 @@ public class ArticleEditAction extends AbstractUserBaseAction {
                 return FREEMARKER;
             }
 
+            String pinyin = Utils.getPinYin(articlename);
+            TArticle articletemp = articleService.findByPinyin(pinyin);
+            if (articletemp != null) {
+                // 存在的话
+                if (StringUtils.equals(articletemp.getPinyin(), pinyin)) {
+                    // 如果存在相同拼音的就在后面加数字
+                    pinyin = pinyin + 2;
+                } else {
+                    // TODO 此处多线程的话会有问题，后台同时操作的时候应该不多！暂时不对应
+                    int suffixNumber = Integer.valueOf(StringUtils.substring(articletemp.getPinyin(), pinyin.length(),
+                            articletemp.getPinyin().length())) + 1;
+                    pinyin = pinyin + (suffixNumber + 1);
+                }
+            }
+            article.setPinyin(pinyin);
+
             TUser user = LoginManager.getLoginUser();
             article.setAuthorid(user.getUserno());
             article.setAuthor(user.getUsername());
