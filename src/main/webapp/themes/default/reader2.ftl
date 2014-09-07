@@ -17,6 +17,28 @@
     document.onselect=function(e){return false;} 
     document.oncopy=function(e){document.selection.empty();}
     document.onbeforecopy=function(e){return false;}
+    $(document).ready(function(){
+       var readhistory = $.cookie("readhistory");
+       if(! readhistory ){
+            readhistory = new Array();
+       }else{
+            readhistory = JSON.parse(readhistory);
+       }
+       var readObject = new Object();
+       readObject.chapterno = ${chapter.chapterno?c};
+       readObject.articleno = ${chapter.articleno?c};
+       readObject.chaptername = "${chapter.chaptername}";
+       readObject.articlename = "${chapter.articlename}";
+       var index = readObject.articleno.in_array(readhistory);
+       if(index != -1){
+            readhistory.splice(index,1);
+       }
+       readhistory.splice(0,0,readObject);
+       if(readhistory.length > 10 ){
+            readhistory.splice(9,readhistory.length - 10);
+       }
+       $.cookie("readhistory",JSON.stringify(readhistory),{expires: 365});
+    })
     -->
 </script>
 </#macro>
