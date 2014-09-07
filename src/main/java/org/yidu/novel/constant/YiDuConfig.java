@@ -29,6 +29,12 @@ public class YiDuConfig {
     public final static String REVIEW_NUM = "reviewnum";
     public final static String ADD_REVIEW_WITHOUT_LOGIN = "addReviewWithoutLogin";
     public final static String ENABLE_PSEUDO = "enablePseudo";
+    
+    public final static String ENABLE_QQLOGIN = "enableQQLogin";
+    public final static String APP_ID = "app_ID";
+    public final static String APP_KEY = "app_KEY";
+    public final static String REDIRECT_URI = "redirect_URI";
+
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

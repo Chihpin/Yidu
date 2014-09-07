@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.struts2.convention.annotation.Action;
+import org.yidu.novel.action.QQLoginAction;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -112,6 +113,12 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      * 是否启用伪原创
      */
     private boolean enablePseudo;
+
+    private boolean enableQQLogin;
+
+    private String appId;
+
+    private String appKey;
 
     public String getFilePath() {
         return filePath;
@@ -281,6 +288,30 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.enablePseudo = enablePseudo;
     }
 
+    public boolean isEnableQQLogin() {
+        return enableQQLogin;
+    }
+
+    public void setEnableQQLogin(boolean enableQQLogin) {
+        this.enableQQLogin = enableQQLogin;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
+    }
+
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
@@ -303,6 +334,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         judgmobilesitebydomian = YiDuConstants.yiduConf.getBoolean(YiDuConfig.JUDG_MOBILESITE_BY_DOMIAN, true);
         mobilesitedomian = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILESITE_DOMIAN);
         enablePseudo = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false);
+        enableQQLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
 
         // 设定文件初期读入
         try {
@@ -311,6 +343,10 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
             dburl = jdbcConf.getString(YiDuConfig.JDBC_URL);
             username = jdbcConf.getString(YiDuConfig.JDBC_USERNAME);
             password = jdbcConf.getString(YiDuConfig.JDBC_PASSWORD);
+
+            PropertiesConfiguration qqconnectConfig = new PropertiesConfiguration("qqconnectconfig.properties");
+            appId = qqconnectConfig.getString(YiDuConfig.APP_ID);
+            appKey = qqconnectConfig.getString(YiDuConfig.APP_KEY);
 
         } catch (ConfigurationException e) {
             logger.error(e);
@@ -339,6 +375,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.JUDG_MOBILESITE_BY_DOMIAN, judgmobilesitebydomian);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.MOBILESITE_DOMIAN, mobilesitedomian);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_PSEUDO, enablePseudo);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_QQLOGIN, enableQQLogin);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());
@@ -348,13 +385,25 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
             PropertiesConfiguration jdbcConf = new PropertiesConfiguration(Thread.currentThread()
                     .getContextClassLoader().getResource("jdbc.properties"));
 
-            jdbcConf.getString(YiDuConfig.JDBC_URL, dburl);
-            jdbcConf.getString(YiDuConfig.JDBC_USERNAME, username);
-            jdbcConf.getString(YiDuConfig.JDBC_PASSWORD, password);
+            jdbcConf.setProperty(YiDuConfig.JDBC_URL, dburl);
+            jdbcConf.setProperty(YiDuConfig.JDBC_USERNAME, username);
+            jdbcConf.setProperty(YiDuConfig.JDBC_PASSWORD, password);
 
             File jdbcFile = new File(jdbcConf.getPath());
             out = new FileOutputStream(jdbcFile);
             jdbcConf.save(out);
+
+            PropertiesConfiguration qqconnectConfig = new PropertiesConfiguration(Thread.currentThread()
+                    .getContextClassLoader().getResource("qqconnectconfig.properties"));
+
+            qqconnectConfig.setProperty(YiDuConfig.APP_ID, appId);
+            qqconnectConfig.setProperty(YiDuConfig.APP_KEY, appKey);
+            qqconnectConfig.setProperty(YiDuConfig.REDIRECT_URI, YiDuConstants.yiduConf.getString(YiDuConfig.URI)
+                    + QQLoginAction.URL);
+
+            File qqconnectConfigFile = new File(qqconnectConfig.getPath());
+            out = new FileOutputStream(qqconnectConfigFile);
+            qqconnectConfig.save(out);
 
         } catch (Exception e) {
             addActionError(e.getMessage());

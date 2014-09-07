@@ -23,6 +23,16 @@ public class QQLoginAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = -4123651229405239412L;
 
+    /**
+     * 功能名称。
+     */
+    public static final String NAME = "QQLogin";
+
+    /**
+     * 访问URL。
+     */
+    public static final String URL = NAMESPACE + "/" + NAME;
+
     @Override
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_OTHERS;

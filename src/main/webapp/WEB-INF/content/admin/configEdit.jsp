@@ -146,6 +146,21 @@
        <td class="odd" width="20%"><s:text name="label.admin.config.edit.enablePseudo" /></td>
        <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enablePseudo" ></s:radio></td>
     </tr>
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.enableQQLogin" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableQQLogin" ></s:radio></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.appId" /></td>
+       <td class="even"><s:textfield name ="appId" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.config.edit.appKey" /></td>
+       <td class="even"><s:textfield name ="appKey" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" colspan="2">
