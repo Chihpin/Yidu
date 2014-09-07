@@ -50,9 +50,12 @@
                 <#elseif category??>
                 <#assign listurl = "/articleList?category=${category}&page=">
                 <#assign listurlforjs = "${contextPath}/list/${category}/" >
-                <#else>
+                <#elseif author??>
                 <#assign listurl = "/articleList?author=${author}&page=">
                 <#assign listurlforjs = "${contextPath}/list/${author}/" >
+        <#else>
+                <#assign listurl = "/articleList?page=">
+                <#assign listurlforjs = "${contextPath}/list/" >
                 </#if>
                 <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages?c}</em>
                 <a href="${encodeURL(listurl +"1")}" class="first">1</a>
