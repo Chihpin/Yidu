@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
@@ -154,9 +155,9 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
 
     @Override
     public TArticle findByPinyin(String pinyin) {
-        String sql = "SELECT count(*) FROM TArticle where pinyin ~ '^" + pinyin + "[\\d]*$' order by pinyin desc;";
-
-        List<TArticle> articleList = this.find(sql);
+        String sql = "SELECT * FROM t_article where pinyin ~ '^" + pinyin + "[\\d]*$' order by pinyin desc;";
+        List<TArticle> articleList = this.yiduJdbcTemplate.query(sql, new BeanPropertyRowMapper<TArticle>(
+                TArticle.class));
         if (articleList != null && articleList.size() > 0) {
             return articleList.get(0);
         }
