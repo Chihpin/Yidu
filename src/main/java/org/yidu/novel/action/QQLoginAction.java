@@ -69,7 +69,6 @@ public class QQLoginAction extends AbstractPublicBaseAction {
                         userService.save(user);
                     } else {
                         // 未登录状态添加用户
-
                         // 根据openid查询用户信息
                         user = userService.findByOpenid(openID);
 
@@ -80,6 +79,7 @@ public class QQLoginAction extends AbstractPublicBaseAction {
                             // 设置默认随机密码
                             user.setPassword(Utils.convert2MD5(userInfoBean.getNickname() + Utils.getRandomString(32)));
                             user.setSex(StringUtils.equals(userInfoBean.getGender(), "男") ? (short) 1 : (short) 2);
+                            user.setType(YiDuConstants.UserType.NORMAL_USER);
                             user.setRegdate(new Date());
                             user.setDeleteflag(false);
                             user.setActivedflag(true);
