@@ -309,7 +309,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
                 } else {
                     // TODO 此处多线程的话会有问题，后台同时操作的时候应该不多！暂时不对应
                     int suffixNumber = Integer.valueOf(StringUtils.substring(articletemp.getPinyin(), pinyin.length(),
-                            articletemp.getPinyin().length())) + 1;
+                            articletemp.getPinyin().length()));
                     pinyin = pinyin + (suffixNumber + 1);
                 }
             }
