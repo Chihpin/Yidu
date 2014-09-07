@@ -46,4 +46,6 @@ public interface ArticleService {
 
     public void cleanStatistics();
 
+    public Integer getCountByJDBC(final ArticleSearchBean searchBean);
+
 }

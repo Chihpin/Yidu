@@ -7,7 +7,9 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 
 /**
@@ -33,14 +35,18 @@ public class InitializerListener implements ServletContextListener {
             FileChangedReloadingStrategy reloadStrategy = new FileChangedReloadingStrategy();
             yiduConf.setReloadingStrategy(reloadStrategy);
             YiDuConstants.yiduConf = yiduConf;
-            
-            //加载伪原创设置
+
+            // 加载伪原创设置
             YiDuConstants.pseudoConf = new PropertiesConfiguration("pseudo.properties");
             YiDuConstants.pseudoConf.setReloadingStrategy(reloadStrategy);
-            
+
             // 初始化缓存
             CacheManager.initCacheManager();
-            // 初始化选项列表
+
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
+                // 初始化小说件数MAP
+                ArticleCountManager.initArticleCountManager();
+            }
 
             logger.info("Initialize successfully.");
         } catch (Exception e) {

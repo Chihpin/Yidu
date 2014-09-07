@@ -15,6 +15,7 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.BookcaseSearchBean;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.bean.UserSearchBean;
+import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -476,14 +477,19 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
 
-        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
         int count = 0;
-        if (countInfo == null) {
-            count = articleService.getCount(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
+            count = ArticleCountManager.getArticleCount(String.valueOf(category));
         } else {
-            count = Integer.parseInt(countInfo.toString());
+            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            if (countInfo == null) {
+                count = articleService.getCount(searchBean);
+                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+            } else {
+                count = Integer.parseInt(countInfo.toString());
+            }
         }
+
         dto.setTotal(count);
         int pages = count / size;
         if (count % size > 0) {
@@ -533,13 +539,19 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         // 取章节信息
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
-        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
         int count = 0;
-        if (countInfo == null) {
-            count = articleService.getCount(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
+
+            count = ArticleCountManager.getArticleCount(String.valueOf(category));
+
         } else {
-            count = Integer.parseInt(countInfo.toString());
+            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            if (countInfo == null) {
+                count = articleService.getCount(searchBean);
+                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+            } else {
+                count = Integer.parseInt(countInfo.toString());
+            }
         }
         dto.setTotal(count);
         int pages = count / size;

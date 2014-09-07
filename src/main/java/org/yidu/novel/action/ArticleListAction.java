@@ -3,11 +3,14 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
+import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 
@@ -117,13 +120,27 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
         pagination.setSortOrder("DESC");
 
-        Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
         int count = 0;
-        if (countInfo == null) {
-            count = articleService.getCount(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
+            // 开启缓存件数的话
+            if (category != null && category != 0) {
+                // 分类
+                count = ArticleCountManager.getArticleCount(String.valueOf(category));
+            } else if (StringUtils.isNotEmpty(author)) {
+                count = ArticleCountManager.getArticleCount("author");
+            } else if (fullflag != null && fullflag) {
+                count = ArticleCountManager.getArticleCount("fullflag");
+            } else {
+                count = ArticleCountManager.getArticleCount("all");
+            }
         } else {
-            count = Integer.parseInt(countInfo.toString());
+            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            if (countInfo == null) {
+                count = articleService.getCount(searchBean);
+                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+            } else {
+                count = Integer.parseInt(countInfo.toString());
+            }
         }
         // 总件数设置
         pagination.setPreperties(count);

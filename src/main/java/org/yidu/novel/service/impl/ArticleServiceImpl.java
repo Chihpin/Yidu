@@ -163,4 +163,14 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         }
         return null;
     }
+
+    @Override
+    public Integer getCountByJDBC(ArticleSearchBean searchBean) {
+        StringBuffer sql = new StringBuffer();
+        List<Object> params = new ArrayList<Object>();
+        sql.append("SELECT count(*) FROM t_article where deleteflag = false ");
+        buildCondtion(searchBean, sql, params);
+        return yiduJdbcTemplate.queryForObject(sql.toString(), params.toArray(), Integer.class);
+    }
+
 }

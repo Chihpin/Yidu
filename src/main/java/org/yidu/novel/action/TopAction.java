@@ -8,7 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
+import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 
@@ -105,11 +107,18 @@ public class TopAction extends AbstractPublicListBaseAction {
         pagination.setSortColumn(sortColumn);
         pagination.setSortOrder(StringUtils.equalsIgnoreCase("ASC", sortOrder) ? sortOrder : "DESC");
 
-        Integer count = CacheManager.getObject(CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX);
-        if (count == null || count == 0) {
-            count = articleService.getCount(searchBean);
+        int count = 0;
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
+            // 开启缓存件数的话
+            count = ArticleCountManager.getArticleCount(sortColumn);
+        } else {
+            Integer countCache = CacheManager.getObject(CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX);
+            if (countCache == null || countCache == 0) {
+                count = articleService.getCount(searchBean);
+            } else {
+                count = countCache;
+            }
         }
-
         // 总件数设置
         pagination.setPreperties(count);
         searchBean.setPagination(pagination);
