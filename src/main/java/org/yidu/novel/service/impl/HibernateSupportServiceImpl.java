@@ -66,21 +66,23 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
         return this.getQuery(hql, params.toArray());
     }
 
+    // fomat HQL to JPQL style
+    private String fomatHQL(String queryString) {
+        StringBuffer buffer = new StringBuffer(queryString);
+        int start = 0;
+        int order = 0;
+        while ((start = buffer.indexOf("?", start + 1)) > 0) {
+            buffer.insert(start + 1, order);
+            order++;
+        }
+        return buffer.toString();
+    }
+
     protected final Query getQuery(final String hql, final Object... params) {
-//    	Session session = null;
-//    	try {
-//    		session = this.sessionFactory.getCurrentSession();
-//    	} catch (HibernateException e) {
-//    		session = sessionFactory.openSession();
-//    	}
-//    	if(session != null && !session.getTransaction().isActive()) {
-//    		session = sessionFactory.openSession();
-//    	}
-//        Query query = session.createQuery(hql);
-    	Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        Query query = this.sessionFactory.getCurrentSession().createQuery(fomatHQL(hql));
         if (params != null && params.length != 0) {
             for (int i = 0; i < params.length; i++) {
-                query.setParameter(i, params[i]);
+                query.setParameter(i + "", params[i]);
             }
         }
         return query;
