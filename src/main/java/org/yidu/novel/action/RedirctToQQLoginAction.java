@@ -38,7 +38,7 @@ public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
         if (StringUtils.isEmpty(backUrl)) {
             backUrl = "/";
         }
-        ServletActionContext.getRequest().getSession().setAttribute(BACK_URL, backUrl);
+        ServletActionContext.getRequest().getSession(true).setAttribute(BACK_URL, backUrl);
         return REDIRECT;
     };
 

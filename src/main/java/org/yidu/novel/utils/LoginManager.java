@@ -48,8 +48,8 @@ public class LoginManager {
      */
     public static final void doLogin(final TUser user) {
         HttpSession session = getSession(true);
-        session.invalidate();
-        session = getSession(true);
+        // session.invalidate();
+        // session = getSession(true);
         session.setAttribute(YiDuConstants.LoginUser, user);
     }
 
