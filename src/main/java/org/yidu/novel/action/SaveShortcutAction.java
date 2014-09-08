@@ -79,11 +79,6 @@ public class SaveShortcutAction extends AbstractPublicBaseAction {
     public String execute() {
         logger.debug("execute start.");
         String shortcutStr = "[InternetShortcut]\nURL=" + getText("label.system.url");
-        logger.info(shortcutStr);
-        // +
-        // "IDList= IconIndex=43 IconFile=/favicon.ico HotKey=1626  [{000214A0-0000-0000-C000-000000000046}]\n "
-        // + "Prop3=19,2 ";
-
         is = new ByteArrayInputStream(shortcutStr.getBytes());
         length = shortcutStr.length();
         logger.debug("execute normally end.");
