@@ -36,7 +36,7 @@ public class ErrorInterceptor extends AbstractInterceptor {
         } catch (Throwable th) {
         	AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
         	if(th instanceof IOException) {
-        		logger.warn("IOException occured! may the user stop downloading");
+        		logger.debug("IOException occured! may the user stop downloading, do not care.");
         		return null;
         	} else {
         		logger.error(action, th);
