@@ -70,7 +70,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
     }
 
     @Override
-    public void delteByNo(int chapterno) {
+    public void deleteByNo(int chapterno) {
         TChapter chapter = getByNo(chapterno);
         this.delete(chapter);
     }
@@ -91,7 +91,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
     }
 
     @Override
-    public Integer getArticleSize(int articleno) {
+    public Integer getChapterCount(int articleno) {
         StringBuffer sql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
         sql.append("SELECT sum(size) FROM TChapter where  deleteflag=false and chaptertype = 0 ");

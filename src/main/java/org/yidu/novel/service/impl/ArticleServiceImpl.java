@@ -100,7 +100,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     }
 
     @Override
-    public void delteByNo(final int articleno) {
+    public void deleteByNo(final int articleno) {
         TArticle article = getByNo(articleno);
         this.delete(article);
 

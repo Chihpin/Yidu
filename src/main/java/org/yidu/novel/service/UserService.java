@@ -6,6 +6,16 @@ import java.util.List;
 import org.yidu.novel.bean.UserSearchBean;
 import org.yidu.novel.entity.TUser;
 
+/**
+ * 
+ * <p>
+ * 提供用户信息操作的服务
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public interface UserService {
 
     /**
@@ -65,7 +75,7 @@ public interface UserService {
      * 
      * @param userno
      */
-    public void delteByNo(final int userno);
+    public void deleteByNo(final int userno);
 
     /**
      * 保存用户信息

@@ -16,7 +16,7 @@ public class MessageServiceImpl extends HibernateSupportServiceImpl implements M
     }
 
     @Override
-    public void delteByNo(int messageno) {
+    public void deleteByNo(int messageno) {
         TMessage message = getByNo(messageno);
         this.delete(message);
 

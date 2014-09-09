@@ -185,7 +185,7 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
             article.setLastupdate(new Date());
         }
         // 更新小说字数
-        article.setSize(this.chapterService.getArticleSize(articleno));
+        article.setSize(this.chapterService.getChapterCount(articleno));
 
         article.setModifytime(new Date());
         article.setModifyuserno(LoginManager.getLoginUser().getUserno());

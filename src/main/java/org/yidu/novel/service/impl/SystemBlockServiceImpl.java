@@ -50,7 +50,7 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
     }
 
     @Override
-    public void delteByNo(int blockno) {
+    public void deleteByNo(int blockno) {
         TSystemBlock systemBlock = getByNo(blockno);
         // TODO deleteflag
         this.delete(systemBlock);

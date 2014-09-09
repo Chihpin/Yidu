@@ -128,7 +128,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
             return FREEMARKER_ERROR;
         }
 
-        TBookcase bookcase = this.bookcaseService.getByArticleno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
         if (bookcase == null) {
             bookcase = new TBookcase();
         }
@@ -163,7 +163,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
         if (bookcaseno != 0) {
             TBookcase bookcase = this.bookcaseService.getByNo(bookcaseno);
             if (bookcase.getUserno() == LoginManager.getLoginUser().getUserno()) {
-                this.bookcaseService.delteByNo(bookcaseno);
+                this.bookcaseService.deleteByNo(bookcaseno);
             } else {
                 addActionError(getText("errors.unauthority.bookcase"));
                 return FREEMARKER_ERROR;

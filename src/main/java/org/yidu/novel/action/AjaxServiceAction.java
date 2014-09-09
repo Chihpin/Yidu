@@ -341,7 +341,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        bookcaseService.getByArticleno(LoginManager.getLoginUser().getUserno(), articleno);
+        bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
 
         dto.setCode(0);
         logger.debug("deleteBookcaseByArticle normally end.");
@@ -365,7 +365,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        TBookcase bookcase = this.bookcaseService.getByArticleno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
         if (bookcase == null) {
             bookcase = new TBookcase();
         }
@@ -395,7 +395,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        TBookcase bookcase = bookcaseService.getByArticleno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
         if (bookcase != null) {
             dto.setResult("1");
         }
@@ -434,7 +434,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        bookcaseService.batchdeleteByNo(bookcasenos, LoginManager.getLoginUser().getUserno());
+        bookcaseService.batchDeleteByNo(bookcasenos, LoginManager.getLoginUser().getUserno());
         dto.setCode(0);
         logger.debug("deleteBookcase normally end.");
     }

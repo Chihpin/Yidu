@@ -29,4 +29,5 @@ public class BaseServiceImpl {
     public void setYiduDataSource(final DataSource yiduDataSource) {
         this.yiduJdbcTemplate = new JdbcTemplate(yiduDataSource);
     }
+
 }

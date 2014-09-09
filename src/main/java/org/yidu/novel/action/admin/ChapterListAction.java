@@ -108,14 +108,14 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         chapterService.save(chapter);
         // 更新最新章节信息
         TArticle article = articleService.getByNo(articleno);
-        article.setSize(chapterService.getArticleSize(articleno));
+        article.setSize(chapterService.getChapterCount(articleno));
         TChapter lastChapter = chapterService.getLastChapter(articleno);
         if (lastChapter != null) {
             article.setLastchapterno(lastChapter.getChapterno());
             article.setLastchapter(lastChapter.getChaptername());
             article.setLastupdate(lastChapter.getPostdate());
         }
-        article.setSize(chapterService.getArticleSize(articleno));
+        article.setSize(chapterService.getChapterCount(articleno));
         articleService.save(article);
         loadData();
         return INPUT;

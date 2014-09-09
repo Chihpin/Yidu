@@ -72,7 +72,7 @@ public class MessageAction extends AbstractUserBaseAction {
         if (messageno != 0) {
             TMessage message = this.messageService.getByNo(messageno);
             if (message.getUserno() == LoginManager.getLoginUser().getUserno()) {
-                this.messageService.delteByNo(messageno);
+                this.messageService.deleteByNo(messageno);
             } else {
                 addActionError(getText("errors.unauthority.message"));
                 return FREEMARKER_ERROR;

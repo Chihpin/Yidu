@@ -127,7 +127,7 @@ public class ReviewListAction extends AbstractAdminListBaseAction {
     }
 
     public String delete() throws Exception {
-        reviewService.delteByNo(reviewno);
+        reviewService.deleteByNo(reviewno);
         loadData();
         return INPUT;
     }

@@ -59,7 +59,7 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
     }
 
     @Override
-    public void delteByNo(int userno) {
+    public void deleteByNo(int userno) {
         TUser user = this.get(TUser.class, userno);
         this.delete(user);
     }

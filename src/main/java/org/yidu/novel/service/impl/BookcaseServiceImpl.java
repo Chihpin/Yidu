@@ -51,7 +51,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     }
 
     @Override
-    public void delteByNo(int bookcaseno) {
+    public void deleteByNo(int bookcaseno) {
         TBookcase bookcase = getByNo(bookcaseno);
         this.delete(bookcase);
     }
@@ -81,7 +81,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     }
 
     @Override
-    public TBookcase getByArticleno(int userno, int articleno) {
+    public TBookcase getByArticlenoAndUserno(int userno, int articleno) {
         BookcaseSearchBean searchBean = new BookcaseSearchBean();
         searchBean.setArticleno(articleno);
         searchBean.setUserno(userno);
@@ -93,7 +93,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
     }
 
     @Override
-    public void batchdeleteByNo(String bookcasenos, int userno) {
+    public void batchDeleteByNo(String bookcasenos, int userno) {
         // 初期SQL做成
         StringBuffer sql = new StringBuffer();
         sql.append("delete from  t_bookcase   " + "WHERE userno= ");

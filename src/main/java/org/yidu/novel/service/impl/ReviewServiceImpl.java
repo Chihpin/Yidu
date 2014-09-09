@@ -18,7 +18,7 @@ public class ReviewServiceImpl extends HibernateSupportServiceImpl implements Re
     }
 
     @Override
-    public void delteByNo(int reviewno) {
+    public void deleteByNo(int reviewno) {
         TReview review = getByNo(reviewno);
         this.delete(review);
 
