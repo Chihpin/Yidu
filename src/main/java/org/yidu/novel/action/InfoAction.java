@@ -46,6 +46,8 @@ public class InfoAction extends AbstractPublicBaseAction {
      */
     private int articleno;
 
+    private String pinyin;
+
     private ArticleDTO article = new ArticleDTO();
 
     private List<TChapter> chapterList = new ArrayList<TChapter>();
@@ -60,6 +62,14 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     public void setArticleno(int articleno) {
         this.articleno = articleno;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
 
     public int getSubDir() {
