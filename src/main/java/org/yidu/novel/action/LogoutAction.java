@@ -9,6 +9,16 @@ import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
 
+/**
+ * 
+ * <p>
+ * 退出Action
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class LogoutAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = -5189599136868434255L;

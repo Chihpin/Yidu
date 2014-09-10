@@ -2,8 +2,6 @@ package org.yidu.novel.action;
 
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
-import org.yidu.novel.entity.TUser;
-import org.yidu.novel.utils.LoginManager;
 
 /**
  * 
@@ -18,7 +16,12 @@ import org.yidu.novel.utils.LoginManager;
 public class BookcaseAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = 366181195078436796L;
-    
+
+    /**
+     * 获得模版名字
+     * 
+     * @return 模版名字
+     */
     public String getTempName() {
         return "bookcase";
     }
@@ -26,10 +29,6 @@ public class BookcaseAction extends AbstractPublicBaseAction {
     @Override
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_BOOKCASE;
-    }
-
-    public TUser getLoginUser() {
-        return LoginManager.getLoginUser();
     }
 
     @Override

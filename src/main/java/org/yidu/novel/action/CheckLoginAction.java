@@ -8,6 +8,16 @@ import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.LoginManager;
 
+/**
+ * 
+ * <p>
+ * 检查用户登录状态
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 @Action(value = "checklogin")
 public class CheckLoginAction extends AbstractPublicBaseAction {
 
@@ -30,11 +40,13 @@ public class CheckLoginAction extends AbstractPublicBaseAction {
         return AbstractBaseAction.JSON_RESULT;
     }
 
+    /**
+     * 获得用户信息
+     * 
+     * @return 用户信息
+     */
     public TUser getData() {
-        if (LoginManager.isLoginFlag()) {
-            return LoginManager.getLoginUser();
-        }
-        return null;
+        return LoginManager.getLoginUser();
     }
 
     @Override

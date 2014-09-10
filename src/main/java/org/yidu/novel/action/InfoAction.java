@@ -10,7 +10,7 @@ import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
-import org.yidu.novel.dto.ArticleDTO;
+import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.entity.TReview;
 import org.yidu.novel.utils.Pagination;
@@ -48,7 +48,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     private String pinyin;
 
-    private ArticleDTO article = new ArticleDTO();
+    private TArticle article = new TArticle();
 
     private List<TChapter> chapterList = new ArrayList<TChapter>();
 
@@ -76,12 +76,8 @@ public class InfoAction extends AbstractPublicBaseAction {
         return articleno / YiDuConstants.SUB_DIR_ARTICLES;
     }
 
-    public ArticleDTO getArticle() {
+    public TArticle getArticle() {
         return article;
-    }
-
-    public void setArticle(ArticleDTO article) {
-        this.article = article;
     }
 
     public List<TChapter> getChapterList() {
@@ -115,23 +111,22 @@ public class InfoAction extends AbstractPublicBaseAction {
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
-        article = CacheManager.getObject(CACHE_KEY_ARTICEL_PREFIX + articleno);
+        article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
         if (article == null || article.getArticleno() == 0) {
-            article = getArticleInfoByNo(articleno);
-            if (article != null && article.getArticleno() != 0) {
-                CacheManager.putObject(CACHE_KEY_ARTICEL_PREFIX + articleno, article);
-            }
+            article = articleService.getByNo(articleno);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
         }
 
         if (article != null) {
             // 获取章节信息
             ChapterSearchBean searchBean = new ChapterSearchBean();
             BeanUtils.copyProperties(this, searchBean);
-            chapterList = CacheManager.getObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString());
+            chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean);
             if (chapterList == null || chapterList.size() == 0) {
                 chapterList = chapterService.find(searchBean);
                 if (chapterList != null && chapterList.size() != 0) {
-                    CacheManager.putObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString(), chapterList);
+                    CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
+                            chapterList);
                 }
             }
 

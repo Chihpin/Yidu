@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.Action;
 /**
  * 
  * <p>
- * 区块编辑Action
+ * 下载处理Action
  * </p>
  * Copyright(c) 2013 YiDu-Novel. All rights reserved.
  * 
@@ -39,9 +39,6 @@ import com.opensymphony.xwork2.Action;
         @Result(name = Action.ERROR, type = "httpheader", params = { "status", "404" }) })
 public class DownloadAction extends AbstractPublicBaseAction {
 
-    /**
-     * シリアライズ時のID。
-     */
     private static final long serialVersionUID = -6265156751627551469L;
 
     /**

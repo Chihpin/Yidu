@@ -8,7 +8,7 @@ import org.yidu.novel.utils.LoginManager;
 
 /**
  * <p>
- * 用户中心
+ * 用户中心Action
  * </p>
  * Copyright(c) 2013 YiDu-Novel. All rights reserved.
  * 

@@ -7,13 +7,11 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.IndexAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
-import org.yidu.novel.dto.ArticleDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TSystemBlock;
 import org.yidu.novel.entity.TUser;
@@ -37,16 +35,6 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
      * 命名空间。
      */
     public static final String NAMESPACE = "";
-
-    protected static final String CACHE_KEY_INDEX_BLOCK = "CacheKey_indexBlock";
-    protected static final String CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_LIST_COUNT";
-    protected static final String CACHE_KEY_ARTICEL_LIST_PREFIX = "CacheKey_ARTICLE_LIST";
-    protected static final String CACHE_KEY_ARTICEL_PREFIX = "CacheKey_ARTICLE";
-    protected static final String CACHE_KEY_CHAPTER_LIST_PREFIX = "CacheKey_CHAPTER_LIST";
-    protected static final String CACHE_KEY_CHAPTER_PREFIX = "CacheKey_CHAPTER";
-    protected static final String CACHE_KEY_HISTORY_PREFIX = "CacheKey_HISTORY";
-    protected static final String CACHE_KEY_ARTICEL_TOP_LIST_PREFIX = "CacheKey_ARTICLE_TOP_LIST";
-    protected static final String CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_TOP_COUNT";
 
     /**
      * 区块信息
@@ -85,7 +73,7 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
         if (this instanceof IndexAction) {
             logger.debug("this instanceof IndexAction.");
             // 从缓存中把首页用的区块信息取出
-            blocks = CacheManager.getObject(CACHE_KEY_INDEX_BLOCK);
+            blocks = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK, null);
             if (blocks == null || blocks.size() == 0) {
                 blocks = new HashMap<String, Object>();
                 // 没有取到的话从数据库里取出
@@ -111,27 +99,12 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
                         } else if (tSystemBlock.getType() == YiDuConstants.BlockType.HTML) {
                             blocks.put(tSystemBlock.getBlockid(), tSystemBlock.getContent());
                         }
-                        CacheManager.putObject(CACHE_KEY_INDEX_BLOCK, blocks);
+                        CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK, null, blocks);
                     }
                 }
             }
         }
         logger.debug("loadBlock normally end.");
-    }
-
-    protected ArticleDTO getArticleInfoByNo(int articleno) {
-        ArticleDTO article = CacheManager.getObject(CACHE_KEY_ARTICEL_PREFIX + articleno);
-        if (article == null || article.getArticleno() == 0) {
-            article = new ArticleDTO();
-            TArticle tarticle = articleService.getByNo(articleno);
-            if (tarticle == null || tarticle.getArticleno() == 0) {
-                addActionError(getText("errors.not.exsits.article"));
-                return null;
-            }
-            BeanUtils.copyProperties(tarticle, article);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_PREFIX + articleno, article);
-        }
-        return article;
     }
 
     /**

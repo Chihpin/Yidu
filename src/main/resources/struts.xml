@@ -21,7 +21,6 @@
                 <param name="excludeNullProperties">true</param>
             </result-type>
             <result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
-            <result-type name="imageResult" class="org.yidu.novel.result.CustomImageBytesResult" />
         </result-types>
         <interceptors>
              <interceptor name="errorHandle" class="org.yidu.novel.interceptor.ErrorInterceptor" />

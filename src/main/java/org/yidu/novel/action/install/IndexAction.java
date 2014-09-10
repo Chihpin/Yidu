@@ -49,26 +49,68 @@ public class IndexAction extends AbstractInstallBaseAction {
      * URL。
      */
     public static final String URL = NAMESPACE + "/" + NAME;
-
     private String prefixjdbc = "jdbc:postgresql://";
     private static String LOCK_FILE = ServletActionContext.getServletContext().getRealPath("/") + "/install.lock";
-
+    /**
+     * 网站标题
+     */
     private String title;
+    /**
+     * 网站关键字
+     */
     private String siteKeywords;
+    /**
+     * 网站描述
+     */
     private String siteDescription;
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 网站url
+     */
     private String url;
+    /**
+     * 版权信息
+     */
     private String copyright;
+    /**
+     * 备案号
+     */
     private String beianNo;
+    /**
+     * 统计代码
+     */
     private String analyticscode;
-
+    /**
+     * 数据库Host
+     */
     private String dbhost;
+    /**
+     * 数据库端口
+     */
     private String dbport;
+    /**
+     * 数据库名称
+     */
     private String dbname;
+    /**
+     * 数据库连接用户
+     */
     private String dbusername;
+    /**
+     * 数据库连接密码
+     */
     private String dbpassword;
 
+    /**
+     * 管理员用户名
+     */
     private String username;
+    /**
+     * 管理员用密码
+     */
     private String password;
 
     public String getTitle() {
@@ -231,6 +273,11 @@ public class IndexAction extends AbstractInstallBaseAction {
         return INPUT;
     }
 
+    /**
+     * 安装界面内容保存
+     * 
+     * @return 模版名字
+     */
     public String save() {
 
         File lockFile = new File(LOCK_FILE);

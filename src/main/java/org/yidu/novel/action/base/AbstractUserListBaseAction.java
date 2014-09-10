@@ -5,7 +5,7 @@ import org.yidu.novel.utils.Pagination;
 
 /**
  * <p>
- * 用户画面的基类
+ * 用户列表页画面的基类
  * </p>
  * Copyright(c) 2013 YiDu-Novel. All rights reserved.
  * 

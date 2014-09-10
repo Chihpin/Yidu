@@ -6,7 +6,6 @@ import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.entity.TSystemBlock;
 
 /**
- * 
  * <p>
  * 提供区块信息操作的服务
  * </p>

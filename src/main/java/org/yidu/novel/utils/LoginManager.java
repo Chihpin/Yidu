@@ -9,9 +9,9 @@ import org.yidu.novel.entity.TUser;
 /**
  * 
  * <p>
- * 登录状态管理
+ * 登录状态管理器
  * </p>
- * Copyright(c) 2013 YiDu-Novel. All rights reserved.
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
  * @version 1.0.0
  * @author shinpa.you
@@ -22,6 +22,11 @@ public class LoginManager {
         return ServletActionContext.getRequest().getSession(create);
     }
 
+    /**
+     * 获取用户信息
+     * 
+     * @return 用户信息
+     */
     public static final TUser getLoginUser() {
         HttpSession session = getSession(false);
         if (session != null) {
@@ -31,6 +36,16 @@ public class LoginManager {
         }
     }
 
+    
+    /**
+     * 登录判断
+     * 
+     * @return true - 是否登录
+     */
+    public static final void setReferer() {
+        ServletActionContext.getRequest();
+    }
+    
     /**
      * 登录判断
      * 
@@ -48,8 +63,8 @@ public class LoginManager {
      */
     public static final void doLogin(final TUser user) {
         HttpSession session = getSession(true);
-        // session.invalidate();
-        // session = getSession(true);
+        session.invalidate();
+        session = getSession(true);
         session.setAttribute(YiDuConstants.LoginUser, user);
     }
 

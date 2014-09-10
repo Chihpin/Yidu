@@ -18,6 +18,16 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
+/**
+ * 
+ * <p>
+ * 登录Action。
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class LoginAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = 1L;

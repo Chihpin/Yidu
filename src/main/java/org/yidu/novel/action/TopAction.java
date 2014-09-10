@@ -112,7 +112,8 @@ public class TopAction extends AbstractPublicListBaseAction {
             // 开启缓存件数的话
             count = ArticleCountManager.getArticleCount(sortColumn);
         } else {
-            Integer countCache = CacheManager.getObject(CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX);
+            Integer countCache = CacheManager.getObject(
+                    CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX, null);
             if (countCache == null || countCache == 0) {
                 count = articleService.getCount(searchBean);
             } else {
@@ -123,10 +124,11 @@ public class TopAction extends AbstractPublicListBaseAction {
         pagination.setPreperties(count);
         searchBean.setPagination(pagination);
 
-        articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_TOP_LIST_PREFIX + searchBean.toString());
+        articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_TOP_LIST_PREFIX, searchBean);
         if (articleList == null || articleList.size() == 0) {
             articleList = articleService.find(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_TOP_LIST_PREFIX + searchBean.toString(), articleList);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_TOP_LIST_PREFIX, searchBean,
+                    articleList);
         }
         logger.debug("normally end.");
     }

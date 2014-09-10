@@ -34,7 +34,7 @@ import org.yidu.novel.utils.Utils;
  * <p>
  * 手机画面用各种ajax接口
  * </p>
- * Copyright(c) 2013 YiDu-Novel. All rights reserved.
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
  * @version 1.0.0
  * @author shinpa.you
@@ -44,7 +44,17 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
     private static final long serialVersionUID = -5966399886620363535L;
 
-    class ActionType {
+    /**
+     * 
+     * <p>
+     * 处理类型定义
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
+    class ProccessType {
         public static final String TOP_LIST = "toplist";
         public static final String CATEGORY_LIST = "categorylist";
         public static final String CHAPTER_LIST = "chapterlist";
@@ -58,23 +68,60 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         public static final String HISTORY = "history";
         public static final String SEARCH = "search";
         public static final String REGISTER = "register";
-
     }
 
+    /**
+     * 处理名字
+     */
     private String action;
+    /**
+     * 登录ID
+     */
     private String loginid;
+    /**
+     * 登录密码
+     */
     private String password;
+    /**
+     * 小说分类
+     */
     private int category;
+    /**
+     * 小说编号
+     */
     private int articleno;
     private int index;
+    /**
+     * 排序
+     */
     private int sort;
+    /**
+     * 小说字数
+     */
     private int size;
+    /**
+     * 类型
+     */
     private int type;
+    /**
+     * 用户编号
+     */
     private int userno;
+    /**
+     * 书签编号
+     */
     private String bookcasenos;
-
+    /**
+     * 搜索键
+     */
     private String key;
+    /**
+     * 长度
+     */
     private int length;
+    /**
+     * 状态
+     */
     private int status;
 
     private JsonInfoDTO dto = new JsonInfoDTO();
@@ -197,32 +244,33 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
     @Override
     public String execute() {
+
         logger.debug("execute started. ");
-        if (StringUtils.equals(action, ActionType.CATEGORY_LIST)) {
+        if (StringUtils.equals(action, ProccessType.CATEGORY_LIST)) {
             getCategoryList();
-        } else if (StringUtils.equals(action, ActionType.CHANGE_PASSWORD)) {
+        } else if (StringUtils.equals(action, ProccessType.CHANGE_PASSWORD)) {
             dochangepass();
-        } else if (StringUtils.equals(action, ActionType.CHAPTER_LIST)) {
+        } else if (StringUtils.equals(action, ProccessType.CHAPTER_LIST)) {
             getChapterList();
-        } else if (StringUtils.equals(action, ActionType.LOGIN)) {
+        } else if (StringUtils.equals(action, ProccessType.LOGIN)) {
             dologin();
-        } else if (StringUtils.equals(action, ActionType.TOP_LIST)) {
+        } else if (StringUtils.equals(action, ProccessType.TOP_LIST)) {
             getTopList();
-        } else if (StringUtils.equals(action, ActionType.BOOKCASE)) {
+        } else if (StringUtils.equals(action, ProccessType.BOOKCASE)) {
             getBookcase();
-        } else if (StringUtils.equals(action, ActionType.DELETE_BOOKCASE)) {
+        } else if (StringUtils.equals(action, ProccessType.DELETE_BOOKCASE)) {
             deleteBookcase();
-        } else if (StringUtils.equals(action, ActionType.HISTORY)) {
+        } else if (StringUtils.equals(action, ProccessType.HISTORY)) {
             getHistory();
-        } else if (StringUtils.equals(action, ActionType.BOOKCASEIS_EXISTS)) {
+        } else if (StringUtils.equals(action, ProccessType.BOOKCASEIS_EXISTS)) {
             checkBookCaseExists();
-        } else if (StringUtils.equals(action, ActionType.ADD_BOOKCASE)) {
+        } else if (StringUtils.equals(action, ProccessType.ADD_BOOKCASE)) {
             addBookcase();
-        } else if (StringUtils.equals(action, ActionType.DELETE_BOOKCASE_BY_ARTICLE)) {
+        } else if (StringUtils.equals(action, ProccessType.DELETE_BOOKCASE_BY_ARTICLE)) {
             deleteBookcaseByArticle();
-        } else if (StringUtils.equals(action, ActionType.SEARCH)) {
+        } else if (StringUtils.equals(action, ProccessType.SEARCH)) {
             doSearch();
-        } else if (StringUtils.equals(action, ActionType.REGISTER)) {
+        } else if (StringUtils.equals(action, ProccessType.REGISTER)) {
             register();
         } else {
             dto.setCode(1);
@@ -322,10 +370,11 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         pagination.setSortOrder("DESC");
         searchBean.setPagination(pagination);
 
-        List<TArticle> articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());
+        List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
+                searchBean);
         if (articleList == null || articleList.size() == 0) {
             articleList = articleService.find(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString(), articleList);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
         dto.setItems(articleList);
 
@@ -365,7 +414,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(),
+                articleno);
         if (bookcase == null) {
             bookcase = new TBookcase();
         }
@@ -395,7 +445,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             return;
         }
 
-        TBookcase bookcase = bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = bookcaseService
+                .getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
         if (bookcase != null) {
             dto.setResult("1");
         }
@@ -481,10 +532,12 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
             count = ArticleCountManager.getArticleCount(String.valueOf(category));
         } else {
-            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            Object countInfo = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX,
+                    searchBean);
             if (countInfo == null) {
                 count = articleService.getCount(searchBean);
-                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX, searchBean,
+                        count);
             } else {
                 count = Integer.parseInt(countInfo.toString());
             }
@@ -522,10 +575,11 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         pagination.setSortOrder("DESC");
         searchBean.setPagination(pagination);
 
-        List<TArticle> articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());
+        List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
+                searchBean);
         if (articleList == null || articleList.size() == 0) {
             articleList = articleService.find(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString(), articleList);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
         dto.setItems(articleList);
 
@@ -545,10 +599,12 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             count = ArticleCountManager.getArticleCount(String.valueOf(category));
 
         } else {
-            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            Object countInfo = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX,
+                    searchBean);
             if (countInfo == null) {
                 count = articleService.getCount(searchBean);
-                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX, searchBean,
+                        count);
             } else {
                 count = Integer.parseInt(countInfo.toString());
             }
@@ -568,10 +624,11 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         pagination.setSortOrder("DESC");
         searchBean.setPagination(pagination);
 
-        List<TArticle> articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());
+        List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
+                searchBean);
         if (articleList == null || articleList.size() == 0) {
             articleList = articleService.find(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString(), articleList);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
         dto.setItems(articleList);
 
@@ -602,11 +659,13 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         }
         searchBean.setPagination(pagination);
 
-        List<TChapter> chapterList = CacheManager.getObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString());
+        List<TChapter> chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
+                searchBean);
         if (chapterList == null || chapterList.size() == 0) {
             chapterList = chapterService.find(searchBean);
             if (chapterList != null && chapterList.size() != 0) {
-                CacheManager.putObject(CACHE_KEY_CHAPTER_LIST_PREFIX + searchBean.toString(), chapterList);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
+                        chapterList);
             }
         }
         dto.setItems(chapterList);

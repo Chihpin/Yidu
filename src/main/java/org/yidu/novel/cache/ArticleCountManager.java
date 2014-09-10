@@ -15,6 +15,16 @@ import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.service.ArticleService;
 
+/**
+ * 
+ * <p>
+ * 小说件数管理器
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class ArticleCountManager {
 
     /**

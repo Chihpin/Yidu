@@ -134,10 +134,12 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
                 count = ArticleCountManager.getArticleCount("all");
             }
         } else {
-            Object countInfo = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString());
+            Object countInfo = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX,
+                    searchBean);
             if (countInfo == null) {
                 count = articleService.getCount(searchBean);
-                CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX + searchBean.toString(), count);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX, searchBean,
+                        count);
             } else {
                 count = Integer.parseInt(countInfo.toString());
             }
@@ -146,10 +148,10 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         pagination.setPreperties(count);
         searchBean.setPagination(pagination);
 
-        articleList = CacheManager.getObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString());
+        articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean);
         if (articleList == null || articleList.size() == 0) {
             articleList = articleService.find(searchBean);
-            CacheManager.putObject(CACHE_KEY_ARTICEL_LIST_PREFIX + searchBean.toString(), articleList);
+            CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
         logger.debug("normally end.");
     }

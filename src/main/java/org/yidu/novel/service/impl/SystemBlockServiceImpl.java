@@ -45,14 +45,12 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
     @Override
     public TSystemBlock getByNo(int blockno) {
         TSystemBlock systemBlock = this.get(TSystemBlock.class, blockno);
-        // TODO deleteflag
         return systemBlock;
     }
 
     @Override
     public void deleteByNo(int blockno) {
         TSystemBlock systemBlock = getByNo(blockno);
-        // TODO deleteflag
         this.delete(systemBlock);
     }
 

@@ -7,7 +7,7 @@ import org.yidu.novel.constant.YiDuConstants;
 
 /**
  * <p>
- * 账单Action
+ * 账单管理Action
  * </p>
  * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 

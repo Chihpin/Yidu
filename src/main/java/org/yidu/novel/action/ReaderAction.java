@@ -133,7 +133,8 @@ public class ReaderAction extends AbstractPublicBaseAction {
                         + segChapterList.get(segChapterList.size() - 1).getChaptername());
             }
         } else {
-            ChapterDTO chapterDto = CacheManager.getObject(CACHE_KEY_CHAPTER_PREFIX + chapterno);
+            ChapterDTO chapterDto = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_PREFIX,
+                    chapterno);
             if (chapterDto == null || chapterDto.getChapterno() == 0) {
                 TChapter tchapter = chapterService.getByNo(chapterno);
                 if (tchapter != null) {
@@ -147,7 +148,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
                     if (prechapter != null) {
                         chapterDto.setPreChapterno(prechapter.getChapterno());
                     }
-                    CacheManager.putObject(CACHE_KEY_CHAPTER_PREFIX + chapterno, chapterDto);
+                    CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_PREFIX, chapterno, chapterDto);
                 } else {
                     addActionError(getText("errors.not.exsits.chapter"));
                 }
