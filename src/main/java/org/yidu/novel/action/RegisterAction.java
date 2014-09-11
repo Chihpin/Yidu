@@ -106,6 +106,8 @@ public class RegisterAction extends AbstractPublicBaseAction {
         if (LoginManager.isLoginFlag()) {
             return REDIRECT;
         } else {
+            // 记录访问地址
+            LoginManager.setReferer();
             return FREEMARKER;
         }
     }

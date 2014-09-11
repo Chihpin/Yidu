@@ -1,12 +1,12 @@
 package org.yidu.novel.action;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.utils.LoginManager;
 
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
@@ -34,11 +34,8 @@ public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
 
     @Override
     public String execute() {
-        String backUrl = getBackUrl();
-        if (StringUtils.isEmpty(backUrl)) {
-            backUrl = "/";
-        }
-        ServletActionContext.getRequest().getSession(true).setAttribute(BACK_URL, backUrl);
+        // 记录访问地址
+        LoginManager.setReferer();
         return REDIRECT;
     };
 

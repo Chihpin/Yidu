@@ -91,6 +91,8 @@ public class LoginAction extends AbstractPublicBaseAction {
         if (LoginManager.isLoginFlag()) {
             return GO_TOP;
         } else {
+            // 记录访问地址
+            LoginManager.setReferer();
             return FREEMARKER;
         }
     }
@@ -128,4 +130,5 @@ public class LoginAction extends AbstractPublicBaseAction {
     @Override
     protected void loadData() {
     }
+
 }

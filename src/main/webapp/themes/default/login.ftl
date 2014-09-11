@@ -44,6 +44,5 @@
         </tr>
       </tbody>
     </table>
-    <@s.hidden name="backUrl"/>
 </@s.form>
 </#macro>

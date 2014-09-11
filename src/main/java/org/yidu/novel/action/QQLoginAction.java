@@ -38,10 +38,6 @@ public class QQLoginAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_OTHERS;
     }
 
-    public String getBackUrl() {
-        return ServletActionContext.getRequest().getSession().getAttribute(BACK_URL).toString();
-    }
-
     @Override
     public String execute() {
 

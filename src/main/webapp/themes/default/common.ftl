@@ -56,20 +56,16 @@
         </div>
           <span id="checklogin">
           <script>
-            thisUrl = window.location.href;
-            if(thisUrl.indexOf('?backUrl') != -1){
-                thisUrl = thisUrl.substring(0,thisUrl.indexOf('?backUrl'));
-            }
-            document.writeln("<a href=\"${contextPath}/gotoQQLogin?backUrl="+thisUrl+" \"><img src=\"${contextPath}/themes/${themeName}/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
-            document.writeln("<a href=\"${contextPath}/login?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
-            document.writeln("<a href=\"${contextPath}/register?backUrl="+thisUrl+" \" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
+            document.writeln("<a href=\"${contextPath}/gotoQQLogin\"><img src=\"${contextPath}/themes/${themeName}/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
+            document.writeln("<a href=\"${contextPath}/login\" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
+            document.writeln("<a href=\"${contextPath}/register\" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
           
             $(document).ready(function(){
                 $.post('${contextPath}/checklogin',function(data){
                     if(data!=null){
                        var html = '你好   <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
                         if(data.openid==null){
-                            html = html + '&nbsp;&nbsp;&nbsp;<a href=\"${contextPath}/gotoQQLogin?backUrl='+thisUrl+'" \"><img src=\"${contextPath}/themes/${themeName}/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
+                            html = html + '&nbsp;&nbsp;&nbsp;<a href=\"${contextPath}/gotoQQLogin" \"><img src=\"${contextPath}/themes/${themeName}/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
                         }
                         if(data.type==30){
                             html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>';

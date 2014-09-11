@@ -155,14 +155,13 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
         return ServletActionContext.getRequest().getRequestURL().toString();
     }
 
-    protected static final String BACK_URL = "backUrl";
     /**
      * 回退URL
      */
     private String backUrl;
 
     public String getBackUrl() {
-        return backUrl;
+        return backUrl ;
     }
 
     public void setBackUrl(String backUrl) {

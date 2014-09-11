@@ -49,6 +49,10 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
         this.blocks = blocks;
     }
 
+    public String getBackUrl() {
+        return LoginManager.getAndCleanReferer();
+    }
+
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
