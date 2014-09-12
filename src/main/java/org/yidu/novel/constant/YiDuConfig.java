@@ -34,9 +34,9 @@ public class YiDuConfig {
     public final static String APP_ID = "app_ID";
     public final static String APP_KEY = "app_KEY";
     public final static String REDIRECT_URI = "redirect_URI";
-
     public final static String ENABLE_CACHE_ARTICLE_COUNT = "enableCacheArticleCount";
     public final static String RELOAD_ARTICLE_COUNT_TIME = "reloadArticleCountTime";
+    public final static String ENABLE_GENERATE_HTML_FILE = "enableGenerateHtmlFile";
 
     // jdbc
     public final static String JDBC_URL = "jdbc.url";

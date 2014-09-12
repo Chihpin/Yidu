@@ -69,7 +69,8 @@ public class ArticleCountManager {
 
                 while (true) {
                     try {
-                        logger.info("going to init category count.");
+                        logger.info("ArticleCount Manager daemon process going to load count info.");
+                        logger.debug("going to init category count.");
                         // 初始化分类小说件数
                         PropertiesConfiguration languageConf = new PropertiesConfiguration(Thread.currentThread()
                                 .getContextClassLoader().getResource("language/package.properties"));
@@ -89,7 +90,7 @@ public class ArticleCountManager {
                             }
                         }
 
-                        logger.info("going to init top count.");
+                        logger.debug("going to init top count.");
                         // 初始化排行榜小说件数
                         int allcount = 0;
                         Integer count = articleService.getCountByJDBC(new ArticleSearchBean());
@@ -100,14 +101,14 @@ public class ArticleCountManager {
                             articleCountMap.put(it.next(), allcount);
                         }
 
-                        logger.info("going to init all count.");
+                        logger.debug("going to init all count.");
                         articleCountMap.put("all", allcount);
 
-                        logger.info("going to init author count.");
+                        logger.debug("going to init author count.");
                         // TODO 默认设为10个，估计超过10个的很少！
                         articleCountMap.put("author", 10);
 
-                        logger.info("going to init fullflg count.");
+                        logger.debug("going to init fullflg count.");
                         ArticleSearchBean searchBean = new ArticleSearchBean();
                         searchBean.setFullflag(true);
                         int fullcount = articleService.getCountByJDBC(searchBean);

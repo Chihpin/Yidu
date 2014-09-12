@@ -11,6 +11,8 @@ public class YiDuConstants {
 
     public static PropertiesConfiguration pseudoConf;
 
+    public static ThreadLocal<String> requestUri = new ThreadLocal<String>();
+
     public static final Map<String, String> topNameMap = new LinkedHashMap<String, String>() {
         private static final long serialVersionUID = -2355068040470822368L;
         {

@@ -58,6 +58,7 @@ import org.tuckey.web.filters.urlrewrite.utils.ModRewriteConfLoader;
 import org.tuckey.web.filters.urlrewrite.utils.NumberUtils;
 import org.tuckey.web.filters.urlrewrite.utils.ServerNameMatcher;
 import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 
 /**
@@ -388,6 +389,7 @@ public class UrlRewriteFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
 
+        // 易读专用开关设置
         if (!YiDuConstants.yiduConf.getBoolean("cleanUrl", true)) {
             chain.doFilter(request, response);
             return;
@@ -396,6 +398,16 @@ public class UrlRewriteFilter implements Filter {
         UrlRewriter urlRewriter = getUrlRewriter(request, response, chain);
 
         final HttpServletRequest hsRequest = (HttpServletRequest) request;
+
+        // 如果生成静态html的话，先保存URL，生成同样的url的静态文件
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_GENERATE_HTML_FILE, false)) {
+            String uri = hsRequest.getRequestURI().toString();
+            if (org.apache.commons.lang3.StringUtils.endsWith(uri, "html")) {
+                log.info("save uri " + hsRequest.getRequestURI().toString());
+                YiDuConstants.requestUri.set(uri);
+            }
+        }
+
         final HttpServletResponse hsResponse = (HttpServletResponse) response;
         UrlRewriteWrappedResponse urlRewriteWrappedResponse = new UrlRewriteWrappedResponse(hsResponse, hsRequest,
                 urlRewriter);
@@ -415,9 +427,21 @@ public class UrlRewriteFilter implements Filter {
 
         boolean requestRewritten = false;
         if (urlRewriter != null) {
-
             // process the request
-            requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+            // 如果存在的话就不做伪静态转换啦
+
+            boolean fileExists = false;
+            if (org.apache.commons.lang3.StringUtils.endsWith(hsRequest.getRequestURI(), "html")) {
+                String htmlFilePath = context.getRealPath("/") + hsRequest.getRequestURI();
+                File htmlFile = new File(htmlFilePath);
+                fileExists = htmlFile.exists();
+                log.info("htmlfile path :" + htmlFile);
+            }
+
+            if (!fileExists) {
+                // 文件不存在话，才做伪静态变换
+                requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+            }
 
         } else {
             if (log.isDebugEnabled()) {

@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -24,6 +26,9 @@ import freemarker.template.Template;
  * @author shinpa.you
  */
 public class StaticUtils {
+
+    private static final Log logger = LogFactory.getLog(StaticUtils.class);
+
     /**
      * 生成静态页面主方法
      * 
@@ -36,8 +41,7 @@ public class StaticUtils {
      * @param targetHtmlPath
      *            生成静态页面的路径
      */
-    public static void crateHTML(ServletContext context, Map<String, Object> data, String templatePath,
-            String targetHtmlPath) {
+    public static void crateHTML(ServletContext context, Object data, String templatePath, String htmlPath) {
         Configuration freemarkerCfg = new Configuration();
         // 加载模版
         freemarkerCfg.setServletContextForTemplateLoading(context, "/");
@@ -47,15 +51,20 @@ public class StaticUtils {
             Template template = freemarkerCfg.getTemplate(templatePath, "UTF-8");
             template.setEncoding("UTF-8");
             // 静态页面路径
-            String htmlPath = context.getRealPath("/html") + "/" + targetHtmlPath;
-            File htmlFile = new File(htmlPath);
+            String htmlPathString = context.getRealPath("/") + "/" + htmlPath;
+            File htmlFile = new File(htmlPathString);
+
+            if (!htmlFile.getParentFile().exists()) {
+                htmlFile.getParentFile().mkdirs();
+            }
+            htmlFile.createNewFile();
             Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlFile), "UTF-8"));
             // 处理模版
             template.process(data, out);
             out.flush();
             out.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("error occured where generate Html file.", e);
         }
     }
 }

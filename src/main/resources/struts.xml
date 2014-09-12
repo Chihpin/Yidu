@@ -28,7 +28,7 @@
             <!--<interceptor name="logOutput" class="org.yidu.novel.interceptor.LogInterceptor" /> -->
             <interceptor name="setLanguage" class="org.yidu.novel.interceptor.SetLanguageInterceptor" />
             <interceptor name="mobile" class="org.yidu.novel.interceptor.MobileInterceptor" />
-            
+            <interceptor name="generateHtmlFile" class="org.yidu.novel.interceptor.GenerateHtmlFileInterceptor" />
             <interceptor-stack name="yidu-default">
                 <!-- <interceptor-ref name="logOutput" /> 
                 <interceptor-ref name="setLanguage" />-->
@@ -36,6 +36,7 @@
                     <param name="validation.excludeMethods">back</param>
                 </interceptor-ref>
                 <interceptor-ref name="errorHandle" />
+                <interceptor-ref name="generateHtmlFile" />
                 <interceptor-ref name="authCheck" /> 
                 <interceptor-ref name="mobile" />
             </interceptor-stack>

@@ -52,13 +52,17 @@
 		</init-param>
 		<init-param>
 			<param-name>logLevel</param-name>
-			<param-value>sysout:INFO</param-value>
+			<param-value>INFO</param-value>
 		</init-param>
 		<init-param>
 			<param-name>statusEnabled</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		<!-- <init-param> <param-name>statusEnabledOnHosts</param-name> <param-value>localhost, 
+		<!--<init-param>
+            <param-name>confPath</param-name>
+            <param-value>/WEB-INF/urlrewrite_default.xml</param-value>
+        </init-param>
+		 <init-param> <param-name>statusEnabledOnHosts</param-name> <param-value>localhost, 
 			*.kaixinwx.com</param-value> </init-param> -->
 	</filter>
 
