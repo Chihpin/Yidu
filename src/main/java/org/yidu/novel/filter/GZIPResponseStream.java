@@ -148,4 +148,12 @@ public class GZIPResponseStream extends ServletOutputStream {
         return (this.closed);
     }
 
+    /**
+     * reset
+     * 
+     */
+    public void reset() {
+        // noop
+    }
+
 }

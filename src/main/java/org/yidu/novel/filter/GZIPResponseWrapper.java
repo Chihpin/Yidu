@@ -131,4 +131,13 @@ class GZIPResponseWrapper extends HttpServletResponseWrapper {
         writer = new PrintWriter(new OutputStreamWriter(stream, "UTF-8"));
         return (writer);
     }
+
+    /**
+     * 设置长度
+     * 
+     * @param length
+     *            长度
+     */
+    public void setContentLength(int length) {
+    }
 }
