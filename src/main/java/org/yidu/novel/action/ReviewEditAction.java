@@ -29,4 +29,10 @@ public class ReviewEditAction extends AbstractPublicBaseAction {
 
     }
 
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

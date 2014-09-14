@@ -104,6 +104,7 @@ public class InfoAction extends AbstractPublicBaseAction {
         this.reviewList = reviewList;
     }
 
+    @Override
     public String getTempName() {
         return "info";
     }

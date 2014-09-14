@@ -62,6 +62,7 @@ public class SearchAction extends AbstractPublicListBaseAction {
         this.articleList = articleList;
     }
 
+    @Override
     public String getTempName() {
         return "search";
     }

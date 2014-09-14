@@ -49,4 +49,10 @@ public class NotFoundAction extends AbstractPublicBaseAction {
         // TODO Auto-generated method stub
         return 99;
     }
+
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

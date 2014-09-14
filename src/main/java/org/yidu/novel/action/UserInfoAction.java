@@ -56,6 +56,7 @@ public class UserInfoAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_USER_INFO;
     }
 
+    @Override
     public String getTempName() {
         return "userInfo";
     }

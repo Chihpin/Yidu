@@ -24,6 +24,7 @@ public class BookcaseAction extends AbstractPublicBaseAction {
      * 
      * @return 模版名字
      */
+    @Override
     public String getTempName() {
         return "bookcase";
     }

@@ -100,6 +100,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
         this.chapter = chapter;
     }
 
+    @Override
     public String getTempName() {
         if (toChapterno != 0 && toChapterno > chapterno) {
             return "reader2";

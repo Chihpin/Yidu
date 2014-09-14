@@ -30,6 +30,7 @@ public class MobileSearchAction extends AbstractPublicListBaseAction {
         this.key = key;
     }
 
+    @Override
     public String getTempName() {
         return "search";
     }

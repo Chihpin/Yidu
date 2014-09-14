@@ -131,6 +131,13 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     public abstract int getPageType();
 
     /**
+     * 取得表示用的模版名称
+     * 
+     * @return 模版名称
+     */
+    public abstract String getTempName();
+
+    /**
      * 
      * <p>
      * 获取当前登录状态

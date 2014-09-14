@@ -66,42 +66,107 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      */
     List<TArticle> articleList = new ArrayList<TArticle>();
 
+    /**
+     * 获取 category
+     * 
+     * @return category
+     */
     public Integer getCategory() {
         return category;
     }
 
+    /**
+     * 
+     * 设置category
+     * 
+     * 
+     * @param category
+     *            category
+     */
     public void setCategory(Integer category) {
         this.category = category;
     }
 
+    /**
+     * 获取 page
+     * 
+     * @return page
+     */
     public int getPage() {
         return page;
     }
 
+    /**
+     * 
+     * 设置page
+     * 
+     * 
+     * @param page
+     *            page
+     */
     public void setPage(int page) {
         this.page = page;
     }
 
+    /**
+     * 获取 author
+     * 
+     * @return author
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * 
+     * 设置author
+     * 
+     * 
+     * @param author
+     *            author
+     */
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    /**
+     * 获取 fullflag
+     * 
+     * @return fullflag
+     */
     public Boolean getFullflag() {
         return fullflag;
     }
 
+    /**
+     * 
+     * 设置fullflag
+     * 
+     * 
+     * @param fullflag
+     *            fullflag
+     */
     public void setFullflag(Boolean fullflag) {
         this.fullflag = fullflag;
     }
 
+    /**
+     * 获取 articleList
+     * 
+     * @return articleList
+     */
     public List<TArticle> getArticleList() {
         return articleList;
     }
 
+    /**
+     * 
+     * 设置articleList
+     * 
+     * 
+     * @param articleList
+     *            articleList
+     */
     public void setArticleList(List<TArticle> articleList) {
         this.articleList = articleList;
     }

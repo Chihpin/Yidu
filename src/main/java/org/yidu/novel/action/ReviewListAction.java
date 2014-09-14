@@ -133,6 +133,7 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
         return YiDuConstants.Pagetype.PAGE_REVIEW;
     }
 
+    @Override
     public String getTempName() {
         return "reviewList";
     }

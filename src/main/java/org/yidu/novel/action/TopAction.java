@@ -88,6 +88,7 @@ public class TopAction extends AbstractPublicListBaseAction {
         this.articleList = articleList;
     }
 
+    @Override
     public String getTempName() {
         return "top";
     }

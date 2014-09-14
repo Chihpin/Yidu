@@ -98,6 +98,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
         this.qq = qq;
     }
 
+    @Override
     public String getTempName() {
         return "register";
     }

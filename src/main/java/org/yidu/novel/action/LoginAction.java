@@ -82,6 +82,7 @@ public class LoginAction extends AbstractPublicBaseAction {
         this.useCookie = useCookie;
     }
 
+    @Override
     public String getTempName() {
         return "login";
     }

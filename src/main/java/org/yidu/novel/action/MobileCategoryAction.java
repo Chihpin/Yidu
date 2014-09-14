@@ -26,6 +26,7 @@ public class MobileCategoryAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_CATEGORY;
     }
 
+    @Override
     public String getTempName() {
         return "category";
     }

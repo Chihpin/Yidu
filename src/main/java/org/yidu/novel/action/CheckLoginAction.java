@@ -59,4 +59,10 @@ public class CheckLoginAction extends AbstractPublicBaseAction {
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_OTHERS;
     }
+
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

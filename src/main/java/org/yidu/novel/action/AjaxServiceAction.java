@@ -725,4 +725,10 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
     @Override
     protected void loadData() {
     }
+
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

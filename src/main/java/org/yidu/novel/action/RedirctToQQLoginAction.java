@@ -61,4 +61,10 @@ public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

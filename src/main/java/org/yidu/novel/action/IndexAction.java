@@ -29,6 +29,7 @@ public class IndexAction extends AbstractPublicBaseAction {
      */
     public static final String URL = NAMESPACE + "/" + NAME;
 
+    @Override
     public String getTempName() {
         return "index";
     }

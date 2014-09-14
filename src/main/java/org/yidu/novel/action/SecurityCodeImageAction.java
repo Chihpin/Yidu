@@ -12,6 +12,16 @@ import org.yidu.novel.utils.SecurityImage;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 
+ * <p>
+ * 生成验证码
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 @Results({ @Result(name = "success", type = "stream", params = { "contentType", "image/jpeg", "inputName",
         "imageStream", "bufferSize", "4096" }) })
 public class SecurityCodeImageAction extends ActionSupport implements SessionAware {

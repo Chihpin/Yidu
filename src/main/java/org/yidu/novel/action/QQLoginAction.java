@@ -114,4 +114,10 @@ public class QQLoginAction extends AbstractPublicBaseAction {
     protected void loadData() {
     }
 
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

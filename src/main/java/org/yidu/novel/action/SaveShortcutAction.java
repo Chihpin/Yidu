@@ -94,4 +94,10 @@ public class SaveShortcutAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_OTHERS;
     }
 
+    @Override
+    public String getTempName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
