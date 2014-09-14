@@ -88,7 +88,7 @@ public class RegiAuthorAction extends AbstractUserBaseAction {
      */
     public String register() {
         logger.debug("register start.");
-        if (ArrayUtils.contains(YiDuConstants.allowSampleTypes, getSampleContentType())) {
+        if (ArrayUtils.contains(YiDuConstants.ALLOW_SAMPLE_TYPES, getSampleContentType())) {
             try {
                 // saveArticlespic();
             } catch (Exception e) {

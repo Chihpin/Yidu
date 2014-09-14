@@ -25,7 +25,9 @@ public class SearchAction extends AbstractPublicListBaseAction {
      * 串行化版本统一标识符
      */
     private static final long serialVersionUID = -4215796997609788238L;
-
+    /**
+     * 检索关键字
+     */
     private String key;
 
     /**
@@ -36,30 +38,68 @@ public class SearchAction extends AbstractPublicListBaseAction {
     /**
      * 小说列表
      */
-    List<TArticle> articleList = new ArrayList<TArticle>();
+    private List<TArticle> articleList = new ArrayList<TArticle>();
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = StringUtils.trim(key);
-    }
-
+    /**
+     * 获取 page
+     * 
+     * @return page
+     */
     public int getPage() {
         return page;
     }
 
+    /**
+     * 
+     * 设置page
+     * 
+     * 
+     * @param page
+     *            page
+     */
     public void setPage(int page) {
         this.page = page;
     }
 
+    /**
+     * 获取 articleList
+     * 
+     * @return articleList
+     */
     public List<TArticle> getArticleList() {
         return articleList;
     }
 
+    /**
+     * 
+     * 设置articleList
+     * 
+     * 
+     * @param articleList
+     *            articleList
+     */
     public void setArticleList(List<TArticle> articleList) {
         this.articleList = articleList;
+    }
+
+    /**
+     * 获取 key
+     * 
+     * @return key
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * 
+     * 设置key
+     * 
+     * @param key
+     *            key
+     */
+    public void setKey(String key) {
+        this.key = StringUtils.trim(key);
     }
 
     @Override

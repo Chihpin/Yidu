@@ -33,13 +33,28 @@ public class SiteMapAction extends AbstractPublicListBaseAction {
      * URL。
      */
     public static final String URL = NAMESPACE + "/" + NAME;
+    /**
+     * 小说列表
+     */
+    private List<TArticle> articleList = new ArrayList<TArticle>();
 
-    List<TArticle> articleList = new ArrayList<TArticle>();
-
+    /**
+     * 获取 articleList
+     * 
+     * @return articleList
+     */
     public List<TArticle> getArticleList() {
         return articleList;
     }
 
+    /**
+     * 
+     * 设置articleList
+     * 
+     * 
+     * @param articleList
+     *            articleList
+     */
     public void setArticleList(List<TArticle> articleList) {
         this.articleList = articleList;
     }

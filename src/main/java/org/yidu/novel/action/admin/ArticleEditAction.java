@@ -327,7 +327,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
 
         // 保存图片文件
         if (articlespic != null) {
-            if (ArrayUtils.contains(YiDuConstants.allowPicTypes, getArticlespicContentType())) {
+            if (ArrayUtils.contains(YiDuConstants.ALLOW_PIC_TYPES, getArticlespicContentType())) {
                 try {
                     Utils.saveArticlespic(article.getArticleno(), articlespic, articlespicFileName);
                 } catch (Exception e) {

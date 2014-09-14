@@ -52,7 +52,7 @@
 		</init-param>
 		<init-param>
 			<param-name>logLevel</param-name>
-			<param-value>INFO</param-value>
+			<param-value>log4j：INFO</param-value>
 		</init-param>
 		<init-param>
 			<param-name>statusEnabled</param-name>

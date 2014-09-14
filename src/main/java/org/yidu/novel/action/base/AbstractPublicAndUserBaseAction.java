@@ -26,6 +26,9 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      */
     private static final long serialVersionUID = 6698799932081679448L;
 
+    /**
+     * 获取数据
+     */
     protected abstract void loadData();
 
     /**
@@ -33,10 +36,21 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      */
     private boolean hasError = false;
 
+    /**
+     * 设置是否存在错误标识
+     * 
+     * @param hasError
+     *            是否存在错误标识
+     */
     public void setHasError(boolean hasError) {
         this.hasError = hasError;
     }
 
+    /**
+     * 获得是否存在错误标识
+     * 
+     * @return 是否存在错误标识
+     */
     public boolean getHasError() {
         return hasError;
     }

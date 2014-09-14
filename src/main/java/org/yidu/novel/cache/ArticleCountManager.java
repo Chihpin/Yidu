@@ -103,7 +103,7 @@ public class ArticleCountManager {
                         if (count != null) {
                             allcount = count;
                         }
-                        for (Iterator<String> it = YiDuConstants.topNameMap.keySet().iterator(); it.hasNext();) {
+                        for (Iterator<String> it = YiDuConstants.TOP_NAME_MAP.keySet().iterator(); it.hasNext();) {
                             articleCountMap.put(it.next(), allcount);
                         }
 
@@ -122,7 +122,7 @@ public class ArticleCountManager {
 
                         logger.info("ArticleCount Manager daemon process going to sleep.");
 
-                        Thread.sleep(YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_ARTICLE_COUNT_TIME, 120) * 60 * 1000);
+                        Thread.sleep(YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_ARTICLE_COUNT_INTERVAL, 120) * 60 * 1000);
 
                     } catch (Exception e) {
                         logger.error("init initArticleCountManager failed.", e);

@@ -428,20 +428,19 @@ public class UrlRewriteFilter implements Filter {
         boolean requestRewritten = false;
         if (urlRewriter != null) {
             // process the request
-            // 如果存在的话就不做伪静态转换啦
-
+            // 如果是HTML文件并且已经存在的话就不做伪静态转换啦
+            log.info(hsRequest.getRequestURI());
             boolean fileExists = false;
             if (org.apache.commons.lang3.StringUtils.endsWith(hsRequest.getRequestURI(), "html")) {
                 String htmlFilePath = context.getRealPath("/") + hsRequest.getRequestURI();
                 File htmlFile = new File(htmlFilePath);
-                fileExists = htmlFile.exists();
                 log.debug("htmlfile path :" + htmlFile);
+                fileExists = htmlFile.exists();
+                if (!fileExists) {
+                    requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+                }
             }
-
-            if (!fileExists) {
-                // 文件不存在话，才做伪静态变换
-                requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
-            }
+            // 非HTML文件不做伪静态解析
 
         } else {
             if (log.isDebugEnabled()) {

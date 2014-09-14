@@ -17,6 +17,9 @@ public abstract class JsonBaseAction extends AbstractBaseAction {
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 返回数据
+     */
     protected ResponseBean<?> res;
 
     @Override
@@ -25,8 +28,18 @@ public abstract class JsonBaseAction extends AbstractBaseAction {
         return JSON_RESULT;
     }
 
+    /**
+     * 加载Json数据
+     * 
+     * @return Json数据
+     */
     protected abstract ResponseBean<?> loadJsonData();
 
+    /**
+     * 取得返回数据
+     * 
+     * @return 返回数据
+     */
     public ResponseBean<?> getData() {
         return res;
     }

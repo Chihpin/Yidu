@@ -29,24 +29,59 @@ public class SecurityCodeImageAction extends ActionSupport implements SessionAwa
      * 串行化版本统一标识符
      */
     private static final long serialVersionUID = 1496691731440581303L;
-    // 图片流
+    /**
+     * 图片流
+     */
     private ByteArrayInputStream imageStream;
-    // session域
+    /**
+     * session域
+     */
     private Map<String, Object> session;
 
+    /**
+     * 获取 imageStream
+     * 
+     * @return imageStream
+     */
     public ByteArrayInputStream getImageStream() {
         return imageStream;
     }
 
+    /**
+     * 
+     * 设置imageStream
+     * 
+     * 
+     * @param imageStream
+     *            imageStream
+     */
     public void setImageStream(ByteArrayInputStream imageStream) {
         this.imageStream = imageStream;
     }
 
+    /**
+     * 获取 session
+     * 
+     * @return session
+     */
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    /**
+     * 
+     * 设置session
+     * 
+     * 
+     * @param session
+     *            session
+     */
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
 
     @Action("imagecode")
+    @Override
     public String execute() throws Exception {
         // 如果开启Hard模式，可以不区分大小写
         // String securityCode =

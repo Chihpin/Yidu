@@ -11,57 +11,195 @@ package org.yidu.novel.constant;
  * @author shinpa.you
  */
 public class YiDuConfig {
-    // yiduconfig
-    public final static String URI = "uri";
-    public final static String CONTENT_FILE_PATH = "contentFilePath";
-    public final static String SKIP_AUTH_CHECK = "skipAuthCheck";
-    public final static String COUNT_PER_PAGE = "countPerPage";
-    public final static String CACHE_EFFECTIVE = "cacheEffective";
-    public final static String AD_EFFECTIVE = "adEffective";
-    public final static String CLEAN_URL = "cleanUrl";
-    public final static String FILE_PATH = "filePath";
-    public final static String IAMGE_PATH = "iamgePath";
-    public final static String RELATIVE_IAMGE_PATH = "relativeIamgePath";
-    public final static String MAX_BOOKCASE = "maxBookcase";
-    public final static String NUMBER_PER_PAGE = "numberPerPage";
-    public final static String GZIP_EFFECTIVE = "gzipEffective";
-    public final static String CREATE_INDEXPAGE = "createIndexPage";
-    public final static String CREATE_SITEMAP = "createSiteMap";
-    public final static String THEME_NAME = "themeName";
-    public final static String TXT_ENCODING = "txtEncoding";
-    public final static String KEEP_DELETE_DATA_DAYS = "keepDeleteDataDays";
-    public final static String JUDG_MOBILESITE_BY_DOMIAN = "judgmobilesitebydomian";
-    public final static String ENABLE_MOBILE_SITE = "enableMobileSite";
-    public final static String MOBILESITE_DOMIAN = "mobilesitedomian";
-    public final static String SITEMAP_TYPE = "siteMapType";
-    public final static String XML_SITEMAP_ARTICLE_URL = "xmlSiteMapArticleURL";
-    public final static String XML_SITEMAP_CHAPTER_URL = "xmlSiteMapChapterURL";
-    public final static String REVIEW_NUM = "reviewnum";
-    public final static String ADD_REVIEW_WITHOUT_LOGIN = "addReviewWithoutLogin";
-    public final static String ENABLE_PSEUDO = "enablePseudo";
+    /**
+     * URI
+     */
+    public static final String URI = "uri";
+    /**
+     * content文件路径
+     */
+    public static final String CONTENT_FILE_PATH = "contentFilePath";
+    /**
+     * 是否跳过验证
+     */
+    public static final String SKIP_AUTH_CHECK = "skipAuthCheck";
+    /**
+     * 每页表示件数
+     */
+    public static final String COUNT_PER_PAGE = "countPerPage";
+    /**
+     * 是否启用缓存
+     */
+    public static final String CACHE_EFFECTIVE = "cacheEffective";
+    /**
+     * 是否启用广告
+     */
+    public static final String AD_EFFECTIVE = "adEffective";
+    /**
+     * 是否启用伪静态
+     */
+    public static final String CLEAN_URL = "cleanUrl";
+    /**
+     * TXT文件路径
+     */
+    public static final String FILE_PATH = "filePath";
+    /**
+     * 图片文件路径
+     */
+    public static final String IAMGE_PATH = "iamgePath";
 
-    public final static String ENABLE_QQLOGIN = "enableQQLogin";
-    public final static String APP_ID = "app_ID";
-    public final static String APP_KEY = "app_KEY";
-    public final static String REDIRECT_URI = "redirect_URI";
-    public final static String ENABLE_CACHE_ARTICLE_COUNT = "enableCacheArticleCount";
-    public final static String RELOAD_ARTICLE_COUNT_TIME = "reloadArticleCountTime";
-    public final static String ENABLE_GENERATE_HTML_FILE = "enableGenerateHtmlFile";
+    /**
+     * 图片相对文件路径
+     */
+    public static final String RELATIVE_IAMGE_PATH = "relativeIamgePath";
+    /**
+     * 最大书签数
+     */
+    public static final String MAX_BOOKCASE = "maxBookcase";
+    /**
+     * 每页表示记录书
+     */
+    public static final String NUMBER_PER_PAGE = "numberPerPage";
+    /**
+     * 是否启用GZIP压缩
+     */
+    public static final String GZIP_EFFECTIVE = "gzipEffective";
+    /**
+     * 是否生成静态首页
+     */
+    public static final String CREATE_INDEXPAGE = "createIndexPage";
+    /**
+     * 是否生成网站地图
+     */
+    public static final String CREATE_SITEMAP = "createSiteMap";
+    /**
+     * 模版名称
+     */
+    public static final String THEME_NAME = "themeName";
+    /**
+     * TXT文件编码
+     */
+    public static final String TXT_ENCODING = "txtEncoding";
+    /**
+     * 删除后的数据的保存天数
+     */
+    public static final String KEEP_DELETE_DATA_DAYS = "keepDeleteDataDays";
+    /**
+     * 是否用手机信息判断
+     */
+    public static final String JUDG_MOBILESITE_BY_DOMIAN = "judgmobilesitebydomian";
+    /**
+     * 是否启用手机页面
+     */
+    public static final String ENABLE_MOBILE_SITE = "enableMobileSite";
+    /**
+     * 手机页面域名
+     */
+    public static final String MOBILESITE_DOMIAN = "mobilesitedomian";
+    /**
+     * 网站地图类型
+     */
+    public static final String SITEMAP_TYPE = "siteMapType";
+    /**
+     * XML网站地图内的小说信息URL
+     */
+    public static final String XML_SITEMAP_ARTICLE_URL = "xmlSiteMapArticleURL";
+    /**
+     * XML网站地图内的章节信息URL
+     */
+    public static final String XML_SITEMAP_CHAPTER_URL = "xmlSiteMapChapterURL";
+    /**
+     * 信息页显示评论数量
+     */
+    public static final String REVIEW_NUM = "reviewnum";
+    /**
+     * 是否允许在未登录状态下发表评论
+     */
+    public static final String ADD_REVIEW_WITHOUT_LOGIN = "addReviewWithoutLogin";
+    /**
+     * 是否启用伪原创
+     */
+    public static final String ENABLE_PSEUDO = "enablePseudo";
+    /**
+     * 是否启用QQ登录
+     */
+    public static final String ENABLE_QQLOGIN = "enableQQLogin";
+    /**
+     * QQ登录的APPID
+     */
+    public static final String APP_ID = "app_ID";
+    /**
+     * QQ登录的APPKEY
+     */
+    public static final String APP_KEY = "app_KEY";
+    /**
+     * QQ登录用重定向URI
+     */
+    public static final String REDIRECT_URI = "redirect_URI";
+    /**
+     * 是否缓存小说件数
+     */
+    public static final String ENABLE_CACHE_ARTICLE_COUNT = "enableCacheArticleCount";
+    /**
+     * 重新加载小说件数时间
+     */
+    public static final String RELOAD_ARTICLE_COUNT_INTERVAL = "reloadArticleCountInterval";
+    /**
+     * 是否生成静态HTML文件
+     */
+    public static final String ENABLE_GENERATE_HTML_FILE = "enableGenerateHtmlFile";
 
-    // jdbc
-    public final static String JDBC_URL = "jdbc.url";
-    public final static String JDBC_USERNAME = "jdbc.username";
-    public final static String JDBC_PASSWORD = "jdbc.password";
-    public final static String JDBC_DBNAME = "jdbc.dbname";
-    // language
-    public final static String URL = "label.system.url";
-    public final static String NAME = "label.system.name";
-    public final static String TITLE = "label.system.title";
-    public final static String SITEKEYWORDS = "label.system.siteKeywords";
-    public final static String SITEDESCRIPTION = "label.system.siteDescription";
-    public final static String DOMAIN = "label.system.domain";
-    public final static String COPYRIGHT = "label.system.copyright";
-    public final static String BEIANNO = "label.system.beianNo";
-    public final static String ANALYTICSCODE = "label.system.analyticscode";
+    /**
+     * 数据库JDBC URL
+     */
+    public static final String JDBC_URL = "jdbc.url";
+    /**
+     * 数据库连接用户名
+     */
+    public static final String JDBC_USERNAME = "jdbc.username";
+    /**
+     * 数据库连接密码
+     */
+    public static final String JDBC_PASSWORD = "jdbc.password";
+    /**
+     * 数据库连接数据库名
+     */
+    public static final String JDBC_DBNAME = "jdbc.dbname";
+    /**
+     * 网站URL
+     */
+    public static final String URL = "label.system.url";
+    /**
+     * 网站名字
+     */
+    public static final String NAME = "label.system.name";
+    /**
+     * 网站标题
+     */
+    public static final String TITLE = "label.system.title";
+    /**
+     * 网站关键字
+     */
+    public static final String SITEKEYWORDS = "label.system.siteKeywords";
+    /**
+     * 网站描述
+     */
+    public static final String SITEDESCRIPTION = "label.system.siteDescription";
+    /**
+     * 网站域名
+     */
+    public static final String DOMAIN = "label.system.domain";
+    /**
+     * 网站的copyright
+     */
+    public static final String COPYRIGHT = "label.system.copyright";
+    /**
+     * 备案号
+     */
+    public static final String BEIANNO = "label.system.beianNo";
+    /**
+     * 统计代码
+     */
+    public static final String ANALYTICSCODE = "label.system.analyticscode";
 
 }

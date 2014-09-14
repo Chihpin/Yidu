@@ -51,25 +51,53 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      * 串行化版本统一标识符
      */
     private static final long serialVersionUID = 1L;
-
+    /**
+     * JSON结果类型
+     */
     protected static final String JSON_RESULT = "json";
-
+    /**
+     * 返回主页结果类型
+     */
     public static final String GO_TOP = "GOTO_Top";
-
+    /**
+     * 跳转登录页结果类型
+     */
     public static final String GOTO_LOGIN = "GOTO_Login";
-
+    /**
+     * 重定向结果类型
+     */
     public static final String REDIRECT = "redirect";
-
+    /**
+     * 消息结果类型
+     */
     public static final String MESSAGE = "message";
-
+    /**
+     * 管理系的错误结果类型
+     */
     public static final String ADMIN_ERROR = "adminerror";
-
+    /**
+     * freemarker结果类型
+     */
     public static final String FREEMARKER = "freemarker";
+    /**
+     * freemarker错误结果类型
+     */
     public static final String FREEMARKER_ERROR = "freemarker_error";
+    /**
+     * freemarker消息结果类型
+     */
     public static final String FREEMARKER_MESSAGE = "freemarker_message";
-
+    /**
+     * 手机freemarker结果类型
+     */
     public static final String MOBILE_FREEMARKER = "mobile_freemarker";
+    /**
+     * 手机freemarker错误结果类型
+     */
     public static final String MOBILE_FREEMARKER_ERROR = "mobile_freemarker_error";
+    /**
+     * 手机freemarker消息结果类型
+     */
     public static final String MOBILE_FREEMARKER_MESSAGE = "mobile_freemarker_message";
 
     /**
@@ -80,39 +108,123 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     /**
      * 用户关联操作服务
      */
-    @Autowired
     protected UserService userService;
 
     /**
      * 小说关联操作服务
      */
-    @Autowired
     protected ArticleService articleService;
     /**
      * 章节关联操作服务
      */
-    @Autowired
     protected ChapterService chapterService;
     /**
      * 书签关联操作服务
      */
-    @Autowired
     protected BookcaseService bookcaseService;
     /**
      * 区块关联操作服务
      */
-    @Autowired
     protected SystemBlockService systemBlockService;
     /**
      * 消息关联操作服务
      */
-    @Autowired
     protected MessageService messageService;
     /**
      * 评论关联操作服务
      */
-    @Autowired
     protected ReviewService reviewService;
+
+    /**
+     * 
+     * 设置userService
+     * 
+     * 
+     * @param userService
+     *            userService
+     */
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * 
+     * 设置articleService
+     * 
+     * 
+     * @param articleService
+     *            articleService
+     */
+    @Autowired
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    /**
+     * 
+     * 设置chapterService
+     * 
+     * 
+     * @param chapterService
+     *            chapterService
+     */
+    @Autowired
+    public void setChapterService(ChapterService chapterService) {
+        this.chapterService = chapterService;
+    }
+
+    /**
+     * 
+     * 设置bookcaseService
+     * 
+     * 
+     * @param bookcaseService
+     *            bookcaseService
+     */
+    @Autowired
+    public void setBookcaseService(BookcaseService bookcaseService) {
+        this.bookcaseService = bookcaseService;
+    }
+
+    /**
+     * 
+     * 设置systemBlockService
+     * 
+     * 
+     * @param systemBlockService
+     *            systemBlockService
+     */
+    @Autowired
+    public void setSystemBlockService(SystemBlockService systemBlockService) {
+        this.systemBlockService = systemBlockService;
+    }
+
+    /**
+     * 
+     * 设置messageService
+     * 
+     * 
+     * @param messageService
+     *            messageService
+     */
+    @Autowired
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    /**
+     * 
+     * 设置reviewService
+     * 
+     * 
+     * @param reviewService
+     *            reviewService
+     */
+    @Autowired
+    public void setReviewService(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
 
     @Override
     public String getInputResultName() {
@@ -142,20 +254,47 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      */
     private String backUrl;
 
+    /**
+     * 获取回退URL
+     * 
+     * @return 回退URL
+     */
     public String getBackUrl() {
         return backUrl;
     }
 
+    /**
+     * 设置回退URL
+     * 
+     * @param backUrl
+     *            回退URL
+     */
     public void setBackUrl(String backUrl) {
         this.backUrl = backUrl;
     }
 
+    /**
+     * 回退处理
+     * 
+     * @return 回退字符串
+     * @throws Exception
+     *             异常
+     */
     @SkipValidation
     public String back() throws Exception {
         return REDIRECT;
     }
 
+    /**
+     * 配置属性集合
+     */
     protected Map<String, LinkedMap> collections = new HashMap<String, LinkedMap>();
+
+    /**
+     * 获取集合
+     * 
+     * @return 获取集合
+     */
 
     public Map<String, LinkedMap> getCollections() {
 

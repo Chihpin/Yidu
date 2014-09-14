@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 /**
  * 
  * <p>
- * `排行榜Action
+ * 排行榜Action
  * </p>
  * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
@@ -46,46 +46,103 @@ public class TopAction extends AbstractPublicListBaseAction {
      */
     private String sortOrder;
 
-    public String getTopNameJsonData() {
-        Gson gson = new Gson();
-        return gson.toJson(YiDuConstants.topNameMap, Map.class);
-    }
+    /**
+     * 小说列表
+     */
+    private List<TArticle> articleList = new ArrayList<TArticle>();
 
+    /**
+     * 获取 page
+     * 
+     * @return page
+     */
     public int getPage() {
         return page;
     }
 
+    /**
+     * 
+     * 设置page
+     * 
+     * 
+     * @param page
+     *            page
+     */
     public void setPage(int page) {
         this.page = page;
     }
 
-    public String getSortColumn() {
-        return sortColumn;
-    }
-
-    public void setSortColumn(String sortColumn) {
-        this.sortColumn = StringUtils.lowerCase(sortColumn);
-    }
-
+    /**
+     * 获取 sortOrder
+     * 
+     * @return sortOrder
+     */
     public String getSortOrder() {
         return sortOrder;
     }
 
+    /**
+     * 
+     * 设置sortOrder
+     * 
+     * 
+     * @param sortOrder
+     *            sortOrder
+     */
     public void setSortOrder(String sortOrder) {
         this.sortOrder = sortOrder;
     }
 
     /**
-     * 小说列表
+     * 获取 articleList
+     * 
+     * @return articleList
      */
-    List<TArticle> articleList = new ArrayList<TArticle>();
-
     public List<TArticle> getArticleList() {
         return articleList;
     }
 
+    /**
+     * 
+     * 设置articleList
+     * 
+     * 
+     * @param articleList
+     *            articleList
+     */
     public void setArticleList(List<TArticle> articleList) {
         this.articleList = articleList;
+    }
+
+    /**
+     * 获取 sortColumn
+     * 
+     * @return sortColumn
+     */
+    public String getSortColumn() {
+        return sortColumn;
+    }
+
+    /**
+     * 
+     * 设置sortColumn
+     * 
+     * 
+     * @param sortColumn
+     *            sortColumn
+     */
+    public void setSortColumn(String sortColumn) {
+        this.sortColumn = StringUtils.lowerCase(sortColumn);
+    }
+
+    /**
+     * 获取排行榜名字的JSON数据
+     * 
+     * @return 排行榜名字的JSON数据
+     */
+    public String getTopNameJsonData() {
+        Gson gson = new Gson();
+        return gson.toJson(YiDuConstants.TOP_NAME_MAP, Map.class);
     }
 
     @Override
@@ -97,7 +154,7 @@ public class TopAction extends AbstractPublicListBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
 
-        if (!YiDuConstants.topNameMap.containsKey(sortColumn)) {
+        if (!YiDuConstants.TOP_NAME_MAP.containsKey(sortColumn)) {
             // 默认最近更新
             sortColumn = "lastupdate";
         }

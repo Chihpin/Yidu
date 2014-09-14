@@ -43,14 +43,30 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
      */
     private Map<String, Object> blocks = new HashMap<String, Object>();
 
+    /**
+     * 获取区块信息
+     * 
+     * @return 区块信息
+     */
     public Map<String, Object> getBlocks() {
         return blocks;
     }
 
+    /**
+     * 设置区块信息
+     * 
+     * @param blocks
+     *            区块信息
+     */
     public void setBlocks(Map<String, Object> blocks) {
         this.blocks = blocks;
     }
 
+    /**
+     * 获取回退URL
+     * 
+     * @return 回退URL
+     */
     public String getBackUrl() {
         return LoginManager.getAndCleanReferer();
     }
@@ -74,7 +90,9 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
         return FREEMARKER;
     }
 
-    // 初始化区块信息
+    /**
+     * 初始化区块信息
+     */
     protected void loadBlock() {
         logger.debug("loadBlock start.");
         if (this instanceof IndexAction) {

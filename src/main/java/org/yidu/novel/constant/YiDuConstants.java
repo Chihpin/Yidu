@@ -16,14 +16,22 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  * @author shinpa.you
  */
 public class YiDuConstants {
-
+    /**
+     * 易读配置文件
+     */
     public static PropertiesConfiguration yiduConf;
-
+    /**
+     * 伪静态配置文件
+     */
     public static PropertiesConfiguration pseudoConf;
-
+    /**
+     * 请求URI
+     */
     public static ThreadLocal<String> requestUri = new ThreadLocal<String>();
-
-    public static final Map<String, String> topNameMap = new LinkedHashMap<String, String>() {
+    /**
+     * 排行榜名字MAP
+     */
+    public static final Map<String, String> TOP_NAME_MAP = new LinkedHashMap<String, String>() {
         private static final long serialVersionUID = -2355068040470822368L;
         {
             put("lastupdate", "最近更新");
@@ -41,14 +49,29 @@ public class YiDuConstants {
     };
 
     /**
-     * UTF-8字符串
+     * UTF-8字符
      */
     public static final String ENCODING_UTF_8 = "UTF-8";
-
+    /**
+     * GBK字符
+     */
     public static final String ENCODING_GBK = "GBK";
 
+    /**
+     * 小说子目录的小说数
+     */
     public static final int SUB_DIR_ARTICLES = 1000;
 
+    /**
+     * 
+     * <p>
+     * 用户分组
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
     public static final class UserGroup {
 
         /**
@@ -127,18 +150,55 @@ public class YiDuConstants {
      * @author shinpa.you
      */
     public static final class BlockTarget {
-        public final static short ARTICLE_LIST = 1;
-        public final static short ARTICLE_DETAIL = 2;
-        public final static short CHAPTER_LIST = 3;
-        public final static short READER_PAGE = 4;
-        public final static short USER_DETAIL = 5;
-        public final static short INDEX = 6;
+        /**
+         * 小说列表页
+         */
+        public static final short ARTICLE_LIST = 1;
+        /**
+         * 小说详细页
+         */
+        public static final short ARTICLE_DETAIL = 2;
+        /**
+         * 章节列表页
+         */
+        public static final short CHAPTER_LIST = 3;
+        /**
+         * 阅读页
+         */
+        public static final short READER_PAGE = 4;
+        /**
+         * 用户详细页
+         */
+        public static final short USER_DETAIL = 5;
+        /**
+         * 主页
+         */
+        public static final short INDEX = 6;
     }
 
+    /**
+     * 
+     * <p>
+     * 图片类型
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
     public static final class ImageType {
-        public final static short JPG = 1;
-        public final static short GIF = 2;
-        public final static short PNG = 3;
+        /**
+         * JPG
+         */
+        public static final short JPG = 1;
+        /**
+         * GIF
+         */
+        public static final short GIF = 2;
+        /**
+         * PNG
+         */
+        public static final short PNG = 3;
     }
 
     /**
@@ -152,9 +212,18 @@ public class YiDuConstants {
      * @author shinpa.you
      */
     public static final class BlockType {
-        public final static short ARTICLE_LIST = 10;
-        public final static short CUSTONIZE_ARTICLE_LIST = 20;
-        public final static short HTML = 30;
+        /**
+         * 小说列表
+         */
+        public static final short ARTICLE_LIST = 10;
+        /**
+         * 自定义小说列表
+         */
+        public static final short CUSTONIZE_ARTICLE_LIST = 20;
+        /**
+         * HTML类型
+         */
+        public static final short HTML = 30;
     }
 
     /**
@@ -349,27 +418,61 @@ public class YiDuConstants {
      * @version 1.0.0
      * @author shinpa.you
      */
-    public final static class ImgageMateType {
+    public static final class ImgageMateType {
+        /**
+         * JPG的Mate类型
+         */
         public static final String JPG = "image/jpeg";
+        /**
+         * PNG的Mate类型
+         */
         public static final String PNG = "image/png";
+        /**
+         * GIF的Mate类型
+         */
         public static final String GIF = "image/gif";
 
     }
 
-    public static final String[] allowPicTypes = new String[] { ImgageMateType.JPG, ImgageMateType.PNG,
+    /**
+     * 支持的图片类型
+     */
+    public static final String[] ALLOW_PIC_TYPES = new String[] { ImgageMateType.JPG, ImgageMateType.PNG,
             ImgageMateType.GIF };
 
-    public static final String[] allowSampleTypes = new String[] { "text/plain", "application/kswps" };
+    /**
+     * 支持的Sample类型
+     */
+    public static final String[] ALLOW_SAMPLE_TYPES = new String[] { "text/plain", "application/kswps" };
 
+    /**
+     * 网站地图类型
+     */
     public enum SiteMapType {
+        /**
+         * HTML和XML定义
+         */
         HTML("html"), XML("xml");
-
+        /**
+         * 名字
+         */
         private String name;
 
+        /**
+         * 设置网站地图类型
+         * 
+         * @param name
+         *            地图类型
+         */
         private SiteMapType(String name) {
             this.name = name;
         }
 
+        /**
+         * 获取网站地图类型
+         * 
+         * @return 地图类型
+         */
         public String getName() {
             return name;
         }

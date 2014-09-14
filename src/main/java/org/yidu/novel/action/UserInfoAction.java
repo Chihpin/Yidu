@@ -30,23 +30,53 @@ public class UserInfoAction extends AbstractPublicBaseAction {
      * 访问URL。
      */
     public static final String URL = NAMESPACE + "/" + NAME;
-
+    /**
+     * 用户编号
+     */
     private int userno;
-
+    /**
+     * 用户信息
+     */
     private TUser user;
 
+    /**
+     * 获取 userno
+     * 
+     * @return userno
+     */
     public int getUserno() {
         return userno;
     }
 
+    /**
+     * 
+     * 设置userno
+     * 
+     * 
+     * @param userno
+     *            userno
+     */
     public void setUserno(int userno) {
         this.userno = userno;
     }
 
+    /**
+     * 获取 user
+     * 
+     * @return user
+     */
     public TUser getUser() {
         return user;
     }
 
+    /**
+     * 
+     * 设置user
+     * 
+     * 
+     * @param user
+     *            user
+     */
     public void setUser(TUser user) {
         this.user = user;
     }

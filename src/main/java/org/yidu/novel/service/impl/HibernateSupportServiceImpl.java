@@ -21,8 +21,21 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
     /**
      * sessionFactory
      */
-    @Autowired
+
     protected SessionFactory sessionFactory;
+
+    /**
+     * 
+     * 设置sessionFactory
+     * 
+     * 
+     * @param sessionFactory
+     *            sessionFactory
+     */
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     /**
      * 根据entityClass和ID获取Entity实例
@@ -108,6 +121,19 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
      *            参数
      * @return Query
      */
+    protected final <T> List<T> find(final String hql, final List<?> params) {
+        return this.find(hql, params.toArray());
+    }
+
+    /**
+     * 根据hql和参数构成Query
+     * 
+     * @param hql
+     *            hql
+     * @param params
+     *            参数
+     * @return Query
+     */
     protected final Query getQuery(final String hql, final Object... params) {
         Query query = this.sessionFactory.getCurrentSession().createQuery(fomatHQL(hql));
         if (params != null && params.length != 0) {
@@ -116,6 +142,31 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
             }
         }
         return query;
+    }
+
+    /**
+     * 根据hql和参数构成Query
+     * 
+     * @param sql
+     *            sql
+     * @param params
+     *            参数
+     */
+    protected final void sqlQuery(final String sql, final List<?> params) {
+        this.sqlQuery(sql, params.toArray());
+    }
+
+    /**
+     * 根据hql和参数获得Int结果
+     * 
+     * @param hql
+     *            hql
+     * @param params
+     *            参数
+     * @return Int结果
+     */
+    protected final Integer getIntResult(final String hql, final List<?> params) {
+        return getIntResult(hql, params.toArray());
     }
 
     /**
@@ -144,6 +195,24 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
     protected final <T> List<T> find(final String hql, final Object... params) {
         Query query = this.getQuery(hql, params);
         return query.list();
+    }
+
+    /**
+     * 根据hql,参数,指定区间获得List结果
+     * 
+     * @param hql
+     *            hql
+     * @param firstResult
+     *            第一条结果
+     * @param maxResults
+     *            最大结果
+     * @param params
+     *            参数
+     * @return List结果
+     */
+    protected final <T> List<T> findByRange(final String hql, final int firstResult, final int maxResults,
+            final List<?> params) {
+        return this.findByRange(hql, firstResult, maxResults, params.toArray());
     }
 
     /**
