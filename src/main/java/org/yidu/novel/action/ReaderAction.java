@@ -60,44 +60,109 @@ public class ReaderAction extends AbstractPublicBaseAction {
      */
     private List<ChapterDTO> fullReadChapterList;
 
-    public List<ChapterDTO> getFullReadChapterList() {
-        return fullReadChapterList;
-    }
-
-    public void setFullReadChapterList(List<ChapterDTO> fullReadChapterList) {
-        this.fullReadChapterList = fullReadChapterList;
-    }
-
-    public Integer getArticleno() {
+    /**
+     * 获取articleno
+     * 
+     * @return articleno
+     */
+    public int getArticleno() {
         return articleno;
     }
 
-    public void setArticleno(Integer articleno) {
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
+    public void setArticleno(int articleno) {
         this.articleno = articleno;
     }
 
-    public Integer getChapterno() {
+    /**
+     * 获取chapterno
+     * 
+     * @return chapterno
+     */
+    public int getChapterno() {
         return chapterno;
     }
 
-    public void setChapterno(Integer chapterno) {
+    /**
+     * 
+     * 设置chapterno
+     * 
+     * 
+     * @param chapterno
+     *            chapterno
+     */
+    public void setChapterno(int chapterno) {
         this.chapterno = chapterno;
     }
 
-    public Integer getToChapterno() {
+    /**
+     * 获取toChapterno
+     * 
+     * @return toChapterno
+     */
+    public int getToChapterno() {
         return toChapterno;
     }
 
-    public void setToChapterno(Integer toChapterno) {
+    /**
+     * 
+     * 设置toChapterno
+     * 
+     * 
+     * @param toChapterno
+     *            toChapterno
+     */
+    public void setToChapterno(int toChapterno) {
         this.toChapterno = toChapterno;
     }
 
+    /**
+     * 获取chapter
+     * 
+     * @return chapter
+     */
     public ChapterDTO getChapter() {
         return chapter;
     }
 
+    /**
+     * 
+     * 设置chapter
+     * 
+     * 
+     * @param chapter
+     *            chapter
+     */
     public void setChapter(ChapterDTO chapter) {
         this.chapter = chapter;
+    }
+
+    /**
+     * 获取fullReadChapterList
+     * 
+     * @return fullReadChapterList
+     */
+    public List<ChapterDTO> getFullReadChapterList() {
+        return fullReadChapterList;
+    }
+
+    /**
+     * 
+     * 设置fullReadChapterList
+     * 
+     * 
+     * @param fullReadChapterList
+     *            fullReadChapterList
+     */
+    public void setFullReadChapterList(List<ChapterDTO> fullReadChapterList) {
+        this.fullReadChapterList = fullReadChapterList;
     }
 
     @Override

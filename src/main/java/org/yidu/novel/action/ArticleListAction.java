@@ -171,6 +171,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         this.articleList = articleList;
     }
 
+    @Override
     public String getTempName() {
         return "articleList";
     }

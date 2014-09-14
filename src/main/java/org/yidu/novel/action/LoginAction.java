@@ -43,15 +43,34 @@ public class LoginAction extends AbstractPublicBaseAction {
      * URL。
      */
     public static final String URL = NAMESPACE + "/" + NAME;
-
+    /**
+     * 登录ID
+     */
     private String loginid;
+    /**
+     * 登录密码
+     */
     private String password;
+    /**
+     * 是否保存Cookie
+     */
     private boolean useCookie;
 
+    /**
+     * 获取登录ID
+     * 
+     * @return 登录ID
+     */
     public String getLoginid() {
         return loginid;
     }
 
+    /**
+     * 设置登录ID
+     * 
+     * @param loginid
+     *            登录ID
+     */
     @Validations(
     // 必須
     requiredStrings = { @RequiredStringValidator(message = "${getText(\"errors.required.input\", "
@@ -61,10 +80,21 @@ public class LoginAction extends AbstractPublicBaseAction {
         this.loginid = loginid;
     }
 
+    /**
+     * 获取登录密码
+     * 
+     * @return 登录密码
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * 设置登录密码
+     * 
+     * @param password
+     *            登录密码
+     */
     @Validations(
     // 必須
     requiredStrings = { @RequiredStringValidator(message = "${getText(\"errors.required.input\","
@@ -74,10 +104,21 @@ public class LoginAction extends AbstractPublicBaseAction {
         this.password = password;
     }
 
+    /**
+     * 获取是否保存Cookie
+     * 
+     * @return 是否保存Cookie
+     */
     public boolean isUseCookie() {
         return useCookie;
     }
 
+    /**
+     * 设置是否保存Cookie
+     * 
+     * @param useCookie
+     *            是否保存Cookie
+     */
     public void setUseCookie(boolean useCookie) {
         this.useCookie = useCookie;
     }
@@ -88,6 +129,7 @@ public class LoginAction extends AbstractPublicBaseAction {
     }
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.info("LoginAction execute has been excuted.");
         initCollections(new String[] { "collectionProperties.article.category" });
@@ -100,6 +142,11 @@ public class LoginAction extends AbstractPublicBaseAction {
         }
     }
 
+    /**
+     * 登录处理
+     * 
+     * @return 返回页
+     */
     @Transactional
     public String login() {
         logger.debug("LoginAction login has been excuted.");

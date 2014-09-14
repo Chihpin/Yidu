@@ -67,63 +67,158 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
      * 评论列表
      */
     private List<TReview> reviewList = new ArrayList<TReview>();
-
+    /**
+     * 小说信息
+     */
     private TArticle article;
-
+    /**
+     * 用户信息
+     */
     private TUser user;
 
+    /**
+     * 获取articleno
+     * 
+     * @return articleno
+     */
     public int getArticleno() {
         return articleno;
     }
 
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
     public void setArticleno(int articleno) {
         this.articleno = articleno;
     }
 
+    /**
+     * 获取page
+     * 
+     * @return page
+     */
     public int getPage() {
         return page;
     }
 
+    /**
+     * 
+     * 设置page
+     * 
+     * 
+     * @param page
+     *            page
+     */
     public void setPage(int page) {
         this.page = page;
     }
 
+    /**
+     * 获取review
+     * 
+     * @return review
+     */
     public String getReview() {
         return review;
     }
 
+    /**
+     * 
+     * 设置review
+     * 
+     * 
+     * @param review
+     *            review
+     */
     public void setReview(String review) {
         this.review = StringUtils.trim(review);
     }
 
-    public boolean getIsFromForm() {
+    /**
+     * 获取isFromForm
+     * 
+     * @return isFromForm
+     */
+    public boolean isFromForm() {
         return isFromForm;
     }
 
-    public void setIsFromForm(boolean isFromForm) {
+    /**
+     * 
+     * 设置isFromForm
+     * 
+     * 
+     * @param isFromForm
+     *            isFromForm
+     */
+    public void setFromForm(boolean isFromForm) {
         this.isFromForm = isFromForm;
     }
 
+    /**
+     * 获取reviewList
+     * 
+     * @return reviewList
+     */
     public List<TReview> getReviewList() {
         return reviewList;
     }
 
+    /**
+     * 
+     * 设置reviewList
+     * 
+     * 
+     * @param reviewList
+     *            reviewList
+     */
     public void setReviewList(List<TReview> reviewList) {
         this.reviewList = reviewList;
     }
 
+    /**
+     * 获取article
+     * 
+     * @return article
+     */
     public TArticle getArticle() {
         return article;
     }
 
+    /**
+     * 
+     * 设置article
+     * 
+     * 
+     * @param article
+     *            article
+     */
     public void setArticle(TArticle article) {
         this.article = article;
     }
 
+    /**
+     * 获取user
+     * 
+     * @return user
+     */
     public TUser getUser() {
         return user;
     }
 
+    /**
+     * 
+     * 设置user
+     * 
+     * 
+     * @param user
+     *            user
+     */
     public void setUser(TUser user) {
         this.user = user;
     }
@@ -138,11 +233,21 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
         return "reviewList";
     }
 
+    /**
+     * 获得回退URL
+     * 
+     * @return 回退URL
+     */
     public String getBackUrl() {
         return ServletActionContext.getResponse().encodeURL(
                 "/reviewList?subdir=" + articleno / 1000 + "&articleno=" + articleno);
     }
 
+    /**
+     * 获得JSON类型返回数据
+     * 
+     * @return JSON类型返回数据
+     */
     public String getData() {
         if (hasActionErrors()) {
             return StringUtils.join(getActionErrors(), ",");
@@ -180,6 +285,11 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
 
     }
 
+    /**
+     * 添加评论
+     * 
+     * @return 表示页面
+     */
     @Transactional
     public String addReview() {
 

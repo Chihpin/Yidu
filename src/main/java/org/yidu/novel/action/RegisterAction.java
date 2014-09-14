@@ -33,11 +33,25 @@ public class RegisterAction extends AbstractPublicBaseAction {
      * 串行化版本统一标识符
      */
     private static final long serialVersionUID = 1L;
-
+    /**
+     * 登录ID
+     */
     private String loginid;
+    /**
+     * 登录密码
+     */
     private String password;
+    /**
+     * 重新输入的密码
+     */
     private String repassword;
+    /**
+     * 电子邮件
+     */
     private String email;
+    /**
+     * QQ号
+     */
     private String qq;
 
     public String getLoginid() {
@@ -104,6 +118,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
     }
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.info("RegisterAction execute has been excuted.");
         if (LoginManager.isLoginFlag()) {
@@ -115,6 +130,11 @@ public class RegisterAction extends AbstractPublicBaseAction {
         }
     }
 
+    /**
+     * 用户注册
+     * 
+     * @return 显示页面
+     */
     @Transactional
     public String register() {
         logger.info("RegisterAction register started.");

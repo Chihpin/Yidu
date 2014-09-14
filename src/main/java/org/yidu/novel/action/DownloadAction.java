@@ -80,34 +80,81 @@ public class DownloadAction extends AbstractPublicBaseAction {
      * */
     private InputStream is;
 
+    /**
+     * 获取下载文件名
+     * 
+     * @return 下载文件名
+     */
     public String getDownloadFileName() {
         return downloadFileName;
     }
 
+    /**
+     * 设置下载文件名
+     * 
+     * @param downloadFileName
+     *            下载文件名
+     */
     public void setDownloadFileName(String downloadFileName) {
         this.downloadFileName = downloadFileName;
     }
 
+    /**
+     * 获取下载文件长度
+     * 
+     * @return 下载文件长度
+     */
     public long getLength() {
         return length;
     }
 
+    /**
+     * 获取InputStream
+     * 
+     * @return InputStream
+     */
     public InputStream getIs() {
         return is;
     }
 
+    /**
+     * 获取 articleno
+     * 
+     * @return articleno
+     */
     public int getArticleno() {
         return articleno;
     }
 
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
     public void setArticleno(int articleno) {
         this.articleno = articleno;
     }
 
+    /**
+     * 获取 chapterno
+     * 
+     * @return chapterno
+     */
     public int getChapterno() {
         return chapterno;
     }
 
+    /**
+     * 
+     * 设置chapterno
+     * 
+     * 
+     * @param chapterno
+     *            chapterno
+     */
     public void setChapterno(int chapterno) {
         this.chapterno = chapterno;
     }

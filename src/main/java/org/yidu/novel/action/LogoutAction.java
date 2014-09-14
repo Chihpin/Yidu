@@ -26,6 +26,7 @@ public class LogoutAction extends AbstractPublicBaseAction {
     private static final long serialVersionUID = -5189599136868434255L;
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.info("LoginOutAction execute has been excuted.");
         if (LoginManager.isLoginFlag()) {

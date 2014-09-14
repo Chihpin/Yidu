@@ -45,63 +45,161 @@ public class InfoAction extends AbstractPublicBaseAction {
      * 小说编号
      */
     private int articleno;
-
+    /**
+     * 拼音
+     */
     private String pinyin;
-
+    /**
+     * 小说信息
+     */
     private TArticle article = new TArticle();
-
+    /**
+     * 章节列表信息
+     */
     private List<TChapter> chapterList = new ArrayList<TChapter>();
-
+    /**
+     * 评论件数
+     */
     private int reviewCount;
-
+    /**
+     * 评论列表
+     */
     private List<TReview> reviewList = new ArrayList<TReview>();
 
+    /**
+     * 获取 articleno
+     * 
+     * @return articleno
+     */
     public int getArticleno() {
         return articleno;
     }
 
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
     public void setArticleno(int articleno) {
         this.articleno = articleno;
     }
 
+    /**
+     * 获取 pinyin
+     * 
+     * @return pinyin
+     */
     public String getPinyin() {
         return pinyin;
     }
 
+    /**
+     * 
+     * 设置pinyin
+     * 
+     * 
+     * @param pinyin
+     *            pinyin
+     */
     public void setPinyin(String pinyin) {
         this.pinyin = pinyin;
     }
 
-    public int getSubDir() {
-        return articleno / YiDuConstants.SUB_DIR_ARTICLES;
-    }
-
+    /**
+     * 获取 article
+     * 
+     * @return article
+     */
     public TArticle getArticle() {
         return article;
     }
 
+    /**
+     * 
+     * 设置article
+     * 
+     * 
+     * @param article
+     *            article
+     */
+    public void setArticle(TArticle article) {
+        this.article = article;
+    }
+
+    /**
+     * 获取 chapterList
+     * 
+     * @return chapterList
+     */
     public List<TChapter> getChapterList() {
         return chapterList;
     }
 
+    /**
+     * 
+     * 设置chapterList
+     * 
+     * 
+     * @param chapterList
+     *            chapterList
+     */
     public void setChapterList(List<TChapter> chapterList) {
         this.chapterList = chapterList;
     }
 
+    /**
+     * 获取 reviewCount
+     * 
+     * @return reviewCount
+     */
     public int getReviewCount() {
         return reviewCount;
     }
 
+    /**
+     * 
+     * 设置reviewCount
+     * 
+     * 
+     * @param reviewCount
+     *            reviewCount
+     */
     public void setReviewCount(int reviewCount) {
         this.reviewCount = reviewCount;
     }
 
+    /**
+     * 获取 reviewList
+     * 
+     * @return reviewList
+     */
     public List<TReview> getReviewList() {
         return reviewList;
     }
 
+    /**
+     * 
+     * 设置reviewList
+     * 
+     * 
+     * @param reviewList
+     *            reviewList
+     */
     public void setReviewList(List<TReview> reviewList) {
         this.reviewList = reviewList;
+    }
+
+    /**
+     * 获取小说子目录
+     * 
+     * @return 小说子目录
+     */
+    @Deprecated
+    public int getSubDir() {
+        return articleno / YiDuConstants.SUB_DIR_ARTICLES;
     }
 
     @Override

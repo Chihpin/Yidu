@@ -57,6 +57,11 @@ public class SaveShortcutAction extends AbstractPublicBaseAction {
      * */
     private InputStream is;
 
+    /**
+     * 获得下载文件名
+     * 
+     * @return 下载文件名
+     */
     public String getDownloadFileName() {
         try {
             return URLEncoder.encode(getText("label.system.name") + ".url", "UTF-8");
@@ -66,10 +71,20 @@ public class SaveShortcutAction extends AbstractPublicBaseAction {
         return getText("label.system.url") + ".url";
     }
 
+    /**
+     * 获取文件长度
+     * 
+     * @return 文件长度
+     */
     public long getLength() {
         return length;
     }
 
+    /**
+     * 获取InputStream
+     * 
+     * @return InputStream
+     */
     public InputStream getIs() {
         return is;
     }
