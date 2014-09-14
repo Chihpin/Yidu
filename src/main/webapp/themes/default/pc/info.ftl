@@ -49,7 +49,7 @@
                 <a href="javascript:void(0)" id="hidden" style="display:none;float:right;" onclick="document.getElementById('waa').style.height='72px';document.getElementById('hidden').style.display='none';document.getElementById('show').style.display='';">- 收回介绍</a> 
           </div>
           <div class="b-oper">
-              <a href="#chapters" class="reader" title="${article.articlename}免费阅读">开始阅读</a>
+              <a href="<#if !enableChapterIndexPahge >#chapters<#else>${article.chapterListUrl}</#if>" class="reader" title="${article.articlename}免费阅读">开始阅读</a>
               <a href="${encodeURL("/user/bookcase!add?articleno=${article.articleno?c}")}" target="_blank" class="mehide" >加入书架</a>
               <a href="${encodeURL("/user/vote?articleno=${article.articleno?c}")}" target="_blank"  id="toupiao"  class="toupiao">给本书投票</a>
               <a href="#" id="toupiaonum" class="meNum">${article.allvote}</a>
@@ -169,6 +169,8 @@
     <#if adEffective?? && adEffective>
     <div class="bookNew"><script src="${contextPath}/ad/info4.js" type="text/javascript"></script></div>
     </#if>
+
+    <#if !enableChapterIndexPahge >
     <div class="clear"></div>
     <div class="chapterNum">
         <a name="chapters"></a>
@@ -195,7 +197,10 @@
           </ul>
         </div>
     </div>
+    <#if adEffective?? && adEffective>
     <script type="text/javascript" src="${contextPath}/ad/info5.js"></script>
+    </#if>
+    </#if>
 </#macro>
 
 <#macro customizefooter> 

@@ -4,38 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
-import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.cache.CacheManager;
-import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
-import org.yidu.novel.entity.TReview;
-import org.yidu.novel.utils.Pagination;
 
 /**
  * <p>
- * 小说简介页
+ * 小说章节列表页
  * </p>
- * Copyright(c) 2013 YiDu-Novel. All rights reserved.
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
  * @version 1.0.0
  * @author shinpa.you
  */
-public class InfoAction extends AbstractPublicBaseAction {
+@Action(value = "chapterList")
+public class ChapterListAction extends AbstractPublicBaseAction {
 
     /**
      * 串行化版本统一标识符
      */
-    private static final long serialVersionUID = -4215796997609788238L;
+    private static final long serialVersionUID = -694735140661882540L;
 
     /**
      * 功能名称。
      */
-    public static final String NAME = "info";
+    public static final String NAME = "chapterList";
 
     /**
      * 访问URL。
@@ -58,14 +56,6 @@ public class InfoAction extends AbstractPublicBaseAction {
      * 章节列表信息
      */
     private List<TChapter> chapterList = new ArrayList<TChapter>();
-    /**
-     * 评论件数
-     */
-    private int reviewCount;
-    /**
-     * 评论列表
-     */
-    private List<TReview> reviewList = new ArrayList<TReview>();
 
     /**
      * 获取 articleno
@@ -151,70 +141,9 @@ public class InfoAction extends AbstractPublicBaseAction {
         this.chapterList = chapterList;
     }
 
-    /**
-     * 获取 reviewCount
-     * 
-     * @return reviewCount
-     */
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
-    /**
-     * 
-     * 设置reviewCount
-     * 
-     * 
-     * @param reviewCount
-     *            reviewCount
-     */
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    /**
-     * 获取 reviewList
-     * 
-     * @return reviewList
-     */
-    public List<TReview> getReviewList() {
-        return reviewList;
-    }
-
-    /**
-     * 
-     * 设置reviewList
-     * 
-     * 
-     * @param reviewList
-     *            reviewList
-     */
-    public void setReviewList(List<TReview> reviewList) {
-        this.reviewList = reviewList;
-    }
-
-    /**
-     * 获取小说子目录
-     * 
-     * @return 小说子目录
-     */
-    @Deprecated
-    public int getSubDir() {
-        return articleno / YiDuConstants.SUB_DIR_ARTICLES;
-    }
-
     @Override
     public String getTempName() {
-        return "info";
-    }
-
-    /**
-     * 获取是否开启了章节列表页标识
-     * 
-     * @return 是否开启了章节列表页标识
-     */
-    public boolean getEnableChapterIndexPahge() {
-        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAHGE, false);
+        return "chapterList";
     }
 
     @Override
@@ -232,34 +161,17 @@ public class InfoAction extends AbstractPublicBaseAction {
         }
 
         if (article != null) {
-
-            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAHGE, false)) {
-                // 获取章节信息
-                ChapterSearchBean searchBean = new ChapterSearchBean();
-                BeanUtils.copyProperties(this, searchBean);
-                chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
-                        searchBean);
-                if (chapterList == null || chapterList.size() == 0) {
-                    chapterList = chapterService.find(searchBean);
-                    if (chapterList != null && chapterList.size() != 0) {
-                        CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
-                                chapterList);
-                    }
+            // 获取章节信息
+            ChapterSearchBean searchBean = new ChapterSearchBean();
+            BeanUtils.copyProperties(this, searchBean);
+            chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean);
+            if (chapterList == null || chapterList.size() == 0) {
+                chapterList = chapterService.find(searchBean);
+                if (chapterList != null && chapterList.size() != 0) {
+                    CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
+                            chapterList);
                 }
             }
-
-            // 获取评论信息
-            ReviewSearchBean reviewSearchBean = new ReviewSearchBean();
-            reviewSearchBean.setArticleno(articleno);
-            // 获取评论件数
-            reviewCount = reviewService.getCount(reviewSearchBean);
-            // 获取评论
-            Pagination pagination = new Pagination(YiDuConstants.yiduConf.getInt(YiDuConfig.REVIEW_NUM, 5), 1);
-            pagination.setSortColumn(TChapter.PROP_POSTDATE);
-            pagination.setSortOrder("DESC");
-            reviewSearchBean.setPagination(pagination);
-            this.reviewList = reviewService.find(reviewSearchBean);
-
         } else {
             addActionError(getText("errors.not.exsits.article"));
         }
@@ -271,7 +183,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     @Override
     public int getPageType() {
-        return YiDuConstants.Pagetype.PAGE_ARTICLE_INFO;
+        return YiDuConstants.Pagetype.PAGE_CHAPTER_LIST;
     }
 
 }

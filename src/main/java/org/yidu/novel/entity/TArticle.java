@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.yidu.novel.action.ArticleListAction;
+import org.yidu.novel.action.ChapterListAction;
 import org.yidu.novel.action.DownloadAction;
 import org.yidu.novel.action.InfoAction;
 import org.yidu.novel.action.ReaderAction;
@@ -236,6 +237,16 @@ public class TArticle extends BaseTArticle {
     public String getReviewUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(ReviewListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+    }
+
+    /**
+     * 获取章节列表URL
+     * 
+     * @return 分类列表URL
+     */
+    public String getChapterListUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
     }
 
     /**

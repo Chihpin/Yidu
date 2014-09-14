@@ -250,6 +250,12 @@ public class YiDuConstants {
          * 3：小说介绍页
          */
         public static final int PAGE_ARTICLE_INFO = 3;
+
+        /**
+         * 60：章节列表页
+         */
+        public static final int PAGE_CHAPTER_LIST = 60;
+
         /**
          * 4：小说阅读页
          */

@@ -148,6 +148,10 @@ public class YiDuConfig {
      * 是否生成静态HTML文件
      */
     public static final String ENABLE_GENERATE_HTML_FILE = "enableGenerateHtmlFile";
+    /**
+     * 是否启用独立章节列表页面
+     */
+    public static final String ENABLE_CHAPTER_INDEX_PAHGE = "enableChapterIndexPahge";
 
     /**
      * 数据库JDBC URL

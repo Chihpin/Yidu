@@ -56,6 +56,8 @@
 
 	<!-- 小说列表结束 -->
 
+	<!-- 小说简介开始 -->
+
 	<rule>
 		<from>^/info/\d*/(\d*)\.html$</from>
 		<to last="true">/info\?articleno=$1</to>
@@ -66,23 +68,26 @@
 		<to last="true">/info/$1/$2\.html</to>
 	</outbound-rule>
 
+	<!-- 小说简介结束 -->
+
+	<!-- 章节列表开始 -->
+
 	<rule>
-		<from>^/reader/(\d*)/index\.html$</from>
-		<to last="true">/info\?articleno=$1</to>
+		<from>^/reader/\d*/(\d*)/index\.html$</from>
+		<to last="true">/chapterList\?articleno=$1</to>
 	</rule>
+
+	<outbound-rule>
+		<from>^/chapterList\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/reader/$1/$2/index\.html</to>
+	</outbound-rule>
+
+	<!-- 章节列表结束 -->
+
+	<!-- 阅读页开始 -->
 
 	<rule>
 		<from>^/reader/\d*/(\d*)/(\d*)\.html$</from>
-		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
-	</rule>
-
-	<rule>
-		<from>^/reader/(\d*)/(\d*)\.html$</from>
-		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
-	</rule>
-
-	<rule>
-		<from>^/reader/(\d*)/(\d*)\.html$</from>
 		<to last="true">/reader\?articleno=$1&amp;chapterno=$2</to>
 	</rule>
 
@@ -268,7 +273,6 @@
 		<from>^/reader\?subdir=(\d*)&amp;articleno=(\d*)&amp;chapterno=(\d*)&amp;toChapterno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/reader/$1/$2/$3/$4\.html</to>
 	</outbound-rule>
-	
  <!-- 
      <rule>
 	     <name>Domain Name Check</name> 
