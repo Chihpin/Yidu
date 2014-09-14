@@ -40,6 +40,7 @@
        readObject.articleno = ${chapter.articleno?c};
        readObject.chaptername = "${chapter.chaptername}";
        readObject.articlename = "${chapter.articlename}";
+       readObject.articlename = "${article.imgUrl}";
        var index = readObject.articleno.in_array(readhistory);
        if(index != -1){
             readhistory.splice(index,1);

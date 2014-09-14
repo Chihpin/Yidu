@@ -9,6 +9,7 @@ import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.dto.ChapterDTO;
+import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.utils.Utils;
 
@@ -51,9 +52,14 @@ public class ReaderAction extends AbstractPublicBaseAction {
     private int toChapterno;
 
     /**
-     * 内容
+     * 章节内容
      */
     private ChapterDTO chapter;
+
+    /**
+     * 小说内容
+     */
+    private TArticle article;
 
     /**
      * 全文阅读内容
@@ -165,6 +171,27 @@ public class ReaderAction extends AbstractPublicBaseAction {
         this.fullReadChapterList = fullReadChapterList;
     }
 
+    /**
+     * 获取article
+     * 
+     * @return article
+     */
+    public TArticle getArticle() {
+        return article;
+    }
+
+    /**
+     * 
+     * 设置article
+     * 
+     * 
+     * @param article
+     *            article
+     */
+    public void setArticle(TArticle article) {
+        this.article = article;
+    }
+
     @Override
     public String getTempName() {
         if (toChapterno != 0 && toChapterno > chapterno) {
@@ -217,6 +244,15 @@ public class ReaderAction extends AbstractPublicBaseAction {
                         chapterDto.setPreChapterno(prechapter.getChapterno());
                     }
                     CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_PREFIX, chapterno, chapterDto);
+
+                    article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX,
+                            chapterDto.getArticleno());
+                    if (article == null || article.getArticleno() == 0) {
+                        article = articleService.getByNo(chapterDto.getArticleno());
+                        CacheManager
+                                .putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
+                    }
+
                 } else {
                     addActionError(getText("errors.not.exsits.chapter"));
                 }

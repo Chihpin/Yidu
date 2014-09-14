@@ -6,6 +6,11 @@
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>
 
+<#macro customizetop>
+<script src="${contextPath}/themes/${themeName}/wap/js/lib/jquery.cookie.js"></script>
+</#macro>
+
+
 <#macro content>
     <div class="m10">
         <div class="tab t2">
@@ -33,6 +38,12 @@
 
 <#macro customizefooter>
     <script type="text/javascript">
+    
+        function imageError(element,articleno) {
+            element.onerror='';
+            element.src='/cover/nocover.jpg';
+        }
+    
         <#if loginUser??>
         var _userid = parseInt("${loginUser.userno}");
         <#else>
@@ -100,7 +111,7 @@
                 htm.push('  <a href="/info/'+Math.floor(item.articleno/1000)+'/'+item.articleno+'.html">');
                 htm.push('      <div class="con">');
                 htm.push('          <h2>' + item.articlename + '</h2>');
-                htm.push('          <img src="'+item.imgUrl+'" />');
+                htm.push('          <img src="'+item.imgUrl+'"  onerror="imageError(this,'+item.articleno+')" />');
                 htm.push('          <em class="del" style="display:' + de + '" onclick="setDeleteId(' + item.bookcaseno + ');return false;"></em>');
                 if (item.fullflag)
                     htm.push('<em class="wan"></em>');
@@ -149,14 +160,15 @@
                 return;
             }
             Util.Loading();
-            $.get("ajaxService", $.param({ action: "history"})
-                , function (res) {
-                    if (res.code == 0) {
-                        _his = res.items;
-                        show(_his);
-                    }
-                    Util.LoadingClear();
-                });
+            
+             var readhistory = $.cookie("readhistory");
+               if(! readhistory ){
+                    readhistory = new Array();
+               }else{
+                    readhistory = JSON.parse(readhistory);
+               }
+              show(readhistory);
+              Util.LoadingClear();
         }
        
         // 删除信息
@@ -239,7 +251,7 @@
                 $("#sortBar").show();
             }
         });
-
+        
     </script>
 
 </#macro>

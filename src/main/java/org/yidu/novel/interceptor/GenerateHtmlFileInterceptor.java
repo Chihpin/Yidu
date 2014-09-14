@@ -43,21 +43,13 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
                 ReaderAction action = (ReaderAction) invocation.getAction();
                 logger.info("going to Generate Html file.");
 
-                String templatePath = "themes/" + YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME) + "/"
+                String templatePath = "themes/" + YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME) + "/pc/"
                         + action.getTempName() + ".ftl";
 
                 StaticUtils.crateHTML(ServletActionContext.getServletContext(), action, templatePath,
                         YiDuConstants.requestUri.get());
-
-                // GenerateHtmlFileThread thread = new
-                // GenerateHtmlFileThread(ServletActionContext.getServletContext(),
-                // action, templatePath, YiDuConstants.requestUri.get());
-                // thread.start();
             }
         }
-
-        // new Thread(new ConcurrencyLockExample()).start();
-
         return rtn;
     }
 

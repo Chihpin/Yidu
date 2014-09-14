@@ -17,6 +17,7 @@
         </ul>
     </div>
 
+
 </#macro>
 
 <#macro content>
@@ -27,6 +28,30 @@
         </div>
     </div>
     <script language="JavaScript" type="text/JavaScript"> 
+        $(document).ready(function(){
+           var readhistory = $.cookie("readhistory");
+           if(! readhistory ){
+                readhistory = new Array();
+           }else{
+                readhistory = JSON.parse(readhistory);
+           }
+           var readObject = new Object();
+           readObject.chapterno = ${chapter.chapterno?c};
+           readObject.articleno = ${chapter.articleno?c};
+           readObject.chaptername = "${chapter.chaptername}";
+           readObject.articlename = "${chapter.articlename}";
+           readObject.articlename = "${article.imgUrl}";
+           var index = readObject.articleno.in_array(readhistory);
+           if(index != -1){
+                readhistory.splice(index,1);
+           }
+           readhistory.splice(0,0,readObject);
+           if(readhistory.length > 10 ){
+                readhistory.splice(9,readhistory.length - 10);
+           }
+           $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
+        })
+    
         window.onload = function() {
             var str = document.getElementById("content").innerHTML;//这里是整个页面代码 ,也可以指定id
             str = str.replace(/\<script[\s\S]+?\<\/script\>/gi, "");

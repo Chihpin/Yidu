@@ -10,7 +10,7 @@
 </#if>
 <meta name="author" content="www.51yd.org"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/wap/css/mobilecss.css" rel="stylesheet" />
-<script src="${contextPath}/themes/${themeName}/wap/js/jQuery.Min.js"></script>
+<script src="${contextPath}/themes/${themeName}/wap/js/lib/jquery-2.1.1.min.js"></script>
 <script src="${contextPath}/themes/${themeName}/wap/js/JX.js"></script>
 <script src="${contextPath}/themes/${themeName}/wap/js/Site.js"></script>
 </head>
