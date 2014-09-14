@@ -56,7 +56,10 @@
         </div>
           <span id="checklogin">
           <script>
-            document.writeln("<a href=\"${contextPath}/gotoQQLogin\"><img src=\"${contextPath}/themes/${themeName}/pc/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
+            var enableQQLogin = <#if enableQQLogin>true<#else>false</#if>;
+            if(enableQQLogin){ 
+                document.writeln("<a href=\"${contextPath}/gotoQQLogin\"><img src=\"${contextPath}/themes/${themeName}/pc/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
+            }
             document.writeln("<a href=\"${contextPath}/login\" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
             document.writeln("<a href=\"${contextPath}/register\" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
           
@@ -64,7 +67,7 @@
                 $.post('${contextPath}/checklogin',function(data){
                     if(data!=null){
                        var html = '你好   <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
-                        if(data.openid==null){
+                        if(enableQQLogin && data.openid==null){
                             html = html + '&nbsp;&nbsp;&nbsp;<a href=\"${contextPath}/gotoQQLogin" \"><img src=\"${contextPath}/themes/${themeName}/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
                         }
                         if(data.type==30){
