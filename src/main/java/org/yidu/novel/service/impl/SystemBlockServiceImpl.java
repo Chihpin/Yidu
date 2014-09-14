@@ -9,6 +9,15 @@ import org.yidu.novel.entity.TSystemBlock;
 import org.yidu.novel.service.SystemBlockService;
 import org.yidu.novel.utils.Pagination;
 
+/**
+ * <p>
+ * 提供区块信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implements SystemBlockService {
 
     @Override

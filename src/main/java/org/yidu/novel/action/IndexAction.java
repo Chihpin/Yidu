@@ -14,7 +14,9 @@ import org.yidu.novel.constant.YiDuConstants;
  * @author shinpa.you
  */
 public class IndexAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -5991997032217966675L;
 
     /**

@@ -10,6 +10,15 @@ import org.yidu.novel.service.ReviewService;
 import org.yidu.novel.utils.Pagination;
 import org.yidu.novel.utils.Utils;
 
+/**
+ * <p>
+ * 提供评论信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class ReviewServiceImpl extends HibernateSupportServiceImpl implements ReviewService {
 
     @Override
@@ -43,8 +52,11 @@ public class ReviewServiceImpl extends HibernateSupportServiceImpl implements Re
      * 创建检索条件
      * 
      * @param searchBean
+     *            检索条件
      * @param hql
+     *            hql
      * @param params
+     *            参数
      */
     private void buildCondtion(ReviewSearchBean searchBean, StringBuffer hql, List<Object> params) {
         if (Utils.isDefined(searchBean.getArticleno())) {

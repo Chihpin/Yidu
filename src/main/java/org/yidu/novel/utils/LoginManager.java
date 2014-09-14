@@ -26,7 +26,9 @@ public class LoginManager {
      * 输出log
      */
     private static Log logger = LogFactory.getLog(LoginManager.class);
-
+    /**
+     * REFERER键
+     */
     private static final String REFERER_KEY = "referer";
 
     /**
@@ -36,11 +38,15 @@ public class LoginManager {
      *            是否新建
      * @return Session对象
      */
-    private static final HttpSession getSession(final boolean create) {
+    private static HttpSession getSession(final boolean create) {
         return ServletActionContext.getRequest().getSession(create);
     }
 
-    public static final void setReferer() {
+    /**
+     * 设置Referer
+     * 
+     */
+    public static void setReferer() {
         String refererPath = (String) ServletActionContext.getRequest().getHeader(REFERER_KEY);
         // 如果URL里没有本站域名的话，设置本站域名为默认值
         if (!(StringUtils.contains(refererPath, YiDuConstants.yiduConf.getString(YiDuConfig.URI)) && StringUtils
@@ -52,6 +58,11 @@ public class LoginManager {
         session.setAttribute(REFERER_KEY, refererPath);
     }
 
+    /**
+     * 获取并清空Referer
+     * 
+     * @return Referer字符串
+     */
     public static final String getAndCleanReferer() {
         HttpSession session = getSession(false);
         if (session == null || StringUtils.isEmpty(session.getAttribute(REFERER_KEY).toString())) {
@@ -72,7 +83,7 @@ public class LoginManager {
     public static final TUser getLoginUser() {
         HttpSession session = getSession(false);
         if (session != null) {
-            return (TUser) session.getAttribute(YiDuConstants.LoginUser);
+            return (TUser) session.getAttribute(YiDuConstants.LOGINUSER);
         } else {
             return null;
         }
@@ -95,7 +106,7 @@ public class LoginManager {
      */
     public static final void doLogin(final TUser user) {
         HttpSession session = getSession(true);
-        session.setAttribute(YiDuConstants.LoginUser, user);
+        session.setAttribute(YiDuConstants.LOGINUSER, user);
     }
 
     /**
@@ -103,6 +114,6 @@ public class LoginManager {
      */
     public static final void doLogout() {
         HttpSession session = getSession(true);
-        session.setAttribute(YiDuConstants.LoginUser, null);
+        session.setAttribute(YiDuConstants.LOGINUSER, null);
     }
 }

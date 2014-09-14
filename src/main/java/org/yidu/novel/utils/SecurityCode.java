@@ -17,7 +17,18 @@ public class SecurityCode {
      * 验证码难度级别，Simple只包含数字，Medium包含数字和小写英文，Hard包含数字和大小写英文
      */
     public enum SecurityCodeLevel {
-        Simple, Medium, Hard
+        /**
+         * 简单
+         */
+        Simple,
+        /**
+         * 中等
+         */
+        Medium,
+        /**
+         * 难
+         */
+        Hard
     };
 
     /**
@@ -59,7 +70,7 @@ public class SecurityCode {
         int n = codes.length;
 
         // 抛出运行时异常
-        if (len > n && isCanRepeat == false) {
+        if (len > n && !isCanRepeat) {
             throw new RuntimeException(String.format(
                     "调用SecurityCode.getSecurityCode(%1$s,%2$s,%3$s)出现异常，当isCanRepeat为%3$s时，传入参数%1$s不能大于%4$s", len,
                     level, isCanRepeat, n));

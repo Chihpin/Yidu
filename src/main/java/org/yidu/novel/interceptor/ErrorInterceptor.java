@@ -21,11 +21,17 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * @author shinpa.you
  */
 public class ErrorInterceptor extends AbstractInterceptor {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 9085740143630189023L;
-
+    /**
+     * 未知错误的键
+     */
     private static final String UNKNOWN_ERROR_KEY = "errors.unknown";
-
+    /**
+     * logger
+     */
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Override
@@ -34,15 +40,15 @@ public class ErrorInterceptor extends AbstractInterceptor {
             String rtn = invocation.invoke();
             return rtn;
         } catch (Throwable th) {
-        	AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
-        	if(th instanceof IOException) {
-        		logger.debug("IOException occured! may the user stop downloading, do not care.");
-        		return null;
-        	} else {
-        		logger.error(action, th);
+            AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
+            if (th instanceof IOException) {
+                logger.debug("IOException occured! may the user stop downloading, do not care.");
+                return null;
+            } else {
+                logger.error(action, th);
                 String errorMsg = action.getText(UNKNOWN_ERROR_KEY);
                 action.addActionError(errorMsg);
-        	}
+            }
         }
         if (invocation.getAction() instanceof AbstractAdminBaseAction) {
             return AbstractBaseAction.ADMIN_ERROR;

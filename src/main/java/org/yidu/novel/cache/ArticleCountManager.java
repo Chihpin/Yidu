@@ -31,13 +31,16 @@ public class ArticleCountManager {
      * 输出log
      */
     private static Log logger = LogFactory.getLog(ArticleCountManager.class);
-
+    /**
+     * 小说件数MAP
+     */
     private static Map<String, Integer> articleCountMap;
 
     /**
      * 获得小说数量
      * 
      * @param key
+     *            键值
      * @return 小说数量
      */
     public static int getArticleCount(String key) {
@@ -48,6 +51,9 @@ public class ArticleCountManager {
         return 0;
     }
 
+    /**
+     * 初始化小说件数管理器
+     */
     public static void initArticleCountManager() {
 
         logger.info("going to init ArticleCountManager.");

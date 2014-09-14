@@ -20,6 +20,9 @@ import freemarker.template.TemplateModelException;
  */
 public class EncodeURLMethod implements TemplateMethodModel {
 
+    /**
+     * HttpServletResponse
+     */
     private HttpServletResponse response;
 
     /**
@@ -39,6 +42,7 @@ public class EncodeURLMethod implements TemplateMethodModel {
      *            方法参数列表
      * @return Object 方法返回值
      * @throws TemplateModelException
+     *             模版错误
      */
     @SuppressWarnings("rawtypes")
     public Object exec(List argList) throws TemplateModelException {

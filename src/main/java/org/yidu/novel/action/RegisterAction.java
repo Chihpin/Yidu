@@ -29,7 +29,9 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
  * @author shinpa.you
  */
 public class RegisterAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 1L;
 
     private String loginid;

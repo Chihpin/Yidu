@@ -19,7 +19,7 @@ public interface SystemBlockService {
     /**
      * 通过区块编号取得区块信息
      * 
-     * @param articleno
+     * @param blockno
      *            区块编号
      * @return 区块详细
      */
@@ -28,7 +28,7 @@ public interface SystemBlockService {
     /**
      * 通过区块编号删除区块信息
      * 
-     * @param articleno
+     * @param blockno
      *            区块编号
      */
     void deleteByNo(final int blockno);

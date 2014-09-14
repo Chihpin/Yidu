@@ -15,6 +15,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({ @Result(name = "success", type = "stream", params = { "contentType", "image/jpeg", "inputName",
         "imageStream", "bufferSize", "4096" }) })
 public class SecurityCodeImageAction extends ActionSupport implements SessionAware {
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 1496691731440581303L;
     // 图片流
     private ByteArrayInputStream imageStream;

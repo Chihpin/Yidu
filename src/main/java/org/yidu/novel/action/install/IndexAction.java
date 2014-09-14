@@ -2,7 +2,6 @@ package org.yidu.novel.action.install;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,7 +33,9 @@ import org.yidu.novel.utils.Utils;
  * @author shinpa.you
  */
 public class IndexAction extends AbstractInstallBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -5991997032217966675L;
     /**
      * 命名空间。
@@ -49,8 +50,14 @@ public class IndexAction extends AbstractInstallBaseAction {
      * URL。
      */
     public static final String URL = NAMESPACE + "/" + NAME;
+    /**
+     * 数据库链接前缀
+     */
     private String prefixjdbc = "jdbc:postgresql://";
-    private static String LOCK_FILE = ServletActionContext.getServletContext().getRealPath("/") + "/install.lock";
+    /**
+     * 安装锁文件地址
+     */
+    private static final String LOCK_FILE = ServletActionContext.getServletContext().getRealPath("/") + "/install.lock";
     /**
      * 网站标题
      */
@@ -113,127 +120,344 @@ public class IndexAction extends AbstractInstallBaseAction {
      */
     private String password;
 
+    /**
+     * 获取 prefixjdbc
+     * 
+     * @return prefixjdbc
+     */
+    public String getPrefixjdbc() {
+        return prefixjdbc;
+    }
+
+    /**
+     * 
+     * 设置prefixjdbc
+     * 
+     * 
+     * @param prefixjdbc
+     *            prefixjdbc
+     */
+    public void setPrefixjdbc(String prefixjdbc) {
+        this.prefixjdbc = prefixjdbc;
+    }
+
+    /**
+     * 获取 title
+     * 
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * 
+     * 设置title
+     * 
+     * 
+     * @param title
+     *            title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * 获取 siteKeywords
+     * 
+     * @return siteKeywords
+     */
     public String getSiteKeywords() {
         return siteKeywords;
     }
 
+    /**
+     * 
+     * 设置siteKeywords
+     * 
+     * 
+     * @param siteKeywords
+     *            siteKeywords
+     */
     public void setSiteKeywords(String siteKeywords) {
         this.siteKeywords = siteKeywords;
     }
 
+    /**
+     * 获取 siteDescription
+     * 
+     * @return siteDescription
+     */
     public String getSiteDescription() {
         return siteDescription;
     }
 
+    /**
+     * 
+     * 设置siteDescription
+     * 
+     * 
+     * @param siteDescription
+     *            siteDescription
+     */
     public void setSiteDescription(String siteDescription) {
         this.siteDescription = siteDescription;
     }
 
+    /**
+     * 获取 name
+     * 
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * 设置name
+     * 
+     * 
+     * @param name
+     *            name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 获取 url
+     * 
+     * @return url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * 
+     * 设置url
+     * 
+     * 
+     * @param url
+     *            url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     * 获取 copyright
+     * 
+     * @return copyright
+     */
     public String getCopyright() {
         return copyright;
     }
 
+    /**
+     * 
+     * 设置copyright
+     * 
+     * 
+     * @param copyright
+     *            copyright
+     */
     public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
 
+    /**
+     * 获取 beianNo
+     * 
+     * @return beianNo
+     */
     public String getBeianNo() {
         return beianNo;
     }
 
+    /**
+     * 
+     * 设置beianNo
+     * 
+     * 
+     * @param beianNo
+     *            beianNo
+     */
     public void setBeianNo(String beianNo) {
         this.beianNo = beianNo;
     }
 
+    /**
+     * 获取 analyticscode
+     * 
+     * @return analyticscode
+     */
     public String getAnalyticscode() {
         return analyticscode;
     }
 
+    /**
+     * 
+     * 设置analyticscode
+     * 
+     * 
+     * @param analyticscode
+     *            analyticscode
+     */
     public void setAnalyticscode(String analyticscode) {
         this.analyticscode = analyticscode;
     }
 
+    /**
+     * 获取 dbhost
+     * 
+     * @return dbhost
+     */
     public String getDbhost() {
         return dbhost;
     }
 
+    /**
+     * 
+     * 设置dbhost
+     * 
+     * 
+     * @param dbhost
+     *            dbhost
+     */
     public void setDbhost(String dbhost) {
         this.dbhost = dbhost;
     }
 
+    /**
+     * 获取 dbport
+     * 
+     * @return dbport
+     */
     public String getDbport() {
         return dbport;
     }
 
+    /**
+     * 
+     * 设置dbport
+     * 
+     * 
+     * @param dbport
+     *            dbport
+     */
     public void setDbport(String dbport) {
         this.dbport = dbport;
     }
 
+    /**
+     * 获取 dbname
+     * 
+     * @return dbname
+     */
     public String getDbname() {
         return dbname;
     }
 
+    /**
+     * 
+     * 设置dbname
+     * 
+     * 
+     * @param dbname
+     *            dbname
+     */
     public void setDbname(String dbname) {
         this.dbname = dbname;
     }
 
+    /**
+     * 获取 dbusername
+     * 
+     * @return dbusername
+     */
     public String getDbusername() {
         return dbusername;
     }
 
+    /**
+     * 
+     * 设置dbusername
+     * 
+     * 
+     * @param dbusername
+     *            dbusername
+     */
     public void setDbusername(String dbusername) {
         this.dbusername = dbusername;
     }
 
+    /**
+     * 获取 dbpassword
+     * 
+     * @return dbpassword
+     */
     public String getDbpassword() {
         return dbpassword;
     }
 
+    /**
+     * 
+     * 设置dbpassword
+     * 
+     * 
+     * @param dbpassword
+     *            dbpassword
+     */
     public void setDbpassword(String dbpassword) {
         this.dbpassword = dbpassword;
     }
 
+    /**
+     * 获取 username
+     * 
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * 
+     * 设置username
+     * 
+     * 
+     * @param username
+     *            username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * 获取 password
+     * 
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * 
+     * 设置password
+     * 
+     * 
+     * @param password
+     *            password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.debug("execute start.");
 
@@ -364,8 +588,21 @@ public class IndexAction extends AbstractInstallBaseAction {
         return SUCCESS;
     }
 
-    private void excuteSqlFromFile(Connection conn, String fileName, Object... params) throws FileNotFoundException,
-            IOException, SQLException {
+    /**
+     * 执行SQL文件
+     * 
+     * @param conn
+     *            数据库连接
+     * @param fileName
+     *            文件名
+     * @param params
+     *            执行参数
+     * @throws IOException
+     *             IO异常
+     * @throws SQLException
+     *             SQL异常
+     */
+    private void excuteSqlFromFile(Connection conn, String fileName, Object... params) throws IOException, SQLException {
 
         // 新建数据库
         java.net.URL url = this.getClass().getResource(fileName);

@@ -1,6 +1,7 @@
 package org.yidu.novel.action;
 
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
+
 /**
  * <p>
  * 评价页
@@ -10,8 +11,10 @@ import org.yidu.novel.action.base.AbstractPublicBaseAction;
  * @version 1.0.0
  * @author shinpa.you
  */
-public class ReviewEditAction extends AbstractPublicBaseAction{
-
+public class ReviewEditAction extends AbstractPublicBaseAction {
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 7851872585464786041L;
 
     @Override
@@ -23,7 +26,7 @@ public class ReviewEditAction extends AbstractPublicBaseAction{
     @Override
     protected void loadData() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

@@ -33,6 +33,12 @@ public class TChapter extends BaseTChapter {
         return isDeleteflag();
     }
 
+    /**
+     * 获得子目录 <br>
+     * 默认是小说号/1000
+     * 
+     * @return 子目录
+     */
     public Integer getSubdir() {
         return getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
     }

@@ -29,7 +29,9 @@ import org.yidu.novel.utils.Pagination;
  * @author shinpa.you
  */
 public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 4900892616460135567L;
     /**
      * 命名空间。
@@ -54,6 +56,7 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     }
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.debug("execute start.");
         loadBlock();

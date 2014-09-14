@@ -26,7 +26,9 @@ import org.yidu.novel.utils.CookieUtils;
  */
 @Action(value = "readhistory")
 public class ReadHistoryAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -1839809309350704624L;
 
     /**

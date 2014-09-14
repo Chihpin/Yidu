@@ -29,7 +29,9 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
  * @author shinpa.you
  */
 public class LoginAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -99,10 +101,10 @@ public class LoginAction extends AbstractPublicBaseAction {
 
     @Transactional
     public String login() {
-        logger.info("LoginAction login has been excuted.");
+        logger.debug("LoginAction login has been excuted.");
         TUser user = userService.findByLoginInfo(loginid, Utils.convert2MD5(password));
         if (user != null && user.getDeleteflag() != null && !user.getDeleteflag()) {
-            logger.info("user info is " + user.getLoginid());
+            logger.info("user " + loginid + " has logined.");
             // 正常登录
             LoginManager.doLogin(user);
             // 更新用户最后登录时间
@@ -117,6 +119,7 @@ public class LoginAction extends AbstractPublicBaseAction {
             return REDIRECT;
         } else {
             addActionError(getText("errors.login.failed"));
+            logger.info("user " + loginid + " try to login ,but failed.");
             logger.debug("LoginAction login user is not exist. abnormally end.");
         }
         return FREEMARKER;

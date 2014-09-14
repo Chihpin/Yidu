@@ -25,10 +25,17 @@ import com.opensymphony.xwork2.interceptor.I18nInterceptor;
  * @author shinpa.you
  */
 public class SetLanguageInterceptor extends AbstractInterceptor {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 7671199059328089342L;
-
+    /**
+     * logger
+     */
     private final Log logger = LogFactory.getLog(this.getClass());
+    /**
+     * 管理画面的LOCALE
+     */
     public static final String ADMIN_PAGE_LOCALE = "WW_TRANS_I18N_LOCALE";
 
     @Override

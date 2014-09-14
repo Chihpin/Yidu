@@ -27,7 +27,7 @@ public interface ReviewService {
     /**
      * 通过评论编号删除评论信息
      * 
-     * @param articleno
+     * @param reviewno
      *            评论编号
      */
     void deleteByNo(final int reviewno);

@@ -12,7 +12,9 @@ import org.yidu.novel.bean.ResponseBean;
  * @author shinpa.you
  */
 public abstract class JsonBaseAction extends AbstractBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 1L;
 
     protected ResponseBean<?> res;

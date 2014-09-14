@@ -32,7 +32,9 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 @Action(value = "articleEdit")
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ArticleListAction.URL)
 public class ArticleEditAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 822196809678036074L;
 
     private int articleno;

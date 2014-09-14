@@ -34,8 +34,14 @@ public class CacheManager {
      */
     private static JCS cache = null;
 
+    /**
+     * GSON对象
+     */
     private static Gson gson = new Gson();
 
+    /**
+     * 缓存管理器
+     */
     private CacheManager() {
         // Exists only to defeat instantiation.
     }
@@ -123,14 +129,41 @@ public class CacheManager {
      * @author shinpa.you
      */
     public class CacheKeyPrefix {
+        /**
+         * 主页区块的键
+         */
         public static final String CACHE_KEY_INDEX_BLOCK = "CacheKey_indexBlock";
+        /**
+         * 小说件数的键
+         */
         public static final String CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_LIST_COUNT";
+        /**
+         * 小说列表的键
+         */
         public static final String CACHE_KEY_ARTICEL_LIST_PREFIX = "CacheKey_ARTICLE_LIST";
+        /**
+         * 小说的键
+         */
         public static final String CACHE_KEY_ARTICEL_PREFIX = "CacheKey_ARTICLE";
+        /**
+         * 章节列表的键
+         */
         public static final String CACHE_KEY_CHAPTER_LIST_PREFIX = "CacheKey_CHAPTER_LIST";
+        /**
+         * 章节的键
+         */
         public static final String CACHE_KEY_CHAPTER_PREFIX = "CacheKey_CHAPTER";
+        /**
+         * 历史的键
+         */
         public static final String CACHE_KEY_HISTORY_PREFIX = "CacheKey_HISTORY";
+        /**
+         * 排行榜的小说列表的键
+         */
         public static final String CACHE_KEY_ARTICEL_TOP_LIST_PREFIX = "CacheKey_ARTICLE_TOP_LIST";
+        /**
+         * 排行榜的小说件数的键
+         */
         public static final String CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_TOP_COUNT";
     }
 

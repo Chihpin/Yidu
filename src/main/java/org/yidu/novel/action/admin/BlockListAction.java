@@ -22,7 +22,9 @@ import org.yidu.novel.utils.LoginManager;
  */
 @Action(value = "blockList")
 public class BlockListAction extends AbstractAdminListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4110412379794700028L;
 
     /**

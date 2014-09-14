@@ -24,9 +24,14 @@ import freemarker.template.TemplateException;
  */
 public class FreeMarkertUtil {
 
+    /**
+     * freemarker配置
+     */
     private static Configuration config = new Configuration();
 
     /**
+     * 处理模版
+     * 
      * @param templateName
      *            模板名字
      * @param root
@@ -68,16 +73,17 @@ public class FreeMarkertUtil {
         config.setServletContextForTemplateLoading(servletContext, templateDir);
         config.setObjectWrapper(new DefaultObjectWrapper());
     }
-    
+
     /**
      * 初始化模板配置
      * 
      * @param templateDir
      *            模板位置
-     * @throws IOException 
+     * @throws IOException
+     *             IO异常
      */
     public static void initConfig(String templateDir) throws IOException {
-        //设置FreeMarker的模版文件位置
+        // 设置FreeMarker的模版文件位置
         config.setDirectoryForTemplateLoading(new File(templateDir));
     }
 }

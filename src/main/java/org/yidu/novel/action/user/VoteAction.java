@@ -13,8 +13,19 @@ import org.yidu.novel.constant.YiDuConstants;
  * @version 1.0.0
  * @author shinpa.you
  */
+/**
+ * <p>
+ * TODO。
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class VoteAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -2984522801349519469L;
 
     /**
@@ -32,10 +43,23 @@ public class VoteAction extends AbstractUserBaseAction {
      */
     private int articleno;
 
+    /**
+     * 获取 articleno
+     * 
+     * @return articleno
+     */
     public int getArticleno() {
         return articleno;
     }
 
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
     public void setArticleno(int articleno) {
         this.articleno = articleno;
     }
@@ -46,6 +70,7 @@ public class VoteAction extends AbstractUserBaseAction {
     }
 
     @SkipValidation
+    @Override
     public String execute() {
         logger.debug("execute start.");
         if (articleno != 0) {

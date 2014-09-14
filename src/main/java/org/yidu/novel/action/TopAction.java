@@ -27,7 +27,9 @@ import com.google.gson.Gson;
  * @author shinpa.you
  */
 public class TopAction extends AbstractPublicListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4123651229405239412L;
 
     /**

@@ -11,6 +11,16 @@ import org.yidu.novel.entity.TUser;
 import org.yidu.novel.service.UserService;
 import org.yidu.novel.utils.Pagination;
 
+/**
+ * 
+ * <p>
+ * 提供用户信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class UserServiceImpl extends HibernateSupportServiceImpl implements UserService {
 
     @Override
@@ -83,6 +93,16 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
         return this.getIntResult(hql.toString(), params);
     }
 
+    /**
+     * 创建检索条件
+     * 
+     * @param searchBean
+     *            检索条件
+     * @param hql
+     *            HQL
+     * @param params
+     *            参数
+     */
     private void buildCondition(UserSearchBean searchBean, StringBuilder hql, List<Object> params) {
         if (searchBean.getUserno() != 0) {
             hql.append(" AND userno = ? ");

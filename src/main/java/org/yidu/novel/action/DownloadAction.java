@@ -38,7 +38,9 @@ import com.opensymphony.xwork2.Action;
                 "attachment; filename =${downloadFileName}" }),
         @Result(name = Action.ERROR, type = "httpheader", params = { "status", "404" }) })
 public class DownloadAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -6265156751627551469L;
 
     /**

@@ -14,14 +14,35 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.interceptor.PreResultListener;
 
+/**
+ * 
+ * <p>
+ * 手机判别用拦截器
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class MobileInterceptor extends AbstractInterceptor {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -8192961773909614182L;
+    /**
+     * 手机版页面前缀
+     */
     private static final String RESULT_CODE_SUFFIX_MOBILE = "mobile_";
-    private final Log logger = LogFactory.getLog(this.getClass());
-
+    /**
+     * logger
+     */
+    private final Log logger = LogFactory.getLog(MobileInterceptor.class);
+    /**
+     * wap画面用手机类型定义
+     */
     private static final String[] MOBILE_BROWSER_UAS = { "iPhone OS", "Android", "BlackBerry", "Windows Phone" };
 
+    @Override
     public String intercept(ActionInvocation invocation) throws Exception {
         logger.debug("AuthCheckInterceptor start.");
 

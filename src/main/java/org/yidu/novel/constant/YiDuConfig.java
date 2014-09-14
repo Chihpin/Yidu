@@ -1,5 +1,15 @@
 package org.yidu.novel.constant;
 
+/**
+ * 
+ * <p>
+ * 易读配置文件定义
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class YiDuConfig {
     // yiduconfig
     public final static String URI = "uri";

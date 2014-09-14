@@ -18,7 +18,7 @@ import org.yidu.novel.utils.LoginManager;
 public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAction {
 
     /**
-     * 
+     * 串行化版本统一标识符
      */
     private static final long serialVersionUID = 4900892616460135567L;
     /**

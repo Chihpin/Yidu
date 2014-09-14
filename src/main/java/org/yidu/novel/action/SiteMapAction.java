@@ -20,7 +20,9 @@ import org.yidu.novel.entity.TArticle;
  */
 @Action(value = "siteMap")
 public class SiteMapAction extends AbstractPublicListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -3069730816500421029L;
 
     /**

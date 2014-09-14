@@ -26,7 +26,9 @@ import org.yidu.novel.utils.Utils;
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL
         + "?articleno=${articleno}")
 public class ChapterEditAction extends AbstractAdminEditBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -6064353669030314155L;
 
     private int chapterno;

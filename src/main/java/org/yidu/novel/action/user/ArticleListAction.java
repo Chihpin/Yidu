@@ -22,7 +22,9 @@ import org.yidu.novel.utils.LoginManager;
  */
 @Action(value = "articleList")
 public class ArticleListAction extends AbstractUserListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 6039988916270544079L;
 
     /**

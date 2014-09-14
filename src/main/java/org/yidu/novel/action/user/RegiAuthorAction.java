@@ -18,7 +18,9 @@ import org.yidu.novel.constant.YiDuConstants;
  */
 @Action(value = "regiauthor")
 public class RegiAuthorAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 6332048762572310141L;
 
     /**

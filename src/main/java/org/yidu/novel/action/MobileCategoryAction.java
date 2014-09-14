@@ -16,7 +16,9 @@ import org.yidu.novel.constant.YiDuConstants;
  */
 @Action(value = "mobileCategory")
 public class MobileCategoryAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -6592333259290864477L;
 
     @Override

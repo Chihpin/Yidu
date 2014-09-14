@@ -26,8 +26,10 @@ import freemarker.template.Template;
  * @author shinpa.you
  */
 public class StaticUtils {
-
-    private static final Log logger = LogFactory.getLog(StaticUtils.class);
+    /**
+     * logger
+     */
+    private static Log logger = LogFactory.getLog(StaticUtils.class);
 
     /**
      * 生成静态页面主方法
@@ -41,7 +43,7 @@ public class StaticUtils {
      * @param targetHtmlPath
      *            生成静态页面的路径
      */
-    public static void crateHTML(ServletContext context, Object data, String templatePath, String htmlPath) {
+    public static void crateHTML(ServletContext context, Object data, String templatePath, String targetHtmlPath) {
         Configuration freemarkerCfg = new Configuration();
         // 加载模版
         freemarkerCfg.setServletContextForTemplateLoading(context, "/");
@@ -51,7 +53,7 @@ public class StaticUtils {
             Template template = freemarkerCfg.getTemplate(templatePath, "UTF-8");
             template.setEncoding("UTF-8");
             // 静态页面路径
-            String htmlPathString = context.getRealPath("/") + "/" + htmlPath;
+            String htmlPathString = context.getRealPath("/") + "/" + targetHtmlPath;
             File htmlFile = new File(htmlPathString);
 
             if (!htmlFile.getParentFile().exists()) {

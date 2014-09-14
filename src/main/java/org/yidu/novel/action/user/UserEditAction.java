@@ -28,7 +28,9 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
  */
 @Action(value = "useredit")
 public class UserEditAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 8182483310788301445L;
 
     /**
@@ -280,7 +282,7 @@ public class UserEditAction extends AbstractUserBaseAction {
         }
         user.setModifytime(new Date());
         user.setModifyuserno(LoginManager.getLoginUser().getUserno());
-        
+
         userService.save(user);
         addActionMessage(getText("messages.save.success"));
         loadData();

@@ -23,7 +23,9 @@ import org.yidu.novel.constant.YiDuConstants;
  * @author shinpa.you
  */
 public class InitializerListener implements ServletContextListener {
-
+    /**
+     * 串行化版本统一标识符
+     */
     protected Log logger = LogFactory.getLog(this.getClass());
 
     @Override

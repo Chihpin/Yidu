@@ -16,7 +16,9 @@ import org.yidu.novel.constant.YiDuConstants;
  */
 @Action(value = "billdetail")
 public class BillDetailAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -2984522801349519469L;
 
     /**

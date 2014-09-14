@@ -51,6 +51,11 @@ public class TArticle extends BaseTArticle {
         return isDeleteflag();
     }
 
+    /**
+     * 获取HTML格式的小说简介信息
+     * 
+     * @return HTML格式的小说简介信息
+     */
     public String getIntroForHtml() {
         if (getIntro() != null) {
             // 替换换行和空格
@@ -60,6 +65,11 @@ public class TArticle extends BaseTArticle {
         return null;
     }
 
+    /**
+     * 获得小说简介的缩略
+     * 
+     * @return 小说简介的缩略
+     */
     public String getIntroOmit() {
         if (getIntro() != null && getIntro().length() > 60) {
             return getIntro().substring(0, 60) + "...";
@@ -67,10 +77,21 @@ public class TArticle extends BaseTArticle {
         return getIntro();
     }
 
+    /**
+     * 获得子目录 <br>
+     * 默认是小说号/1000
+     * 
+     * @return 子目录
+     */
     public Integer getSubdir() {
         return getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
     }
 
+    /**
+     * 获得最新章节名字的缩略
+     * 
+     * @return 最新章节名字的缩略
+     */
     public String getLastchapterOmit() {
         if (getLastchapter() != null && getLastchapter().length() > 10) {
             return getLastchapter().substring(0, 10);
@@ -78,17 +99,32 @@ public class TArticle extends BaseTArticle {
         return getLastchapter();
     }
 
+    /**
+     * 获得最后更新时间
+     * 
+     * @return 最后更新时间
+     */
     public String getLastupdateMin() {
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
         return sdf1.format(getLastupdate());
     }
 
+    /**
+     * 获得小说类别名字
+     * 
+     * @return 小说类别名字
+     */
     public String getCategoryStr() {
         String[] categoryArr = new String[] { "玄幻魔法", "武侠修真", "都市言情", "历史军事", "侦探推理", "网游动漫", "科幻小说", "恐怖灵异", "散文诗词",
                 "其他类型" };
         return categoryArr[getCategory() - 1];
     }
 
+    /**
+     * 获得图片URL
+     * 
+     * @return 图片URL
+     */
     public String getImgUrl() {
         String fileName = "";
         if (getImgflag() == null) {
@@ -202,47 +238,57 @@ public class TArticle extends BaseTArticle {
         return response.encodeURL(ReviewListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
     }
 
-    public final static class CatetoryType {
+    /**
+     * 
+     * <p>
+     * 小说类别定义
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
+    public static final class CatetoryType {
 
         /**
          * 1|玄幻魔法
          */
-        public final static int XUANHUAN = 1;
+        public static final int XUANHUAN = 1;
         /**
          * 2|武侠修真
          */
-        public final static int WUXIA = 2;
+        public static final int WUXIA = 2;
         /**
          * 3|都市言情
          */
-        public final static int YANXIN = 3;
+        public static final int YANXIN = 3;
         /**
          * 4|历史军事
          */
-        public final static int JUSHI = 4;
+        public static final int JUSHI = 4;
         /**
          * 5|侦探推理
          */
-        public final static int ZHENTAN = 5;
+        public static final int ZHENTAN = 5;
         /**
          * 6|网游动漫
          */
-        public final static int WANGYOU = 6;
+        public static final int WANGYOU = 6;
         /**
          * 7|科幻灵异
          */
-        public final static int KEHUAN = 7;
+        public static final int KEHUAN = 7;
         /**
          * 8|恐怖灵异
          */
-        public final static int KONGBU = 8;
+        public static final int KONGBU = 8;
         /**
          * 9|剧本其他
          */
-        public final static int JUBEN = 9;
+        public static final int JUBEN = 9;
         /**
          * 10|其他类型
          */
-        public final static int OTHER = 10;
+        public static final int OTHER = 10;
     }
 }

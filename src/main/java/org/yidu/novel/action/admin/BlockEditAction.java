@@ -26,7 +26,9 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 @Action(value = "blockEdit")
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = BlockListAction.URL)
 public class BlockEditAction extends AbstractAdminEditBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -94899397547008502L;
 
     private int blockno;
@@ -56,11 +58,9 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         this.blockno = blockno;
     }
 
- 
     public String getBlockid() {
         return blockid;
     }
-
 
     public void setBlockid(String blockid) {
         this.blockid = blockid;
@@ -152,7 +152,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         TSystemBlock systemBlock = new TSystemBlock();
         if (blockno != 0) {
             systemBlock = systemBlockService.getByNo(blockno);
-        }else{
+        } else {
             systemBlock.setDeleteflag(false);
         }
         BeanUtils.copyProperties(this, systemBlock);

@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.yidu.novel.service.ArticleService;
 
@@ -26,11 +27,8 @@ public class CleanStatisticsDataJob extends QuartzJobBean {
     /**
      * 小说关联操作服务
      */
+    @Autowired
     private ArticleService articleService;
-
-    public void setArticleService(ArticleService articleService) {
-        this.articleService = articleService;
-    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

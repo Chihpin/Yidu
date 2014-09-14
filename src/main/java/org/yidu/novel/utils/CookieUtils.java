@@ -15,19 +15,43 @@ import org.yidu.novel.entity.TUser;
 import org.yidu.novel.service.UserService;
 
 /**
- * cookie的增加、删除、查询
+ * 
+ * <p>
+ * cookie的增加、删除、查询工具类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
  */
 public class CookieUtils {
+    /**
+     * logger
+     */
     protected static Log logger = LogFactory.getLog(CookieUtils.class);
+    /**
+     * 用户的cookie名
+     */
     public static final String USER_COOKIE = "user.cookie";
+    /**
+     * 阅读履历的cookie名
+     */
     public static final String READ_HISTORY_COOKIE = "read.history.cookie";
 
-    // 添加一个cookie
+    /**
+     * 添加用户信息到Cookie
+     * 
+     * @param user
+     *            用户信息
+     * @return Cookie信息
+     */
+
     public static Cookie addUserCookie(TUser user) {
         try {
             Cookie cookie = new Cookie(USER_COOKIE, URLEncoder.encode(user.getLoginid(), YiDuConstants.ENCODING_UTF_8)
                     + "," + user.getPassword());
-            cookie.setMaxAge(60 * 60 * 24 * 14);// cookie保存两周
+            // cookie保存两周
+            cookie.setMaxAge(60 * 60 * 24 * 14);
             return cookie;
         } catch (UnsupportedEncodingException e) {
             logger.error(e);
@@ -39,7 +63,9 @@ public class CookieUtils {
      * 使用cookie信息登录
      * 
      * @param request
+     *            HttpServletRequest
      * @param userService
+     *            用户服务
      */
     public static void getUserCookieAndLogoin(HttpServletRequest request, UserService userService) {
         Cookie[] cookies = request.getCookies();
@@ -58,7 +84,7 @@ public class CookieUtils {
                             if (user != null) {
                                 LoginManager.doLogin(user);
                                 // 更新用户最后登录时间
-                                userService.updateLastLoginDate(user.getUserno(),new Date());
+                                userService.updateLastLoginDate(user.getUserno(), new Date());
                             }
                         }
                     }
@@ -67,7 +93,13 @@ public class CookieUtils {
         }
     }
 
-    // 删除cookie
+    /**
+     * 删除cookie
+     * 
+     * @param request
+     *            HttpServletRequest
+     * @return Cookie信息
+     */
     public static Cookie delUserCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -82,7 +114,13 @@ public class CookieUtils {
         return null;
     }
 
-    // 添加一个cookie
+    /**
+     * 把指定小说编号存入Cookie
+     * 
+     * @param articlenos
+     *            小说编号
+     * @return Cookie信息
+     */
     public static Cookie addHistoryCookie(String articlenos) {
         Cookie cookie = new Cookie(READ_HISTORY_COOKIE, articlenos);
         // cookie保存1年
@@ -92,6 +130,13 @@ public class CookieUtils {
     }
 
     // 得到cookie
+    /**
+     * 从HTTPRequest中取出阅读履历字符串
+     * 
+     * @param request
+     *            HttpServletRequest
+     * @return 阅读履历字符串
+     */
     public static String getHistoryCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

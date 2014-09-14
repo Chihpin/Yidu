@@ -14,13 +14,18 @@ import com.opensymphony.xwork2.Action;
  * @author shinpa.you
  */
 public abstract class AbstractAdminBaseAction extends AbstractBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 4900892616460135567L;
     /**
      * 命名空间。
      */
     public static final String NAMESPACE = "/admin";
 
+    /**
+     * 读取数据
+     */
     protected abstract void loadData();
 
     @Override

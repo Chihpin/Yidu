@@ -19,12 +19,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class BaseServiceImpl {
 
+    /**
+     * logger
+     */
     protected Log logger = LogFactory.getLog(this.getClass());
     /**
      * 定义JdbcTemplate
      */
     protected JdbcTemplate yiduJdbcTemplate;
 
+    /**
+     * 初始化数据源
+     * 
+     * @param yiduDataSource
+     *            易读用数据源
+     */
     @Autowired
     public void setYiduDataSource(final DataSource yiduDataSource) {
         this.yiduJdbcTemplate = new JdbcTemplate(yiduDataSource);

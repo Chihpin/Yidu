@@ -18,9 +18,21 @@ import com.qq.connect.api.OpenID;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.oauth.Oauth;
 
+/**
+ * 
+ * <p>
+ * QQ登录功能
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 @Action(value = "QQLogin")
 public class QQLoginAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4123651229405239412L;
 
     /**

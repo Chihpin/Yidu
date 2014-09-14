@@ -29,7 +29,9 @@ import org.yidu.novel.utils.LoginManager;
  */
 @Action(value = "reviewList")
 public class ReviewListAction extends AbstractPublicListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 7851872585464786041L;
 
     /**

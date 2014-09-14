@@ -22,7 +22,9 @@ import org.yidu.novel.constant.YiDuConfig;
  */
 @Action(value = "languageEdit")
 public class LanguageEditAction extends AbstractAdminEditBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -6768164951656460867L;
 
     private String title;

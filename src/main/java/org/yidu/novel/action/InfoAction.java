@@ -27,7 +27,7 @@ import org.yidu.novel.utils.Pagination;
 public class InfoAction extends AbstractPublicBaseAction {
 
     /**
-     * 
+     * 串行化版本统一标识符
      */
     private static final long serialVersionUID = -4215796997609788238L;
 

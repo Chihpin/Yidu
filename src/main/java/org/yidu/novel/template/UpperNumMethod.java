@@ -21,20 +21,20 @@ public class UpperNumMethod implements TemplateMethodModel {
     /**
      * 执行方法
      * 
-     * @param num
-     *            方法参数列表
-     * @return Object 方法返回值
+     * @param argList
+     *            参加列表
+     * @return 格式化后的字符串
      * @throws TemplateModelException
+     *             模版异常
      */
-    @SuppressWarnings("rawtypes")
     @Override
-    public Object exec(List argList) throws TemplateModelException {
+    public Object exec(@SuppressWarnings("rawtypes") List argList) throws TemplateModelException {
         // 限定方法中必须且只能传递一个参数
         if (argList.size() != 1) {
             throw new TemplateModelException("Wrong arguments!");
         }
         // String u[] = {"零","壹","贰","叁","肆","伍","陆","柒","捌","玖"};
-        String u[] = { "〇", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+        String[] u = { "〇", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
         char[] str = String.valueOf(argList.get(0)).toCharArray();
         String rstr = "";
         for (int i = 0; i < str.length; i++) {

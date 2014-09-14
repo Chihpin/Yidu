@@ -2,6 +2,16 @@ package org.yidu.novel.bean;
 
 import java.util.Date;
 
+/**
+ * 
+ * <p>
+ * 小说搜索条件
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class ArticleSearchBean extends BaseSearchBean {
 
     private int articleno;
@@ -115,7 +125,7 @@ public class ArticleSearchBean extends BaseSearchBean {
                 + ", pageType=" + pageType + getPagination() + "]";
     }
 
-   public class PageType {
+    public class PageType {
         public static final int publicPage = 1;
         public static final int authorPage = 2;
         public static final int adminPage = 3;

@@ -22,7 +22,9 @@ import org.yidu.novel.entity.TReview;
  */
 @Action(value = "reviewList")
 public class ReviewListAction extends AbstractAdminListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 50763768615695410L;
 
     /**

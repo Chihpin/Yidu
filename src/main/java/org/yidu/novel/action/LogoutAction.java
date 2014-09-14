@@ -20,7 +20,9 @@ import org.yidu.novel.utils.LoginManager;
  * @author shinpa.you
  */
 public class LogoutAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -5189599136868434255L;
 
     @SkipValidation

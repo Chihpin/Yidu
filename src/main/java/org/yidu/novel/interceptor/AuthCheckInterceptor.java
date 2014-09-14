@@ -28,23 +28,28 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * @author shinpa.you
  */
 public class AuthCheckInterceptor extends AbstractInterceptor {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 6232895416881210405L;
-
+    /**
+     * 认证错误的键
+     */
     private static final String AUTH_ERROR_KEY = "errors.unauthority";
+    /**
+     * 未知错误的键
+     */
     private static final String UNKNOWN_ERROR_KEY = "errors.unknown";
-
-    private final Log logger = LogFactory.getLog(this.getClass());
+    /**
+     * logger
+     */
+    private static Log logger = LogFactory.getLog(AuthCheckInterceptor.class);
 
     /**
      * 用户关联操作服务
      */
-    protected UserService userService;
-
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    protected UserService userService;
 
     @Override
     public String intercept(final ActionInvocation invocation) throws Exception {

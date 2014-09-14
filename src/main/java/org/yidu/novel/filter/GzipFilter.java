@@ -14,9 +14,27 @@ import javax.servlet.http.HttpServletResponse;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 
+/**
+ * 
+ * <p>
+ * Gzip过滤器
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class GzipFilter implements Filter {
+    /**
+     * 过滤器配置
+     */
     private FilterConfig filterConfig = null;
 
+    /**
+     * 构造方法
+     * 
+     * @return 过滤器配置
+     */
     protected final FilterConfig getFilterConfig() {
         return this.filterConfig;
     }

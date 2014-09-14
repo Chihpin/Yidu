@@ -13,6 +13,16 @@ import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.CleanDeleteDataService;
 import org.yidu.novel.utils.Utils;
 
+/**
+ * 
+ * <p>
+ * 理删除数据服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class CleanDeleteDataServiceImpl extends HibernateSupportServiceImpl implements CleanDeleteDataService {
 
     @Override

@@ -403,7 +403,7 @@ public class UrlRewriteFilter implements Filter {
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_GENERATE_HTML_FILE, false)) {
             String uri = hsRequest.getRequestURI().toString();
             if (org.apache.commons.lang3.StringUtils.endsWith(uri, "html")) {
-                log.info("save uri " + hsRequest.getRequestURI().toString());
+                log.debug("save uri " + hsRequest.getRequestURI().toString());
                 YiDuConstants.requestUri.set(uri);
             }
         }
@@ -435,7 +435,7 @@ public class UrlRewriteFilter implements Filter {
                 String htmlFilePath = context.getRealPath("/") + hsRequest.getRequestURI();
                 File htmlFile = new File(htmlFilePath);
                 fileExists = htmlFile.exists();
-                log.info("htmlfile path :" + htmlFile);
+                log.debug("htmlfile path :" + htmlFile);
             }
 
             if (!fileExists) {

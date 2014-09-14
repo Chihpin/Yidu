@@ -24,7 +24,9 @@ import org.yidu.novel.utils.Utils;
 @Action(value = "userEdit")
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = UserListAction.URL)
 public class UserEditAction extends AbstractAdminEditBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 8182483310788301445L;
 
     /**

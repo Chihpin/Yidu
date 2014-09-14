@@ -11,10 +11,22 @@ import org.yidu.novel.utils.LoginManager;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 
+/**
+ * 
+ * <p>
+ * 跳转到QQ登录画面
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 @Action(value = "gotoQQLogin")
 @Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = "${url}")
 public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4123651229405239412L;
 
     @Override
@@ -22,6 +34,11 @@ public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_OTHERS;
     }
 
+    /**
+     * 获取qq登录页的地址
+     * 
+     * @return qq登录页的地址
+     */
     public String getUrl() {
         String url = NotFoundAction.URL;
         try {
@@ -43,9 +60,5 @@ public class RedirctToQQLoginAction extends AbstractPublicBaseAction {
     protected void loadData() {
         // TODO Auto-generated method stub
 
-    }
-
-    public String getTempName() {
-        return "test";
     }
 }

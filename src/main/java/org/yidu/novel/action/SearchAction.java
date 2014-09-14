@@ -21,7 +21,9 @@ import org.yidu.novel.entity.TArticle;
  * @author shinpa.you
  */
 public class SearchAction extends AbstractPublicListBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4215796997609788238L;
 
     private String key;

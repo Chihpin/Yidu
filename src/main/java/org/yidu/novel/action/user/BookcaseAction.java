@@ -27,7 +27,9 @@ import org.yidu.novel.utils.LoginManager;
  * @author shinpa.you
  */
 public class BookcaseAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 366181195078436796L;
 
     /**
@@ -128,7 +130,8 @@ public class BookcaseAction extends AbstractUserBaseAction {
             return FREEMARKER_ERROR;
         }
 
-        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
+        TBookcase bookcase = this.bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(),
+                articleno);
         if (bookcase == null) {
             bookcase = new TBookcase();
         }

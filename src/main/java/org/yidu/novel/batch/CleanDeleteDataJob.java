@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.yidu.novel.service.CleanDeleteDataService;
 
@@ -22,12 +23,11 @@ public class CleanDeleteDataJob extends QuartzJobBean {
      * 输出log
      */
     private Log logger = LogFactory.getLog(this.getClass());
-
+    /**
+     * 清理数据服务
+     */
+    @Autowired
     private CleanDeleteDataService cleanDeleteDataService;
-
-    public void setCleanDeleteDataService(CleanDeleteDataService cleanDeleteDataService) {
-        this.cleanDeleteDataService = cleanDeleteDataService;
-    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

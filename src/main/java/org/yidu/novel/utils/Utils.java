@@ -36,12 +36,31 @@ import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TChapter;
 
+/**
+ * 
+ * <p>
+ * 易读工具类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class Utils {
-
+    /**
+     * logger
+     */
     protected static Log logger = LogFactory.getLog(Utils.class);
 
+    /**
+     * 把字符串转成MD5字符串
+     * 
+     * @param input
+     *            需要转换的字符串
+     * @return 转换后的MD5字符串
+     */
     public static String convert2MD5(final String input) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
         try {
             byte[] btInput = input.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
@@ -52,7 +71,7 @@ public class Utils {
             byte[] md = mdInst.digest();
             // 把密文转换成十六进制的字符串形式
             int j = md.length;
-            char str[] = new char[j * 2];
+            char[] str = new char[j * 2];
             int k = 0;
             for (int i = 0; i < j; i++) {
                 byte byte0 = md[i];
@@ -69,8 +88,10 @@ public class Utils {
     /**
      * 取得章节信息
      * 
-     * @param articleno
-     * @param chapterno
+     * @param chapter
+     *            章节信息
+     * @param escape
+     *            是否进行HTML过滤
      * @return 章节内容
      */
     public static String getContext(TChapter chapter, boolean escape) {
@@ -80,8 +101,10 @@ public class Utils {
     /**
      * 取得章节信息
      * 
-     * @param articleno
-     * @param chapterno
+     * @param chapter
+     *            章节信息
+     * @param escape
+     *            是否进行HTML过滤
      * @param pseudo
      *            是否进行伪原创
      * @return 章节内容
@@ -142,17 +165,29 @@ public class Utils {
         return result;
     }
 
+    /**
+     * 根据小说编号和章节编号获得章节TXT文件路径
+     * 
+     * @param articleno
+     *            小说编号
+     * @param chapterno
+     *            章节编号
+     * @return 章节TXT文件路径
+     */
     public static String getTextFilePathByChapterno(int articleno, int chapterno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
-
-        // path = ServletActionContext.getServletContext().getRealPath("/") +
-        // "/" + path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/"
-        // + articleno + "/" + chapterno + ".txt";
 
         path = path + "/" + articleno / YiDuConstants.SUB_DIR_ARTICLES + "/" + articleno + "/" + chapterno + ".txt";
         return path;
     }
 
+    /**
+     * 根据小说编号获得小说的txt目录
+     * 
+     * @param articleno
+     *            小说编号
+     * @return 小说的txt目录
+     */
     public static String getTextDirectoryPathByArticleno(int articleno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
         // path = ServletActionContext.getServletContext().getRealPath("/") +
@@ -162,6 +197,13 @@ public class Utils {
         return path;
     }
 
+    /**
+     * 根据小说编号获得小说的图片目录
+     * 
+     * @param articleno
+     *            小说编号
+     * @return 小说的图片目录
+     */
     public static String getImgDirectoryPathByArticleno(int articleno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
@@ -173,9 +215,13 @@ public class Utils {
      * 保存文件
      * 
      * @param articleno
+     *            小说编号
      * @param chapterno
+     *            章节编号
      * @param content
+     *            章节内容
      * @throws IOException
+     *             IO异常
      */
     public static void saveContext(int articleno, int chapterno, String content) throws IOException {
         String path = getTextFilePathByChapterno(articleno, chapterno);
@@ -201,6 +247,7 @@ public class Utils {
      * 取得指定URI内容
      * 
      * @param uri
+     *            文件URI
      * @return 页面内容
      */
     public static String getContentFromUri(String uri) {
@@ -208,7 +255,7 @@ public class Utils {
         try {
             HttpGet httpget = new HttpGet(uri);
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-                public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
+                public String handleResponse(final HttpResponse response) throws IOException {
                     int status = response.getStatusLine().getStatusCode();
                     if (status >= 200 && status < 300) {
                         HttpEntity entity = response.getEntity();
@@ -256,23 +303,21 @@ public class Utils {
             // 删除子文件
             if (files[i].isFile()) {
                 flag = deleteFile(files[i].getAbsolutePath());
-                if (!flag)
+                if (!flag) {
                     break;
-            } // 删除子目录
-            else {
+                }
+            } else {
+                // 删除子目录
                 flag = deleteDirectory(files[i].getAbsolutePath());
-                if (!flag)
+                if (!flag) {
                     break;
+                }
             }
         }
-        if (!flag)
-            return false;
-        // 删除当前目录
-        if (dirFile.delete()) {
-            return true;
-        } else {
+        if (!flag) {
             return false;
         }
+        return dirFile.delete();
     }
 
     /**
@@ -293,6 +338,18 @@ public class Utils {
         return flag;
     }
 
+    /**
+     * 保存小说图片
+     * 
+     * @param articleno
+     *            小说编号
+     * @param file
+     *            图片文件
+     * @param fileName
+     *            文件名
+     * @throws Exception
+     *             保存异常
+     */
     public static void saveArticlespic(int articleno, File file, String fileName) throws Exception {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
@@ -305,6 +362,13 @@ public class Utils {
         FileUtils.copyFile(file, savefile);
     }
 
+    /**
+     * 根据小说编号获得小说图片路径
+     * 
+     * @param articleno
+     *            小说编号
+     * @return 小说图片路径
+     */
     public static String getArticlePicPath(int articleno) {
         String path = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         path = ServletActionContext.getServletContext().getRealPath("/") + "/" + path + "/" + articleno
@@ -313,10 +377,11 @@ public class Utils {
     }
 
     /**
-     * * 将汉字转换为全拼 * *
+     * 将汉字转换为全拼
      * 
      * @param src
-     * @return String
+     *            需要转换的汉字
+     * @return 拼音字符串
      */
     public static String getPinYin(String src) {
 
@@ -348,6 +413,16 @@ public class Utils {
         return retStr;
     }
 
+    /**
+     * 判断对象是不是定义了 <br>
+     * List的话，不为NULL和空<br>
+     * 字符串的的话，不为NULL或空<br>
+     * Integer的话，不为NULL或0<br>
+     * 
+     * @param obj
+     *            要判断的对象
+     * @return 是否定义了
+     */
     public static boolean isDefined(Object obj) {
         if (obj instanceof Collection) {
             return CollectionUtils.isNotEmpty((Collection<?>) obj);

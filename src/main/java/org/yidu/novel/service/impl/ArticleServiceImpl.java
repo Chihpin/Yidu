@@ -6,17 +6,23 @@ import java.util.List;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
 
+/**
+ * 
+ * <p>
+ * 提供小说信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class ArticleServiceImpl extends HibernateSupportServiceImpl implements ArticleService {
-
-    private static final Log log = LogFactory.getLog(ArticleServiceImpl.class);
 
     @Override
     public List<TArticle> find(final ArticleSearchBean searchBean) {
@@ -39,6 +45,16 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         }
     }
 
+    /**
+     * 创建检索条件
+     * 
+     * @param searchBean
+     *            检索条件
+     * @param hql
+     *            HQL
+     * @param params
+     *            参数
+     */
     private void buildCondtion(ArticleSearchBean searchBean, StringBuffer hql, List<Object> params) {
         // 小说号条件追加
         if (searchBean.getArticleno() != 0) {
@@ -136,7 +152,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
 
     @Override
     public void cleanStatistics() {
-        log.info("cleanStatistics start");
+        logger.info("cleanStatistics start");
         String sql = "update t_article set dayvote = 0 ,dayvisit = 0";
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
@@ -150,7 +166,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
             sql += ",monthvote = 0,monthvisit=0";
         }
         this.yiduJdbcTemplate.update(sql);
-        log.info("cleanStatistics end");
+        logger.info("cleanStatistics end");
     }
 
     @Override

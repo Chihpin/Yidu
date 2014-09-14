@@ -9,6 +9,16 @@ import org.yidu.novel.dto.BookcaseDTO;
 import org.yidu.novel.entity.TBookcase;
 import org.yidu.novel.service.BookcaseService;
 
+/**
+ * 
+ * <p>
+ * 提供书签信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements BookcaseService {
 
     @Override
@@ -23,6 +33,16 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
 
     }
 
+    /**
+     * 创建检索条件
+     * 
+     * @param searchBean
+     *            检索条件
+     * @param hql
+     *            HQL
+     * @param params
+     *            参数
+     */
     private void buildCondtion(BookcaseSearchBean searchBean, StringBuffer hql, List<Object> params) {
         if (searchBean.getUserno() != null && searchBean.getUserno() != 0) {
             hql.append("  AND userno=?");

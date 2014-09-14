@@ -1,9 +1,5 @@
 package org.yidu.novel.interceptor;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
@@ -28,9 +24,13 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * @author shinpa.you
  */
 public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = -4852225907669227478L;
-
+    /**
+     * logger
+     */
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Override
@@ -56,38 +56,52 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
             }
         }
 
+        // new Thread(new ConcurrencyLockExample()).start();
+
         return rtn;
     }
 
-    public class ConcurrencyLockExample implements Runnable {
-
-        private Lock lock;
-
-        public ConcurrencyLockExample() {
-            this.lock = new ReentrantLock();
-        }
-
-        @Override
-        public void run() {
-            try {
-                if (lock.tryLock(10, TimeUnit.SECONDS)) {
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                // release lock
-                lock.unlock();
-            }
-        }
-    }
-
+    /**
+     * 
+     * <p>
+     * 生成HTML用线程
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
     class GenerateHtmlFileThread extends Thread {
-
+        /**
+         * ServletContext
+         */
         ServletContext context;
+        /**
+         * 生成html用的数据
+         */
         Object data;
+        /**
+         * 模版路径
+         */
         String templatePath;
+        /**
+         * 静态html路径
+         */
         String htmlPath;
 
+        /**
+         * 
+         * 构造
+         * 
+         * @param context
+         *            ServletContext
+         * @param data
+         *            生成html用的数据
+         * @param templatePath
+         *            模版路径
+         * @param htmlPath
+         *            静态html路径
+         */
         public GenerateHtmlFileThread(ServletContext context, ReaderAction data, String templatePath, String htmlPath) {
             this.context = context;
             this.data = data;
@@ -95,6 +109,9 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
             this.htmlPath = htmlPath;
         }
 
+        /**
+         * 启动
+         */
         public void run() {
             StaticUtils.crateHTML(context, data, templatePath, htmlPath);
         }

@@ -47,7 +47,9 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
         @Result(name = AbstractBaseAction.GOTO_LOGIN, location = org.yidu.novel.action.LoginAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect") })
 public abstract class AbstractBaseAction extends ActionSupport implements ValidationWorkflowAware {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 1L;
 
     protected static final String JSON_RESULT = "json";
@@ -78,59 +80,39 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     /**
      * 用户关联操作服务
      */
+    @Autowired
     protected UserService userService;
 
     /**
      * 小说关联操作服务
      */
+    @Autowired
     protected ArticleService articleService;
     /**
      * 章节关联操作服务
      */
+    @Autowired
     protected ChapterService chapterService;
-
+    /**
+     * 书签关联操作服务
+     */
+    @Autowired
     protected BookcaseService bookcaseService;
-
+    /**
+     * 区块关联操作服务
+     */
+    @Autowired
     protected SystemBlockService systemBlockService;
-
+    /**
+     * 消息关联操作服务
+     */
+    @Autowired
     protected MessageService messageService;
-
+    /**
+     * 评论关联操作服务
+     */
+    @Autowired
     protected ReviewService reviewService;
-
-    @Autowired
-    public void setSystemBlockService(SystemBlockService systemBlockService) {
-        this.systemBlockService = systemBlockService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setArticleService(ArticleService articleService) {
-        this.articleService = articleService;
-    }
-
-    @Autowired
-    public void setChapterService(ChapterService chapterService) {
-        this.chapterService = chapterService;
-    }
-
-    @Autowired
-    public void setBookcaseService(BookcaseService bookcaseService) {
-        this.bookcaseService = bookcaseService;
-    }
-
-    @Autowired
-    public void setMessageService(MessageService messageService) {
-        this.messageService = messageService;
-    }
-
-    @Autowired
-    public void setReviewService(ReviewService reviewService) {
-        this.reviewService = reviewService;
-    }
 
     @Override
     public String getInputResultName() {
@@ -161,7 +143,7 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     private String backUrl;
 
     public String getBackUrl() {
-        return backUrl ;
+        return backUrl;
     }
 
     public void setBackUrl(String backUrl) {
@@ -180,6 +162,12 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
         return collections;
     }
 
+    /**
+     * 从property中读取内容转成Map
+     * 
+     * @param keys
+     *            property里的键
+     */
     public void initCollections(String[] keys) {
         for (String key : keys) {
             LinkedMap pulldown = new LinkedMap();

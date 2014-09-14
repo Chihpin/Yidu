@@ -17,7 +17,9 @@ import org.yidu.novel.utils.LoginManager;
  */
 @Action(value = "center")
 public class CenterAction extends AbstractUserBaseAction {
-
+    /**
+     * 串行化版本统一标识符
+     */
     private static final long serialVersionUID = 822196809678036074L;
 
     private TUser user;

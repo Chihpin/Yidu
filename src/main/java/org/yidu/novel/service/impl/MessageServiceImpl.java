@@ -8,6 +8,16 @@ import org.yidu.novel.entity.TMessage;
 import org.yidu.novel.service.MessageService;
 import org.yidu.novel.utils.Pagination;
 
+/**
+ * 
+ * <p>
+ * 提供消息信息操作的服务实装类
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.0.0
+ * @author shinpa.you
+ */
 public class MessageServiceImpl extends HibernateSupportServiceImpl implements MessageService {
 
     @Override
