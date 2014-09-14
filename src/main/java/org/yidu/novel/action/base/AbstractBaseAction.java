@@ -35,12 +35,12 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
  * @author shinpa.you
  */
 @Results({
-        @Result(name = AbstractBaseAction.FREEMARKER_ERROR, location = "/themes/${themeName}/error.ftl", type = "freemarker"),
-        @Result(name = AbstractBaseAction.FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/message.ftl"),
-        @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/themes/${themeName}/${tempName}.ftl"),
-        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_ERROR, location = "/themes/${themeName}/mobile/error.ftl", type = "freemarker"),
-        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/mobile/message.ftl"),
-        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER, type = "freemarker", location = "/themes/${themeName}/mobile/${tempName}.ftl"),
+        @Result(name = AbstractBaseAction.FREEMARKER_ERROR, location = "/themes/${themeName}/pc/error.ftl", type = "freemarker"),
+        @Result(name = AbstractBaseAction.FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/pc/message.ftl"),
+        @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/themes/${themeName}/pc/${tempName}.ftl"),
+        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_ERROR, location = "/themes/${themeName}/wap/error.ftl", type = "freemarker"),
+        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/wap/message.ftl"),
+        @Result(name = AbstractBaseAction.MOBILE_FREEMARKER, type = "freemarker", location = "/themes/${themeName}/wap/${tempName}.ftl"),
         @Result(name = AbstractBaseAction.ADMIN_ERROR, location = "/WEB-INF/error.jsp", type = "dispatcher"),
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
