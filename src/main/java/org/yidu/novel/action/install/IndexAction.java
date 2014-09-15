@@ -2,9 +2,10 @@ package org.yidu.novel.action.install;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -610,7 +611,8 @@ public class IndexAction extends AbstractInstallBaseAction {
         String realPath = url.getPath();
 
         File file = new File(realPath);
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        // 指定文件字符集
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
         String sql = new String();
         String line = new String();
         while ((line = br.readLine()) != (null)) {
