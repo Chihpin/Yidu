@@ -66,6 +66,7 @@ public class MessageAction extends AbstractUserBaseAction {
 
     @Transactional
     public String add() {
+        addActionMessage("messages.proccess.success");
         return FREEMARKER_MESSAGE;
     }
 

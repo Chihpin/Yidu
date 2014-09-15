@@ -29,6 +29,7 @@ public abstract class BaseTUser  implements Serializable {
 	public static String PROP_ALIPAYACOUNT = "alipayacount";
 	public static String PROP_QQ = "qq";
 	public static String PROP_CATEGORY = "category";
+	public static String PROP_MAILTOKEN = "mailtoken";
 	public static String PROP_MODIFYUSERNO = "modifyuserno";
 	public static String PROP_EMAIL = "email";
 	public static String PROP_LASTLOGIN = "lastlogin";
@@ -89,6 +90,7 @@ public abstract class BaseTUser  implements Serializable {
 	private java.util.Date modifytime;
 	private java.lang.String openid;
 	private java.lang.Boolean activedflag;
+	private java.lang.String mailtoken;
 
 
 
@@ -518,6 +520,23 @@ public abstract class BaseTUser  implements Serializable {
 	 */
 	public void setActivedflag (java.lang.Boolean activedflag) {
 		this.activedflag = activedflag;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: mailtoken
+	 */
+	public java.lang.String getMailtoken () {
+		return mailtoken;
+	}
+
+	/**
+	 * Set the value related to the column: mailtoken
+	 * @param mailtoken the mailtoken value
+	 */
+	public void setMailtoken (java.lang.String mailtoken) {
+		this.mailtoken = mailtoken;
 	}
 
 

@@ -6,16 +6,16 @@ public class TUser extends BaseTUser {
     private static final long serialVersionUID = 1L;
 
     /* [CONSTRUCTOR MARKER BEGIN] */
-    public TUser() {
-        super();
-    }
+	public TUser () {
+		super();
+	}
 
-    /**
-     * Constructor for primary key
-     */
-    public TUser(int userno) {
-        super(userno);
-    }
+	/**
+	 * Constructor for primary key
+	 */
+	public TUser (int userno) {
+		super(userno);
+	}
 
     /* [CONSTRUCTOR MARKER END] */
 

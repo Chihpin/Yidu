@@ -119,6 +119,11 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
             params.add(searchBean.getUsername());
         }
 
+        if (StringUtils.isNotBlank(searchBean.getEmail())) {
+            hql.append(" AND email = ? ");
+            params.add(searchBean.getEmail());
+        }
+
         if (searchBean.getDeleteflag() != null) {
             hql.append(" AND deleteflag = ? ");
             params.add(searchBean.getDeleteflag());

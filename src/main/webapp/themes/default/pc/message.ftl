@@ -11,7 +11,7 @@
     <p class="b-all-switch normal">处理成功！</p>
     <div class="msgwin mgl_61" style="text-align:center;">
         <div class="blockcontent">
-            <div style="padding:10px"><br />处理成功，感谢您的参加！<br /><a href="javascript:window.close()">关闭本窗口</a><br /><br /></div>
+            <div style="padding:10px"><@s.actionmessage /><br /><a href="javascript:window.close()">关闭本窗口</a><br /><br /></div>
         </div>
     </div>
 </section>

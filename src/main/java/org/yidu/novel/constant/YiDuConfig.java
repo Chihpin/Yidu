@@ -152,6 +152,17 @@ public class YiDuConfig {
      * 是否启用独立章节列表页面
      */
     public static final String ENABLE_CHAPTER_INDEX_PAHGE = "enableChapterIndexPahge";
+    /**
+     * 是否启用邮箱验证
+     */
+    public static final String ENABLE_MAIL_AUTH = "enableMailAuth";
+    public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
+    public static final String MAIL_SMTP_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
+    public static final String MAIL_SMTP_HOST = "mail.smtp.host";
+    public static final String MAIL_SMTP_PORT = "mail.smtp.port";
+    public static final String MAIL_SMTP_USERNAME = "mail.smtp.username";
+    public static final String MAIL_SMTP_PASSWORD = "mail.smtp.password";
+    public static final String MAIL_SMTP_FROM = "mail.smtp.from";
 
     /**
      * 数据库JDBC URL

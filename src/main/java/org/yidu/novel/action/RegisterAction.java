@@ -9,9 +9,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.UserSearchBean;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.LoginManager;
+import org.yidu.novel.utils.MailUtils;
 import org.yidu.novel.utils.Utils;
 
 import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
@@ -153,18 +155,64 @@ public class RegisterAction extends AbstractPublicBaseAction {
             return FREEMARKER;
         }
 
+        // 邮箱重复检查
+        searchBean = new UserSearchBean();
+        searchBean.setEmail(email);
+        searchBean.setDeleteflag(false);
+        userList = this.userService.find(searchBean);
+        if (userList != null && userList.size() > 0) {
+            addActionError(this.getText("errors.duplicated", new String[] { this.getText("label.user.email") }));
+            return FREEMARKER;
+        }
+
         TUser user = new TUser();
         BeanUtils.copyProperties(this, user);
         user.setDeleteflag(false);
         user.setRegdate(new Date());
         user.setPassword(Utils.convert2MD5(password));
         user.setType(YiDuConstants.UserType.NORMAL_USER);
-        // 注册用户登录
-        this.userService.save(user);
-        // 登录处理
-        LoginManager.doLogin(user);
-        logger.debug("RegisterAction register normally end.");
-        return REDIRECT;
+
+        // 是否开启邮箱验证
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_MAIL_AUTH, false)) {
+            // 开启的话发邮件结束
+            MailUtils.sendMail(email, getText("reg.mail.title", new String[] { getText("label.system.name") }),
+                    creatContent());
+            addActionMessage(getText("message.mail.auth"));
+            user.setMailtoken(Utils.convert2MD5(loginid + password + email));
+            user.setActivedflag(false);
+            // 注册用户登录
+            this.userService.save(user);
+
+            return FREEMARKER_MESSAGE;
+        } else {
+
+            user.setActivedflag(true);
+            // 注册用户登录
+            this.userService.save(user);
+            // 未开启的话，直接登录
+            LoginManager.doLogin(user);
+            // 登录处理
+            logger.debug("RegisterAction register normally end.");
+            return REDIRECT;
+        }
+    }
+
+    /**
+     * 合成邮件内容
+     * 
+     * @return 邮件内容
+     */
+    private String creatContent() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getText(
+                "reg.mail.content",
+                new String[] { loginid, YiDuConstants.yiduConf.getString(YiDuConfig.URI),
+                        Utils.convert2MD5(loginid + password + email), getText("label.system.name"),
+                        YiDuConstants.yiduConf.getString(YiDuConfig.URI) }));
+        sb.append("\n");
+        sb.append(getText("reg.mail.content.footer"));
+
+        return sb.toString();
     }
 
     @Override

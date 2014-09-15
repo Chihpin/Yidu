@@ -105,5 +105,8 @@
         <property name="activedflag" type="java.lang.Boolean">
             <column name="activedflag" />
         </property>
+        <property name="mailtoken" type="string">
+            <column name="mailtoken" length="32" />
+        </property>
     </class>
 </hibernate-mapping>

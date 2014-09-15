@@ -292,6 +292,12 @@ public class YiDuConstants {
          * 11：注册页
          */
         public static final int PAGE_REGEDIT = 12;
+
+        /**
+         * 13：邮件验证页
+         */
+        public static final int PAGE_MAIL_VALIDATE = 13;
+
         /**
          * 书架
          */
