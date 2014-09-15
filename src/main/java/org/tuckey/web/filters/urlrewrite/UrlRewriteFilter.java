@@ -429,7 +429,6 @@ public class UrlRewriteFilter implements Filter {
         if (urlRewriter != null) {
             // process the request
             // 如果是HTML文件并且已经存在的话就不做伪静态转换啦
-            log.info(hsRequest.getRequestURI());
             boolean fileExists = false;
             if (org.apache.commons.lang3.StringUtils.endsWith(hsRequest.getRequestURI(), "html")) {
                 String htmlFilePath = context.getRealPath("/") + hsRequest.getRequestURI();
