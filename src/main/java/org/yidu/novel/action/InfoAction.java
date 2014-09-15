@@ -214,7 +214,7 @@ public class InfoAction extends AbstractPublicBaseAction {
      * @return 是否开启了章节列表页标识
      */
     public boolean getEnableChapterIndexPahge() {
-        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAHGE, false);
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
     }
 
     @Override
@@ -233,7 +233,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
         if (article != null) {
 
-            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAHGE, false)) {
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
                 // 获取章节信息
                 ChapterSearchBean searchBean = new ChapterSearchBean();
                 BeanUtils.copyProperties(this, searchBean);

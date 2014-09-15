@@ -122,6 +122,10 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     private String appKey;
 
+    private boolean enableCacheArticleCount;
+
+    private boolean enableChapterIndexPage;
+
     public String getFilePath() {
         return filePath;
     }
@@ -314,6 +318,48 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.appKey = appKey;
     }
 
+    /**
+     * 获取enableCacheArticleCount
+     * 
+     * @return enableCacheArticleCount
+     */
+    public boolean isEnableCacheArticleCount() {
+        return enableCacheArticleCount;
+    }
+
+    /**
+     * 
+     * 设置enableCacheArticleCount
+     * 
+     * 
+     * @param enableCacheArticleCount
+     *            enableCacheArticleCount
+     */
+    public void setEnableCacheArticleCount(boolean enableCacheArticleCount) {
+        this.enableCacheArticleCount = enableCacheArticleCount;
+    }
+
+    /**
+     * 获取enableChapterIndexPage
+     * 
+     * @return enableChapterIndexPage
+     */
+    public boolean isEnableChapterIndexPage() {
+        return enableChapterIndexPage;
+    }
+
+    /**
+     * 
+     * 设置enableChapterIndexPage
+     * 
+     * 
+     * @param enableChapterIndexPage
+     *            enableChapterIndexPage
+     */
+    public void setEnableChapterIndexPage(boolean enableChapterIndexPage) {
+        this.enableChapterIndexPage = enableChapterIndexPage;
+    }
+
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
@@ -337,6 +383,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         mobilesitedomian = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILESITE_DOMIAN);
         enablePseudo = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false);
         enableQQLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
+        enableCacheArticleCount = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false);
+        enableChapterIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
 
         // 设定文件初期读入
         try {
@@ -378,6 +426,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.MOBILESITE_DOMIAN, mobilesitedomian);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_PSEUDO, enablePseudo);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_QQLOGIN, enableQQLogin);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, enableCacheArticleCount);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, enableChapterIndexPage);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());

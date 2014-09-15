@@ -151,7 +151,7 @@ public class YiDuConfig {
     /**
      * 是否启用独立章节列表页面
      */
-    public static final String ENABLE_CHAPTER_INDEX_PAHGE = "enableChapterIndexPahge";
+    public static final String ENABLE_CHAPTER_INDEX_PAGE = "enableChapterIndexPage";
     /**
      * 是否启用邮箱验证
      */
