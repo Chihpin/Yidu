@@ -321,6 +321,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         user.setLastlogin(new Date());
         user.setPassword(Utils.convert2MD5(password));
         user.setType(YiDuConstants.UserType.NORMAL_USER);
+        user.setActivedflag(true);
         // 注册用户登录
         this.userService.save(user);
         // 登录处理
