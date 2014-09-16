@@ -1,5 +1,7 @@
 package org.yidu.novel.bean;
 
+import java.util.Date;
+
 public class UserSearchBean extends BaseSearchBean {
     /**
      * 用户ID
@@ -34,6 +36,14 @@ public class UserSearchBean extends BaseSearchBean {
      * 删除标识
      */
     private Boolean deleteflag;
+    /**
+     * 激活标识
+     */
+    private Boolean activedflag;
+
+    private Date modifytime;
+
+    private Date regdate;
 
     /**
      * 获取userno
@@ -201,6 +211,69 @@ public class UserSearchBean extends BaseSearchBean {
      */
     public void setDeleteflag(Boolean deleteflag) {
         this.deleteflag = deleteflag;
+    }
+
+    /**
+     * 获取activedflag
+     * 
+     * @return activedflag
+     */
+    public Boolean getActivedflag() {
+        return activedflag;
+    }
+
+    /**
+     * 
+     * 设置activedflag
+     * 
+     * 
+     * @param activedflag
+     *            activedflag
+     */
+    public void setActivedflag(Boolean activedflag) {
+        this.activedflag = activedflag;
+    }
+
+    /**
+     * 获取modifytime
+     * 
+     * @return modifytime
+     */
+    public Date getModifytime() {
+        return modifytime;
+    }
+
+    /**
+     * 
+     * 设置modifytime
+     * 
+     * 
+     * @param modifytime
+     *            modifytime
+     */
+    public void setModifytime(Date modifytime) {
+        this.modifytime = modifytime;
+    }
+
+    /**
+     * 获取regdate
+     * 
+     * @return regdate
+     */
+    public Date getRegdate() {
+        return regdate;
+    }
+
+    /**
+     * 
+     * 设置regdate
+     * 
+     * 
+     * @param regdate
+     *            regdate
+     */
+    public void setRegdate(Date regdate) {
+        this.regdate = regdate;
     }
 
 }

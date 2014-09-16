@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -162,6 +163,8 @@ public class EmailValidateAction extends AbstractPublicBaseAction {
         searchBean.setLoginid(loginid);
         searchBean.setMailtoken(mailtoken);
         searchBean.setPassword(Utils.convert2MD5(password));
+        searchBean.setActivedflag(false);
+        searchBean.setModifytime(DateUtils.addHours(new Date(), -3));
 
         List<TUser> userList = userService.find(searchBean);
         if (Utils.isDefined(userList)) {

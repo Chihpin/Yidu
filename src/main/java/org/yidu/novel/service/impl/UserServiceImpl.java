@@ -114,6 +114,11 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
             params.add(searchBean.getLoginid());
         }
 
+        if (StringUtils.isNotBlank(searchBean.getPassword())) {
+            hql.append(" AND password = ? ");
+            params.add(searchBean.getPassword());
+        }
+
         if (StringUtils.isNotBlank(searchBean.getUsername())) {
             hql.append(" AND username = ? ");
             params.add(searchBean.getUsername());
@@ -127,6 +132,16 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
         if (searchBean.getDeleteflag() != null) {
             hql.append(" AND deleteflag = ? ");
             params.add(searchBean.getDeleteflag());
+        }
+
+        if (searchBean.getActivedflag() != null) {
+            hql.append(" AND activedflag = ? ");
+            params.add(searchBean.getActivedflag());
+        }
+
+        if (searchBean.getModifytime() != null) {
+            hql.append(" AND modifytime > ? ");
+            params.add(searchBean.getModifytime());
         }
 
     }

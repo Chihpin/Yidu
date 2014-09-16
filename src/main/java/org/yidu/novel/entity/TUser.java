@@ -22,6 +22,11 @@ public class TUser extends BaseTUser {
     public Boolean getDeleteflag() {
         return isDeleteflag();
     }
+    
+    public Boolean getActivedflag() {
+        return isActivedflag();
+    }
+
 
     // 为了Struts2的Json Result
     @Override

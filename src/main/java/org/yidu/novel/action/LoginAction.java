@@ -151,8 +151,14 @@ public class LoginAction extends AbstractPublicBaseAction {
     public String login() {
         logger.debug("LoginAction login has been excuted.");
         TUser user = userService.findByLoginInfo(loginid, Utils.convert2MD5(password));
-        if (user != null && user.getDeleteflag() != null && !user.getDeleteflag()) {
+        if (user != null) {
+
+            if (user.getActivedflag() == null || !user.getActivedflag()) {
+                addActionError(getText("errors.login.actived"));
+                return FREEMARKER;
+            }
             logger.info("user " + loginid + " has logined.");
+
             // 正常登录
             LoginManager.doLogin(user);
             // 更新用户最后登录时间
