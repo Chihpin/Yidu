@@ -126,4 +126,16 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
 
         return YiDuConstants.yiduConf.getString("themeName", "default");
     }
+
+    /**
+     * <p>
+     * 是否开启QQ登录
+     * </p>
+     * 
+     * @return 是否开启QQ登录
+     */
+    public boolean getEnableQQLogin() {
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
+    }
+
 }
