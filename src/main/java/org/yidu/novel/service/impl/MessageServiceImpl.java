@@ -7,6 +7,7 @@ import org.yidu.novel.bean.MessageSearchBean;
 import org.yidu.novel.entity.TMessage;
 import org.yidu.novel.service.MessageService;
 import org.yidu.novel.utils.Pagination;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -52,7 +53,7 @@ public class MessageServiceImpl extends HibernateSupportServiceImpl implements M
         StringBuffer hql = new StringBuffer();
         List<Object> params = new ArrayList<Object>();
         hql.append("From TMessage WHERE  deleteflag=false  ");
-        if (searchBean.getUserno() != 0) {
+        if (Utils.isDefined(searchBean.getUserno())) {
             hql.append(" AND (userno = ? OR touserno = ? )");
             params.add(searchBean.getUserno());
             params.add(searchBean.getUserno());

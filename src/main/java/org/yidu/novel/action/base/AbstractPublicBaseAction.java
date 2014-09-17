@@ -18,6 +18,7 @@ import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Pagination;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -99,7 +100,7 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
             logger.debug("this instanceof IndexAction.");
             // 从缓存中把首页用的区块信息取出
             blocks = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK, null);
-            if (blocks == null || blocks.size() == 0) {
+            if (!Utils.isDefined(blocks)) {
                 blocks = new HashMap<String, Object>();
                 // 没有取到的话从数据库里取出
                 // block数据取得
