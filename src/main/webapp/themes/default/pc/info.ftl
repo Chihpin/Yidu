@@ -114,6 +114,42 @@
     <#if adEffective?? && adEffective>
     <div class="bookNew"><script src="${contextPath}/ad/info3.js" type="text/javascript"></script></div>
     </#if>
+    <div class="navTab">
+        <ul>
+            <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
+            <li onmouseover="replaces(2,2)" id="for2" class ><a href="#">猜你喜欢</a></li>
+        </ul>
+    </div>
+
+    <div class="tabMain">
+        <#if recommendArticleList ?? > 
+        <ul id="content1">
+            <#list recommendArticleList as article>
+            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+        <#if randomRecommendArticleList ?? > 
+        <ul id="content2" style="display:none;">
+            <#list randomRecommendArticleList as article>
+           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+    </div>
+    
     <div class="clear"></div>
     <div class="comment_left">
         <div class="commenthead">

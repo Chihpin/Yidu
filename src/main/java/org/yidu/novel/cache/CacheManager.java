@@ -165,6 +165,16 @@ public class CacheManager {
          * 排行榜的小说件数的键
          */
         public static final String CACHE_KEY_ARTICEL_TOP_LIST_COUNT_PREFIX = "CacheKey_ARTICLE_TOP_COUNT";
+
+        /**
+         * 推荐小说
+         */
+        public static final String CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX = "CacheKey_RECOMMEND_ARTICLE_LIST";
+
+        /**
+         * 随机推荐
+         */
+        public static final String CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX = "CacheKey_RANDOM_RECOMMEND_ARTICLE_LIST";
     }
 
 }

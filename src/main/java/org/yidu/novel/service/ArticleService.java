@@ -100,4 +100,28 @@ public interface ArticleService {
      */
     Integer getCountByJDBC(final ArticleSearchBean searchBean);
 
+    /**
+     * 根据小说分类和小说编号取得推荐列表<br>
+     * 其实就是取同类的小说中当前小说的之后的指定的count本小说<br>
+     * 将来算法可能会更新，暂时做成这样
+     * 
+     * @param category
+     *            分类编号
+     * @param articleno
+     *            小说编号
+     * @return 推荐列表
+     */
+
+    List<TArticle> findRecommendArticleList(final int category, final int articleno, final int count);
+
+    /**
+     * 根据小说分类取得随机推荐列表<br>
+     * 将来算法可能会更新，暂时做成这样
+     * 
+     * @param category
+     *            分类编号
+     * @return 推荐列表
+     */
+    List<TArticle> findRandomRecommendArticleList(final int category, final int count);
+
 }

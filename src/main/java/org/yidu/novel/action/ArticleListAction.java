@@ -13,6 +13,7 @@ import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -217,7 +218,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         searchBean.setPagination(pagination);
 
         articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean);
-        if (articleList == null || articleList.size() == 0) {
+        if (!Utils.isDefined(articleList)) {
             articleList = articleService.find(searchBean);
             CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }

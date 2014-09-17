@@ -189,4 +189,20 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         return yiduJdbcTemplate.queryForObject(sql.toString(), params.toArray(), Integer.class);
     }
 
+    @Override
+    public List<TArticle> findRecommendArticleList(final int category, int articleno, final int count) {
+        List<Object> params = new ArrayList<Object>();
+        params.add(category);
+        params.add(articleno);
+        String hql = "FROM TArticle where category = ? and articleno > ? and deleteflag = false order by articleno ";
+        return this.findByRange(hql, 1, count, params);
+    }
+
+    @Override
+    public List<TArticle> findRandomRecommendArticleList(int category, final int count) {
+        List<Object> params = new ArrayList<Object>();
+        params.add(category);
+        String hql = "FROM TArticle where category = ? and deleteflag = false order by rand() ";
+        return this.findByRange(hql, 1, count, params);
+    }
 }

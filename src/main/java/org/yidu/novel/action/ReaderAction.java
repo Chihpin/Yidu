@@ -67,6 +67,16 @@ public class ReaderAction extends AbstractPublicBaseAction {
     private List<ChapterDTO> fullReadChapterList;
 
     /**
+     * 推荐章节列表
+     */
+    private List<TArticle> recommendArticleList = new ArrayList<TArticle>();
+
+    /**
+     * 随机推荐章节列表
+     */
+    private List<TArticle> randomRecommendArticleList = new ArrayList<TArticle>();
+
+    /**
      * 获取articleno
      * 
      * @return articleno
@@ -192,6 +202,48 @@ public class ReaderAction extends AbstractPublicBaseAction {
         this.article = article;
     }
 
+    /**
+     * 获取recommendArticleList
+     * 
+     * @return recommendArticleList
+     */
+    public List<TArticle> getRecommendArticleList() {
+        return recommendArticleList;
+    }
+
+    /**
+     * 
+     * 设置recommendArticleList
+     * 
+     * 
+     * @param recommendArticleList
+     *            recommendArticleList
+     */
+    public void setRecommendArticleList(List<TArticle> recommendArticleList) {
+        this.recommendArticleList = recommendArticleList;
+    }
+
+    /**
+     * 获取randomRecommendArticleList
+     * 
+     * @return randomRecommendArticleList
+     */
+    public List<TArticle> getRandomRecommendArticleList() {
+        return randomRecommendArticleList;
+    }
+
+    /**
+     * 
+     * 设置randomRecommendArticleList
+     * 
+     * 
+     * @param randomRecommendArticleList
+     *            randomRecommendArticleList
+     */
+    public void setRandomRecommendArticleList(List<TArticle> randomRecommendArticleList) {
+        this.randomRecommendArticleList = randomRecommendArticleList;
+    }
+
     @Override
     public String getTempName() {
         if (toChapterno != 0 && toChapterno > chapterno) {
@@ -216,10 +268,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
                         chapterDto.setContent(Utils.getContext(chapterDto, true,
                                 YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false)));
                     }
-                    // 更新统计信息
-                    if (articleno != 0) {
-                        articleService.updateVisitStatistic(articleno);
-                    }
+
                     fullReadChapterList.add(chapterDto);
                 }
                 chapter = new ChapterDTO();
@@ -262,9 +311,31 @@ public class ReaderAction extends AbstractPublicBaseAction {
                 chapter.setContent(Utils.getContext(chapter, true,
                         YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false)));
             }
-            // 更新统计信息
-            if (articleno != 0) {
-                articleService.updateVisitStatistic(articleno);
+        }
+
+        // 更新统计信息
+        if (articleno != 0) {
+            articleService.updateVisitStatistic(articleno);
+
+            recommendArticleList = CacheManager.getObject(
+                    CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME + articleno);
+
+            if (!Utils.isDefined(recommendArticleList)) {
+                // 如果没有缓存，就去查询数据库
+                recommendArticleList = articleService.findRecommendArticleList(article.getCategory(),
+                        article.getArticleno(), 12);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
+                        + articleno, recommendArticleList);
+            }
+
+            randomRecommendArticleList = CacheManager.getObject(
+                    CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME + articleno);
+
+            if (!Utils.isDefined(randomRecommendArticleList)) {
+                // 如果没有缓存，就去查询数据库
+                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 3);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
+                        + articleno, randomRecommendArticleList);
             }
         }
 

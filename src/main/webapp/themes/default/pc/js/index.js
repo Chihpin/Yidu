@@ -62,23 +62,22 @@ function repales_rell1(num, size) {
 
 	for ( var i = 1; i <= size; i++) {
 		if (i == num) {
-			document.getElementById("cttd" + i).style.display = "block";
-			document.getElementById("ask" + i).className = "select";
+			$("#cttd" + i).show();
+			$("#ask" + i).addClass("select");
 		} else {
-			document.getElementById("cttd" + i).style.display = "none";
-			document.getElementById("ask" + i).className = "";
+			$("#cttd" + i).hide();
+			$("#ask" + i).removeClass("select");
 		}
 	}
 }
 function replaces(num, size) {
-
 	for ( var i = 1; i <= size; i++) {
 		if (i == num) {
-			document.getElementById("content" + i).style.display = "block";
-			document.getElementById("for" + i).className = "select";
+			$("#content" + i).show();
+			$("#for" + i).addClass("select");
 		} else {
-			document.getElementById("content" + i).style.display = "none";
-			document.getElementById("for" + i).className = "";
+			$("#content" + i).hide();
+			$("#for" + i).removeClass("select");
 		}
 	}
 }

@@ -120,6 +120,14 @@
         <#if adEffective?? && adEffective>
         <script type="text/javascript" src="${contextPath}/ad/reader1.js"></script>
         </#if>
+        <#if recommendArticleList ?? > 
+        <div id="listtj">&nbsp;推荐阅读：
+        <#list recommendArticleList as article>
+            <#if article_index != 0 >、</#if>
+            <a href="${article.url}" alt="${article.articlename}">${article.articlename}</a>
+        </#list>
+        </div>
+        </#if>
         <div class="mainContenr"   id="content">
             <#if chapter.content??>${chapter.content}</#if>
         </div>

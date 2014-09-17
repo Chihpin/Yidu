@@ -20,7 +20,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -429,7 +429,7 @@ public class Utils {
         }
 
         if (obj instanceof String) {
-            return org.apache.commons.lang3.StringUtils.isNotEmpty((String) obj);
+            return StringUtils.isNotEmpty((String) obj);
         }
 
         if (obj instanceof Integer) {
