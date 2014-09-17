@@ -40,6 +40,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><s:text name="label.admin.block.edit.category" /></td>
+                    <td>
+                        <s:select
+                            id="category"
+                            name="category"
+                            list="collections['collectionProperties.article.category']"
+                            />
+                    </td>
+                </tr>
+                <tr>
                     <td><s:text name="label.admin.block.edit.sortcol" /></td>
                     <td>
                         <s:textfield id="sortcol" name="sortcol" cssClass="tb-rounded" /> 

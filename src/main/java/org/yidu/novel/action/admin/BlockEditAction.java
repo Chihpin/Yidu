@@ -130,7 +130,8 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
     protected void loadData() {
         logger.debug("loadData start.");
         // 初始化下拉列表选项
-        initCollections(new String[] { "collectionProperties.block.type", "collectionProperties.block.target" });
+        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.block.type",
+                "collectionProperties.block.target" });
         // 编辑
         if (blockno != 0) {
             TSystemBlock systemBlock = systemBlockService.getByNo(blockno);

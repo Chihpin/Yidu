@@ -174,6 +174,12 @@ public class YiDuConstants {
          * 主页
          */
         public static final short INDEX = 6;
+
+        /**
+         * 全站
+         */
+        public static final short ALL_SITE = 99;
+
     }
 
     /**
@@ -224,6 +230,17 @@ public class YiDuConstants {
          * HTML类型
          */
         public static final short HTML = 30;
+
+        /**
+         * HTML类型
+         */
+        public static final short TOP_LIST = 40;
+
+        /**
+         * HTML类型
+         */
+        public static final short RODMON_LIST = 50;
+
     }
 
     /**
