@@ -107,6 +107,12 @@ public class BookcaseAction extends AbstractUserBaseAction {
     }
 
     @Override
+    public String getBackUrl() {
+        // TODO Auto-generated method stub
+        return URL;
+    }
+
+    @Override
     protected void loadData() {
         BookcaseSearchBean searchBean = new BookcaseSearchBean();
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
@@ -173,7 +179,6 @@ public class BookcaseAction extends AbstractUserBaseAction {
                 return FREEMARKER_ERROR;
             }
         }
-        this.loadData();
-        return FREEMARKER;
+        return REDIRECT;
     }
 }
