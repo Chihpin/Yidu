@@ -77,6 +77,7 @@
                         }
                         html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/message")}" style="color: rgb(240, 240, 240);">消息管理</a>';
                         html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/bookcase")}" style="color: rgb(240, 240, 240);">我的书架</a>';
+                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/subscribe")}" style="color: rgb(240, 240, 240);">订阅管理</a>';
                         html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/logout")}" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
                         $('#checklogin').html(html);
                     }

@@ -56,6 +56,7 @@ public class YiDuConfig {
      * 最大书签数
      */
     public static final String MAX_BOOKCASE = "maxBookcase";
+
     /**
      * 每页表示记录书
      */
@@ -163,6 +164,11 @@ public class YiDuConfig {
     public static final String MAIL_SMTP_USERNAME = "mail.smtp.username";
     public static final String MAIL_SMTP_PASSWORD = "mail.smtp.password";
     public static final String MAIL_SMTP_FROM = "mail.smtp.from";
+
+    /**
+     * 最大订阅数
+     */
+    public static final String MAX_SUBSCRIBE = "maxSubscribe";
 
     /**
      * 数据库JDBC URL

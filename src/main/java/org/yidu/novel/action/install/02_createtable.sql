@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS t_review;
 DROP TABLE IF EXISTS t_credit_history;
 DROP TABLE IF EXISTS t_user;
 DROP TABLE IF EXISTS t_article;
+DROP TABLE IF EXISTS t_subscribe;
 
 
 /* Create Tables */
@@ -197,4 +198,12 @@ CREATE TABLE t_article
     modifyuserno integer,
     modifytime timestamp without time zone,
     PRIMARY KEY (articleno)
+) WITHOUT OIDS;
+
+CREATE TABLE t_subscribe
+(
+    subscribeno serial NOT NULL,
+    userno int,
+    articleno int,
+    PRIMARY KEY (subscribeno)
 ) WITHOUT OIDS;

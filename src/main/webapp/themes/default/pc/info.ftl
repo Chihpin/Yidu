@@ -49,10 +49,10 @@
                 <a href="javascript:void(0)" id="hidden" style="display:none;float:right;" onclick="document.getElementById('waa').style.height='72px';document.getElementById('hidden').style.display='none';document.getElementById('show').style.display='';">- 收回介绍</a> 
           </div>
           <div class="b-oper">
-              <a href="<#if !enableChapterIndexPahge >#chapters<#else>${article.chapterListUrl}</#if>" class="reader" title="${article.articlename}免费阅读">开始阅读</a>
+              <a href="<#if !enableChapterIndexPage >#chapters<#else>${article.chapterListUrl}</#if>" class="reader" title="${article.articlename}免费阅读">开始阅读</a>
               <a href="${encodeURL("/user/bookcase!add?articleno=${article.articleno?c}")}" target="_blank" class="mehide" >加入书架</a>
+              <a href="${encodeURL("/user/subscribe!add?articleno=${article.articleno?c}")}" target="_blank" class="subscribe" >订阅本书</a>
               <a href="${encodeURL("/user/vote?articleno=${article.articleno?c}")}" target="_blank"  id="toupiao"  class="toupiao">给本书投票</a>
-              <a href="#" id="toupiaonum" class="meNum">${article.allvote}</a>
               <a href="javascript:;"  class="error">内容报错</a>
           </div>
         </div>
@@ -98,6 +98,7 @@
                     ${article.author}</a></dd></dl>
                 <dl><dt>全文长度：</dt><dd><#if article.size ??>${article.size}<#else>0</#if>字</dd></dl>
                 <dl><dt>总点击量：</dt><dd>${article.allvisit}</dd></dl>
+                <dl><dt>总推荐量：</dt><dd>${article.allvote}</dd></dl>
                 <dl><dt>TXT下载：</dt><dd><a href="${encodeURL("/download?articleno=${article.articleno?c}")}" target="_blank"><font color="red" >全本下载</font></a></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>

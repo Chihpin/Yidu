@@ -71,6 +71,7 @@
                 <strong class="l jieqi_title">${chapter.chaptername}</strong>
                 <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}"  target="_blank" title="加入书签" class="l">加入书签</a>
                 <a href="${encodeURL("/user/vote?articleno=${chapter.articleno?c}")}"  target="_blank" title="推荐本书" class="l">推荐本书</a>
+                <a href="${article.subscribeUrl}"  target="_blank" title="订阅本书" class="l">订阅本书</a>
                 <div class="clear"></div>
             </h1>
             <div class="toolbar">

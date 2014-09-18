@@ -14,6 +14,7 @@ import org.yidu.novel.action.InfoAction;
 import org.yidu.novel.action.ReaderAction;
 import org.yidu.novel.action.ReviewListAction;
 import org.yidu.novel.action.user.BookcaseAction;
+import org.yidu.novel.action.user.SubscribeAction;
 import org.yidu.novel.action.user.VoteAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -247,6 +248,16 @@ public class TArticle extends BaseTArticle {
     public String getChapterListUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+    }
+
+    /**
+     * 获取订阅URL
+     * 
+     * @return 订阅URL
+     */
+    public String getSubscribeUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(SubscribeAction.URL + "!add?articleno=" + getArticleno());
     }
 
     /**

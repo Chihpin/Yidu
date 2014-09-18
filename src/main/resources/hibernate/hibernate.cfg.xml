@@ -13,5 +13,6 @@
         <mapping class="org.yidu.novel.entity.TUser" resource="hibernate/TUser.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TReview" resource="hibernate/TReview.hbm.xml" />
         <mapping class="org.yidu.novel.entity.TMessage" resource="hibernate/TMessage.hbm.xml" />
+        <mapping class="org.yidu.novel.entity.TSubscribe" resource="hibernate/TSubscribe.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

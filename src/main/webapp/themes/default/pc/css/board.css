@@ -51,7 +51,7 @@
 .seeWell li em { margin-bottom:5px; display:block; height:44px;overflow:hidden;}
 .seeWell li a.readTo { display:block; width:78px; height:28px; background:url(../images/common1.png) no-repeat 0 -104px; line-height:27px; text-align:center; color:#333; float:left; margin-top:2px; margin-left:10px; }
 .board .box h2 { padding:15px 25px 5px; border-bottom:1px solid #ededed; }
-.board .box h2 a { display:inline-block; color:#4d4d4d; font:20px/40px '微软雅黑', sans-seif; cursor:pointer; _zoom:1; }
+.board .box h2 a { display:inline-block; color:#4d4d4d; font:20px/40px '蠕ｮ霓ｯ髮�ｻ�, sans-seif; cursor:pointer; _zoom:1; }
 .board .box .more { margin-left: 25px; color:#4a8d2d; }
 .board .box .fix { position:absolute; right:10px; top:23px; cursor:pointer; width:24px; height:24px; background:url(spring/lock.png) no-repeat 0 -100%; text-indent:-10em; overflow:hidden; }
 .board .fixed .fix { background-position:0 0; }
@@ -94,10 +94,10 @@
 .infoDetail { padding:10px 25px; color:#666; background:url(../images/circle.png) no-repeat 10px 17px; background-color:#f9f9f9; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; margin:10px 0; letter-spacing:1px; }
 #container a.reader { float:left; width:155px; height:43px; background:url(../images/all.png) no-repeat 0 -66px; text-align:center; line-height:43px; color:#fff; font-size:18px; }
 .reader:hover { text-decoration:none; }
-#container a.mehide { float:left; width:73px; height:28px; background:url(../images/all.png) no-repeat -94px -110px; text-align:center; line-height:30px; padding-left:10px; margin-left:25px; margin-top:13px; display:inline; }
-#container a.meNum { float:left; width:26px; padding-left:2px; height:18px; background:url(../images/all.png) no-repeat -176px -116px; line-height:18px; text-align:center; color:#666; margin-top:20px; margin-left:2px; display:inline; }
-#container a.toupiao { float:left; width:87px; height:28px; background:url(../images/all.png) no-repeat -94px -297px; text-align:center; line-height:30px; padding-left:10px; margin-left:25px; margin-top:13px; display:inline; }
-#container a.error { float:left; width:73px; height:28px; background:url(../images/all.png) no-repeat -94px -328px; text-align:center; line-height:30px; padding-left:10px; margin-left:25px; margin-top:13px; display:inline; }
+#container a.mehide { float:left; width:73px; height:28px; background:url(../images/all.png) no-repeat -94px -110px; text-align:center; line-height:30px; padding-left:10px; margin-left:15px; margin-top:13px; display:inline; }
+#container a.subscribe { float:left; width:73px; height:28px; background:url(../images/all.png) no-repeat -94px -110px; text-align:center; line-height:30px; padding-left:10px; margin-left:15px; margin-top:13px; display:inline; }
+#container a.toupiao { float:left; width:87px; height:28px; background:url(../images/all.png) no-repeat -94px -297px; text-align:center; line-height:30px; padding-left:10px; margin-left:15px; margin-top:13px; display:inline; }
+#container a.error { float:left; width:73px; height:28px; background:url(../images/all.png) no-repeat -94px -328px; text-align:center; line-height:30px; padding-left:10px; margin-left:15px; margin-top:13px; display:inline; }
 .scores h2 { padding-left:10px; color:#000; line-height:25px; }
 .scores p { text-align:center; font-style:italic; font-weight:bold; font-size:30px; color:#ff6600; text-align:center; line-height:30px; margin-bottom:10px; }
 .sets { background:#f9f9f9; border-top:1px solid #dedede; text-align:center; padding-bottom:10px; padding-top:14px; cursor:pointer; }
@@ -211,7 +211,7 @@
 
 .comment_left{ width: 958px;  border: 1px solid #BEDFBE; float:left;}
 
-/*封面页评论*/
+/*蟆�擇鬘ｵ隸�ｮｺ*/
 .commenthead{height:40px; overflow:hidden; background:#fff; float:left;width: 100%;}
 .commenthead .ti{ background: url(../images/modbg.png) repeat-x left -142px; height:23px; padding:9px 10px;}
 .commenthead .ti h2{float:left; font-size:16px; font-weight:bold; color: #339900;}

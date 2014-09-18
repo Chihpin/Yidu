@@ -162,33 +162,33 @@
 	</rule>
 
 	<rule>
-		<from>^/user/addbookcase/(\d*)/(\d*)$</from>
+		<from>^/user/addbookcase/(\d*)/(\d*)\.html$</from>
 		<to last="true">/user/bookcase!add\?articleno=$1&amp;chapterno=$2</to>
 	</rule>
 
 	<outbound-rule>
 		<from>^/user/bookcase!add\?articleno=(\d*)&amp;chapterno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/user/addbookcase/$1/$2</to>
+		<to last="true">/user/addbookcase/$1/$2\.html</to>
 	</outbound-rule>
 
 	<rule>
-		<from>^/user/addbookcase/(\d*)$</from>
+		<from>^/user/addbookcase/(\d*)\.html$</from>
 		<to last="true">/user/bookcase!add\?articleno=$1</to>
 	</rule>
 
 	<outbound-rule>
 		<from>^/user/bookcase!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/user/addbookcase/$1</to>
+		<to last="true">/user/addbookcase/$1\.html</to>
 	</outbound-rule>
 
 	<rule>
-		<from>^/user/deletebookcase/(\d*)$</from>
+		<from>^/user/deletebookcase/(\d*)\.html$</from>
 		<to last="true">/user/bookcase!delete\?bookcaseno=$1</to>
 	</rule>
 
 	<outbound-rule>
 		<from>^/user/bookcase!delete\?bookcaseno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/user/deletebookcase/$1</to>
+		<to last="true">/user/deletebookcase/$1\.html</to>
 	</outbound-rule>
 
 	<rule>
@@ -210,6 +210,18 @@
 		<from>^/user/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/user/vote/$1.html</to>
 	</outbound-rule>
+	
+	
+	<rule>
+        <from>^/user/subscribe/(\d*).html$</from>
+        <to last="true">/user/subscribe!add\?articleno=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/user/subscribe!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/user/subscribe/$1.html</to>
+    </outbound-rule>
+	
 
 	<rule>
 		<from>^/top/(.+?)/(\d*)\.html$</from>

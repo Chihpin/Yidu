@@ -77,5 +77,15 @@
 		</primary-key>
 	</table>
 
+	<table name="t_subscribe" schema="public">
+		<primary-key>
+			<generator class="sequence">
+				<param name="sequence">t_subscribe_subscribeno_seq</param>
+			</generator>
+			<key-column name="subscribeno" type="int"></key-column>
+		</primary-key>
+	</table>
+
+
 
 </hibernate-reverse-engineering>

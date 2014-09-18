@@ -316,6 +316,10 @@ public class YiDuConstants {
         public static final int PAGE_MAIL_VALIDATE = 13;
 
         /**
+         * 订阅
+         */
+        public static final int PAGE_USER_SUBSCRIBE = 20;
+        /**
          * 书架
          */
         public static final int PAGE_USER_BOOKCASE = 21;

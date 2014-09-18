@@ -16,6 +16,7 @@ import org.yidu.novel.service.BookcaseService;
 import org.yidu.novel.service.ChapterService;
 import org.yidu.novel.service.MessageService;
 import org.yidu.novel.service.ReviewService;
+import org.yidu.novel.service.SubscribeService;
 import org.yidu.novel.service.SystemBlockService;
 import org.yidu.novel.service.UserService;
 
@@ -136,6 +137,11 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     protected ReviewService reviewService;
 
     /**
+     * 订阅关联操作服务
+     */
+    protected SubscribeService subscribeService;
+
+    /**
      * 
      * 设置userService
      * 
@@ -224,6 +230,19 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     @Autowired
     public void setReviewService(ReviewService reviewService) {
         this.reviewService = reviewService;
+    }
+
+    /**
+     * 
+     * 设置subscribeService
+     * 
+     * 
+     * @param subscribeService
+     *            subscribeService
+     */
+    @Autowired
+    public void setSubscribeService(SubscribeService subscribeService) {
+        this.subscribeService = subscribeService;
     }
 
     @Override
