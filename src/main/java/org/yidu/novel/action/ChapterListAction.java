@@ -232,7 +232,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
             if (!Utils.isDefined(recommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
                 recommendArticleList = articleService.findRecommendArticleList(article.getCategory(),
-                        article.getArticleno(), 12);
+                        article.getArticleno(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
                         + articleno, recommendArticleList);
             }
@@ -242,7 +242,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
 
             if (!Utils.isDefined(randomRecommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
-                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 3);
+                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
                         + articleno, randomRecommendArticleList);
             }

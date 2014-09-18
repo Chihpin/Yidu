@@ -11,6 +11,7 @@ import org.yidu.novel.action.IndexAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TSystemBlock;
@@ -178,6 +179,15 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
      */
     public TUser getLoginUser() {
         return LoginManager.getLoginUser();
+    }
+
+    /**
+     * 获取是否开启了章节列表页标识
+     * 
+     * @return 是否开启了章节列表页标识
+     */
+    public boolean getEnableChapterIndexPage() {
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
     }
 
 }

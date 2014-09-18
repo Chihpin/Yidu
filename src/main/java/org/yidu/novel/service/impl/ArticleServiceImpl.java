@@ -194,8 +194,12 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         List<Object> params = new ArrayList<Object>();
         params.add(category);
         params.add(articleno);
-        String hql = "FROM TArticle where category = ? and articleno > ? and deleteflag = false order by articleno ";
-        return this.findByRange(hql, 1, count, params);
+        StringBuffer hql = new StringBuffer();
+        hql.append("FROM TArticle where category = ? and articleno > ? and deleteflag = false ");
+        hql.append(" AND lastupdate is not null ");
+        hql.append(" AND lastchapterno is not null ");
+        hql.append("  order by articleno  ");
+        return this.findByRange(hql.toString(), 1, count, params);
     }
 
     @Override

@@ -10,15 +10,9 @@
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
 <script type="text/javascript">
     <!--
-    document.oncontextmenu=function(e){return false;} 
-    document.ondragstart=function(e){return false;}
-    document.onselectstart=function(e){return false;}
-    document.onselect=function(e){return false;} 
-    document.oncopy=function(e){document.selection.empty();}
-    document.onbeforecopy=function(e){return false;}
     var preview_page = '<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>';
     var next_page = '<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>';
-    var index_page = '${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}';
+    var index_page = '<#if enableChapterIndexPage>${article.chapterListUrl}<#else>${article.url}</#if>';
     var article_id = '${chapter.articleno?c}';
     var chapter_id = '${chapter.chapterno?c}';
     function jumpPage() {
@@ -66,8 +60,8 @@
                 </form>
             </span>
     位置：&nbsp; > &nbsp; <a href="${contextPath}/" class="c009900">${getText("label.system.name")}</a> > 
-
-    <a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title">${chapter.articlename}</a>  > 
+    <a href="${article.url}" class="article_title">${chapter.articlename}</a>  > 
+    <#if enableChapterIndexPage><a href="${article.chapterListUrl}" class="article_title">${chapter.articlename}章节目录</a> > </#if>
     ${chapter.chaptername}</div>
     <section class="main b-detail" id="directs">
         <div class="bookInfo">
@@ -120,14 +114,6 @@
         <#if adEffective?? && adEffective>
         <script type="text/javascript" src="${contextPath}/ad/reader1.js"></script>
         </#if>
-        <#if recommendArticleList ?? > 
-        <div id="listtj">&nbsp;推荐阅读：
-        <#list recommendArticleList as article>
-            <#if article_index != 0 >、</#if>
-            <a href="${article.url}" alt="${article.articlename}">${article.articlename}</a>
-        </#list>
-        </div>
-        </#if>
         <div class="mainContenr"   id="content">
             <#if chapter.content??>${chapter.content}</#if>
         </div>
@@ -136,7 +122,7 @@
         </#if>
         <div class="backs">
             <a href="<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>" class="pre">上一章</a>
-            <a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="backfor">返回目录</a>
+            <a href="<#if enableChapterIndexPage>${article.chapterListUrl}<#else>${article.url}</#if>" class="backfor">返回目录</a>
             <a href="<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>" class="next">下一章</a>
             <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
                  <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="加入书签"  target="_blank">加入书签</a>
@@ -152,6 +138,42 @@
             2、<em>注册本站会员</em>，将《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
             3、免费小说《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》 ${chapter.chaptername}所描述的内容只是作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
         </div>
+        
+     <div class="navTab">
+        <ul>
+            <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
+            <li onmouseover="replaces(2,2)" id="for2" class ><a href="#">猜你喜欢</a></li>
+        </ul>
+    </div>
+
+    <div class="tabMain">
+        <#if recommendArticleList ?? > 
+        <ul id="content1">
+            <#list recommendArticleList as article>
+            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+        <#if randomRecommendArticleList ?? > 
+        <ul id="content2" style="display:none;">
+            <#list randomRecommendArticleList as article>
+           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+    </div>
     </div>
 </div>
 <script language="JavaScript" type="text/JavaScript"> 

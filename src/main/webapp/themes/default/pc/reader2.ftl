@@ -7,16 +7,8 @@
 <#macro customizeimport>  
 <link href="${contextPath}/themes/${themeName}/pc/css/readtools.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/style5.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
 <script type="text/javascript">
     <!--
-    document.oncontextmenu=function(e){return false;} 
-    document.ondragstart=function(e){return false;}
-    document.onselectstart=function(e){return false;}
-    document.onselect=function(e){return false;} 
-    document.oncopy=function(e){document.selection.empty();}
-    document.onbeforecopy=function(e){return false;}
     $(document).ready(function(){
        var readhistory = $.cookie("readhistory");
        if(! readhistory ){
@@ -55,7 +47,8 @@
             </span>
     位置：<a href="${contextPath}/" class="c009900">${getText("label.system.name")}</a> > 
 
-    <a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title">${chapter.articlename}</a>  > 
+    <a href="${article.url}" class="article_title">${chapter.articlename}</a>  > 
+    <#if enableChapterIndexPage><a href="${article.chapterListUrl}" class="article_title">${chapter.articlename}章节目录</a> > </#if>
     ${chapter.chaptername}</div>
     <section class="main b-detail" id="directs">
         <div class="bookInfo">
@@ -124,6 +117,41 @@
         </#if>
         </div>
        </section>
+       
+    <div class="navTab">
+        <ul>
+            <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
+            <li onmouseover="replaces(2,2)" id="for2" class ><a href="#">猜你喜欢</a></li>
+        </ul>
+    </div>
+    <div class="tabMain">
+        <#if recommendArticleList ?? > 
+        <ul id="content1">
+            <#list recommendArticleList as article>
+            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+        <#if randomRecommendArticleList ?? > 
+        <ul id="content2" style="display:none;">
+            <#list randomRecommendArticleList as article>
+           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+    </div>
     </div>
 </div>
 </#macro>

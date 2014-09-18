@@ -294,14 +294,6 @@ public class ReaderAction extends AbstractPublicBaseAction {
                     }
                     CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_PREFIX, chapterno, chapterDto);
 
-                    article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX,
-                            chapterDto.getArticleno());
-                    if (article == null || article.getArticleno() == 0) {
-                        article = articleService.getByNo(chapterDto.getArticleno());
-                        CacheManager
-                                .putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
-                    }
-
                 } else {
                     addActionError(getText("errors.not.exsits.chapter"));
                 }
@@ -315,6 +307,12 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
         // 更新统计信息
         if (articleno != 0) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX,
+                    chapter.getArticleno());
+            if (article == null || article.getArticleno() == 0) {
+                article = articleService.getByNo(chapter.getArticleno());
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
+            }
             articleService.updateVisitStatistic(articleno);
 
             recommendArticleList = CacheManager.getObject(
@@ -323,7 +321,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
             if (!Utils.isDefined(recommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
                 recommendArticleList = articleService.findRecommendArticleList(article.getCategory(),
-                        article.getArticleno(), 12);
+                        article.getArticleno(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
                         + articleno, recommendArticleList);
             }
@@ -333,7 +331,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
             if (!Utils.isDefined(randomRecommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
-                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 3);
+                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
                         + articleno, randomRecommendArticleList);
             }

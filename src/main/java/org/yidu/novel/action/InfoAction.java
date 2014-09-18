@@ -261,15 +261,6 @@ public class InfoAction extends AbstractPublicBaseAction {
         return "info";
     }
 
-    /**
-     * 获取是否开启了章节列表页标识
-     * 
-     * @return 是否开启了章节列表页标识
-     */
-    public boolean getEnableChapterIndexPahge() {
-        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
-    }
-
     @Override
     protected void loadData() {
         logger.debug("loadData start.");

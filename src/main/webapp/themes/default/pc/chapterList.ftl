@@ -30,16 +30,6 @@
     <#if adEffective?? && adEffective>
     <script type="text/javascript" src="${contextPath}/ad/chapterList2.js"></script>
     </#if>
-    <br>
-    <#if recommendArticleList ?? > 
-    <div id="listtj">&nbsp;推荐阅读：
-    <#list recommendArticleList as article>
-        <#if article_index != 0 >、</#if>
-        <a href="${article.url}" alt="${article.articlename}">${article.articlename}</a>
-    </#list>
-    </div>
-    </#if>
-    <br>
     <div class="clear"></div>
     <div class="chapterNum">
         <a name="chapters"></a>
@@ -69,6 +59,42 @@
     <#if adEffective?? && adEffective>
     <script type="text/javascript" src="${contextPath}/ad/chapterList3.js"></script>
     </#if>
+        <div class="navTab">
+        <ul>
+            <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
+            <li onmouseover="replaces(2,2)" id="for2" class ><a href="#">猜你喜欢</a></li>
+        </ul>
+    </div>
+
+    <div class="tabMain">
+        <#if recommendArticleList ?? > 
+        <ul id="content1">
+            <#list recommendArticleList as article>
+            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+        <#if randomRecommendArticleList ?? > 
+        <ul id="content2" style="display:none;">
+            <#list randomRecommendArticleList as article>
+           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <#if article.fullflag>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
+            <#else>
+                <img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="topss png_bg"  alt="连载中图标">
+            </#if>
+            <a href="${article.url}">${article.articlename}</a></li>
+            </#list>
+        </ul>
+        </#if>
+    </div>
+    
 </#macro>
 
 <#macro customizefooter> 

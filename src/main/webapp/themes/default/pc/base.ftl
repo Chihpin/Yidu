@@ -23,7 +23,7 @@
 <![endif]-->
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/board.css">
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/common.css">
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/index.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js"></script>

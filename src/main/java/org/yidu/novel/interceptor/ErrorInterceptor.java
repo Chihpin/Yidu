@@ -43,6 +43,7 @@ public class ErrorInterceptor extends AbstractInterceptor {
             AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();
             if (th instanceof IOException) {
                 logger.debug("IOException occured! may the user stop downloading, do not care.");
+                logger.error(th);
                 return null;
             } else {
                 logger.error(action, th);
