@@ -10,9 +10,9 @@
 <div class="layout grid-s160m0e190 channel-netnovel">
     <div class="col-main"><div class="main-wrap channel-netnovel-main">
     <section>
-        <header class="netnovel-header">
-            <h3>我的订阅 &nbsp;&nbsp;- 您最大可以订阅  ${maxSubscribeNum} 本小说，现已订阅 ${subscribeNum} 本。</h3>
-            <h3 style="color:red">您订阅的小说如果更新了，我们会通过邮件的方式通知您，切记设置好邮件信息，否则使用该功能！</h3>
+        <header class="netnovel-headersubscribe ">
+            <h3>我的订阅 &nbsp;&nbsp;- 您最大可以订阅  ${maxSubscribeNum} 本小说，现已订阅 ${subscribeNum} 本。<br>
+            <span style="color:red">您订阅的小说如果更新了，我们会通过邮件的方式通知您，切记设置好邮件信息，否则使用该功能！</span></h3>
         </header>
         <form action="" method="post" name="checkform" id="checkform" onSubmit="return check_confirm();">
             <table class="mygrid" width="100%" align="center" style="font-size:12px">
