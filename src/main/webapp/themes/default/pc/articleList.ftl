@@ -34,7 +34,7 @@
               作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>
               <em class="c999 clearfix">${article.introForHtml}</em>
               更新：<a href="${article.lastChapterUrl}"  title="${article.lastchapter}">${article.lastchapterOmit}</a>
-              <a href="${article.url}" class="readTo"  title="${article.articlename}">马上阅读</a>
+              <a href="<#if !enableChapterIndexPage >${article.url}<#else>${article.chapterListUrl}</#if>" class="readTo"  title="${article.articlename}">马上阅读</a>
            </span>
         </li>
         </#list>

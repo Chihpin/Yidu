@@ -36,7 +36,7 @@
             类型：<a href="${encodeURL("/articleList?category=${article.category}&page=1")}"><#if article.category!=0>${categorymap[article.category?c]}</#if></a><br/> 
             作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>
             <br>点击数：<label>${article.allvisit}</label>
-            <a class="readTo" href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">马上阅读</a></span></li>
+            <a class="readTo" href="<#if !enableChapterIndexPage >${article.url}<#else>${article.chapterListUrl}</#if>">马上阅读</a></span></li>
         </#if>
         </#list>
         </ul>
