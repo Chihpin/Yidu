@@ -129,7 +129,7 @@
             <#list reviewList as review>
                 <li class="line">
                 <div class="has_avatar">
-                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/images/90_avatar_middle.jpg"></a>
+                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/pc/images/90_avatar_middle.jpg"></a>
                 </div>
                 <div class="replycontent">
                     <div class="t_t">
