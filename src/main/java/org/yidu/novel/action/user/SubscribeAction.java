@@ -166,7 +166,7 @@ public class SubscribeAction extends AbstractUserBaseAction {
         bookcaseCount = this.subscribeService.getCount(searchBean);
         if (bookcaseCount > 0) {
             // 已经存在啦，算了，告诉他成功啦！哈哈
-            addActionMessage("messages.proccess.success");
+            addActionMessage(getText("messages.proccess.success"));
             return FREEMARKER_MESSAGE;
         }
 
