@@ -177,7 +177,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_MAIL_AUTH, false)) {
             // 开启的话发邮件结束
             MailUtils.sendMail(email, getText("reg.mail.title", new String[] { getText("label.system.name") }),
-                    creatContent());
+                    creatContent(), false);
             addActionMessage(getText("message.mail.auth"));
             user.setMailtoken(Utils.convert2MD5(loginid + password + email));
             user.setActivedflag(false);
