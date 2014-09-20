@@ -21,7 +21,6 @@ public class HibernateSupportServiceImpl extends BaseServiceImpl {
     /**
      * sessionFactory
      */
-
     protected SessionFactory sessionFactory;
 
     /**

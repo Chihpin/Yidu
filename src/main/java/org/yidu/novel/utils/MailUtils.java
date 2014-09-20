@@ -4,11 +4,14 @@ import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +43,7 @@ public class MailUtils {
      *            邮件内容
      * @return 成功标识
      */
-    public static boolean sendMail(String toAddr, String title, String content) {
+    public static boolean sendMail(String toAddr, String title, String content, boolean isHtmlFormat) {
 
         final String username = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_USERNAME);
         final String password = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_PASSWORD);
@@ -63,7 +66,11 @@ public class MailUtils {
             message.setFrom(new InternetAddress(YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_FROM)));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddr));
             message.setSubject(title);
-            message.setText(content);
+            if (isHtmlFormat) {
+                message.setContent(content, "text/html");
+            } else {
+                message.setText(content);
+            }
             Transport.send(message);
 
         } catch (MessagingException e) {
@@ -73,4 +80,5 @@ public class MailUtils {
         return true;
 
     }
+
 }

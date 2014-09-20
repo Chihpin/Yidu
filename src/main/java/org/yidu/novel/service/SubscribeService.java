@@ -57,7 +57,7 @@ public interface SubscribeService {
      *            检索条件
      * @return 订阅信息列表
      */
-    List<SubscribeDTO> findByUserno(final int userno);
+    List<SubscribeDTO> findAllData(final SubscribeSearchBean searchBean);
 
     /**
      * 根据条件取得订阅件数

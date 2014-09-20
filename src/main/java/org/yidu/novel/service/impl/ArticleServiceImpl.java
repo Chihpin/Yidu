@@ -11,6 +11,7 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -205,8 +206,13 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     @Override
     public List<TArticle> findRandomRecommendArticleList(int category, final int count) {
         List<Object> params = new ArrayList<Object>();
-        params.add(category);
-        String hql = "FROM TArticle where category = ? and deleteflag = false order by rand() ";
-        return this.findByRange(hql, 1, count, params);
+        StringBuffer hql = new StringBuffer();
+        hql.append("FROM TArticle where deleteflag = false ");
+        if (Utils.isDefined(category)) {
+            params.add(category);
+            hql.append(" and  category = ? ");
+        }
+        hql.append(" order by rand()  ");
+        return this.findByRange(hql.toString(), 1, count, params);
     }
 }

@@ -1,10 +1,15 @@
 package org.yidu.novel.bean;
 
+import java.util.Date;
+
+import org.apache.commons.lang3.Range;
+
 public class SubscribeSearchBean extends BaseSearchBean {
 
     private int subscribeno;
     private int articleno;
     private int userno;
+    private Range<Date> dateRange;
 
     /**
      * 获取subscribeno
@@ -67,6 +72,27 @@ public class SubscribeSearchBean extends BaseSearchBean {
      */
     public void setUserno(int userno) {
         this.userno = userno;
+    }
+
+    /**
+     * 获取dateRange
+     * 
+     * @return dateRange
+     */
+    public Range<Date> getDateRange() {
+        return dateRange;
+    }
+
+    /**
+     * 
+     * 设置dateRange
+     * 
+     * 
+     * @param dateRange
+     *            dateRange
+     */
+    public void setDateRange(Range<Date> dateRange) {
+        this.dateRange = dateRange;
     }
 
 }

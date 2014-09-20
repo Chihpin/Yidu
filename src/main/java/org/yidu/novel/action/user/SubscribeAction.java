@@ -136,7 +136,9 @@ public class SubscribeAction extends AbstractUserBaseAction {
 
     @Override
     protected void loadData() {
-        subscribeList = this.subscribeService.findByUserno(LoginManager.getLoginUser().getUserno());
+        SubscribeSearchBean searchBean = new SubscribeSearchBean();
+        searchBean.setUserno(LoginManager.getLoginUser().getUserno());
+        subscribeList = this.subscribeService.findAllData(searchBean);
     }
 
     @Override
@@ -156,7 +158,7 @@ public class SubscribeAction extends AbstractUserBaseAction {
         SubscribeSearchBean searchBean = new SubscribeSearchBean();
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
         int bookcaseCount = this.subscribeService.getCount(searchBean);
-        if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE,30)) {
+        if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE, 30)) {
             addActionError(getText("errors.max.subscribe"));
             return FREEMARKER_ERROR;
         }

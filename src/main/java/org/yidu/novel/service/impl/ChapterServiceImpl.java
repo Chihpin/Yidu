@@ -1,5 +1,6 @@
 package org.yidu.novel.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.ChapterService;
 import org.yidu.novel.utils.Pagination;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -32,8 +34,18 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
             hql.append(" AND articleno = ? ");
             params.add(searchBean.getArticleno());
         }
-        if (StringUtils.isNotEmpty(searchBean.getChapternos())) {
-            hql.append(" AND chapterno in ( " + searchBean.getChapternos() + ") ");
+        if (Utils.isDefined(searchBean.getChapternoList())) {
+            hql.append(" AND chapterno in ( " + StringUtils.join(searchBean.getChapternoList(), ",") + ") ");
+        }
+
+        if (Utils.isDefined(searchBean.getArticlenoList())) {
+            hql.append(" AND articleno in ( " + StringUtils.join(searchBean.getArticlenoList(), ",") + ") ");
+        }
+
+        if (Utils.isDefined(searchBean.getDateRange())) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.sss");
+            hql.append(" AND postdate >= '" + sdf.format(searchBean.getDateRange().getMinimum()) + "'");
+//            hql.append(" AND postdate < '" + sdf.format(searchBean.getDateRange().getMaximum()) + "'");
         }
 
         Pagination pagination = searchBean.getPagination();
@@ -42,7 +54,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
             hql.append(pagination.getSortInfo());
             return this.findByRange(hql.toString(), pagination.getStart(), pagination.getPageSize(), params);
         } else {
-            hql.append("ORDER BY chapterno ASC ");
+            hql.append("ORDER BY articleno asc ,chapterno ASC ");
             return this.find(hql.toString(), params);
         }
     }

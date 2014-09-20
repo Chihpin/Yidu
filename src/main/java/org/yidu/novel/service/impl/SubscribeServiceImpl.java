@@ -1,5 +1,6 @@
 package org.yidu.novel.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +70,24 @@ public class SubscribeServiceImpl extends HibernateSupportServiceImpl implements
     }
 
     @Override
-    public List<SubscribeDTO> findByUserno(int userno) {
+    public List<SubscribeDTO> findAllData(SubscribeSearchBean searchBean) {
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ts.subscribeno, ta.* FROM t_subscribe ts join t_article ta on ts.articleno = ta.articleno"
-                + " where userno =  " + userno);
+        sql.append("SELECT ts.subscribeno, ta.* , tu.userno,tu.loginid,tu.email FROM t_subscribe ts ");
+        sql.append(" join t_article ta on ts.articleno = ta.articleno ");
+        sql.append(" join t_user tu on tu.userno = ts.userno ");
+        sql.append(" where 1=1 ");
+        if (Utils.isDefined(searchBean.getUserno())) {
+            sql.append(" AND ts.userno =  " + searchBean.getUserno());
+        }
+
+        if (Utils.isDefined(searchBean.getDateRange())) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.sss");
+            sql.append(" AND ta.lastupdate >= '" + sdf.format(searchBean.getDateRange().getMinimum()) + "'");
+            // sql.append(" AND ta.lastupdate < '" +
+            // sdf.format(searchBean.getDateRange().getMaximum()) + "'");
+        }
+        sql.append(" order by ts.articleno ");
+
         List<Object> params = new ArrayList<Object>();
         List<SubscribeDTO> subscribeList = this.yiduJdbcTemplate.query(sql.toString(), params.toArray(),
                 new BeanPropertyRowMapper<SubscribeDTO>(SubscribeDTO.class));

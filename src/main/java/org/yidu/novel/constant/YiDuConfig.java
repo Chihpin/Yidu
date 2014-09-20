@@ -171,6 +171,11 @@ public class YiDuConfig {
     public static final String MAX_SUBSCRIBE = "maxSubscribe";
 
     /**
+     * 订阅的检查间隔
+     */
+    public static final String SEND_SUBSCRIBE_INTEVAL = "sendSubscribeInteval";
+
+    /**
      * 数据库JDBC URL
      */
     public static final String JDBC_URL = "jdbc.url";

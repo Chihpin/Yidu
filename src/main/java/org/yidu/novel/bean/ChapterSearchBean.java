@@ -1,5 +1,10 @@
 package org.yidu.novel.bean;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.Range;
+
 public class ChapterSearchBean extends BaseSearchBean {
 
     /**
@@ -8,14 +13,21 @@ public class ChapterSearchBean extends BaseSearchBean {
     private int articleno;
 
     /**
-     * 章节号
+     * 小说编号列表
      */
-    private int chapterno;
+    private List<Integer> articlenoList;
 
     /**
      * 章节号
      */
-    private String chapternos;
+    private int chapterno;
+
+    private Range<Date> dateRange;
+
+    /**
+     * 章节编号列表
+     */
+    private List<Integer> chapternoList;
 
     public int getArticleno() {
         return articleno;
@@ -33,11 +45,67 @@ public class ChapterSearchBean extends BaseSearchBean {
         this.chapterno = chapterno;
     }
 
-    public String getChapternos() {
-        return chapternos;
+    /**
+     * 获取articlenoList
+     * 
+     * @return articlenoList
+     */
+    public List<Integer> getArticlenoList() {
+        return articlenoList;
     }
 
-    public void setChapternos(String chapternos) {
-        this.chapternos = chapternos;
+    /**
+     * 
+     * 设置articlenoList
+     * 
+     * 
+     * @param articlenoList
+     *            articlenoList
+     */
+    public void setArticlenoList(List<Integer> articlenoList) {
+        this.articlenoList = articlenoList;
     }
+
+    /**
+     * 获取chapternoList
+     * 
+     * @return chapternoList
+     */
+    public List<Integer> getChapternoList() {
+        return chapternoList;
+    }
+
+    /**
+     * 
+     * 设置chapternoList
+     * 
+     * 
+     * @param chapternoList
+     *            chapternoList
+     */
+    public void setChapternoList(List<Integer> chapternoList) {
+        this.chapternoList = chapternoList;
+    }
+
+    /**
+     * 获取dateRange
+     * 
+     * @return dateRange
+     */
+    public Range<Date> getDateRange() {
+        return dateRange;
+    }
+
+    /**
+     * 
+     * 设置dateRange
+     * 
+     * 
+     * @param dateRange
+     *            dateRange
+     */
+    public void setDateRange(Range<Date> dateRange) {
+        this.dateRange = dateRange;
+    }
+
 }
