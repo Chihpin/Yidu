@@ -307,8 +307,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
         // 更新统计信息
         if (articleno != 0) {
-            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX,
-                    chapter.getArticleno());
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
             if (article == null || article.getArticleno() == 0) {
                 article = articleService.getByNo(chapter.getArticleno());
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
