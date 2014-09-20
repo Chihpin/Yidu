@@ -87,7 +87,7 @@
 
 	<bean id="sendSubscribeMailTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="sendSubscribeMailJob" />
-		<property name="cronExpression" value="0 */1 * * * ?" />
+		<property name="cronExpression" value="0 */15 * * * ?" />
 	</bean>
 
 	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
