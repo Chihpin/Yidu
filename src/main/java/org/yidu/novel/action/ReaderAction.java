@@ -281,7 +281,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
                     chapterno);
             if (chapterDto == null || chapterDto.getChapterno() == 0) {
                 TChapter tchapter = chapterService.getByNo(chapterno);
-                if (tchapter != null) {
+                if (tchapter != null && tchapter.getChapterno() != 0) {
                     TChapter nextchapter = chapterService.getNextChapter(tchapter.getArticleno(), chapterno, true);
                     TChapter prechapter = chapterService.getNextChapter(tchapter.getArticleno(), chapterno, false);
                     chapterDto = new ChapterDTO();
@@ -296,43 +296,48 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
                 } else {
                     addActionError(getText("errors.not.exsits.chapter"));
+                    return;
                 }
             }
             chapter = chapterDto;
-            if (chapter != null && chapter.getChapterno() != 0) {
-                chapter.setContent(Utils.getContext(chapter, true,
-                        YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false)));
-            }
+            chapter.setContent(Utils.getContext(chapter, true,
+                    YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PSEUDO, false)));
         }
 
         // 更新统计信息
-        if (articleno != 0) {
-            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
+        if (chapter.getArticleno() != 0) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX,
+                    chapter.getArticleno());
             if (article == null || article.getArticleno() == 0) {
                 article = articleService.getByNo(chapter.getArticleno());
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
             }
-            articleService.updateVisitStatistic(articleno);
+            if (article == null || article.getArticleno() == 0) {
+                addActionError(getText("errors.not.exsits.chapter"));
+                return;
+            }
+            articleService.updateVisitStatistic(chapter.getArticleno());
 
             recommendArticleList = CacheManager.getObject(
-                    CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME + articleno);
+                    CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME + article.getArticleno());
 
             if (!Utils.isDefined(recommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
                 recommendArticleList = articleService.findRecommendArticleList(article.getCategory(),
                         article.getArticleno(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
-                        + articleno, recommendArticleList);
+                        + article.getArticleno(), recommendArticleList);
             }
 
             randomRecommendArticleList = CacheManager.getObject(
-                    CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME + articleno);
+                    CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX,
+                    NAME + article.getArticleno());
 
             if (!Utils.isDefined(randomRecommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
                 randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
-                        + articleno, randomRecommendArticleList);
+                        + article.getArticleno(), randomRecommendArticleList);
             }
         }
 
