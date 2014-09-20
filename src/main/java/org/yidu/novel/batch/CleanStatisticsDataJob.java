@@ -27,8 +27,21 @@ public class CleanStatisticsDataJob extends QuartzJobBean {
     /**
      * 小说关联操作服务
      */
-    @Autowired
+
     private ArticleService articleService;
+
+    /**
+     * 
+     * 设置articleService
+     * 
+     * 
+     * @param articleService
+     *            articleService
+     */
+    @Autowired
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

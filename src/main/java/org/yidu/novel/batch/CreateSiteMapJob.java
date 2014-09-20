@@ -47,13 +47,37 @@ public class CreateSiteMapJob extends QuartzJobBean {
     /**
      * 小说关联操作服务
      */
-    @Autowired
     private ArticleService articleService;
     /**
      * 章节关联操作服务
      */
-    @Autowired
     private ChapterService chapterService;
+
+    /**
+     * 
+     * 设置articleService
+     * 
+     * 
+     * @param articleService
+     *            articleService
+     */
+    @Autowired
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    /**
+     * 
+     * 设置chapterService
+     * 
+     * 
+     * @param chapterService
+     *            chapterService
+     */
+    @Autowired
+    public void setChapterService(ChapterService chapterService) {
+        this.chapterService = chapterService;
+    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

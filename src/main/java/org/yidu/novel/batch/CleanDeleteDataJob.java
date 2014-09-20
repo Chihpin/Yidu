@@ -26,8 +26,21 @@ public class CleanDeleteDataJob extends QuartzJobBean {
     /**
      * 清理数据服务
      */
-    @Autowired
+
     private CleanDeleteDataService cleanDeleteDataService;
+
+    /**
+     * 
+     * 设置cleanDeleteDataService
+     * 
+     * 
+     * @param cleanDeleteDataService
+     *            cleanDeleteDataService
+     */
+    @Autowired
+    public void setCleanDeleteDataService(CleanDeleteDataService cleanDeleteDataService) {
+        this.cleanDeleteDataService = cleanDeleteDataService;
+    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
