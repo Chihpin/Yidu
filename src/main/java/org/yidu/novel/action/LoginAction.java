@@ -131,7 +131,7 @@ public class LoginAction extends AbstractPublicBaseAction {
     @SkipValidation
     @Override
     public String execute() {
-        logger.info("LoginAction execute has been excuted.");
+        logger.debug("LoginAction execute has been excuted.");
         initCollections(new String[] { "collectionProperties.article.category" });
         if (LoginManager.isLoginFlag()) {
             return GO_TOP;
