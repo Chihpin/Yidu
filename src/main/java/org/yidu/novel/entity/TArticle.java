@@ -170,6 +170,16 @@ public class TArticle extends BaseTArticle {
     }
 
     /**
+     * 获取小说介绍页拼音形式的URL
+     * 
+     * @return 小说介绍页拼音形式的URL
+     */
+    public String getPinyinUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(InfoAction.URL + "?pinyin=" + getPinyin());
+    }
+
+    /**
      * 获取作者列表URL
      * 
      * @return 作者列表URL
@@ -198,6 +208,16 @@ public class TArticle extends BaseTArticle {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                 + "&chapterno=" + getLastchapterno());
+    }
+
+    /**
+     * 获取最新章节的拼音形式的URL
+     * 
+     * @return 最新章节的拼音形式的URL
+     */
+    public String getPinyinLastChapterUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?pinyin=" + getPinyin() + "&chapterno=" + getLastchapterno());
     }
 
     /**
