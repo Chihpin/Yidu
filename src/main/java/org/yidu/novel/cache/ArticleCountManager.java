@@ -69,7 +69,7 @@ public class ArticleCountManager {
                 logger.info("start ArticleCount Manager daemon process.");
 
                 ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
-                        new String[] { "spring/spring.xml" });
+                        new String[] { "spring/springWithoutBatch.xml" });
 
                 ArticleService articleService = (ArticleService) context.getBean("articleService");
 
