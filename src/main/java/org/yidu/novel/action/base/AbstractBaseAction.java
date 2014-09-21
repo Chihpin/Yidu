@@ -46,7 +46,8 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.GOTO_LOGIN, location = org.yidu.novel.action.LoginAction.URL, type = "redirect"),
-        @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect") })
+        @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect"),
+        @Result(name = AbstractBaseAction.HTTPHEADER404, type = "httpheader", params = { "status", "404" }) })
 public abstract class AbstractBaseAction extends ActionSupport implements ValidationWorkflowAware {
     /**
      * 串行化版本统一标识符
@@ -72,6 +73,10 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      * 消息结果类型
      */
     public static final String MESSAGE = "message";
+    /**
+     * HTTP HEADER类型
+     */
+    public static final String HTTPHEADER404 = "httpheader404";
     /**
      * 管理系的错误结果类型
      */

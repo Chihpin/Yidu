@@ -91,11 +91,12 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	
 	<error-page>
       <error-code>404</error-code>
-      <location>/error/404.html</location>
+      <location>/error/error404</location>
     </error-page>
     
 </web-app>

@@ -1,22 +1,22 @@
-package org.yidu.novel.action;
+package org.yidu.novel.action.error;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.action.error.Error404Action;
+import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.constant.YiDuConstants;
 
 /**
  * 
  * <p>
- * 当页面找不到的时候，默认处理Action。
+ * 404错误画面，默认处理Action。
  * </p>
  * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
  * @version 1.0.0
  * @author shinpa.you
  */
-@Action(value = "notFound")
-public class NotFoundAction extends Error404Action {
+@Action(value = "error404")
+public class Error404Action extends AbstractPublicBaseAction {
 
     /**
      * 串行化版本统一标识符
@@ -26,7 +26,7 @@ public class NotFoundAction extends Error404Action {
     /**
      * 功能名称。
      */
-    public static final String NAME = "notFound";
+    public static final String NAME = "error404";
 
     /**
      * URL。
@@ -36,10 +36,21 @@ public class NotFoundAction extends Error404Action {
     @SkipValidation
     @Override
     public String execute() {
-        // 取得数据
-        super.execute();
-        ServletActionContext.getResponse().setStatus(404);
+
         return FREEMARKER;
     }
 
+    @Override
+    protected void loadData() {
+    }
+
+    @Override
+    public int getPageType() {
+        return YiDuConstants.Pagetype.PAGE_OTHERS;
+    }
+
+    @Override
+    public String getTempName() {
+        return "error/error404";
+    }
 }
