@@ -28,7 +28,6 @@
 							<prop key="save">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
 							<prop key="delete">PROPAGATION_REQUIRED</prop>
 							<prop key="find">PROPAGATION_REQUIRED</prop>
-							<prop key="executeInternal">PROPAGATION_REQUIRED</prop>
 							<prop key="findRandomRecommendArticleList">PROPAGATION_REQUIRED</prop>
 							
 						</props>
