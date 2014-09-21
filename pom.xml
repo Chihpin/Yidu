@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- 版本设置(Spring3/Strunts2) -->
-		<spring.version>3.2.4.RELEASE</spring.version>
+		<spring.version>3.2.11.RELEASE</spring.version>
 		<struts2.version>2.3.16.3</struts2.version>
 		<hibernate.version>4.2.8.Final</hibernate.version>
 	</properties>
