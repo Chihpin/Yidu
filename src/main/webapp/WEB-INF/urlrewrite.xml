@@ -192,13 +192,13 @@
 	</outbound-rule>
 
 	<rule>
-		<from>^/download/(\d*).txt$</from>
+		<from>^/download/\d*/(\d*).txt$</from>
 		<to last="true">/download\?articleno=$1</to>
 	</rule>
 
 	<outbound-rule>
-		<from>^/download\?articleno=(\d*)(;jsessionid=.*)?$</from>
-		<to last="true">/download/$1.txt</to>
+		<from>^/download\?subdir=(\d*)&amp;articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/download/$1/$2.txt</to>
 	</outbound-rule>
 
 	<rule>
