@@ -438,8 +438,11 @@ public class UrlRewriteFilter implements Filter {
                 if (!fileExists) {
                     requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
                 }
+            } else if (!org.apache.commons.lang3.StringUtils.endsWithAny(hsRequest.getRequestURI(), "css", "js", "jpg",
+                    "png", "gif")) {
+                // 只有非静态文件才做伪静态解析
+                requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
             }
-            // 非HTML文件不做伪静态解析
 
         } else {
             if (log.isDebugEnabled()) {

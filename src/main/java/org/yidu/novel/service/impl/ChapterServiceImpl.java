@@ -45,7 +45,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         if (Utils.isDefined(searchBean.getDateRange())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.sss");
             hql.append(" AND postdate >= '" + sdf.format(searchBean.getDateRange().getMinimum()) + "'");
-            hql.append(" AND postdate < '" + sdf.format(searchBean.getDateRange().getMaximum()) + "'");
+//            hql.append(" AND postdate < '" + sdf.format(searchBean.getDateRange().getMaximum()) + "'");
         }
 
         Pagination pagination = searchBean.getPagination();

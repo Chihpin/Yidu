@@ -172,7 +172,7 @@ public class SendSubscribeMailJob extends QuartzJobBean {
 
                 // 获取邮件模版
                 String classBasePath = SendSubscribeMailJob.class.getClassLoader().getResource("").getPath();
-                String siteRootPath = classBasePath + "../../";
+                String siteRootPath = "E:/workspace/YiDu-Novel/src/main/webapp/";
                 String templatePath = siteRootPath
                         + MessageFormat.format(THEMES_DIR,
                                 new Object[] { YiDuConstants.yiduConf.getString("themeName") });

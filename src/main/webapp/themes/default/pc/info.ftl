@@ -216,7 +216,7 @@
         <#if recommendArticleList ?? > 
         <ul id="content1">
             <#list recommendArticleList as article>
-            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;" alt="${article.articlename}"></a>
             <#if article.fullflag>
                 <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
             <#else>
@@ -229,7 +229,7 @@
         <#if randomRecommendArticleList ?? > 
         <ul id="content2" style="display:none;">
             <#list randomRecommendArticleList as article>
-           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;"></a>
+           <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;" alt="${article.articlename}"></a>
             <#if article.fullflag>
                 <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
             <#else>

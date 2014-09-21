@@ -1,19 +1,10 @@
-/**
- *
- * channel-net 网络小说频道 
- *
- */
 
 .grid-s160m0e190 .main-wrap { margin: 0 10px 0 160px; }
 .grid-s160m0e190 .col-sub { width: 160px; margin-left: -100%; }
 .grid-s160m0e190 .col-extra { width: 190px; margin-left: -190px; }
-/**
- * fun
- */
+
 .hide { display: none; }
-/**
- * header
- */
+
 #channel-header { margin-top: -13px; margin-bottom: 13px; background: #F5F5F5; border-bottom: 1px solid #ebebeb; }
 .channel-header-wrapper { width: 960px; margin: 0 auto; }
 .channel-logo { float: left; width:75px; }
@@ -37,3 +28,6 @@
 .top-rank-list a { height: 30px; line-height: 30px; padding-left: 12px; display: block; color: #333; }
 .netnovel-header { height: 42px; border-bottom: 1px solid #e7e7e7; }
 .netnovel-header h3 { float: left; padding-top: 12px; font-size: 13px; color: #686868; }
+
+.netnovel-headersubscribe { height: 55px; border-bottom: 1px solid #e7e7e7; }
+.netnovel-headersubscribe h3 { float: left; padding-top: 12px; font-size: 13px; color: #686868; }

@@ -163,6 +163,7 @@ public class SubscribeAction extends AbstractUserBaseAction {
             return FREEMARKER_ERROR;
         }
 
+        searchBean.setUserno(articleno);
         bookcaseCount = this.subscribeService.getCount(searchBean);
         if (bookcaseCount > 0) {
             // 已经存在啦，算了，告诉他成功啦！哈哈
@@ -176,7 +177,7 @@ public class SubscribeAction extends AbstractUserBaseAction {
 
         this.subscribeService.save(subscribe);
         this.loadData();
-        addActionMessage("messages.proccess.success");
+        addActionMessage(getText("messages.proccess.success"));
         return FREEMARKER_MESSAGE;
     }
 
