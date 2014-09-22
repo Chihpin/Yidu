@@ -93,8 +93,9 @@ public class QQLoginAction extends AbstractPublicBaseAction {
                             user.setActivedflag(true);
                             user.setOpenid(openID);
                             user.setModifytime(new Date());
-                            userService.save(user);
                         }
+                        user.setLastlogin(new Date());
+                        userService.save(user);
                     }
 
                     LoginManager.doLogin(user);
