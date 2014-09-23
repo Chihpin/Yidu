@@ -132,6 +132,7 @@ CREATE TABLE t_user
     subcategory int,
     openid varchar(50),
     activedflag boolean DEFAULT 'true',
+    mailtoken character varying(32),
     deleteflag boolean DEFAULT 'false',
     modifyuserno integer,
     modifytime timestamp without time zone,
