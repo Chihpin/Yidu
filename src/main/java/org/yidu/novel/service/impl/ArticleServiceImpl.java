@@ -206,13 +206,25 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     @Override
     public List<TArticle> findRandomRecommendArticleList(int category, final int count) {
         List<Object> params = new ArrayList<Object>();
-        StringBuffer hql = new StringBuffer();
-        hql.append("FROM TArticle where deleteflag = false ");
+        StringBuffer sql = new StringBuffer();
+        // 为了提升性能，没有用hibernate，写了nactiveSQL
+        sql.append(" SELECT * ");
+        sql.append(" FROM  ( ");
+        sql.append("    SELECT DISTINCT 1 + floor(random() * 65000)::integer AS articleno ");
+        sql.append("    FROM   generate_series(1, 50) g ");
+        sql.append("    ) r ");
+        sql.append(" JOIN   t_article USING (articleno) ");
+        sql.append(" where  deleteflag = false ");
+        sql.append(" AND lastupdate is not null  ");
+        sql.append(" AND lastchapterno is not null ");
         if (Utils.isDefined(category)) {
             params.add(category);
-            hql.append(" and  category = ? ");
+            sql.append(" and  category = ? ");
         }
-        hql.append(" order by rand()  ");
-        return this.findByRange(hql.toString(), 1, count, params);
+        sql.append("LIMIT  ?");
+        params.add(count);
+
+        return this.yiduJdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<TArticle>(
+                TArticle.class));
     }
 }
