@@ -39,6 +39,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
      * 10:aritcleList 20:custerartileList 20:html
      */
 
+    private int category;
     private Short type;
     private String sortcol;
     private Boolean isasc;
@@ -86,6 +87,27 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         this.type = type;
     }
 
+    /**
+     * 获取category
+     * 
+     * @return category
+     */
+    public int getCategory() {
+        return category;
+    }
+
+    /**
+     * 
+     * 设置category
+     * 
+     * 
+     * @param category
+     *            category
+     */
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
     public String getSortcol() {
         return this.sortcol;
     }
@@ -131,7 +153,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         logger.debug("loadData start.");
         // 初始化下拉列表选项
         initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.block.type",
-                "collectionProperties.block.target" });
+                "collectionProperties.block.target", "collectionProperties.block.sortCol" });
         // 编辑
         if (blockno != 0) {
             TSystemBlock systemBlock = systemBlockService.getByNo(blockno);

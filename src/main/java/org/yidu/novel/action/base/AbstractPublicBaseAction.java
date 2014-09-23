@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.action.IndexAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.cache.CacheManager;
@@ -43,7 +42,7 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     /**
      * 区块信息
      */
-    private Map<String, Object> blocks = new HashMap<String, Object>();
+    protected Map<String, Object> blocks = new HashMap<String, Object>();
 
     /**
      * 获取区块信息
@@ -92,43 +91,67 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
         return FREEMARKER;
     }
 
+    protected int getArticleno() {
+        return 0;
+    }
+
+    protected int getCategory() {
+        return 0;
+    }
+
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_GLOBAL_BLOCK;
+    }
+
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.ALL_SITE;
+    }
+
     /**
      * 初始化区块信息
      */
     protected void loadBlock() {
         logger.debug("loadBlock start.");
-        if (this instanceof IndexAction) {
-            logger.debug("this instanceof IndexAction.");
-            // 从缓存中把首页用的区块信息取出
-            blocks = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK, null);
-            if (!Utils.isDefined(blocks)) {
-                blocks = new HashMap<String, Object>();
-                // 没有取到的话从数据库里取出
-                // block数据取得
-                List<TSystemBlock> blockList = new ArrayList<TSystemBlock>();
-                SystemBlockSearchBean searchBean = new SystemBlockSearchBean();
-                blockList = systemBlockService.find(searchBean);
-                for (TSystemBlock tSystemBlock : blockList) {
-                    if (tSystemBlock.getTarget() == YiDuConstants.BlockTarget.INDEX) {
-                        if (tSystemBlock.getType() == YiDuConstants.BlockType.ARTICLE_LIST) {
-                            ArticleSearchBean articleSearchBean = new ArticleSearchBean();
-                            Pagination pagination = new Pagination(tSystemBlock.getLimitnum(), 1);
-                            pagination.setSortColumn(tSystemBlock.getSortcol());
-                            pagination.setSortOrder(tSystemBlock.getIsasc() ? "ASC" : "DESC");
-                            articleSearchBean.setPagination(pagination);
-                            List<TArticle> articleList = articleService.find(articleSearchBean);
-                            blocks.put(tSystemBlock.getBlockid(), articleList);
-                        } else if (tSystemBlock.getType() == YiDuConstants.BlockType.CUSTONIZE_ARTICLE_LIST) {
-                            ArticleSearchBean articleSearchBean = new ArticleSearchBean();
-                            articleSearchBean.setArticlenos(tSystemBlock.getContent());
-                            List<TArticle> articleList = articleService.find(articleSearchBean);
-                            blocks.put(tSystemBlock.getBlockid(), articleList);
-                        } else if (tSystemBlock.getType() == YiDuConstants.BlockType.HTML) {
-                            blocks.put(tSystemBlock.getBlockid(), tSystemBlock.getContent());
-                        }
-                        CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK, null, blocks);
-                    }
+        // 从缓存中把首页用的区块信息取出
+        blocks = CacheManager.getObject(getBlockKey(), null);
+        if (!Utils.isDefined(blocks)) {
+            blocks = new HashMap<String, Object>();
+            // 没有取到的话从数据库里取出
+            // block数据取得
+            List<TSystemBlock> blockList = new ArrayList<TSystemBlock>();
+            SystemBlockSearchBean searchBean = new SystemBlockSearchBean();
+            searchBean.setTargets(YiDuConstants.BlockTarget.ALL_SITE, getBlockTarget());
+            blockList = systemBlockService.find(searchBean);
+            for (TSystemBlock tSystemBlock : blockList) {
+                if (tSystemBlock.getType() == YiDuConstants.BlockType.ARTICLE_LIST) {
+                    ArticleSearchBean articleSearchBean = new ArticleSearchBean();
+                    articleSearchBean.setCategory(tSystemBlock.getCategory());
+                    Pagination pagination = new Pagination(tSystemBlock.getLimitnum(), 1);
+                    pagination.setSortColumn(tSystemBlock.getSortcol());
+                    pagination.setSortOrder(tSystemBlock.getIsasc() ? "ASC" : "DESC");
+                    articleSearchBean.setPagination(pagination);
+                    List<TArticle> articleList = articleService.find(articleSearchBean);
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RODMON_LIST) {
+                    List<TArticle> articleList = articleService.findRandomRecommendArticleList(tSystemBlock
+                            .getLimitnum());
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
+
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.BACK_LIST) {
+                    // TODO 暂未开放，貌似没什么用啊
+                    List<TArticle> articleList = articleService.findRecommendArticleList(getCategory(), getArticleno(),
+                            tSystemBlock.getLimitnum());
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
+
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.CUSTONIZE_ARTICLE_LIST) {
+                    ArticleSearchBean articleSearchBean = new ArticleSearchBean();
+                    articleSearchBean.setArticlenos(tSystemBlock.getContent());
+                    List<TArticle> articleList = articleService.find(articleSearchBean);
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.HTML) {
+                    blocks.put(tSystemBlock.getBlockid(), tSystemBlock.getContent());
                 }
+                CacheManager.putObject(getBlockKey(), null, blocks);
             }
         }
         logger.debug("loadBlock normally end.");

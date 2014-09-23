@@ -1,6 +1,7 @@
 package org.yidu.novel.action;
 
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
 
 /**
@@ -36,6 +37,16 @@ public class IndexAction extends AbstractPublicBaseAction {
 
     @Override
     public void loadData() {
+    }
+
+    @Override
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_INDEX_BLOCK;
+    }
+
+    @Override
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.INDEX;
     }
 
     @Override

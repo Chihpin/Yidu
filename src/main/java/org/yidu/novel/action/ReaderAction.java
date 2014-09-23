@@ -349,4 +349,14 @@ public class ReaderAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_READER;
     }
 
+    @Override
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_READER_BLOCK;
+    }
+
+    @Override
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.READER_PAGE;
+    }
+
 }

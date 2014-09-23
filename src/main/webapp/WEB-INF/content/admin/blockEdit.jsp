@@ -45,6 +45,8 @@
                         <s:select
                             id="category"
                             name="category"
+                            headerKey = "0"
+                            headerValue = ""
                             list="collections['collectionProperties.article.category']"
                             />
                     </td>
@@ -52,7 +54,13 @@
                 <tr>
                     <td><s:text name="label.admin.block.edit.sortcol" /></td>
                     <td>
-                        <s:textfield id="sortcol" name="sortcol" cssClass="tb-rounded" /> 
+                        <s:select
+                            id="sortcol"
+                            name="sortcol"
+                            headerKey = ""
+                            headerValue = ""
+                            list="collections['collectionProperties.block.sortCol']"
+                            />
                     </td>
                 </tr>
                 <tr>

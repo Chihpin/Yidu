@@ -45,7 +45,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     /**
      * 小说种类
      */
-    private Integer category;
+    private int category;
 
     /**
      * 页号
@@ -68,11 +68,11 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     List<TArticle> articleList = new ArrayList<TArticle>();
 
     /**
-     * 获取 category
+     * 获取category
      * 
      * @return category
      */
-    public Integer getCategory() {
+    public int getCategory() {
         return category;
     }
 
@@ -84,7 +84,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      * @param category
      *            category
      */
-    public void setCategory(Integer category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -192,7 +192,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         int count = 0;
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
             // 开启缓存件数的话
-            if (category != null && category != 0) {
+            if (category != 0) {
                 // 分类
                 count = ArticleCountManager.getArticleCount(String.valueOf(category));
             } else if (StringUtils.isNotEmpty(author)) {
@@ -228,5 +228,15 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     @Override
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_ARTICLE_LIST;
+    }
+
+    @Override
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_CATEGORY_LIST_BLOCK;
+    }
+
+    @Override
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.ARTICLE_LIST;
     }
 }

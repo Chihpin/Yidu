@@ -11,7 +11,6 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
-import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -193,10 +192,13 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     @Override
     public List<TArticle> findRecommendArticleList(final int category, int articleno, final int count) {
         List<Object> params = new ArrayList<Object>();
-        params.add(category);
         params.add(articleno);
         StringBuffer hql = new StringBuffer();
-        hql.append("FROM TArticle where category = ? and articleno > ? and deleteflag = false ");
+        hql.append("FROM TArticle where articleno > ? and deleteflag = false ");
+        if (category != 0) {
+            hql.append(" AND  category = ?  ");
+            params.add(category);
+        }
         hql.append(" AND lastupdate is not null ");
         hql.append(" AND lastchapterno is not null ");
         hql.append("  order by articleno  ");

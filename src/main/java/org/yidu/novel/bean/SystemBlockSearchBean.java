@@ -10,6 +10,7 @@ public class SystemBlockSearchBean extends BaseSearchBean {
     private Integer limitnum;
     private String content;
     private Short target;
+    private Short[] targets;
 
     public int getBlockno() {
         return blockno;
@@ -73,6 +74,27 @@ public class SystemBlockSearchBean extends BaseSearchBean {
 
     public void setTarget(Short target) {
         this.target = target;
+    }
+
+    /**
+     * 获取targets
+     * 
+     * @return targets
+     */
+    public Short[] getTargets() {
+        return targets;
+    }
+
+    /**
+     * 
+     * 设置targets
+     * 
+     * 
+     * @param targets
+     *            targets
+     */
+    public void setTargets(Short... targets) {
+        this.targets = targets;
     }
 
 }

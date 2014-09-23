@@ -197,4 +197,14 @@ public class TopAction extends AbstractPublicListBaseAction {
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_TOP;
     }
+
+    @Override
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_TOP_LIST_BLOCK;
+    }
+
+    @Override
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.TOP_LIST;
+    }
 }

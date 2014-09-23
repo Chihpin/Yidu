@@ -130,9 +130,33 @@ public class CacheManager {
      */
     public class CacheKeyPrefix {
         /**
-         * 主页区块的键
+         * 首页区块的键
          */
         public static final String CACHE_KEY_INDEX_BLOCK = "CacheKey_indexBlock";
+        /**
+         * 全站区块的键
+         */
+        public static final String CACHE_KEY_GLOBAL_BLOCK = "CacheKey_globalBlock";
+        /**
+         * 小说分类画面区块的键
+         */
+        public static final String CACHE_KEY_CATEGORY_LIST_BLOCK = "CacheKey_categoryListBlock";
+        /**
+         * 小说排行榜画面区块的键
+         */
+        public static final String CACHE_KEY_TOP_LIST_BLOCK = "CacheKey_topListBlock";
+        /**
+         * 小说介绍画面区块的键
+         */
+        public static final String CACHE_KEY_INFO_BLOCK = "CacheKey_infoBlock";
+        /**
+         * 章节列表画面区块的键
+         */
+        public static final String CACHE_KEY_CHAPTER_LIST_BLOCK = "CacheKey_chapterListBlock";
+        /**
+         * 小说阅读画面区块的键
+         */
+        public static final String CACHE_KEY_READER_BLOCK = "CacheKey_readerBlock";
         /**
          * 小说件数的键
          */

@@ -339,4 +339,14 @@ public class InfoAction extends AbstractPublicBaseAction {
         return YiDuConstants.Pagetype.PAGE_ARTICLE_INFO;
     }
 
+    @Override
+    protected String getBlockKey() {
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_INFO_BLOCK;
+    }
+
+    @Override
+    protected Short getBlockTarget() {
+        return YiDuConstants.BlockTarget.ARTICLE_INFO;
+    }
+
 }

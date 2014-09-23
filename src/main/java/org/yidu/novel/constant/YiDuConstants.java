@@ -157,7 +157,7 @@ public class YiDuConstants {
         /**
          * 小说详细页
          */
-        public static final short ARTICLE_DETAIL = 2;
+        public static final short ARTICLE_INFO = 2;
         /**
          * 章节列表页
          */
@@ -174,7 +174,10 @@ public class YiDuConstants {
          * 主页
          */
         public static final short INDEX = 6;
-
+        /**
+         * 排行榜
+         */
+        public static final short TOP_LIST = 7;
         /**
          * 全站
          */
@@ -232,14 +235,14 @@ public class YiDuConstants {
         public static final short HTML = 30;
 
         /**
-         * HTML类型
+         * 随机类型
          */
-        public static final short TOP_LIST = 40;
+        public static final short RODMON_LIST = 40;
 
         /**
-         * HTML类型
+         * 类型
          */
-        public static final short RODMON_LIST = 50;
+        public static final short BACK_LIST = 50;
 
     }
 

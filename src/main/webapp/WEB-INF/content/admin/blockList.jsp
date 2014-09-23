@@ -10,8 +10,8 @@
             <col width="130px">
             <col width="100px">
             <col width="250px">
-            <col width="150px">
-            <col width="200px">
+            <col width="250px">
+            <col width="100px">
         </colgroup>
         <tr>
             <th class="sortable <s:if test="pagination.sortColumn.equals('blockno')">sorted <s:property value="pagination.sortClass"/> </s:if>">
