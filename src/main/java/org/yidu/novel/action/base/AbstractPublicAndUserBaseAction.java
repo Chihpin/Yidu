@@ -138,4 +138,44 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
         return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
     }
 
+    public String getSiteTitle() {
+        return getText("label.system.title");
+    }
+
+    public String getSiteKeyword() {
+        return getText("label.system.siteKeywords");
+    }
+
+    public String getSiteDescription() {
+        return getText("label.system.siteDescription");
+    }
+
+    public String getSiteName() {
+        return getText("label.system.name");
+    }
+
+    public String getSiteUrl() {
+        return getText("label.system.url");
+    }
+
+    public String getSiteCopyright() {
+        return getText("label.system.copyright");
+    }
+
+    public String getSiteSupport() {
+        return getText("label.system.support");
+    }
+
+    public String getBeianNo() {
+        return getText("label.system.beianNo");
+    }
+
+    public String getAnalyticscode() {
+        return getText("label.system.analyticscode");
+    }
+
+    public String getDomain() {
+        return getText("label.system.domain");
+    }
+
 }
