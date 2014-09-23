@@ -204,23 +204,19 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     }
 
     @Override
-    public List<TArticle> findRandomRecommendArticleList(int category, final int count) {
+    public List<TArticle> findRandomRecommendArticleList(final int count) {
         List<Object> params = new ArrayList<Object>();
         StringBuffer sql = new StringBuffer();
         // 为了提升性能，没有用hibernate，写了nactiveSQL
         sql.append(" SELECT * ");
         sql.append(" FROM  ( ");
-        sql.append("    SELECT DISTINCT 1 + floor(random() * 65000)::integer AS articleno ");
+        sql.append("    SELECT DISTINCT 1 + floor(random() * (select max(articleno) from t_article) )::integer AS articleno ");
         sql.append("    FROM   generate_series(1, 50) g ");
         sql.append("    ) r ");
         sql.append(" JOIN   t_article USING (articleno) ");
         sql.append(" where  deleteflag = false ");
         sql.append(" AND lastupdate is not null  ");
         sql.append(" AND lastchapterno is not null ");
-        if (Utils.isDefined(category)) {
-            params.add(category);
-            sql.append(" and  category = ? ");
-        }
         sql.append("LIMIT  ?");
         params.add(count);
 

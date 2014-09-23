@@ -118,10 +118,10 @@ public interface ArticleService {
      * 根据小说分类取得随机推荐列表<br>
      * 将来算法可能会更新，暂时做成这样
      * 
-     * @param category
-     *            分类编号
+     * @param count
+     *            小说件数
      * @return 推荐列表
      */
-    List<TArticle> findRandomRecommendArticleList(final int category, final int count);
+    List<TArticle> findRandomRecommendArticleList(final int count);
 
 }

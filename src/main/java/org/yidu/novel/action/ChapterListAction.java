@@ -242,7 +242,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
 
             if (!Utils.isDefined(randomRecommendArticleList)) {
                 // 如果没有缓存，就去查询数据库
-                randomRecommendArticleList = articleService.findRandomRecommendArticleList(article.getCategory(), 6);
+                randomRecommendArticleList = articleService.findRandomRecommendArticleList(6);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_RANDOM_RECOMMEND_ARTICEL_LIST_PREFIX, NAME
                         + articleno, randomRecommendArticleList);
             }

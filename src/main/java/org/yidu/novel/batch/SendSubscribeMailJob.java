@@ -153,7 +153,7 @@ public class SendSubscribeMailJob extends QuartzJobBean {
                 List<TChapter> chapterList = chapterService.find(chapterSearchBean);
 
                 // 获取推荐小说
-                List<TArticle> randomRecommendArticleList = articleService.findRandomRecommendArticleList(0, 10);
+                List<TArticle> randomRecommendArticleList = articleService.findRandomRecommendArticleList(10);
                 // 创建
                 Map<String, Object> dataMap = new HashMap<String, Object>();
                 dataMap.put("chapterList", chapterList);
