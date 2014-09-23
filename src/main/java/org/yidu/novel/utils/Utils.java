@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -19,6 +20,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -426,6 +428,10 @@ public class Utils {
     public static boolean isDefined(Object obj) {
         if (obj instanceof Collection) {
             return CollectionUtils.isNotEmpty((Collection<?>) obj);
+        }
+
+        if (obj instanceof Map) {
+            return MapUtils.isNotEmpty((Map<?, ?>) obj);
         }
 
         if (obj instanceof String) {
