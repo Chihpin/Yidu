@@ -123,24 +123,24 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
             searchBean.setTargets(YiDuConstants.BlockTarget.ALL_SITE, getBlockTarget());
             blockList = systemBlockService.find(searchBean);
             for (TSystemBlock tSystemBlock : blockList) {
+                int limitnum = tSystemBlock.getLimitnum() == null ? 1 : tSystemBlock.getLimitnum();
                 if (tSystemBlock.getType() == YiDuConstants.BlockType.ARTICLE_LIST) {
                     ArticleSearchBean articleSearchBean = new ArticleSearchBean();
                     articleSearchBean.setCategory(tSystemBlock.getCategory());
-                    Pagination pagination = new Pagination(tSystemBlock.getLimitnum(), 1);
+                    Pagination pagination = new Pagination(limitnum, 1);
                     pagination.setSortColumn(tSystemBlock.getSortcol());
                     pagination.setSortOrder(tSystemBlock.getIsasc() ? "ASC" : "DESC");
                     articleSearchBean.setPagination(pagination);
                     List<TArticle> articleList = articleService.find(articleSearchBean);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RODMON_LIST) {
-                    List<TArticle> articleList = articleService.findRandomRecommendArticleList(tSystemBlock
-                            .getLimitnum());
+                    List<TArticle> articleList = articleService.findRandomRecommendArticleList(limitnum);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
 
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.BACK_LIST) {
                     // TODO 暂未开放，貌似没什么用啊
                     List<TArticle> articleList = articleService.findRecommendArticleList(getCategory(), getArticleno(),
-                            tSystemBlock.getLimitnum());
+                            limitnum);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
 
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.CUSTONIZE_ARTICLE_LIST) {
