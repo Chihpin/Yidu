@@ -1,13 +1,15 @@
 package org.yidu.novel.interceptor;
 
-import javax.servlet.ServletContext;
+import java.io.File;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.yidu.novel.action.ReaderAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.utils.StaticUtils;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -41,71 +43,45 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
             // 如果是阅读页的话，同时生成静态页面
             if (invocation.getAction() instanceof ReaderAction) {
                 ReaderAction action = (ReaderAction) invocation.getAction();
-                logger.info("going to Generate Html file.");
+                logger.info("going to Generate Html file." + YiDuConstants.requestUri.get());
 
                 String templatePath = "themes/" + YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME) + "/pc/"
                         + action.getTempName() + ".ftl";
 
                 StaticUtils.crateHTML(ServletActionContext.getServletContext(), action, templatePath,
                         YiDuConstants.requestUri.get());
+
+                // 判断上一章的静态页是否存在
+                System.out.println(YiDuConstants.requestUri.get());
+
+                ChapterDTO chapter = action.getChapter();
+                if (chapter.getPreChapterno() != 0) {
+                    // TODO 如果章节ID和小说ID一样的话，会出现问题，将来改吧
+                    String preUri = StringUtils.replaceOnce(YiDuConstants.requestUri.get(),
+                            String.valueOf(chapter.getChapterno()), String.valueOf(chapter.getPreChapterno()));
+
+                    String preChapterPath = ServletActionContext.getServletContext().getRealPath("/") + "/" + preUri;
+                    File preChpaterHtml = new File(preChapterPath);
+                    if (preChpaterHtml.exists() && preChpaterHtml.lastModified() < chapter.getPostdate().getTime()) {
+                        // 只有当文件存在，并且最后修改时间比当前章节的发布时间小的情况才生成前一张，因为下一章已经更新啦！
+                        action.setChapterno(chapter.getPreChapterno());
+                        action.execute();
+                        logger.info("going to Generate Html file." + preChapterPath);
+                        StaticUtils.crateHTML(ServletActionContext.getServletContext(), action, templatePath, preUri);
+                    }
+
+                }
+
             }
         }
         return rtn;
     }
 
-    /**
-     * 
-     * <p>
-     * 生成HTML用线程
-     * </p>
-     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
-     * 
-     * @version 1.0.0
-     * @author shinpa.you
-     */
-    class GenerateHtmlFileThread extends Thread {
-        /**
-         * ServletContext
-         */
-        ServletContext context;
-        /**
-         * 生成html用的数据
-         */
-        Object data;
-        /**
-         * 模版路径
-         */
-        String templatePath;
-        /**
-         * 静态html路径
-         */
-        String htmlPath;
-
-        /**
-         * 
-         * 构造
-         * 
-         * @param context
-         *            ServletContext
-         * @param data
-         *            生成html用的数据
-         * @param templatePath
-         *            模版路径
-         * @param htmlPath
-         *            静态html路径
-         */
-        public GenerateHtmlFileThread(ServletContext context, ReaderAction data, String templatePath, String htmlPath) {
-            this.context = context;
-            this.data = data;
-            this.templatePath = templatePath;
-            this.htmlPath = htmlPath;
-        }
-
-        /**
-         * 启动
-         */
-        public void run() {
-            StaticUtils.crateHTML(context, data, templatePath, htmlPath);
-        }
+    public static String getVarNameFromMethodName(String methodName) {
+        String varName = StringUtils.substringAfter(methodName, "get");
+        String firstChar = StringUtils.substring(varName, 0, 1);
+        varName = varName.replaceFirst(firstChar, firstChar.toLowerCase());
+        return varName;
     }
+
 }
