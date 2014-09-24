@@ -65,7 +65,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     /**
      * 小说列表
      */
-    List<TArticle> articleList = new ArrayList<TArticle>();
+    private List<TArticle> articleList = new ArrayList<TArticle>();
 
     /**
      * 获取category
