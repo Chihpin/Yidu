@@ -126,7 +126,9 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
                 int limitnum = tSystemBlock.getLimitnum() == null ? 1 : tSystemBlock.getLimitnum();
                 if (tSystemBlock.getType() == YiDuConstants.BlockType.ARTICLE_LIST) {
                     ArticleSearchBean articleSearchBean = new ArticleSearchBean();
-                    articleSearchBean.setCategory(tSystemBlock.getCategory());
+                    if (Utils.isDefined(tSystemBlock.getCategory())) {
+                        articleSearchBean.setCategory(tSystemBlock.getCategory());
+                    }
                     Pagination pagination = new Pagination(limitnum, 1);
                     pagination.setSortColumn(tSystemBlock.getSortcol());
                     pagination.setSortOrder(tSystemBlock.getIsasc() ? "ASC" : "DESC");
