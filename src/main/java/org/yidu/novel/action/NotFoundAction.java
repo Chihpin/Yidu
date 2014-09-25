@@ -1,5 +1,7 @@
 package org.yidu.novel.action;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -37,8 +39,7 @@ public class NotFoundAction extends Error404Action {
     @Override
     public String execute() {
         // 取得数据
-        super.execute();
-        ServletActionContext.getResponse().setStatus(404);
+        ServletActionContext.getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
         return FREEMARKER;
     }
 

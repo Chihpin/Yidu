@@ -36,7 +36,6 @@ public class Error404Action extends AbstractPublicBaseAction {
     @SkipValidation
     @Override
     public String execute() {
-
         return FREEMARKER;
     }
 

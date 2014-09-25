@@ -1,24 +1,56 @@
-<#include "../common.ftl"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]> <html class="no-js" lang="zh_CN"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>404错误提示页</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- CSS: implied media=all -->
+    <link rel="stylesheet" href="${contextPath}/themes/${themeName}/single/css/404style.css">
+    <style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+    </style>
+</head>
+<body>
+    <div id="error-container">
+        <div id="container">
+            <div id="title">
+                <h1>对不起, 你访问的页面不存在!</h1>
+            </div>
+            <div id="content">
+                <div class="left">
+                    <p class="no-top">&nbsp;&nbsp;&nbsp;可能是如下原因引起了这个错误:</p>
+                    <ul>
+                        <li>&nbsp;&nbsp;&nbsp;URL输入错误</li>
+                        <li>&nbsp;&nbsp;&nbsp;链接已失效</li>
+                        <li>&nbsp;&nbsp;&nbsp;其他原因...</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="right">                 
+                    <p class="no-top">推荐您通过以下链接继续访问本站：</p>
+                    <ul class="links">
+                        <li><a href="/">» 网站首页</a></li>
+                        <li><a href="/top/lastupdate.html">» 小说排行版</a></li>
+                        <li><a href="/list/1.html">» 玄幻魔法小说</a></li>
+                    </ul>
+                    <ul class="links">
+                        <li><a href="/list/2.html">» 都市言情小说</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <div align="center"><span class="STYLE1">你找不到的只是网页，他们找不到的却是家和亲人！爱心公益，需要你我... </span></div>
+                <script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+</body>
 
-<#macro titleContent>  
-<title>没有找到页面</title>
-</#macro>
-
-<#macro content>
-<div class="wrapper">
-<div class="main">
-<h1 style="height: 35px;font-size: 24px;font-family: '微软雅黑';line-height: 26px;"><strong style = "color: #f60;">404 错误</strong> 找不到您访问的页面，郁闷。</h1>
-<h2 style="height: 30px;font-size: 18px;font-family: '微软雅黑';line-height: 26px;"><strong>请CTRL+F5重新刷新页面,或者点击下面链接：</strong></h2>
-<h2 style="height: 30px;font-size: 18px;font-family: '微软雅黑';line-height: 26px;"><strong><script type="text/JavaScript">document.write('<a href="'+window.location.href+'">'+window.location.href+'</a>');</script></strong></h2>
-<h2 style="height: 30px;font-size: 18px;font-family: '微软雅黑';line-height: 26px;">如果还是无法打开，请看下边帮助。</h2>
-<dl>
-<dt>可能是这样儿，检查看看：</dt>
-<dd>网址输入错错了吧？</dd>
-<dd>可能本书色情描写含有部分成人内容，不符合<a href="${contextPath}/">${getText("label.system.name")}</a>健康阅读的宗旨，已被管理员删除。</dd>
-<dd>由于网络延迟，读取错误……请刷新或者稍后再试。</dd>
-<dd>也有可能是我们的网站正在升级维护中……</dd>
-</dl>
-    <script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"></script>
-</div>
-</div>
-</#macro>
+</html>
