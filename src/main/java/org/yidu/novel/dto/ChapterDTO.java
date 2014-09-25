@@ -120,4 +120,25 @@ public class ChapterDTO extends TChapter {
                 + "&chapterno=" + getPreChapterno());
     }
 
+    /**
+     * 获取下一章章节URL
+     * 
+     * @return 下一章章节URL
+     */
+
+    public String getNextChapterThumbnailUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?chapterno=" + getNextChapterno());
+    }
+
+    /**
+     * 获取下一章章节URL
+     * 
+     * @return 上一章章节URL
+     */
+    public String getPreChapterThumbnailUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?chapterno=" + getPreChapterno());
+    }
+
 }

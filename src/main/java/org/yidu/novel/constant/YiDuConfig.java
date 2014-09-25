@@ -176,6 +176,21 @@ public class YiDuConfig {
     public static final String SEND_SUBSCRIBE_INTEVAL = "sendSubscribeInteval";
 
     /**
+     * 订阅的检查间隔
+     */
+    public static final String ENABLE_SINGLE_BOOK = "enableSingleBook";
+
+    /**
+     * 根域名
+     */
+    public static final String ROOT_DOMAIN = "rootDomain";
+
+    /**
+     * 小说信息重载周期
+     */
+    public static final String RELOAD_SINGLE_BOOK_INTERVAL = "reloadSingleBookInterval";
+
+    /**
      * 数据库JDBC URL
      */
     public static final String JDBC_URL = "jdbc.url";

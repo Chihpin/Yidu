@@ -29,6 +29,8 @@ public class ArticleSearchBean extends BaseSearchBean {
 
     private int pageType;
 
+    private int fromArticleno;
+
     public int getArticleno() {
         return articleno;
     }
@@ -115,6 +117,27 @@ public class ArticleSearchBean extends BaseSearchBean {
 
     public void setPageType(int pageType) {
         this.pageType = pageType;
+    }
+
+    /**
+     * 获取fromArticleno
+     * 
+     * @return fromArticleno
+     */
+    public int getFromArticleno() {
+        return fromArticleno;
+    }
+
+    /**
+     * 
+     * 设置fromArticleno
+     * 
+     * 
+     * @param fromArticleno
+     *            fromArticleno
+     */
+    public void setFromArticleno(int fromArticleno) {
+        this.fromArticleno = fromArticleno;
     }
 
     @Override

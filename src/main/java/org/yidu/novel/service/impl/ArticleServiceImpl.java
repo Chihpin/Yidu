@@ -66,6 +66,11 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
             hql.append(" AND articlename = ? ");
             params.add(searchBean.getArticlename());
         }
+        // 小说名条件追加
+        if (searchBean.getFromArticleno() != 0) {
+            hql.append(" AND articleno > ? ");
+            params.add(searchBean.getFromArticleno());
+        }
         // 小说作者条件追加
         if (StringUtils.isNotEmpty(searchBean.getAuthor())) {
             hql.append(" AND author = ? ");

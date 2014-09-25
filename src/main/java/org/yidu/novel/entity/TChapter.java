@@ -63,5 +63,15 @@ public class TChapter extends BaseTChapter {
         return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                 + "&chapterno=" + getChapterno());
     }
+    
+    /**
+     * 获取章节URL
+     * 
+     * @return 章节URL
+     */
+    public String getThumbnailUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?chapterno=" + getChapterno());
+    }
 
 }

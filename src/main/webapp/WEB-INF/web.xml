@@ -72,7 +72,17 @@
 		<filter-class>org.yidu.novel.filter.PoweredByFilter</filter-class>
 	</filter>
 
+	<filter>
+		<filter-name>singleBookFilter</filter-name>
+		<filter-class>org.yidu.novel.filter.SingleBookFilter</filter-class>
+	</filter>
+
 	<!-- The Filter-Mapping Setting -->
+
+	<filter-mapping>
+		<filter-name>singleBookFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>poweredByFilter</filter-name>

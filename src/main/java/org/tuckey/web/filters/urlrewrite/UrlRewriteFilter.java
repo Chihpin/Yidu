@@ -412,6 +412,12 @@ public class UrlRewriteFilter implements Filter {
         UrlRewriteWrappedResponse urlRewriteWrappedResponse = new UrlRewriteWrappedResponse(hsResponse, hsRequest,
                 urlRewriter);
 
+        if (YiDuConstants.singleBookFlag.get()) {
+            // 当单本机能开放的时候，只做outbound-rule
+            chain.doFilter(request, urlRewriteWrappedResponse);
+            return;
+        }
+
         // check for status request
         if (statusEnabled && statusServerNameMatcher.isMatch(request.getServerName())) {
             String uri = hsRequest.getRequestURI();
@@ -441,9 +447,9 @@ public class UrlRewriteFilter implements Filter {
             } else if (!org.apache.commons.lang3.StringUtils.endsWithAny(hsRequest.getRequestURI(), "css", "js", "jpg",
                     "png", "gif")) {
                 // 只有非静态文件才做伪静态解析
+                // TODO 这个东西貌似会把301重定向给搞坏，可能都需要重新设置
                 requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
             }
-
         } else {
             if (log.isDebugEnabled()) {
                 log.debug("urlRewriter engine not loaded ignoring request (could be a conf file problem)");

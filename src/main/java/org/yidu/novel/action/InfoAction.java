@@ -349,4 +349,13 @@ public class InfoAction extends AbstractPublicBaseAction {
         return YiDuConstants.BlockTarget.ARTICLE_INFO;
     }
 
+    /**
+     * 取得单本用ServerName
+     * 
+     * @return 单本用ServerName
+     */
+    public String getServerName() {
+        return YiDuConstants.singleBookServerName.get();
+    }
+
 }

@@ -42,6 +42,8 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
         @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_ERROR, location = "/themes/${themeName}/wap/error.ftl", type = "freemarker"),
         @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/wap/message.ftl"),
         @Result(name = AbstractBaseAction.MOBILE_FREEMARKER, type = "freemarker", location = "/themes/${themeName}/wap/${tempName}.ftl"),
+        @Result(name = AbstractBaseAction.SINGLE_FREEMARKER, type = "freemarker", location = "/themes/${themeName}/single/${tempName}.ftl"),
+        @Result(name = AbstractBaseAction.SINGLE_FREEMARKER_ERROR, type = "freemarker", location = "/themes/${themeName}/single/error.ftl"),
         @Result(name = AbstractBaseAction.ADMIN_ERROR, location = "/WEB-INF/error.jsp", type = "dispatcher"),
         @Result(name = AbstractBaseAction.JSON_RESULT, type = "json"),
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
@@ -105,6 +107,16 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
      * 手机freemarker消息结果类型
      */
     public static final String MOBILE_FREEMARKER_MESSAGE = "mobile_freemarker_message";
+
+    /**
+     * 单本freemarker结果类型
+     */
+    public static final String SINGLE_FREEMARKER = "single_freemarker";
+
+    /**
+     * 单本freemarker错误结果类型
+     */
+    public static final String SINGLE_FREEMARKER_ERROR = "single_freemarker_error";
 
     /**
      * 输出log

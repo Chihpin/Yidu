@@ -28,6 +28,17 @@ public class YiDuConstants {
      * 请求URI
      */
     public static ThreadLocal<String> requestUri = new ThreadLocal<String>();
+
+    /**
+     * 单本小说标识
+     */
+    public static ThreadLocal<Boolean> singleBookFlag = new ThreadLocal<Boolean>();
+
+    /**
+     * 单本小说URI
+     */
+    public static ThreadLocal<String> singleBookServerName = new ThreadLocal<String>();
+
     /**
      * 排行榜名字MAP
      */

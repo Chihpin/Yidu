@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 
@@ -48,6 +49,11 @@ public class InitializerListener implements ServletContextListener {
             if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
                 // 初始化小说件数MAP
                 ArticleCountManager.initArticleCountManager();
+            }
+
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_SINGLE_BOOK, false)) {
+                // 初始化小说拼音和编号映射件数MAP
+                SingleBookManager.initSingleBookManager();
             }
 
             logger.info("Initialize successfully.");

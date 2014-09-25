@@ -359,4 +359,12 @@ public class ReaderAction extends AbstractPublicBaseAction {
         return YiDuConstants.BlockTarget.READER_PAGE;
     }
 
+    /**
+     * 取得单本用ServerName
+     * 
+     * @return 单本用ServerName
+     */
+    public String getServerName() {
+        return YiDuConstants.singleBookServerName.get();
+    }
 }

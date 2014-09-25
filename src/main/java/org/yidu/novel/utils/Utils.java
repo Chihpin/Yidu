@@ -423,7 +423,6 @@ public class Utils {
      * @return 拼音字符串
      */
     public static String getPinYinHeadChar(String src) {
-
         char[] charArray = null;
         charArray = src.toCharArray();
         String[] strArr = new String[charArray.length];
@@ -439,8 +438,13 @@ public class Utils {
                 if (Character.toString(charArray[i]).matches("[\\u4E00-\\u9FA5]+")) {
                     // 将汉字的几种全拼都存到strArr数组中
                     strArr = PinyinHelper.toHanyuPinyinStringArray(charArray[i], pinyinFormat);
-                    // 取出该汉字全拼的第一种读音并连接到字符串retStr后
-                    retStr += strArr[0].charAt(0);
+                    if (strArr == null || strArr[0] == null) {
+                        // 如果翻译失败的话，默认是a
+                        retStr += "a";
+                    } else {
+                        // 取出该汉字全拼的第一种读音并连接到字符串retStr后
+                        retStr += strArr[0].charAt(0);
+                    }
                 } else {
                     // 如果不是汉字字符，直接取出字符并连接到字符串retStr后
                     retStr += Character.toString(charArray[i]);
@@ -508,29 +512,4 @@ public class Utils {
         return new String(randBuffer);
     }
 
-    /**
-     * 把指定Key和Value添加到Map中，如果存在的话就把key自动加1，直到可以添加进去为止
-     * 
-     * @param length
-     *            字符串长度
-     * @return 随机字符串
-     */
-    public static final void putValueIntoMap(Map<String, Integer> map, String key, Integer value) {
-        int index = 0;
-        while (true) {
-            Integer mapValue = null;
-            if (index == 0) {
-                mapValue = map.get(key);
-            } else {
-                mapValue = map.get(key + index);
-            }
-            // 指定元素不存在的话，把当前的信息添进去
-            if (mapValue == null) {
-                key = key + (index == 0 ? "" : index);
-                map.put(key, value);
-                break;
-            }
-            index++;
-        }
-    }
 }

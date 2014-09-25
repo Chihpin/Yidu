@@ -96,6 +96,12 @@
 		<to last="true">/reader/$1/$2/$3\.html</to>
 	</outbound-rule>
 
+	<!-- 单本阅读页 -->
+	<outbound-rule>
+		<from>^/reader\?chapterno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/$1\.html</to>
+	</outbound-rule>
+
 	<rule>
 		<from>^/author/(.+?)/(\d*)\.html$</from>
 		<to last="true">/articleList\?author=$1&amp;page=$2</to>
@@ -210,18 +216,18 @@
 		<from>^/user/vote\?articleno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/user/vote/$1.html</to>
 	</outbound-rule>
-	
-	
-	<rule>
-        <from>^/user/subscribe/(\d*).html$</from>
-        <to last="true">/user/subscribe!add\?articleno=$1</to>
-    </rule>
 
-    <outbound-rule>
-        <from>^/user/subscribe!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
-        <to last="true">/user/subscribe/$1.html</to>
-    </outbound-rule>
-	
+
+	<rule>
+		<from>^/user/subscribe/(\d*).html$</from>
+		<to last="true">/user/subscribe!add\?articleno=$1</to>
+	</rule>
+
+	<outbound-rule>
+		<from>^/user/subscribe!add\?articleno=(\d*)(;jsessionid=.*)?$</from>
+		<to last="true">/user/subscribe/$1.html</to>
+	</outbound-rule>
+
 
 	<rule>
 		<from>^/top/(.+?)/(\d*)\.html$</from>
@@ -285,12 +291,29 @@
 		<from>^/reader\?subdir=(\d*)&amp;articleno=(\d*)&amp;chapterno=(\d*)&amp;toChapterno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/reader/$1/$2/$3/$4\.html</to>
 	</outbound-rule>
+
+	<rule>
+		<name>Domain Name Check</name>
+		<condition name="host" operator="notequal">www.2v1.cc</condition>
+		<condition name="host" operator="notequal">m.2v1.cc</condition>
+		<from>^/(.*)</from>
+		<to type="permanent-redirect">http://www.2v1.cc/$1</to>
+	</rule>
+
+	<rule>
+		<name>USER AGENT Check</name>
+		<condition name="host" operator="notequal">m.2v1.cc</condition>
+		<condition name="user-agent">(android|blackberry|googlebot-mobile|iemobile|iphone|ipod|opera mobile)</condition>
+		<from>^/(.*)</from>
+		<to type="redirect">http://m.2v1.cc/$1</to>
+	</rule>
+
  <!-- 
      <rule>
-	     <name>Domain Name Check</name> 
-	     <condition name="host" operator="notequal">www.yzihan.com</condition> 
-	     <from>^/(.*)</from>
-	     <to type="redirect">http://www.yzihan.com/$1</to>
+         <name>Domain Name Check</name> 
+         <condition name="host" operator="notequal">www.yzihan.com</condition> 
+         <from>^/(.*)</from>
+         <to type="redirect">http://www.yzihan.com/$1</to>
      </rule> 
  
 
