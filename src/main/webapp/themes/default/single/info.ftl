@@ -87,7 +87,7 @@
 <div class="padding">
 <div class="header">
 <ul class="menu">
-<li class="on"><a href="/" title="${article.articlename}">首页</a></li>
+<li class="on"><a href="/" title="${article.articlename}">${article.articlename}</a></li>
 <li style="color:#FFF;padding-left:20px;">喜欢《${article.articlename}》的书迷们，请记住本站http://${serverName}丫，这里绝对是你阅读的首选！</li>
 </ul>
 </div>
@@ -96,11 +96,11 @@
 <div class="links">
     <h5>友情链接</h5>
     <ul>
-        <li><a href='http://www.kaixinwx.com' target='_blank' title="开心文学网">开心文学网</a> </li>
+        <li><a href='http://www.51yd.org' target='_blank' title="易读小说系统">易读小说系统</a> </li>
     </ul>
 </div>
 <div class="foot">
-    <p>本站提供的《${article.articlename}》，是由${article.author}所写的一部情节跌宕起伏、扣人心弦的${article.categoryStr}小说。《${article.articlename}》版权属于${article.author}，从网络收集只为更多的书迷们欣赏!</p>
+    <p>本站提供的《${article.articlename}》，是由${article.author}所写的一部情节跌宕起伏、扣人心弦的${article.categoryStr}小说。《${article.articlename}》版权属于${article.author}，从网络收集只为更多的书迷们欣赏!<br>${getText("label.system.support")}</p>
     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"3","bdPos":"right","bdTop":"100"},"image":{"viewList":["tieba","qzone","sqq","tsina","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tieba","qzone","sqq","tsina","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </div>
 </body>
