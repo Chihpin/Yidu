@@ -10,6 +10,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ * <p>
+ * 添加易读的PowerBy信息
+ * </p>
+ * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+ * 
+ * @version 1.1.5
+ * @author shinpa.you
+ */
 public class PoweredByFilter implements Filter {
 
     @Override
