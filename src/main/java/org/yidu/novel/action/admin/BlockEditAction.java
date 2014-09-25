@@ -39,7 +39,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
      * 10:aritcleList 20:custerartileList 20:html
      */
 
-    private int category;
+    private Integer category;
     private Short type;
     private String sortcol;
     private Boolean isasc;
@@ -92,7 +92,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
      * 
      * @return category
      */
-    public int getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
@@ -104,7 +104,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
      * @param category
      *            category
      */
-    public void setCategory(int category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 
