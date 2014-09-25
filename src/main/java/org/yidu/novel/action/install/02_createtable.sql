@@ -165,6 +165,7 @@ CREATE TABLE t_article
     articleno serial NOT NULL,
     articlename varchar(100),
     pinyin varchar(400),
+    pinyinheadchar varchar(32),
     initial char(1),
     keywords varchar(500),
     authorid int,
