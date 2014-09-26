@@ -140,6 +140,11 @@
     </tr>
 
     <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.enableGenerateHtmlFile" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableGenerateHtmlFile" ></s:radio></td>
+    </tr>
+    
+    <tr align="left" valign="middle">
        <td class="odd" width="25%"><s:text name="label.admin.config.edit.enableMailAuth" /></td>
        <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableMailAuth" ></s:radio></td>
     </tr>

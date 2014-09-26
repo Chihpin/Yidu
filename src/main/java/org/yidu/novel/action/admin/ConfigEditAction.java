@@ -126,6 +126,10 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     private boolean enableChapterIndexPage;
     /**
+     * 是否启用触发式静态
+     */
+    private boolean enableGenerateHtmlFile;
+    /**
      * 是否启用邮箱认证
      */
     private boolean enableMailAuth = true;
@@ -414,6 +418,29 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      */
     public void setEnableChapterIndexPage(boolean enableChapterIndexPage) {
         this.enableChapterIndexPage = enableChapterIndexPage;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return enableGenerateHtmlFileを戻します。
+     */
+    public boolean isEnableGenerateHtmlFile() {
+        return enableGenerateHtmlFile;
+    }
+
+    /**
+     * <p>
+     * TODO enableGenerateHtmlFileを設定。
+     * </p>
+     * 
+     * @param enableGenerateHtmlFile
+     *            enableGenerateHtmlFileを設定。
+     */
+    public void setEnableGenerateHtmlFile(boolean enableGenerateHtmlFile) {
+        this.enableGenerateHtmlFile = enableGenerateHtmlFile;
     }
 
     /**
@@ -763,6 +790,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         enableQQLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
         enableCacheArticleCount = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false);
         enableChapterIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
+        enableGenerateHtmlFile = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_GENERATE_HTML_FILE, false);
         enableMailAuth = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_MAIL_AUTH, false);
         mailSmtpAuth = YiDuConstants.yiduConf.getBoolean(YiDuConfig.MAIL_SMTP_AUTH, false);
         mailSmtpStarttlsEnable = YiDuConstants.yiduConf.getBoolean(YiDuConfig.MAIL_SMTP_STARTTLS_ENABLE, false);
@@ -820,6 +848,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_QQLOGIN, enableQQLogin);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, enableCacheArticleCount);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, enableChapterIndexPage);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_GENERATE_HTML_FILE, enableGenerateHtmlFile);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_MAIL_AUTH, enableMailAuth);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_AUTH, mailSmtpAuth);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_STARTTLS_ENABLE, mailSmtpStarttlsEnable);
