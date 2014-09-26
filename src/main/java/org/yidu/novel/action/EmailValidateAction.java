@@ -3,10 +3,7 @@ package org.yidu.novel.action;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +11,6 @@ import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.UserSearchBean;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TUser;
-import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
@@ -174,15 +170,8 @@ public class EmailValidateAction extends AbstractPublicBaseAction {
             user.setLastlogin(new Date());
             user.setActivedflag(true);
             userService.save(user);
-
             // 正常登录
             LoginManager.doLogin(user);
-
-            if (true) {
-                Cookie cookie = CookieUtils.addUserCookie(user);
-                // 添加cookie到response中
-                ServletActionContext.getResponse().addCookie(cookie);
-            }
             logger.debug("emailValidate normally end.");
             return REDIRECT;
         } else {
