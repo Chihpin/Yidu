@@ -24,16 +24,16 @@ public class TArticle extends BaseTArticle {
     private static final long serialVersionUID = 1L;
 
     /* [CONSTRUCTOR MARKER BEGIN] */
-    public TArticle() {
-        super();
-    }
+	public TArticle () {
+		super();
+	}
 
-    /**
-     * Constructor for primary key
-     */
-    public TArticle(int articleno) {
-        super(articleno);
-    }
+	/**
+	 * Constructor for primary key
+	 */
+	public TArticle (int articleno) {
+		super(articleno);
+	}
 
     /* [CONSTRUCTOR MARKER END] */
 

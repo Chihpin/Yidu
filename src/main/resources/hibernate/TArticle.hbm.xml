@@ -142,5 +142,8 @@
         <property name="pinyin" type="string">
             <column name="pinyin" length="400" />
         </property>
+        <property name="pinyinheadchar" type="string">
+            <column name="pinyinheadchar" length="32" />
+        </property>
     </class>
 </hibernate-mapping>

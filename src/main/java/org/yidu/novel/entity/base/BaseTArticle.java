@@ -45,6 +45,7 @@ public abstract class BaseTArticle  implements Serializable {
 	public static String PROP_IMGFLAG = "imgflag";
 	public static String PROP_CATEGORY = "category";
 	public static String PROP_MONTHVOTE = "monthvote";
+	public static String PROP_PINYINHEADCHAR = "pinyinheadchar";
 	public static String PROP_INTRO = "intro";
 	public static String PROP_PINYIN = "pinyin";
 	public static String PROP_CHAPTERS = "chapters";
@@ -111,6 +112,7 @@ public abstract class BaseTArticle  implements Serializable {
 	private java.lang.Integer modifyuserno;
 	private java.util.Date modifytime;
 	private java.lang.String pinyin;
+	private java.lang.String pinyinheadchar;
 
 
 
@@ -727,6 +729,23 @@ public abstract class BaseTArticle  implements Serializable {
 	 */
 	public void setPinyin (java.lang.String pinyin) {
 		this.pinyin = pinyin;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: pinyinheadchar
+	 */
+	public java.lang.String getPinyinheadchar () {
+		return pinyinheadchar;
+	}
+
+	/**
+	 * Set the value related to the column: pinyinheadchar
+	 * @param pinyinheadchar the pinyinheadchar value
+	 */
+	public void setPinyinheadchar (java.lang.String pinyinheadchar) {
+		this.pinyinheadchar = pinyinheadchar;
 	}
 
 
