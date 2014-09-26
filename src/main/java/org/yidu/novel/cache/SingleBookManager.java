@@ -1,5 +1,7 @@
 package org.yidu.novel.cache;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,12 +94,15 @@ public class SingleBookManager {
                         ArticleSearchBean searchBean = new ArticleSearchBean();
                         searchBean.setFromArticleno(MAX_ARTICLENO);
                         List<TArticle> articleList = articleService.find(searchBean);
+                        String excludeSubDomains = YiDuConstants.yiduConf.getString(YiDuConfig.EXCLUDE_SUB_DOMAIN);
+                        List<String> excludeSubDomainList = new ArrayList<String>();
+                        excludeSubDomainList.addAll(Arrays.asList(StringUtils.split(excludeSubDomains, ";")));
                         // 每次只做增量
                         for (TArticle tArticle : articleList) {
                             // TODO 暂时自己做，将来直接从数据库里取
-
                             String pinYinHeadChar = Utils.getPinYinHeadChar(tArticle.getArticlename());
-                            if (StringUtils.equals(pinYinHeadChar, "m") || StringUtils.equals(pinYinHeadChar, "www")) {
+                            // 如果是排除对象的话，在拼音上加1
+                            if (excludeSubDomainList.contains(pinYinHeadChar)) {
                                 // 如果是www或m的话，把他改掉
                                 pinYinHeadChar += "1";
                             }
@@ -146,5 +151,4 @@ public class SingleBookManager {
             index++;
         }
     }
-
 }

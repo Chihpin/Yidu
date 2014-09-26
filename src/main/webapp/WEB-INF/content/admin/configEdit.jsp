@@ -139,6 +139,64 @@
        <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableChapterIndexPage" ></s:radio></td>
     </tr>
 
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.enableMailAuth" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableMailAuth" ></s:radio></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpAuth" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="mailSmtpAuth" ></s:radio></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpStarttlsEnable" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="mailSmtpStarttlsEnable" ></s:radio></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpHost" /></td>
+       <td class="even"><s:textfield name ="mailSmtpHost" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpUsername" /></td>
+       <td class="even"><s:textfield name ="mailSmtpUsername" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpPassword" /></td>
+       <td class="even"><s:textfield name ="mailSmtpPassword" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.mailSmtpFrom" /></td>
+       <td class="even"><s:textfield name ="mailSmtpFrom" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.maxSubscribe" /></td>
+       <td class="even"><s:textfield name ="maxSubscribe" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>    
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.sendSubscribeInteval" /></td>
+       <td class="even"><s:textfield name ="sendSubscribeInteval" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.enableSingleBook" /></td>
+       <td class="even"><s:radio list="collections['collectionProperties.boolean']" name="enableSingleBook" ></s:radio></td>
+    </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.rootDomain" /></td>
+       <td class="even"><s:textfield name ="rootDomain" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.excludeSubDomain" /></td>
+       <td class="even"><s:textfield name ="excludeSubDomain" size="25" cssClass="text" theme="simple"/></td>
+    </tr>    
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.reloadSingleBookInterval" /></td>
+       <td class="even"><s:textfield name ="reloadSingleBookInterval" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>    
+
 </tbody>
 </table>
 <br />

@@ -125,6 +125,62 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     private boolean enableCacheArticleCount;
 
     private boolean enableChapterIndexPage;
+    /**
+     * 是否启用邮箱认证
+     */
+    private boolean enableMailAuth = true;
+    /**
+     * 邮箱是否需要认证
+     */
+    private boolean mailSmtpAuth = true;
+    /**
+     * 邮箱是否启用Starttls
+     */
+    private boolean mailSmtpStarttlsEnable = true;
+    /**
+     * 邮箱SmtpHost
+     */
+    private String mailSmtpHost;
+    /**
+     * 邮箱SmtpPort
+     */
+    private int mailSmtpPort;
+    /**
+     * 邮箱SmtpUsername
+     */
+    private String mailSmtpUsername;
+    /**
+     * 邮箱SmtpPassword
+     */
+    private String mailSmtpPassword;
+    /**
+     * 邮箱SmtpFrom
+     */
+    private String mailSmtpFrom;
+    /**
+     * 最大订阅数
+     */
+    private int maxSubscribe;
+    /**
+     * 订阅的检查间隔 这里要和batch的启动周期设置成一样的(单位：分)
+     */
+    private int sendSubscribeInteval;
+    /**
+     * 是否启用泛解析单本功能
+     */
+    private boolean enableSingleBook;
+    /**
+     * 根域名，用于泛解析
+     */
+    private String rootDomain;
+    /**
+     * 不包含的子域名
+     */
+    private String excludeSubDomain;
+    /**
+     * 重新加载小说信息周期(单位：分)
+     */
+    private int reloadSingleBookInterval;
 
     public String getFilePath() {
         return filePath;
@@ -360,6 +416,328 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.enableChapterIndexPage = enableChapterIndexPage;
     }
 
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return enableMailAuthを戻します。
+     */
+    public boolean isEnableMailAuth() {
+        return enableMailAuth;
+    }
+
+    /**
+     * <p>
+     * TODO enableMailAuthを設定。
+     * </p>
+     * 
+     * @param enableMailAuth
+     *            enableMailAuthを設定。
+     */
+    public void setEnableMailAuth(boolean enableMailAuth) {
+        this.enableMailAuth = enableMailAuth;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpAuthを戻します。
+     */
+    public boolean isMailSmtpAuth() {
+        return mailSmtpAuth;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpAuthを設定。
+     * </p>
+     * 
+     * @param mailSmtpAuth
+     *            mailSmtpAuthを設定。
+     */
+    public void setMailSmtpAuth(boolean mailSmtpAuth) {
+        this.mailSmtpAuth = mailSmtpAuth;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpStarttlsEnableを戻します。
+     */
+    public boolean isMailSmtpStarttlsEnable() {
+        return mailSmtpStarttlsEnable;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpStarttlsEnableを設定。
+     * </p>
+     * 
+     * @param mailSmtpStarttlsEnable
+     *            mailSmtpStarttlsEnableを設定。
+     */
+    public void setMailSmtpStarttlsEnable(boolean mailSmtpStarttlsEnable) {
+        this.mailSmtpStarttlsEnable = mailSmtpStarttlsEnable;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpHostを戻します。
+     */
+    public String getMailSmtpHost() {
+        return mailSmtpHost;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpHostを設定。
+     * </p>
+     * 
+     * @param mailSmtpHost
+     *            mailSmtpHostを設定。
+     */
+    public void setMailSmtpHost(String mailSmtpHost) {
+        this.mailSmtpHost = mailSmtpHost;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpPortを戻します。
+     */
+    public int getMailSmtpPort() {
+        return mailSmtpPort;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpPortを設定。
+     * </p>
+     * 
+     * @param mailSmtpPort
+     *            mailSmtpPortを設定。
+     */
+    public void setMailSmtpPort(int mailSmtpPort) {
+        this.mailSmtpPort = mailSmtpPort;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpUsernameを戻します。
+     */
+    public String getMailSmtpUsername() {
+        return mailSmtpUsername;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpUsernameを設定。
+     * </p>
+     * 
+     * @param mailSmtpUsername
+     *            mailSmtpUsernameを設定。
+     */
+    public void setMailSmtpUsername(String mailSmtpUsername) {
+        this.mailSmtpUsername = mailSmtpUsername;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpPasswordを戻します。
+     */
+    public String getMailSmtpPassword() {
+        return mailSmtpPassword;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpPasswordを設定。
+     * </p>
+     * 
+     * @param mailSmtpPassword
+     *            mailSmtpPasswordを設定。
+     */
+    public void setMailSmtpPassword(String mailSmtpPassword) {
+        this.mailSmtpPassword = mailSmtpPassword;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return mailSmtpFromを戻します。
+     */
+    public String getMailSmtpFrom() {
+        return mailSmtpFrom;
+    }
+
+    /**
+     * <p>
+     * TODO mailSmtpFromを設定。
+     * </p>
+     * 
+     * @param mailSmtpFrom
+     *            mailSmtpFromを設定。
+     */
+    public void setMailSmtpFrom(String mailSmtpFrom) {
+        this.mailSmtpFrom = mailSmtpFrom;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return maxSubscribeを戻します。
+     */
+    public int getMaxSubscribe() {
+        return maxSubscribe;
+    }
+
+    /**
+     * <p>
+     * TODO maxSubscribeを設定。
+     * </p>
+     * 
+     * @param maxSubscribe
+     *            maxSubscribeを設定。
+     */
+    public void setMaxSubscribe(int maxSubscribe) {
+        this.maxSubscribe = maxSubscribe;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return sendSubscribeIntevalを戻します。
+     */
+    public int getSendSubscribeInteval() {
+        return sendSubscribeInteval;
+    }
+
+    /**
+     * <p>
+     * TODO sendSubscribeIntevalを設定。
+     * </p>
+     * 
+     * @param sendSubscribeInteval
+     *            sendSubscribeIntevalを設定。
+     */
+    public void setSendSubscribeInteval(int sendSubscribeInteval) {
+        this.sendSubscribeInteval = sendSubscribeInteval;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return enableSingleBookを戻します。
+     */
+    public boolean isEnableSingleBook() {
+        return enableSingleBook;
+    }
+
+    /**
+     * <p>
+     * TODO enableSingleBookを設定。
+     * </p>
+     * 
+     * @param enableSingleBook
+     *            enableSingleBookを設定。
+     */
+    public void setEnableSingleBook(boolean enableSingleBook) {
+        this.enableSingleBook = enableSingleBook;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return rootDomainを戻します。
+     */
+    public String getRootDomain() {
+        return rootDomain;
+    }
+
+    /**
+     * <p>
+     * TODO rootDomainを設定。
+     * </p>
+     * 
+     * @param rootDomain
+     *            rootDomainを設定。
+     */
+    public void setRootDomain(String rootDomain) {
+        this.rootDomain = rootDomain;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return excludeSubDomainを戻します。
+     */
+    public String getExcludeSubDomain() {
+        return excludeSubDomain;
+    }
+
+    /**
+     * <p>
+     * TODO excludeSubDomainを設定。
+     * </p>
+     * 
+     * @param excludeSubDomain
+     *            excludeSubDomainを設定。
+     */
+    public void setExcludeSubDomain(String excludeSubDomain) {
+        this.excludeSubDomain = excludeSubDomain;
+    }
+
+    /**
+     * <p>
+     * TODO を取得。
+     * </p>
+     * 
+     * @return reloadSingleBookIntervalを戻します。
+     */
+    public int getReloadSingleBookInterval() {
+        return reloadSingleBookInterval;
+    }
+
+    /**
+     * <p>
+     * TODO reloadSingleBookIntervalを設定。
+     * </p>
+     * 
+     * @param reloadSingleBookInterval
+     *            reloadSingleBookIntervalを設定。
+     */
+    public void setReloadSingleBookInterval(int reloadSingleBookInterval) {
+        this.reloadSingleBookInterval = reloadSingleBookInterval;
+    }
+
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
@@ -385,6 +763,20 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         enableQQLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_QQLOGIN, false);
         enableCacheArticleCount = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false);
         enableChapterIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false);
+        enableMailAuth = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_MAIL_AUTH, false);
+        mailSmtpAuth = YiDuConstants.yiduConf.getBoolean(YiDuConfig.MAIL_SMTP_AUTH, false);
+        mailSmtpStarttlsEnable = YiDuConstants.yiduConf.getBoolean(YiDuConfig.MAIL_SMTP_STARTTLS_ENABLE, false);
+        mailSmtpHost = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_HOST);
+        mailSmtpPort = YiDuConstants.yiduConf.getInt(YiDuConfig.MAIL_SMTP_PORT, 25);
+        mailSmtpUsername = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_USERNAME);
+        mailSmtpPassword = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_PASSWORD);
+        mailSmtpFrom = YiDuConstants.yiduConf.getString(YiDuConfig.MAIL_SMTP_FROM);
+        maxSubscribe = YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE, 30);
+        sendSubscribeInteval = YiDuConstants.yiduConf.getInt(YiDuConfig.SEND_SUBSCRIBE_INTEVAL, 15);
+        enableSingleBook = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_SINGLE_BOOK, false);
+        rootDomain = YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
+        excludeSubDomain = YiDuConstants.yiduConf.getString(YiDuConfig.EXCLUDE_SUB_DOMAIN);
+        reloadSingleBookInterval = YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, 120);
 
         // 设定文件初期读入
         try {
@@ -428,6 +820,20 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_QQLOGIN, enableQQLogin);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, enableCacheArticleCount);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, enableChapterIndexPage);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_MAIL_AUTH, enableMailAuth);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_AUTH, mailSmtpAuth);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_STARTTLS_ENABLE, mailSmtpStarttlsEnable);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_HOST, mailSmtpHost);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_PORT, mailSmtpPort);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_USERNAME, mailSmtpUsername);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_PASSWORD, mailSmtpPassword);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAIL_SMTP_FROM, mailSmtpFrom);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MAX_SUBSCRIBE, maxSubscribe);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.SEND_SUBSCRIBE_INTEVAL, sendSubscribeInteval);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_SINGLE_BOOK, enableSingleBook);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ROOT_DOMAIN, rootDomain);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.EXCLUDE_SUB_DOMAIN, excludeSubDomain);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, reloadSingleBookInterval);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());

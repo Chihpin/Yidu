@@ -184,7 +184,10 @@ public class YiDuConfig {
      * 根域名
      */
     public static final String ROOT_DOMAIN = "rootDomain";
-
+    /**
+     * 不包含的子域名
+     */
+    public static final String EXCLUDE_SUB_DOMAIN = "excludeSubDomain";
     /**
      * 小说信息重载周期
      */
