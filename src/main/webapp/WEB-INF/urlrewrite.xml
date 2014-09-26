@@ -291,31 +291,22 @@
 		<from>^/reader\?subdir=(\d*)&amp;articleno=(\d*)&amp;chapterno=(\d*)&amp;toChapterno=(\d*)(;jsessionid=.*)?$</from>
 		<to last="true">/reader/$1/$2/$3/$4\.html</to>
 	</outbound-rule>
-
+ <!--
 	<rule>
 		<name>Domain Name Check</name>
-		<condition name="host" operator="notequal">www.2v1.cc</condition>
-		<condition name="host" operator="notequal">m.2v1.cc</condition>
+		<condition name="host" operator="notequal">www.51yd.org</condition>
+		<condition name="host" operator="notequal">m.51yd.org</condition>
 		<from>^/(.*)</from>
-		<to type="permanent-redirect">http://www.2v1.cc/$1</to>
+		<to type="permanent-redirect">http://www.51yd.org/$1</to>
 	</rule>
 
 	<rule>
 		<name>USER AGENT Check</name>
-		<condition name="host" operator="notequal">m.2v1.cc</condition>
+		<condition name="host" operator="notequal">m.51yd.org</condition>
 		<condition name="user-agent">(android|blackberry|googlebot-mobile|iemobile|iphone|ipod|opera mobile)</condition>
 		<from>^/(.*)</from>
-		<to type="redirect">http://m.2v1.cc/$1</to>
+		<to type="redirect">http://m.51yd.org/$1</to>
 	</rule>
-
- <!-- 
-     <rule>
-         <name>Domain Name Check</name> 
-         <condition name="host" operator="notequal">www.yzihan.com</condition> 
-         <from>^/(.*)</from>
-         <to type="redirect">http://www.yzihan.com/$1</to>
-     </rule> 
- 
 
     EXAMPLES Redirect one url
     <rule>
