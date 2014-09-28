@@ -8,4 +8,4 @@ INSERT INTO t_system_block( blockid,blockname,TYPE,content,target) VALUES (''ind
 INSERT INTO t_system_block( blockid,blockname,TYPE,content,target) VALUES (''index_wuxia_tuijian'',''首页武侠修真推荐'',20,''1,2,3,4'',6);
 INSERT INTO t_system_block(blockid, blockname, type, sortcol, isasc, limitnum, target, deleteflag) VALUES (''last_update_list_mobile'',''手机页面更新列表'',10,''lastupdate'',FALSE,6,6,FALSE);
 INSERT INTO t_system_block(blockid, blockname, type, isasc, content,  target, deleteflag) VALUES (''index_hot_list_mobile'',''手机页热点'',20,FALSE,''58755,58754,58753'',6,FALSE);
-INSERT INTO t_user(loginid, password,type,deleteflag) VALUES (''{0}'', ''{1}'', 30 ,false);
+INSERT INTO t_user(loginid, password,type,deleteflag,activedflag) VALUES (''{0}'', ''{1}'', 30 ,false,true);
