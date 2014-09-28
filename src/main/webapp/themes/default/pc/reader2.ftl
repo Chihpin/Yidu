@@ -7,8 +7,7 @@
 <#macro customizeimport>  
 <link href="${contextPath}/themes/${themeName}/pc/css/readtools.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/style5.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
+<script src="http://libs.baidu.com/jquerytools/1.2.5/jquery.tools.min.js"></script>
 <script type="text/javascript">
     <!--
     $(document).ready(function(){
