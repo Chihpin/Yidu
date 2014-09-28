@@ -210,6 +210,17 @@ public class TArticle extends BaseTArticle {
                 + "&chapterno=" + getLastchapterno());
     }
 
+    
+    /**
+     * 获取最新章节URL
+     * 
+     * @return 最新章节URL
+     */
+    public String getThumbnailLastChapterUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ReaderAction.URL + "?chapterno=" + getLastchapterno());
+    }
+    
     /**
      * 获取最新章节的拼音形式的URL
      * 

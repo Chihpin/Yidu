@@ -61,9 +61,9 @@
                 </h3></span>
             </div>
             <div class="upd">
-                    最新章节： <a href="${article.lastChapterUrl}" title="${article.lastchapter}">${article.lastchapter}</a>&nbsp;&nbsp;&nbsp;&nbsp;${article.lastupdate?string("yyyy-MM-dd HH:mm")}
+                    最新章节： <a href="${article.thumbnailLastChapterUrl}" title="${article.lastchapter}">${article.lastchapter}</a>&nbsp;&nbsp;&nbsp;&nbsp;${article.lastupdate?string("yyyy-MM-dd HH:mm")}
             </div>
-            <p><a href="${article.lastChapterUrl}" title="${article.lastchapter}">《${article.articlename}》是由${article.author}所写的一部情节跌宕起伏、扣人心弦的${article.categoryStr}小说， ${article.lastchapter} 是小说《${article.articlename}》的最新章节。</a></p>
+            <p><a href="${article.thumbnailLastChapterUrl}" title="${article.lastchapter}">《${article.articlename}》是由${article.author}所写的一部情节跌宕起伏、扣人心弦的${article.categoryStr}小说， ${article.lastchapter} 是小说《${article.articlename}》的最新章节。</a></p>
         </div>
     </div>
     <div class="lbox" style="background:#FFFFFF;">
