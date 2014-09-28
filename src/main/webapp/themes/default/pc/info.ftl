@@ -129,12 +129,12 @@
             <#list reviewList as review>
                 <li class="line">
                 <div class="has_avatar">
-                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/pc/images/90_avatar_middle.jpg"></a>
+                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno?c}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/pc/images/90_avatar_middle.jpg"></a>
                 </div>
                 <div class="replycontent">
                     <div class="t_t">
                         <div>
-                            <a target="_blank" title="${review.loginid}" class="commenter" href="${encodeURL("/userInfo?userno=${review.userno}")}">${review.loginid}</a>
+                            <a target="_blank" title="${review.loginid}" class="commenter" href="${encodeURL("/userInfo?userno=${review.userno?c}")}">${review.loginid}</a>
                             <span class="time">评论于：${review.postdate?string("yyyy-MM-dd HH:mm")}</span>
                         </div>
                     </div>
