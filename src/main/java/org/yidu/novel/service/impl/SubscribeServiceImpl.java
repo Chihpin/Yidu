@@ -83,8 +83,7 @@ public class SubscribeServiceImpl extends HibernateSupportServiceImpl implements
         if (Utils.isDefined(searchBean.getDateRange())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.sss");
             sql.append(" AND ta.lastupdate >= '" + sdf.format(searchBean.getDateRange().getMinimum()) + "'");
-            // sql.append(" AND ta.lastupdate < '" +
-            // sdf.format(searchBean.getDateRange().getMaximum()) + "'");
+            sql.append(" AND ta.lastupdate < '" + sdf.format(searchBean.getDateRange().getMaximum()) + "'");
         }
         sql.append(" order by ts.articleno ");
 
