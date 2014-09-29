@@ -1,3 +1,4 @@
+@charset "utf-8";
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0 }
 body, button, input, select, textarea { font:12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; }
 h1, h2, h3, h4, h5, h6 { font-size:100% }
@@ -165,7 +166,7 @@ table.mygrid caption, .gridtop { border: 1px solid #E7E7E7; background: #e9f1f8;
 table.mygrid th, .head { border: 1px solid #E7E7E7; background: #f5f5f5; color:#054e86; text-align: center; font-weight: bold; font-size: 12px; padding: 3px; }
 table.mygrid td { border: 1px solid #E7E7E7; padding: 3px; background-color: #ffffff !important; }
 table.mygrid .button { background: #f5f5f5; border: 1px solid #E7E7E7; height: 24px; padding: 2px 0px 0px 0px; }
-/**我的收藏 浏览记录**/
+
 .myhide { float:right; position:relative; margin-left:3px; display:inline; z-index:10; width:69px; }
 .myhide a.hides { padding:0 5px; color:#fff; height:31px; line-height:31px; background: url(../images/common2.png) no-repeat right -41px; float:left; padding-right:12px; border-top:1px solid #c8c8c8; }
 .hd-follow .myhide a.select { background: url(../images/common2.png) no-repeat right -92px; color:#666; background-color:#fff; border-top:1px solid #64a60c; }
@@ -210,6 +211,7 @@ table.mygrid .button { background: #f5f5f5; border: 1px solid #E7E7E7; height: 2
 .board-switch a { background-image:url(spring/reload.png); background-repeat:no-repeat; display:inline-block; width:90px; height:32px; line-height: 25px; overflow:hidden; text-indent:30px; color:#fff; cursor:pointer; _display:inline; _zoom:1; _float:left; }
 .b-all-switch .b-all { float:right; color:#4a8d2d; margin-top:2px; font-size:14px; }
 .b-all-switch, .board .box h2 { height:30px; color:#f17f2c; font-size:18px; border-bottom:1px solid #ededed; padding-bottom:10px; }
+
 /**首页热门推荐**/
 .b-all-content li { float:left; width:126px; color:#666; margin-right:36px; display:inline; position:relative; line-height:200%; }
 .b-all-content li a.clearfix { font-size:15px; color:#4a8d2d; display:block; overflow:hidden; }

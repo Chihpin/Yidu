@@ -105,7 +105,6 @@
 </#macro>  
 
 <#macro naviContent>
-<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/channel-net.css">
   <div id="channel-header" class="clearfix">
     <div class="channel-header-wrapper">
       <nav class="channel-nav">

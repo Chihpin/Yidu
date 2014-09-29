@@ -3,9 +3,7 @@
 <!--[if IE 7 ]><html class="ie ie7"><![endif]-->
 <!--[if IE 8 ]><html class="ie ie8"><![endif]-->
 <!--[if IE 9 ]><html class="ie ie9"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html>
-<!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><html><!--<![endif]-->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#assign categorymap = categoryData?eval>
@@ -22,7 +20,7 @@
 <script src="${contextPath}/themes/${themeName}/pc/js/lib/html5.js"></script>
 <![endif]-->
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/common.css">
-<script src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.cookie.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js"></script>
 <#if customizeimport?exists>  

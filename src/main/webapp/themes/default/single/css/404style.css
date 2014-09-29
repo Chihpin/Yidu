@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 audio:not([controls]) { display: none; }
@@ -310,9 +312,6 @@ span.hostorgcn a {
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
 
-
-/* ==|== media queries ====================================================== */
-
 @media only screen and (min-width: 480px) {
 
 
@@ -322,10 +321,6 @@ span.hostorgcn a {
 
 }
 
-
-
-/* ==|== print styles ======================================================= */
- 
 @media print {
   * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
   a, a:visited { text-decoration: underline; }
