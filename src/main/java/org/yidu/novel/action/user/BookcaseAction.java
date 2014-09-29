@@ -164,7 +164,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
 
         this.bookcaseService.save(bookcase);
         this.loadData();
-        addActionMessage("messages.proccess.success");
+        addActionMessage(getText("messages.proccess.success"));
         return FREEMARKER_MESSAGE;
     }
 

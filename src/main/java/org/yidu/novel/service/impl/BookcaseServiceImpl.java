@@ -8,6 +8,7 @@ import org.yidu.novel.bean.BookcaseSearchBean;
 import org.yidu.novel.dto.BookcaseDTO;
 import org.yidu.novel.entity.TBookcase;
 import org.yidu.novel.service.BookcaseService;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -28,7 +29,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
         hql.append("From TBookcase WHERE  deleteflag=false  ");
         List<Object> params = new ArrayList<Object>();
         buildCondtion(searchBean, hql, params);
-        hql.append("ORDER BY createtime DESC");
+        hql.append(" ORDER BY createtime DESC");
         return this.find(hql.toString(), params);
 
     }
@@ -44,13 +45,13 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
      *            参数
      */
     private void buildCondtion(BookcaseSearchBean searchBean, StringBuffer hql, List<Object> params) {
-        if (searchBean.getUserno() != null && searchBean.getUserno() != 0) {
-            hql.append("  AND userno=?");
+        if (Utils.isDefined(searchBean.getUserno() )) {
+            hql.append("  AND userno=? ");
             params.add(searchBean.getUserno());
         }
 
-        if (searchBean.getArticleno() != null && searchBean.getArticleno() != 0) {
-            hql.append("  AND articleno=?");
+        if (Utils.isDefined(searchBean.getArticleno() )) {
+            hql.append("  AND articleno=? ");
             params.add(searchBean.getArticleno());
         }
     }
