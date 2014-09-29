@@ -31,7 +31,7 @@ public class PoweredByFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setHeader("X-Powered-By", "YiDu-Novel 1.1.5Beta");
+        httpResponse.setHeader("X-Powered-By", "YiDu-Novel(http://www.51yd.org)");
         chain.doFilter(request, response);
     }
 
