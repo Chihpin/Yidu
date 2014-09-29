@@ -7,7 +7,6 @@
 <title>易读小说管理后台</title>
 <meta name="keywords" content="易读小说系统管理后台" />
 <meta name="description" content="易读小说系统是开源的JAVA项目，可以帮你快速搭建自己的小说系统!" />
-<link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/board.css">
 <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/common.css">
 <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/styles.css">
 <script type="text/javascript" src="<s:property value="contextPath" />/js/lib/jquery-1.7.1.min.js"></script>
@@ -31,7 +30,6 @@
       </span>
     </div>
   </header>
-  <link rel="stylesheet" type="text/css" href="<s:property value="contextPath" />/css/channel-net.css">
     <div id="channel-header" class="clearfix">
       <div class="channel-header-wrapper">
         <nav class="channel-nav">
