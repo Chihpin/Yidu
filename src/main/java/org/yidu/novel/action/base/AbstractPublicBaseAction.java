@@ -1,24 +1,10 @@
 package org.yidu.novel.action.base;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.yidu.novel.bean.ArticleSearchBean;
-import org.yidu.novel.bean.SystemBlockSearchBean;
-import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
-import org.yidu.novel.entity.TArticle;
-import org.yidu.novel.entity.TSystemBlock;
 import org.yidu.novel.entity.TUser;
-import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
-import org.yidu.novel.utils.Pagination;
-import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -76,11 +62,9 @@ public abstract class AbstractPublicBaseAction extends AbstractPublicAndUserBase
     @Override
     public String execute() {
         logger.debug("execute start.");
+        // 读取区块
         loadBlock();
-        // Cookie
-        if (!LoginManager.isLoginFlag()) {
-            CookieUtils.getUserCookieAndLogoin(ServletActionContext.getRequest(), userService);
-        }
+        // 读取数据
         loadData();
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");

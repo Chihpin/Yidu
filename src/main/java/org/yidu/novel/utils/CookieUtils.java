@@ -49,9 +49,9 @@ public class CookieUtils {
     public static Cookie addUserCookie(TUser user) {
         try {
             Cookie cookie = new Cookie(USER_COOKIE, URLEncoder.encode(user.getLoginid(), YiDuConstants.ENCODING_UTF_8)
-                    + "," + user.getPassword());
-            // cookie保存两周
-            cookie.setMaxAge(60 * 60 * 24 * 14);
+                    + "," + user.getPassword() + "," + user.getType());
+            // 默认保持两年cookie保存两周
+            cookie.setMaxAge(60 * 60 * 24 * 365);
             return cookie;
         } catch (UnsupportedEncodingException e) {
             logger.error(e);
@@ -77,7 +77,7 @@ public class CookieUtils {
                     String value = cookie.getValue();
                     if (StringUtils.isNotBlank(value)) {
                         String[] split = value.split(",");
-                        if (split.length == 2) {
+                        if (split.length >= 2) {
                             String loginid = split[0];
                             String password = split[1];
                             TUser user = userService.findByLoginInfoByJDBC(loginid, password);
