@@ -1,7 +1,7 @@
 <#include "common.ftl"/>
 
 <#macro titleContent>  
-<#if category?? >
+<#if category?? && category!=0 >
 <title>${categorymap[category?c]}小说|${getText("label.system.title")}</title>
 <meta name="keywords" content="${categorymap[category?c]},${categorymap[category?c]}小说,${getText("label.system.siteKeywords")}" />
 <#elseif author?? >
