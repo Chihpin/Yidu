@@ -260,10 +260,10 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     public int getPageType() {
         return YiDuConstants.Pagetype.PAGE_CHAPTER_LIST;
     }
-    
+
     @Override
     protected String getBlockKey() {
-        return CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_BLOCK;
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_BLOCK + articleno;
     }
 
     @Override
@@ -271,4 +271,13 @@ public class ChapterListAction extends AbstractPublicBaseAction {
         return YiDuConstants.BlockTarget.CHAPTER_LIST;
     }
 
+    @Override
+    protected int getRecommondArticleno() {
+        return article.getArticleno();
+    }
+
+    @Override
+    protected int getRecommondCategory() {
+        return article.getCategory() == null ? 0 : article.getCategory();
+    }
 }

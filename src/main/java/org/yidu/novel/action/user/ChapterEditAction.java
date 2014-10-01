@@ -55,10 +55,23 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         this.chapterno = chapterno;
     }
 
+    /**
+     * 获取articleno
+     * 
+     * @return articleno
+     */
     public Integer getArticleno() {
         return articleno;
     }
 
+    /**
+     * 
+     * 设置articleno
+     * 
+     * 
+     * @param articleno
+     *            articleno
+     */
     public void setArticleno(Integer articleno) {
         this.articleno = articleno;
     }

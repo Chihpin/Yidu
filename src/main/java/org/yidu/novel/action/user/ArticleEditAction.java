@@ -92,10 +92,23 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         this.keywords = keywords;
     }
 
+    /**
+     * 获取category
+     * 
+     * @return category
+     */
     public Integer getCategory() {
         return category;
     }
 
+    /**
+     * 
+     * 设置category
+     * 
+     * 
+     * @param category
+     *            category
+     */
     public void setCategory(Integer category) {
         this.category = category;
     }

@@ -1,6 +1,5 @@
 package org.yidu.novel.action.base;
 
-import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TUser;
@@ -25,20 +24,6 @@ public abstract class AbstractUserBaseAction extends AbstractPublicAndUserBaseAc
      * 命名空间。
      */
     public static final String NAMESPACE = "/user";
-
-    @Override
-    @SkipValidation
-    public String execute() {
-        logger.debug("execute start.");
-        loadData();
-        if (this.hasErrors()) {
-            logger.debug("execute abnormally end.");
-            setHasError(true);
-            return FREEMARKER_ERROR;
-        }
-        logger.debug("execute normally end.");
-        return FREEMARKER;
-    }
 
     /**
      * 获得页面类型

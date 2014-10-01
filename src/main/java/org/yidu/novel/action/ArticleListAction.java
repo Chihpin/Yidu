@@ -45,7 +45,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     /**
      * 小说种类
      */
-    private int category;
+    private Integer category;
 
     /**
      * 页号
@@ -72,7 +72,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      * 
      * @return category
      */
-    public int getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
@@ -84,7 +84,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      * @param category
      *            category
      */
-    public void setCategory(int category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 

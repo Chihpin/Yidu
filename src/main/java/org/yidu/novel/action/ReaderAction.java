@@ -351,7 +351,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
     @Override
     protected String getBlockKey() {
-        return CacheManager.CacheKeyPrefix.CACHE_KEY_READER_BLOCK;
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_READER_BLOCK + articleno;
     }
 
     @Override
@@ -366,5 +366,15 @@ public class ReaderAction extends AbstractPublicBaseAction {
      */
     public String getServerName() {
         return YiDuConstants.singleBookServerName.get();
+    }
+
+    @Override
+    protected int getRecommondArticleno() {
+        return article.getArticleno();
+    }
+
+    @Override
+    protected int getRecommondCategory() {
+        return article.getCategory() == null ? 0 : article.getCategory();
     }
 }

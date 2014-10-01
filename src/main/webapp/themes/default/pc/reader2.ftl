@@ -126,9 +126,9 @@
         </ul>
     </div>
     <div class="tabMain">
-        <#if recommendArticleList ?? > 
+        <#if blocks.reader_recommand_list ?? > 
         <ul id="content1">
-            <#list recommendArticleList as article>
+            <#list blocks.reader_recommand_list as article>
             <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;" alt="${article.articlename}"></a>
             <#if article.fullflag>
                 <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">
@@ -139,9 +139,9 @@
             </#list>
         </ul>
         </#if>
-        <#if randomRecommendArticleList ?? > 
+        <#if blocks.reader_random_recommand_list ?? > 
         <ul id="content2" style="display:none;">
-            <#list randomRecommendArticleList as article>
+            <#list blocks.reader_random_recommand_list as article>
            <li><a href="${article.url}" title="${article.articlename}"><img src="${article.imgUrl}" width="111px;" height="146px;" alt="${article.articlename}"></a>
             <#if article.fullflag>
                 <img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="topss png_bg" alt="完本图标">

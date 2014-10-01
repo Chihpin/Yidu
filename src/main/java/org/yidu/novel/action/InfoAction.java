@@ -341,7 +341,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
     @Override
     protected String getBlockKey() {
-        return CacheManager.CacheKeyPrefix.CACHE_KEY_INFO_BLOCK;
+        return CacheManager.CacheKeyPrefix.CACHE_KEY_INFO_BLOCK + articleno;
     }
 
     @Override
@@ -358,4 +358,13 @@ public class InfoAction extends AbstractPublicBaseAction {
         return YiDuConstants.singleBookServerName.get();
     }
 
+    @Override
+    protected int getRecommondArticleno() {
+        return article.getArticleno();
+    }
+
+    @Override
+    protected int getRecommondCategory() {
+        return article.getCategory() == null ? 0 : article.getCategory();
+    }
 }
