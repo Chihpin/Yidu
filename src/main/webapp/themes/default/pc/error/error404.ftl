@@ -16,6 +16,14 @@
 .STYLE1 {color: #FF0000}
 -->
     </style>
+    <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            window.setTimeout(function () {
+                location.href = "${siteUrl}";
+            }, 15000)
+        });
+    </script>
 </head>
 <body>
     <div id="error-container">
