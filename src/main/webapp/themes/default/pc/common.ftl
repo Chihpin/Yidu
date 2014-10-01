@@ -96,7 +96,7 @@
     </p>
     <div class="site-search">
        <form action="${contextPath}/search" method="get" >
-       <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value=<#if key??>${key?html}<#else>"这是一个神奇的搜索，请输入小说名或作者名"</#if> />
+       <input name="key" type="text" id="key" onFocus="this.classname='over';if (value =='这是一个神奇的搜索，请输入小说名或作者名'){value =''}" onBlur="this.classname='input'"  value="<#if key??>${key?html}<#else>这是一个神奇的搜索，请输入小说名或作者名</#if>" />
        <input type="submit" id="searchbuttom" value="" style="background:url('${contextPath}/themes/${themeName}/pc/images/search.jpg');border:0px solid;cursor:pointer;" />
        </form>
     </div>
