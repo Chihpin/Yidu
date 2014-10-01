@@ -358,6 +358,10 @@ public class YiDuConstants {
          */
         public static final int PAGE_BOOKCASE = 26;
         /**
+         * 消息添加
+         */
+        public static final int PAGE_ADD_MESSAGE = 27;
+        /**
          * 小说列表
          */
         public static final int PAGE_AUTHER_ARTICLE_LIST = 30;

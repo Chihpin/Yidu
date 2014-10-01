@@ -8,11 +8,12 @@
 
     <table class="yidu-table" align="center">
         <colgroup>
-            <col width="150px">
-            <col width="320px">
-            <col width="200px">
-            <col width="160px">
-            <col width="120px">
+            <col width="100px">
+            <col width="170px">
+            <col width="400px">
+            <col width="130px">
+            <col width="50px">
+            <col width="100px">
         </colgroup>
         <tr>
             <th class="sortable <s:if test="pagination.sortColumn.equals('loginid')">sorted <s:property value="pagination.sortClass"/> </s:if>">
@@ -20,6 +21,8 @@
             
             <th class="sortable <s:if test="pagination.sortColumn.equals('title')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'articlename');"><s:text name="label.admin.messagae.list.title" /></a></th>
+            
+            <th style="word-break:break-all; word-wrap:break-word;"><s:text name="label.admin.messagae.list.content" /></th>
             
             <th class="sortable <s:if test="pagination.sortColumn.equals('postdate')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'category');"><s:text name="label.admin.messagae.list.date" /></a></th>
@@ -38,6 +41,7 @@
         </s:else>
             <td><s:property  value="#message.loginid" /></td>
             <td><s:property  value="#message.title" /></td>
+            <td><s:property  value="#message.content" /></td>
             <td><s:date name="#message.postdate" format="yyyy/MM/dd HH:mm" /></td>
             <td><s:property  value="collections['collectionProperties.message.isread'][#message.isread]" /></td>
             <td>

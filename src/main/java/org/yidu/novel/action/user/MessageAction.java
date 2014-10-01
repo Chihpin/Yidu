@@ -65,12 +65,6 @@ public class MessageAction extends AbstractUserBaseAction {
     }
 
     @Transactional
-    public String add() {
-        addActionMessage("messages.proccess.success");
-        return FREEMARKER_MESSAGE;
-    }
-
-    @Transactional
     public String delete() {
         if (messageno != 0) {
             TMessage message = this.messageService.getByNo(messageno);
