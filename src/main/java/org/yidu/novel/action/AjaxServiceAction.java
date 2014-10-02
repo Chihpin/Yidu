@@ -70,6 +70,27 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         public static final String HISTORY = "history";
         public static final String SEARCH = "search";
         public static final String REGISTER = "register";
+        public static final String VOTE = "vote";
+    }
+
+    /**
+     * 
+     * <p>
+     * 返回代码定义
+     * </p>
+     * 
+     * @version 1.1.6
+     * @author shinpa.you
+     */
+    class ReturnCode {
+        /**
+         * 返回值：正常
+         */
+        public static final int SUCCESS = 0;
+        /**
+         * 返回值：出错
+         */
+        public static final int FAILED = 1;
     }
 
     /**
@@ -125,7 +146,9 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
      * 状态
      */
     private int status;
-
+    /**
+     * JSON数据的DTO
+     */
     private JsonInfoDTO dto = new JsonInfoDTO();
 
     public String getAction() {
@@ -274,8 +297,10 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             doSearch();
         } else if (StringUtils.equals(action, ProccessType.REGISTER)) {
             register();
+        } else if (StringUtils.equals(action, ProccessType.VOTE)) {
+            doVote();
         } else {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             dto.setErr(getText("errors.unknown"));
         }
 
@@ -283,20 +308,42 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         return JSON_RESULT;
     }
 
+    /**
+     * <p>
+     * 推荐处理
+     * </p>
+     */
+    private void doVote() {
+        logger.debug("doVote start.");
+        if (LoginManager.isLoginFlag() && articleno != 0) {
+            articleService.updateVoteStatistic(articleno);
+            dto.setCode(ReturnCode.SUCCESS);
+            logger.debug("doVote normally end.");
+        } else {
+            dto.setCode(ReturnCode.FAILED);
+            logger.debug("doVote abnormally end.");
+        }
+    }
+
+    /**
+     * <p>
+     * 用户注册
+     * </p>
+     */
     private void register() {
 
         logger.info("regedit started.");
 
         // ID检查
         if (StringUtils.trim(loginid).length() < 5 || StringUtils.trim(loginid).length() > 32) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             dto.setErr(this.getText("errors.lengthrange",
                     new String[] { "5", "32", this.getText("label.user.loginid") }));
             return;
         }
         // 密码检查
         if (StringUtils.trim(password).length() < 5 || StringUtils.trim(password).length() > 32) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             dto.setErr(this.getText("errors.lengthrange",
                     new String[] { "5", "32", this.getText("label.user.password") }));
             return;
@@ -308,7 +355,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         searchBean.setDeleteflag(false);
         List<TUser> userList = this.userService.find(searchBean);
         if (userList != null && userList.size() > 0) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             dto.setErr(this.getText("errors.duplicated", new String[] { this.getText("label.user.loginid") }));
 
             return;
@@ -326,11 +373,16 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         this.userService.save(user);
         // 登录处理
         LoginManager.doLogin(user);
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         dto.setResult("注册成功！");
         logger.debug("regedit normally end.");
     }
 
+    /**
+     * <p>
+     * 小说检索
+     * </p>
+     */
     private void doSearch() {
         logger.debug("doSearch start.");
 
@@ -382,29 +434,37 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         dto.setItems(articleList);
 
         logger.debug("doSearch normally end.");
-
     }
 
+    /**
+     * <p>
+     * 删除小说的书签
+     * </p>
+     */
     private void deleteBookcaseByArticle() {
         logger.debug("deleteBookcaseByArticle start.");
 
         if (articleno == 0) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
         bookcaseService.getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
 
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         logger.debug("deleteBookcaseByArticle normally end.");
-
     }
 
+    /**
+     * <p>
+     * 添加书签
+     * </p>
+     */
     private void addBookcase() {
         logger.debug("addBookcase start.");
 
         if (articleno == 0) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
@@ -413,7 +473,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
         int bookcaseCount = this.bookcaseService.getCount(searchBean);
         if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_BOOKCASE)) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
@@ -427,7 +487,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         if (article != null && article.getArticleno() != 0) {
             BeanUtils.copyProperties(article, bookcase);
         } else {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
         bookcase.setCreatetime(new Date());
@@ -435,16 +495,20 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
         this.bookcaseService.save(bookcase);
 
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         logger.debug("addBookcase normally end.");
-
     }
 
+    /**
+     * <p>
+     * 检查书签是否存在
+     * </p>
+     */
     private void checkBookCaseExists() {
         logger.debug("checkBookCaseExists start.");
 
         if (articleno == 0) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
@@ -453,11 +517,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         if (bookcase != null) {
             dto.setResult("1");
         }
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         logger.debug("checkBookCaseExists normally end.");
-
     }
 
+    /**
+     * <p>
+     * 取得阅读历史
+     * </p>
+     */
     private void getHistory() {
         logger.debug("getHistory start.");
         // 获得阅读履历
@@ -476,23 +544,33 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
                 searchBean.setArticlenos(StringUtils.join(articlenoList, ","));
                 dto.setItems(articleService.find(searchBean));
             }
-            dto.setCode(0);
+            dto.setCode(ReturnCode.SUCCESS);
         }
         logger.debug("getHistory normally end.");
     }
 
+    /**
+     * <p>
+     * 删除书签
+     * </p>
+     */
     private void deleteBookcase() {
         logger.debug("deleteBookcase start.");
         if (StringUtils.isEmpty(StringUtils.trim(bookcasenos))) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
         bookcaseService.batchDeleteByNo(bookcasenos, LoginManager.getLoginUser().getUserno());
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         logger.debug("deleteBookcase normally end.");
     }
 
+    /**
+     * <p>
+     * 获取书签
+     * </p>
+     */
     private void getBookcase() {
         logger.debug("getBookcase start.");
         BookcaseSearchBean searchBean = new BookcaseSearchBean();
@@ -520,10 +598,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         searchBean.setPagination(pagination);
 
         dto.setItems(this.bookcaseService.findWithArticleInfo(searchBean));
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         logger.debug("getBookcase normally end.");
     }
 
+    /**
+     * <p>
+     * 获取排行版小说列表
+     * </p>
+     */
     private void getTopList() {
         logger.debug("getTopList start.");
 
@@ -587,9 +670,13 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         dto.setItems(articleList);
 
         logger.debug("getTopList normally end.");
-
     }
 
+    /**
+     * <p>
+     * 获取分类小说列表
+     * </p>
+     */
     private void getCategoryList() {
         logger.debug("getCategoryList start.");
 
@@ -638,6 +725,11 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         logger.debug("getCategoryList normally end.");
     }
 
+    /**
+     * <p>
+     * 获取章节列表
+     * </p>
+     */
     private void getChapterList() {
         logger.debug("getChapterList start.");
 
@@ -679,12 +771,16 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
     }
 
+    /**
+     * <p>
+     * 修改密码
+     * </p>
+     */
     private void dochangepass() {
         // TODO 输入检查
-
         TUser user = userService.getByNo(userno);
         if (StringUtils.equals(user.getPassword(), Utils.convert2MD5(password))) {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             return;
         }
 
@@ -692,10 +788,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             user.setPassword(Utils.convert2MD5(password));
         }
         userService.save(user);
-        dto.setCode(0);
+        dto.setCode(ReturnCode.SUCCESS);
         // TODO 文字检查和密码校对
     }
 
+    /**
+     * <p>
+     * 用户登录
+     * </p>
+     */
     private void dologin() {
         logger.info("dologin start.");
         TUser user = userService.findByLoginInfo(loginid, Utils.convert2MD5(password));
@@ -708,10 +809,10 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             Cookie cookie = CookieUtils.addUserCookie(user);
             // 添加cookie到response中
             ServletActionContext.getResponse().addCookie(cookie);
-            dto.setCode(0);
+            dto.setCode(ReturnCode.SUCCESS);
             logger.debug("dologin normally end.");
         } else {
-            dto.setCode(1);
+            dto.setCode(ReturnCode.FAILED);
             dto.setErr(getText("errors.login.failed"));
             logger.debug("dologin abnormally end.");
         }
@@ -729,7 +830,6 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
     @Override
     public String getTempName() {
-        // TODO Auto-generated method stub
         return null;
     }
 }
