@@ -76,7 +76,7 @@ public class MessageAction extends AbstractUserBaseAction {
             }
         }
         this.loadData();
-        return INPUT;
+        return FREEMARKER;
     }
 
 }
