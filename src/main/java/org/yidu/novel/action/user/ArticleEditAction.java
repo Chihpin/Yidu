@@ -30,7 +30,6 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
  * @author shinpa.you
  */
 @Action(value = "articleEdit")
-@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ArticleListAction.URL)
 public class ArticleEditAction extends AbstractUserBaseAction {
     /**
      * 串行化版本统一标识符
@@ -234,6 +233,11 @@ public class ArticleEditAction extends AbstractUserBaseAction {
 
     public void setArticlespicFileName(String articlespicFileName) {
         this.articlespicFileName = articlespicFileName;
+    }
+
+    @Override
+    public String getBackUrl() {
+        return ArticleListAction.URL;
     }
 
     @Override

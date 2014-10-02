@@ -84,6 +84,11 @@ public class ChapterListAction extends AbstractUserListBaseAction {
     }
 
     @Override
+    public String getBackUrl() {
+        return URL;
+    }
+
+    @Override
     protected void loadData() {
         article = articleService.getByNo(articleno);
         if (!checkRight(article)) {
@@ -112,8 +117,7 @@ public class ChapterListAction extends AbstractUserListBaseAction {
             chapterService.save(chapter);
         }
 
-        loadData();
-        return FREEMARKER;
+        return REDIRECT;
     }
 
     @Override

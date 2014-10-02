@@ -62,6 +62,11 @@ public class ArticleListAction extends AbstractUserListBaseAction {
     public void setArticleList(List<TArticle> articleList) {
         this.articleList = articleList;
     }
+    
+    @Override
+    public String getBackUrl() {
+        return URL;
+    }
 
     @Override
     protected void loadData() {
@@ -93,8 +98,7 @@ public class ArticleListAction extends AbstractUserListBaseAction {
         article.setDeleteflag(true);
         articleService.save(article);
 
-        loadData();
-        return FREEMARKER;
+        return REDIRECT;
     }
 
     @Override

@@ -26,8 +26,6 @@ import org.yidu.novel.utils.Utils;
  * @author shinpa.you
  */
 @Action(value = "chapterEdit")
-@Result(name = AbstractBaseAction.REDIRECT, type = AbstractBaseAction.REDIRECT, location = ChapterListAction.URL
-        + "?articleno=${articleno}")
 public class ChapterEditAction extends AbstractUserBaseAction {
     /**
      * 串行化版本统一标识符
@@ -168,6 +166,11 @@ public class ChapterEditAction extends AbstractUserBaseAction {
                 this.addFieldError(publishtimeStr, getText("errors.format.date"));
             }
         }
+    }
+
+    @Override
+    public String getBackUrl() {
+        return ChapterListAction.URL + "?articleno=" + articleno;
     }
 
     @Override
