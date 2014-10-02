@@ -52,8 +52,6 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
                         YiDuConstants.requestUri.get());
 
                 // 判断上一章的静态页是否存在
-                System.out.println(YiDuConstants.requestUri.get());
-
                 ChapterDTO chapter = action.getChapter();
                 if (chapter.getPreChapterno() != 0) {
                     // TODO 如果章节ID和小说ID一样的话，会出现问题，将来改吧
