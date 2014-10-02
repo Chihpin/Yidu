@@ -104,9 +104,13 @@ public class ChapterDTO extends TChapter {
      */
 
     public String getNextChapterUrl() {
-        HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
-                + "&chapterno=" + getNextChapterno());
+        if (getNextChapterno() != 0) {
+            HttpServletResponse response = ServletActionContext.getResponse();
+            return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+                    + "&chapterno=" + getNextChapterno());
+        } else {
+            return getInfoUrl();
+        }
     }
 
     /**
@@ -115,9 +119,13 @@ public class ChapterDTO extends TChapter {
      * @return 上一章章节URL
      */
     public String getPreChapterUrl() {
-        HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
-                + "&chapterno=" + getPreChapterno());
+        if (getChapterno() != 0) {
+            HttpServletResponse response = ServletActionContext.getResponse();
+            return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+                    + "&chapterno=" + getPreChapterno());
+        } else {
+            return getInfoUrl();
+        }
     }
 
     /**
