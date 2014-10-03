@@ -197,7 +197,6 @@
                 </#if>
             </#list>
           </ul>
-        </div>
     </div>
     <#if adEffective?? && adEffective>
     <script type="text/javascript" src="${contextPath}/ad/info5.js"></script>
