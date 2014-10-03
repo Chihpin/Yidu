@@ -3,7 +3,10 @@ package org.yidu.novel.dto;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
+import org.yidu.novel.action.ChapterListAction;
 import org.yidu.novel.action.ReaderAction;
+import org.yidu.novel.constant.YiDuConfig;
+import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TChapter;
 
 /**
@@ -98,6 +101,16 @@ public class ChapterDTO extends TChapter {
     }
 
     /**
+     * 获取章节列表URL
+     * 
+     * @return 分类列表URL
+     */
+    public String getChapterListUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        return response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+    }
+
+    /**
      * 获取下一章章节URL
      * 
      * @return 下一章章节URL
@@ -109,7 +122,11 @@ public class ChapterDTO extends TChapter {
             return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                     + "&chapterno=" + getNextChapterno());
         } else {
-            return getInfoUrl();
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+                return getChapterListUrl();
+            } else {
+                return getInfoUrl();
+            }
         }
     }
 
@@ -119,12 +136,17 @@ public class ChapterDTO extends TChapter {
      * @return 上一章章节URL
      */
     public String getPreChapterUrl() {
-        if (getChapterno() != 0) {
+        if (getPreChapterno() != 0) {
             HttpServletResponse response = ServletActionContext.getResponse();
             return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                     + "&chapterno=" + getPreChapterno());
         } else {
-            return getInfoUrl();
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+                return getChapterListUrl();
+            } else {
+                return getInfoUrl();
+            }
+
         }
     }
 
