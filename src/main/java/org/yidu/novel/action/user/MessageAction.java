@@ -2,9 +2,7 @@ package org.yidu.novel.action.user;
 
 import java.util.List;
 
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.transaction.annotation.Transactional;
-import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
 import org.yidu.novel.bean.MessageSearchBean;
 import org.yidu.novel.constant.YiDuConstants;

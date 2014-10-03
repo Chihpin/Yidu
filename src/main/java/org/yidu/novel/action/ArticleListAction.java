@@ -3,7 +3,6 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
