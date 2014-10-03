@@ -3,6 +3,7 @@ package org.yidu.novel.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.BookcaseSearchBean;
 import org.yidu.novel.dto.BookcaseDTO;
@@ -107,7 +108,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
         searchBean.setArticleno(articleno);
         searchBean.setUserno(userno);
         List<TBookcase> list = this.find(searchBean);
-        if (list != null && list.size() > 0) {
+        if (Utils.isDefined(list)) {
             return list.get(0);
         }
         return null;

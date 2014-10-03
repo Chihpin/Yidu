@@ -82,7 +82,7 @@ public class Utils {
             }
             return new String(str).toLowerCase();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
             return null;
         }
     }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.constant.YiDuConfig;
@@ -41,7 +42,7 @@ public class CleanDeleteDataServiceImpl extends HibernateSupportServiceImpl impl
 
         // 按章节删除txt文件
         String getDeleteChapterSql = "select * from t_chapter where deleteflag and modifytime < (now() -  INTERVAL ''{0} days'') ";
-        if (articlenoList != null && articlenoList.size() > 0) {
+        if (Utils.isDefined(articlenoList)) {
             getDeleteChapterSql = getDeleteChapterSql + " and articlno not in (" + StringUtils.join(articlenoList, ",")
                     + ")";
         }

@@ -11,6 +11,7 @@ import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.utils.LoginManager;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -112,7 +113,7 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         TArticle article = articleService.getByNo(articleno);
         article.setSize(chapterService.getChapterCount(articleno));
         TChapter lastChapter = chapterService.getLastChapter(articleno);
-        if (lastChapter != null) {
+        if (Utils.isDefined(lastChapter)) {
             article.setLastchapterno(lastChapter.getChapterno());
             article.setLastchapter(lastChapter.getChaptername());
             article.setLastupdate(lastChapter.getPostdate());

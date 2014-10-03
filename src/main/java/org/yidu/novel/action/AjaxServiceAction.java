@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -57,6 +58,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
      * @author shinpa.you
      */
     class ProccessType {
+        /**
+         * <p>
+         * 私有构造方法
+         * </p>
+         */
+        private ProccessType() {
+            // do nothing
+        }
+
         public static final String TOP_LIST = "toplist";
         public static final String CATEGORY_LIST = "categorylist";
         public static final String CHAPTER_LIST = "chapterlist";
@@ -78,11 +88,21 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
      * <p>
      * 返回代码定义
      * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
      * 
      * @version 1.1.6
      * @author shinpa.you
      */
     class ReturnCode {
+        /**
+         * <p>
+         * 私有构造方法
+         * </p>
+         */
+        private ReturnCode() {
+            // do nothing
+        }
+
         /**
          * 返回值：正常
          */
@@ -354,7 +374,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         searchBean.setLoginid(loginid);
         searchBean.setDeleteflag(false);
         List<TUser> userList = this.userService.find(searchBean);
-        if (userList != null && userList.size() > 0) {
+        if (Utils.isDefined(userList)) {
             dto.setCode(ReturnCode.FAILED);
             dto.setErr(this.getText("errors.duplicated", new String[] { this.getText("label.user.loginid") }));
 
@@ -406,23 +426,23 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         Pagination pagination = new Pagination(size, index + 1);
         switch (sort) {
         case 1:
-            pagination.setSortColumn("lastupdate");
+            pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
             break;
         case 2:
-            pagination.setSortColumn("allvisit");
+            pagination.setSortColumn(TArticle.PROP_ALLVISIT);
             break;
         case 3:
-            pagination.setSortColumn("allvote");
+            pagination.setSortColumn(TArticle.PROP_ALLVOTE);
             break;
         case 4:
-            pagination.setSortColumn("size");
+            pagination.setSortColumn(TArticle.PROP_SIZE);
             break;
         default:
-            pagination.setSortColumn("allvisit");
+            pagination.setSortColumn(TArticle.PROP_ALLVISIT);
             break;
         }
 
-        pagination.setSortOrder("DESC");
+        pagination.setSortOrder(YiDuConstants.Order.DESC);
         searchBean.setPagination(pagination);
 
         List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
@@ -484,7 +504,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         }
 
         TArticle article = this.articleService.getByNo(articleno);
-        if (article != null && article.getArticleno() != 0) {
+        if (Utils.isDefined(article) && article.getArticleno() != 0) {
             BeanUtils.copyProperties(article, bookcase);
         } else {
             dto.setCode(ReturnCode.FAILED);
@@ -514,8 +534,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
         TBookcase bookcase = bookcaseService
                 .getByArticlenoAndUserno(LoginManager.getLoginUser().getUserno(), articleno);
-        if (bookcase != null) {
-            dto.setResult("1");
+        if (Utils.isDefined(bookcase)) {
+            dto.setCode(ReturnCode.FAILED);
         }
         dto.setCode(ReturnCode.SUCCESS);
         logger.debug("checkBookCaseExists normally end.");
@@ -584,15 +604,15 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             break;
         case 2:
             pagination.setSortColumn("ta.lastupdate");
-            pagination.setSortOrder("DESC");
+            pagination.setSortOrder(YiDuConstants.Order.DESC);
             break;
         case 3:
             pagination.setSortColumn("ta.articlename");
-            pagination.setSortOrder("ASC");
+            pagination.setSortOrder(YiDuConstants.Order.ASC);
             break;
         default:
-            pagination.setSortColumn("lastupdate");
-            pagination.setSortOrder("DESC");
+            pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
+            pagination.setSortOrder(YiDuConstants.Order.DESC);
             break;
         }
         searchBean.setPagination(pagination);
@@ -642,28 +662,28 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         Pagination pagination = new Pagination(size, index + 1);
         switch (type) {
         case 1:
-            pagination.setSortColumn("lastupdate");
+            pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
             break;
         case 2:
-            pagination.setSortColumn("allvisit");
+            pagination.setSortColumn(TArticle.PROP_ALLVISIT);
             break;
         case 3:
-            pagination.setSortColumn("allvote");
+            pagination.setSortColumn(TArticle.PROP_ALLVOTE);
             break;
         case 4:
-            pagination.setSortColumn("size");
+            pagination.setSortColumn(TArticle.PROP_SIZE);
             break;
         default:
-            pagination.setSortColumn("lastupdate");
+            pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
             break;
         }
 
-        pagination.setSortOrder("DESC");
+        pagination.setSortOrder(YiDuConstants.Order.DESC);
         searchBean.setPagination(pagination);
 
         List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
                 searchBean);
-        if (articleList == null || articleList.size() == 0) {
+        if (!Utils.isDefined(articleList)) {
             articleList = articleService.find(searchBean);
             CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
@@ -710,8 +730,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
         // 添加page信息
         Pagination pagination = new Pagination(size, index + 1);
-        pagination.setSortColumn("lastupdate");
-        pagination.setSortOrder("DESC");
+        pagination.setSortColumn(TArticle.PROP_LASTUPDATE);
+        pagination.setSortOrder(YiDuConstants.Order.DESC);
         searchBean.setPagination(pagination);
 
         List<TArticle> articleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX,
@@ -746,19 +766,19 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
         // 添加page信息
         Pagination pagination = new Pagination(size, index + 1);
-        pagination.setSortColumn("chapterno");
+        pagination.setSortColumn(TChapter.PROP_CHAPTERNO);
         if (sort == 0) {
-            pagination.setSortOrder("DESC");
+            pagination.setSortOrder(YiDuConstants.Order.DESC);
         } else {
-            pagination.setSortOrder("ASC");
+            pagination.setSortOrder(YiDuConstants.Order.ASC);
         }
         searchBean.setPagination(pagination);
 
         List<TChapter> chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
                 searchBean);
-        if (chapterList == null || chapterList.size() == 0) {
+        if (!Utils.isDefined(chapterList)) {
             chapterList = chapterService.find(searchBean);
-            if (chapterList != null && chapterList.size() != 0) {
+            if (Utils.isDefined(chapterList)) {
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
                         chapterList);
             }

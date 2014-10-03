@@ -9,6 +9,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.yidu.novel.cache.CacheManager;
+
 import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -22,6 +26,10 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  */
 @SuppressWarnings("restriction")
 public class SecurityImage {
+    /**
+     * 输出log
+     */
+    private static Log logger = LogFactory.getLog(SecurityImage.class);
     /**
      * 生成验证码图片
      * 
@@ -103,9 +111,9 @@ public class SecurityImage {
             byte[] bts = bos.toByteArray();
             inputStream = new ByteArrayInputStream(bts);
         } catch (ImageFormatException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return inputStream;
     }

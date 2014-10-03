@@ -15,6 +15,7 @@ import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TBookcase;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.utils.LoginManager;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -143,7 +144,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
 
         if (chapterno != 0) {
             TChapter chapter = this.chapterService.getByNo(chapterno);
-            if (chapter != null && chapter.getChapterno() != 0) {
+            if (Utils.isDefined(chapter) && chapter.getChapterno() != 0) {
                 BeanUtils.copyProperties(chapter, bookcase);
             } else {
                 addActionError(getText("errors.not.exsits.chapter"));
@@ -151,7 +152,7 @@ public class BookcaseAction extends AbstractUserBaseAction {
             }
         } else if (articleno != 0) {
             TArticle article = this.articleService.getByNo(articleno);
-            if (article != null && article.getArticleno() != 0) {
+            if (Utils.isDefined(article) && article.getArticleno() != 0) {
                 BeanUtils.copyProperties(article, bookcase);
             } else {
                 addActionError(getText("errors.not.exsits.article"));

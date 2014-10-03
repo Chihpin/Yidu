@@ -7,6 +7,9 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -25,9 +28,18 @@ import freemarker.template.TemplateException;
 public class FreeMarkertUtil {
 
     /**
+     * 输出log
+     */
+    private static Log logger = LogFactory.getLog(SecurityImage.class);
+
+    /**
      * freemarker配置
      */
     private static Configuration config = new Configuration();
+
+    private FreeMarkertUtil() {
+        // do nothing
+    }
 
     /**
      * 处理模版
@@ -47,15 +59,15 @@ public class FreeMarkertUtil {
             template.process(root, out);
             out.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } finally {
             try {
                 out.close();
                 out = null;
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
             }
         }
     }

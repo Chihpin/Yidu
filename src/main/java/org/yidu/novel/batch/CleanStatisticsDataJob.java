@@ -49,7 +49,7 @@ public class CleanStatisticsDataJob extends QuartzJobBean {
         try {
             articleService.cleanStatistics();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         logger.debug("CleanStatisticsDataJob normally end.");
     }

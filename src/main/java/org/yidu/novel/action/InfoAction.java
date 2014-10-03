@@ -3,6 +3,7 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
@@ -285,7 +286,7 @@ public class InfoAction extends AbstractPublicBaseAction {
                         searchBean);
                 if (!Utils.isDefined(chapterList)) {
                     chapterList = chapterService.find(searchBean);
-                    if (chapterList != null && chapterList.size() != 0) {
+                    if (Utils.isDefined(chapterList)) {
                         CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
                                 chapterList);
                     }

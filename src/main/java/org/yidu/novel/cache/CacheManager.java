@@ -106,7 +106,7 @@ public class CacheManager {
                 cache.put(getCacheKey(prefix, key), value);
             }
         } catch (CacheException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 

@@ -529,4 +529,25 @@ public class YiDuConstants {
         }
     }
 
+    /**
+     * 
+     * <p>
+     * 排序
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.0.0
+     * @author shinpa.you
+     */
+    public static final class Order {
+        /**
+         * 降序
+         */
+        public static final String DESC = "DESC";
+        /**
+         * 升序
+         */
+        public static final String ASC = "ASC";
+    }
+
 }

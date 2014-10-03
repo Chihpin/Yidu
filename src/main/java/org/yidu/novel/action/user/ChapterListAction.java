@@ -10,6 +10,7 @@ import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -103,7 +104,7 @@ public class ChapterListAction extends AbstractUserListBaseAction {
 
     public String delete() throws Exception {
         TChapter chapter = chapterService.getByNo(chapterno);
-        if (chapter != null) {
+        if (Utils.isDefined(chapter)) {
 
             articleno = chapter.getArticleno();
             TArticle article = articleService.getByNo(chapter.getArticleno());

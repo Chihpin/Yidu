@@ -58,7 +58,7 @@ public class QQLoginAction extends AbstractPublicBaseAction {
             AccessToken accessTokenObj = new Oauth().getAccessTokenByRequest(request);
             String accessToken = null;
             String openID = null;
-            if (accessTokenObj.getAccessToken().equals("")) {
+            if (StringUtils.isEmpty(accessTokenObj.getAccessToken())) {
                 logger.warn("没有获取到响应参数");
             } else {
                 accessToken = accessTokenObj.getAccessToken();
@@ -109,7 +109,7 @@ public class QQLoginAction extends AbstractPublicBaseAction {
         }
 
         return REDIRECT;
-    };
+    }
 
     @Override
     protected void loadData() {

@@ -256,7 +256,7 @@ public class UserEditAction extends AbstractUserBaseAction {
             ignoreProperties.add("username");
         }
         // 性别
-        if (user.getSex() != null && user.getSex() != 0) {
+        if (Utils.isDefined(user.getSex())) {
             ignoreProperties.add("sex");
         }
         // 身份证号

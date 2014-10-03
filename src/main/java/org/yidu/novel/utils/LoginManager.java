@@ -82,7 +82,7 @@ public class LoginManager {
      */
     public static final TUser getLoginUser() {
         HttpSession session = getSession(false);
-        if (session != null) {
+        if (Utils.isDefined(session)) {
             return (TUser) session.getAttribute(YiDuConstants.LOGINUSER);
         } else {
             return null;
@@ -95,7 +95,7 @@ public class LoginManager {
      * @return true - 是否登录
      */
     public static final boolean isLoginFlag() {
-        return (getLoginUser() != null);
+        return Utils.isDefined(getLoginUser());
     }
 
     /**

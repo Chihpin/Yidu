@@ -50,7 +50,6 @@ public class LogoutAction extends AbstractPublicBaseAction {
 
     @Override
     public String getTempName() {
-        // TODO Auto-generated method stub
         return null;
     }
 }

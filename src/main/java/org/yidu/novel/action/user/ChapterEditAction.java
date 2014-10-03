@@ -151,7 +151,7 @@ public class ChapterEditAction extends AbstractUserBaseAction {
     }
 
     public String getPublishtimeStr() {
-        if (publishtime != null) {
+        if (Utils.isDefined(publishtime)) {
             return sdf.format(publishtime);
         } else {
             return "";
@@ -181,7 +181,7 @@ public class ChapterEditAction extends AbstractUserBaseAction {
         // 编辑
         if (chapterno != 0) {
             TChapter chapter = chapterService.getByNo(chapterno);
-            if (chapter != null) {
+            if (Utils.isDefined(chapter)) {
 
                 TArticle article = articleService.getByNo(chapter.getArticleno());
 

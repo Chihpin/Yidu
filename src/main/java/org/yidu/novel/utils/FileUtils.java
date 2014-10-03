@@ -168,6 +168,7 @@ public class FileUtils {
             url = getURL(null, path);
             return FileUtils.getFileName(url);
         } catch (Exception e) {
+            logger.error(e.getMessage(), e);
             return null;
         }
     }
@@ -507,7 +508,7 @@ public class FileUtils {
             }
             read.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return sb.toString();
     }
@@ -545,7 +546,7 @@ public class FileUtils {
             writer.write(content);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -608,9 +609,9 @@ public class FileUtils {
             }
             fos.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 

@@ -3,6 +3,7 @@ package org.yidu.novel.action;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.BeanUtils;
@@ -150,8 +151,8 @@ public class RegisterAction extends AbstractPublicBaseAction {
         searchBean.setLoginid(loginid);
         searchBean.setDeleteflag(false);
         List<TUser> userList = this.userService.find(searchBean);
-        if (userList != null && userList.size() > 0) {
-            addActionError(this.getText("errors.duplicated", new String[] { this.getText("label.user.loginid") }));
+        if (Utils.isDefined(userList)) {
+           addActionError(this.getText("errors.duplicated", new String[] { this.getText("label.user.loginid") }));
             return FREEMARKER;
         }
 
@@ -160,7 +161,7 @@ public class RegisterAction extends AbstractPublicBaseAction {
         searchBean.setEmail(email);
         searchBean.setDeleteflag(false);
         userList = this.userService.find(searchBean);
-        if (userList != null && userList.size() > 0) {
+        if (Utils.isDefined(userList)) {
             addActionError(this.getText("errors.duplicated", new String[] { this.getText("label.user.email") }));
             return FREEMARKER;
         }

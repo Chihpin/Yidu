@@ -296,7 +296,7 @@ public class ArticleEditAction extends AbstractUserBaseAction {
 
             String pinyin = Utils.getPinYin(articlename);
             TArticle articletemp = articleService.findByPinyin(pinyin);
-            if (articletemp != null) {
+            if (Utils.isDefined(articletemp)) {
                 // 存在的话
                 if (StringUtils.equals(articletemp.getPinyin(), pinyin)) {
                     // 如果存在相同拼音的就在后面加数字
@@ -350,7 +350,7 @@ public class ArticleEditAction extends AbstractUserBaseAction {
         articleService.save(article);
 
         // 保存图片文件
-        if (articlespic != null) {
+        if (Utils.isDefined(articlespic)) {
             if (ArrayUtils.contains(YiDuConstants.ALLOW_PIC_TYPES, getArticlespicContentType())) {
                 try {
                     Utils.saveArticlespic(article.getArticleno(), articlespic, articlespicFileName);

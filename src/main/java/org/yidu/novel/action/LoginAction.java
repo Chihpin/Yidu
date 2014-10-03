@@ -164,7 +164,7 @@ public class LoginAction extends AbstractPublicBaseAction {
             // 更新用户最后登录时间
             user.setLastlogin(new Date());
             userService.save(user);
-            if (true) {
+            if (useCookie) {
                 Cookie cookie = CookieUtils.addUserCookie(user);
                 // 添加cookie到response中
                 ServletActionContext.getResponse().addCookie(cookie);

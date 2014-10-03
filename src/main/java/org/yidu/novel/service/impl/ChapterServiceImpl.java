@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TChapter;
@@ -80,7 +81,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         params.add(chapterno);
         // 只取一条记录
         List<TChapter> chapterList = this.findByRange(hql.toString(), 0, 1, params);
-        if (chapterList != null && chapterList.size() > 0) {
+        if (Utils.isDefined(chapterList)) {
             return chapterList.get(0);
         }
         return null;
@@ -131,7 +132,7 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         params.add(articleno);
         // 只取一条记录
         List<TChapter> chapterList = this.findByRange(hql.toString(), 0, 1, params);
-        if (chapterList != null && chapterList.size() > 0) {
+        if (Utils.isDefined(chapterList)) {
             return chapterList.get(0);
         }
         return null;
