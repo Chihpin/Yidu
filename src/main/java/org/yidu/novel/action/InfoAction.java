@@ -278,7 +278,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
         if (article != null) {
 
-            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+            if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
                 // 获取章节信息
                 ChapterSearchBean searchBean = new ChapterSearchBean();
                 BeanUtils.copyProperties(this, searchBean);
