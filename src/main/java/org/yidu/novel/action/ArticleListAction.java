@@ -192,10 +192,10 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         int count = 0;
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CACHE_ARTICLE_COUNT, false)) {
             // 开启缓存件数的话
-            if (category != 0) {
+            if (Utils.isDefined(category)) {
                 // 分类
                 count = ArticleCountManager.getArticleCount(String.valueOf(category));
-            } else if (StringUtils.isNotEmpty(author)) {
+            } else if (Utils.isDefined(author)) {
                 count = ArticleCountManager.getArticleCount("author");
             } else if (fullflag != null && fullflag) {
                 count = ArticleCountManager.getArticleCount("fullflag");
