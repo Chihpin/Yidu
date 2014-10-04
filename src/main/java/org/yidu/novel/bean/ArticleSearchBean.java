@@ -31,6 +31,8 @@ public class ArticleSearchBean extends BaseSearchBean {
 
     private int fromArticleno;
 
+    private String pinyin;
+
     public int getArticleno() {
         return articleno;
     }
@@ -138,6 +140,27 @@ public class ArticleSearchBean extends BaseSearchBean {
      */
     public void setFromArticleno(int fromArticleno) {
         this.fromArticleno = fromArticleno;
+    }
+
+    /**
+     * 获取pinyin
+     * 
+     * @return pinyin
+     */
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    /**
+     * 
+     * 设置pinyin
+     * 
+     * 
+     * @param pinyin
+     *            pinyin
+     */
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
 
     @Override

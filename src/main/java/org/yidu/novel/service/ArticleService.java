@@ -60,7 +60,7 @@ public interface ArticleService {
      *            拼音
      * @return 小说
      */
-    TArticle findByPinyin(final String pinyin);
+    TArticle findByPinyinRegularRxpressions(final String pinyin);
 
     /**
      * 保存小说信息

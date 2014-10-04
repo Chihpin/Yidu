@@ -66,6 +66,11 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
             hql.append(" AND articlename = ? ");
             params.add(searchBean.getArticlename());
         }
+        // 拼音条件追加
+        if (StringUtils.isNotEmpty(searchBean.getPinyin())) {
+            hql.append(" AND pinyin = ? ");
+            params.add(searchBean.getPinyin());
+        }
         // 小说名条件追加
         if (searchBean.getFromArticleno() != 0) {
             hql.append(" AND articleno > ? ");
@@ -175,7 +180,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     }
 
     @Override
-    public TArticle findByPinyin(String pinyin) {
+    public TArticle findByPinyinRegularRxpressions(String pinyin) {
         String sql = "SELECT * FROM t_article where pinyin ~ '^" + pinyin + "[\\d]*$' order by pinyin desc;";
         List<TArticle> articleList = this.yiduJdbcTemplate.query(sql, new BeanPropertyRowMapper<TArticle>(
                 TArticle.class));

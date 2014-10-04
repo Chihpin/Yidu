@@ -302,7 +302,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         } else {
             article.setDeleteflag(false);
             String pinyin = Utils.getPinYin(articlename);
-            TArticle articletemp = articleService.findByPinyin(pinyin);
+            TArticle articletemp = articleService.findByPinyinRegularRxpressions(pinyin);
             if (Utils.isDefined(articletemp)) {
                 // 存在的话
                 if (StringUtils.equals(articletemp.getPinyin(), pinyin)) {

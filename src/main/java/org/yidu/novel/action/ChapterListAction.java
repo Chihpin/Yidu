@@ -3,7 +3,6 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +12,7 @@ import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -156,7 +156,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
                 article = articleService.getByNo(articleno);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
             } else if (StringUtils.isNotEmpty(pinyin)) {
-                article = articleService.findByPinyin(pinyin);
+                article = articleService.findByPinyinRegularRxpressions(pinyin);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin, article);
             }
         }

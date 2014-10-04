@@ -3,10 +3,8 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.cache.CacheManager;
@@ -213,23 +211,31 @@ public class InfoAction extends AbstractPublicBaseAction {
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
-        article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
-        if (article == null || article.getArticleno() == 0) {
-            if (articleno != 0) {
+
+        if (articleno != 0) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
+            if (!Utils.isDefined(article)) {
                 article = articleService.getByNo(articleno);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
-            } else if (StringUtils.isNotEmpty(pinyin)) {
-                article = articleService.findByPinyin(pinyin);
-                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin, article);
+            }
+        } else if (Utils.isDefined(pinyin)) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin);
+            if (!Utils.isDefined(article)) {
+                ArticleSearchBean searchBean = new ArticleSearchBean();
+                searchBean.setPinyin(pinyin);
+                List<TArticle> articleList = articleService.find(searchBean);
+                if (Utils.isDefined(articleList)) {
+                    article = articleList.get(0);
+                    CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin, article);
+                }
             }
         }
 
         if (article != null) {
-
             if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
                 // 获取章节信息
                 ChapterSearchBean searchBean = new ChapterSearchBean();
-                BeanUtils.copyProperties(this, searchBean);
+                searchBean.setArticleno(article.getArticleno());
                 chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
                         searchBean);
                 if (!Utils.isDefined(chapterList)) {
