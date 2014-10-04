@@ -119,7 +119,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getFullflag() {
-        return fullflag;
+        return fullflag == null ? false : fullflag;
     }
 
     public void setFullflag(Boolean fullflag) {
@@ -139,7 +139,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getFirstflag() {
-        return firstflag;
+        return firstflag== null ? false : firstflag;
     }
 
     public void setFirstflag(Boolean firstflag) {
@@ -147,7 +147,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getPermission() {
-        return permission;
+        return permission == null ? YiDuConstants.PermissionType.UNPERMISSION : permission;
     }
 
     public void setPermission(Integer permission) {
@@ -155,7 +155,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getAuthorflag() {
-        return authorflag;
+        return authorflag== null ? false : authorflag;
     }
 
     public void setAuthorflag(Boolean authorflag) {

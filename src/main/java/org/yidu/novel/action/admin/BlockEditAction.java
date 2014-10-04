@@ -117,7 +117,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getIsasc() {
-        return this.isasc;
+        return this.isasc == null ? false : isasc;
     }
 
     public void setIsasc(Boolean isasc) {
@@ -153,7 +153,8 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
         logger.debug("loadData start.");
         // 初始化下拉列表选项
         initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.block.type",
-                "collectionProperties.block.target", "collectionProperties.block.sortCol" });
+                "collectionProperties.block.target", "collectionProperties.block.sortCol",
+                "collectionProperties.boolean" });
         // 编辑
         if (blockno != 0) {
             TSystemBlock systemBlock = systemBlockService.getByNo(blockno);
@@ -172,6 +173,10 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
      */
     public String save() {
         logger.debug("save start.");
+        // 初始化下拉列表选项
+        initCollections(new String[] { "collectionProperties.article.category", "collectionProperties.block.type",
+                "collectionProperties.block.target", "collectionProperties.block.sortCol",
+                "collectionProperties.boolean" });
         TSystemBlock systemBlock = new TSystemBlock();
         if (blockno != 0) {
             systemBlock = systemBlockService.getByNo(blockno);

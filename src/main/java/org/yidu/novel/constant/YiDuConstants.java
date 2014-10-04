@@ -389,7 +389,6 @@ public class YiDuConstants {
     }
 
     /**
-     * 
      * <p>
      * 用户类型定义
      * </p>
@@ -420,6 +419,24 @@ public class YiDuConstants {
          * 编辑
          */
         public static final int EDITOR = 40;
+
+    }
+
+    /**
+     * <p>
+     * 小说授权级别定义
+     * </p>
+     * Copyright(c) 2014 YiDu-Novel. All rights reserved.
+     * 
+     * @version 1.1.6
+     * @author shinpa.you
+     */
+    public static final class PermissionType {
+
+        /**
+         * 暂未授权
+         */
+        public static final int UNPERMISSION = 4;
 
     }
 

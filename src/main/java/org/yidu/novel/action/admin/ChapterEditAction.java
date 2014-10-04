@@ -110,7 +110,7 @@ public class ChapterEditAction extends AbstractAdminEditBaseAction {
     }
 
     public int getVip() {
-        return isvip ? 2 : 1;
+        return isvip != null && isvip ? 2 : 1;
     }
 
     public void setVip(int vip) {

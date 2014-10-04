@@ -66,7 +66,7 @@
                 <tr>
                     <td><s:text name="label.admin.block.edit.isasc" /></td>
                     <td>
-                        <s:checkbox name="isasc" value="isasc" fieldValue="true"/>
+                        <s:radio list="collections['collectionProperties.boolean']" name="isasc"></s:radio>
                     </td>
                 </tr>
                 <tr>
