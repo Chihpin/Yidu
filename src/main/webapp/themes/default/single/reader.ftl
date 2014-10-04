@@ -77,7 +77,7 @@
 <div class="header">
 <ul class="menu">
 <li class="on"><a href="${contextPath}/" title="${article.articlename}">${article.articlename}</a></li>
-<li style='color:#FFF;padding-left:20px;'>喜欢《${article.articlename}》的书迷们，请记住本站http://${serverName}丫，这里绝对是你阅读的首选！</li>
+<li style='color:#FFF;padding-left:20px;'>喜欢《${article.articlename}》的书迷们，请记住本站http://${singleBookServerName}丫，这里绝对是你阅读的首选！</li>
 </ul>
 </div>
 </div>

@@ -278,11 +278,11 @@ public class InfoAction extends AbstractPublicBaseAction {
     }
 
     /**
-     * 取得单本用ServerName
+     * 取得单本用singleBookServerName
      * 
-     * @return 单本用ServerName
+     * @return 单本用singleBookServerName
      */
-    public String getServerName() {
+    public String getSingleBookServerName() {
         return YiDuConstants.singleBookServerName.get();
     }
 
