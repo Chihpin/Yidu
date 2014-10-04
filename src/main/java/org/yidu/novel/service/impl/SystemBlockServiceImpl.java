@@ -3,6 +3,7 @@ package org.yidu.novel.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.entity.TSystemBlock;
@@ -39,6 +40,10 @@ public class SystemBlockServiceImpl extends HibernateSupportServiceImpl implemen
         if (searchBean.getType() != null && searchBean.getType() != 0) {
             hql.append(" AND type = ? ");
             params.add(searchBean.getType());
+        }
+
+        if (ArrayUtils.isNotEmpty(searchBean.getTargets())) {
+            hql.append(" AND target in (" + StringUtils.join(searchBean.getTargets(), ",") + ") ");
         }
 
         Pagination pagination = searchBean.getPagination();
