@@ -3,7 +3,6 @@ package org.yidu.novel.action;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.BeanUtils;
