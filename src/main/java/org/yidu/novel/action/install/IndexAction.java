@@ -16,7 +16,7 @@ import java.text.MessageFormat;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.action.base.AbstractInstallBaseAction;
@@ -433,7 +433,7 @@ public class IndexAction extends AbstractInstallBaseAction {
      *            username
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.username = StringUtils.trim(username);
     }
 
     /**
@@ -454,7 +454,7 @@ public class IndexAction extends AbstractInstallBaseAction {
      *            password
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.password = StringUtils.trim(password);
     }
 
     @SkipValidation
