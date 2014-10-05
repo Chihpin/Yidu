@@ -215,7 +215,7 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
         logger.debug("loadBlock start.");
         // 从缓存中把首页用的区块信息取出
         blocks = CacheManager.getObject(getBlockKey(), null);
-        if (!Utils.isDefined(blocks)) {
+        if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.CACHE_EFFECTIVE, false) || !Utils.isDefined(blocks)) {
             blocks = new HashMap<String, Object>();
             // 没有取到的话从数据库里取出
             // block数据取得
