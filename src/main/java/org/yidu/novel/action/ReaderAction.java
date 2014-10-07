@@ -285,7 +285,6 @@ public class ReaderAction extends AbstractPublicBaseAction {
         return YiDuConstants.BlockTarget.READER_PAGE;
     }
 
-
     /**
      * 取得单本用singleBookServerName
      * 
@@ -297,11 +296,18 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
     @Override
     protected int getRecommondArticleno() {
-        return article.getArticleno();
+        if (Utils.isDefined(article)) {
+            return article.getArticleno();
+        }
+        return 0;
     }
 
     @Override
     protected int getRecommondCategory() {
-        return article.getCategory() == null ? 0 : article.getCategory();
+        if (Utils.isDefined(article) && Utils.isDefined(article.getCategory())) {
+            return article.getCategory();
+        } else {
+            return 0;
+        }
     }
 }
