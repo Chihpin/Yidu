@@ -16,6 +16,7 @@ import org.yidu.novel.action.ReviewListAction;
 import org.yidu.novel.action.user.BookcaseAction;
 import org.yidu.novel.action.user.SubscribeAction;
 import org.yidu.novel.action.user.VoteAction;
+import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.base.BaseTArticle;
@@ -24,16 +25,16 @@ public class TArticle extends BaseTArticle {
     private static final long serialVersionUID = 1L;
 
     /* [CONSTRUCTOR MARKER BEGIN] */
-	public TArticle () {
-		super();
-	}
+    public TArticle() {
+        super();
+    }
 
-	/**
-	 * Constructor for primary key
-	 */
-	public TArticle (int articleno) {
-		super(articleno);
-	}
+    /**
+     * Constructor for primary key
+     */
+    public TArticle(int articleno) {
+        super(articleno);
+    }
 
     /* [CONSTRUCTOR MARKER END] */
 
@@ -210,7 +211,6 @@ public class TArticle extends BaseTArticle {
                 + "&chapterno=" + getLastchapterno());
     }
 
-    
     /**
      * 获取最新章节URL
      * 
@@ -220,7 +220,7 @@ public class TArticle extends BaseTArticle {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(ReaderAction.URL + "?chapterno=" + getLastchapterno());
     }
-    
+
     /**
      * 获取最新章节的拼音形式的URL
      * 
@@ -289,6 +289,20 @@ public class TArticle extends BaseTArticle {
     public String getSubscribeUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(SubscribeAction.URL + "!add?articleno=" + getArticleno());
+    }
+
+    /**
+     * 获取小说介绍页拼音形式的URL
+     * 
+     * @return 小说介绍页拼音形式的URL
+     */
+    public String getSingleBookUrl() {
+        String pinyin = SingleBookManager.getPinYinHeadChar(getArticleno());
+        if (StringUtils.isNotBlank(pinyin)) {
+            return "http://" + pinyin + "." + YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
+        } else {
+            return YiDuConstants.serverName.get();
+        }
     }
 
     /**
