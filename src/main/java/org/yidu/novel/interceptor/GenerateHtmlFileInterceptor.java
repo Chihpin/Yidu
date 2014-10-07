@@ -40,8 +40,9 @@ public class GenerateHtmlFileInterceptor extends AbstractInterceptor {
         String rtn = invocation.invoke();
 
         if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_GENERATE_HTML_FILE, false)) {
-            // 如果是阅读页的话，同时生成静态页面
-            if (invocation.getAction() instanceof ReaderAction) {
+            // 如果是阅读页的话，同时生成静态页面 并且不生成分卷阅读
+            if (invocation.getAction() instanceof ReaderAction
+                    && ((ReaderAction) invocation.getAction()).getToChapterno() == 0) {
                 ReaderAction action = (ReaderAction) invocation.getAction();
                 logger.info("going to Generate Html file." + YiDuConstants.requestUri.get());
 
