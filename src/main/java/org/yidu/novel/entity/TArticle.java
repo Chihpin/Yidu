@@ -301,7 +301,7 @@ public class TArticle extends BaseTArticle {
         if (StringUtils.isNotBlank(pinyin)) {
             return "http://" + pinyin + "." + YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
         } else {
-            return YiDuConstants.serverName.get();
+            return YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
         }
     }
 
