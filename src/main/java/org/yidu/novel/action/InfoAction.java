@@ -1,6 +1,5 @@
 package org.yidu.novel.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
@@ -53,11 +52,11 @@ public class InfoAction extends AbstractPublicBaseAction {
     /**
      * 小说信息
      */
-    private TArticle article = new TArticle();
+    private TArticle article;
     /**
      * 章节列表信息
      */
-    private List<TChapter> chapterList = new ArrayList<TChapter>();
+    private List<TChapter> chapterList;
     /**
      * 评论件数
      */
@@ -65,7 +64,7 @@ public class InfoAction extends AbstractPublicBaseAction {
     /**
      * 评论列表
      */
-    private List<TReview> reviewList = new ArrayList<TReview>();
+    private List<TReview> reviewList;
 
     /**
      * 获取 articleno
@@ -258,12 +257,10 @@ public class InfoAction extends AbstractPublicBaseAction {
             pagination.setSortOrder("DESC");
             reviewSearchBean.setPagination(pagination);
             this.reviewList = reviewService.find(reviewSearchBean);
-
+            // 更新统计信息
+            articleService.updateVisitStatistic(article.getArticleno());
         } else {
             addActionError(getText("errors.not.exsits.article"));
-        }
-        if (articleno != 0) {
-            articleService.updateVisitStatistic(articleno);
         }
         logger.debug("loadData normally end.");
     }
