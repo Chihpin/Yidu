@@ -23,7 +23,6 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @author shinpa.you
  * @version 1.0
  */
-@SuppressWarnings("restriction")
 public class SecurityImage {
     /**
      * 输出log
