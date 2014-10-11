@@ -1,12 +1,11 @@
 package org.yidu.novel.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
+import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
@@ -52,11 +51,11 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     /**
      * 小说信息
      */
-    private TArticle article = new TArticle();
+    private TArticle article;
     /**
      * 章节列表信息
      */
-    private List<TChapter> chapterList = new ArrayList<TChapter>();
+    private List<TChapter> chapterList;
 
     /**
      * 获取 articleno
@@ -150,14 +149,23 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
-        article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
-        if (article == null || article.getArticleno() == 0) {
-            if (articleno != 0) {
+
+        if (articleno != 0) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno);
+            if (!Utils.isDefined(article)) {
                 article = articleService.getByNo(articleno);
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, articleno, article);
-            } else if (StringUtils.isNotEmpty(pinyin)) {
-                article = articleService.findByPinyinRegularRxpressions(pinyin);
-                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin, article);
+            }
+        } else if (Utils.isDefined(pinyin)) {
+            article = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin);
+            if (!Utils.isDefined(article)) {
+                ArticleSearchBean searchBean = new ArticleSearchBean();
+                searchBean.setPinyin(pinyin);
+                List<TArticle> articleList = articleService.find(searchBean);
+                if (Utils.isDefined(articleList)) {
+                    article = articleList.get(0);
+                    CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_PREFIX, pinyin, article);
+                }
             }
         }
 
