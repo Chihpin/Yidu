@@ -22,6 +22,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -127,10 +128,12 @@ public class Utils {
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
-                    sb.append(lineTxt);
                     if (escape) {
+                        // 替换到标签的开始结束
+                        sb.append(StringEscapeUtils.escapeHtml(lineTxt));
                         sb.append("<br/>");
                     } else {
+                        sb.append(lineTxt);
                         sb.append("\n");
                     }
                 }
