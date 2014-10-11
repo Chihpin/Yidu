@@ -1,6 +1,5 @@
 package org.yidu.novel.action;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,7 +65,7 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
     /**
      * 评论列表
      */
-    private List<TReview> reviewList = new ArrayList<TReview>();
+    private List<TReview> reviewList;
     /**
      * 小说信息
      */
@@ -266,6 +265,7 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
             article = articleService.getByNo(articleno);
         } else {
             addActionError(getText("errors.not.exsits.article"));
+            return;
         }
 
         ReviewSearchBean searchBean = new ReviewSearchBean();
