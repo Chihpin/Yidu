@@ -77,7 +77,17 @@
 		<filter-class>org.yidu.novel.filter.SingleBookFilter</filter-class>
 	</filter>
 
+
+    <filter>
+        <filter-name>forbidFreemarkerFilter</filter-name>
+        <filter-class>org.yidu.novel.filter.ForbidFreemarkerFilter</filter-class>
+    </filter>	
+
 	<!-- The Filter-Mapping Setting -->
+    <filter-mapping>
+        <filter-name>forbidFreemarkerFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 	<filter-mapping>
 		<filter-name>singleBookFilter</filter-name>
@@ -99,6 +109,7 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
 	<filter-mapping>
