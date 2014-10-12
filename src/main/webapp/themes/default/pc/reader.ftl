@@ -5,49 +5,7 @@
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  
 <#macro customizeimport>  
-<link href="${contextPath}/themes/${themeName}/pc/css/readtools.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
-<script src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
-<script type="text/javascript">
-    <!--
-    var preview_page = '<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>';
-    var next_page = '<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>';
-    var index_page = '<#if enableChapterIndexPage>${article.chapterListUrl}<#else>${article.url}</#if>';
-    var article_id = '${chapter.articleno?c}';
-    var chapter_id = '${chapter.chapterno?c}';
-    function jumpPage() {
-      var event = document.all ? window.event : arguments[0];
-      if (event.keyCode == 37) document.location = preview_page;
-      if (event.keyCode == 39) document.location = next_page;
-    }
-    document.onkeydown=jumpPage;
-
-    $(document).ready(function(){
-       var readhistory = $.cookie("readhistory");
-       if(! readhistory ){
-            readhistory = new Array();
-       }else{
-            readhistory = JSON.parse(readhistory);
-       }
-       var readObject = new Object();
-       readObject.chapterno = ${chapter.chapterno?c};
-       readObject.articleno = ${chapter.articleno?c};
-       readObject.chaptername = "${chapter.chaptername}";
-       readObject.articlename = "${chapter.articlename}";
-       readObject.imgUrl = "${article.imgUrl}";
-       var index = readObject.articleno.in_array(readhistory);
-       if(index != -1){
-            readhistory.splice(index,1);
-       }
-       readhistory.splice(0,0,readObject);
-       if(readhistory.length > 10 ){
-            readhistory.splice(9,readhistory.length - 10);
-       }
-       $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
-    })
-    -->
-</script>
-
+<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/readtools.css" />
 </#macro>
 
 <#macro content>
@@ -92,7 +50,15 @@
                 </li>
                 <li>
                     <span class="fl">字体大小：</span>
-                    <input type='range' name='fontsize' id='fontsize' value='14' style='display:none' readonly min='12' max='30' />
+                    <div class="fl">
+                        <select onchange="setFontSize(this.value);" id="bcolor" name="bcolor">
+                        <option value="#E9FAFF">大小</option>
+                        <option value="14pt">默认</option><option value="10pt">10pt</option>
+                        <option value="12pt">12pt</option><option value="14pt">14pt</option>
+                        <option value="16pt">16pt</option><option value="18pt">18pt</option>
+                        <option value="20pt">20pt</option><option value="22pt">22pt</option>
+                        <option value="25pt">25pt</option><option value="30pt">30pt</option></select>
+                    </div>    
                 </li>
                 <li>
                     <span class="fl">字体颜色：</span>
@@ -114,25 +80,19 @@
                 </li>
             </ul>
         </div>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader1.js"></script>
-        </#if>
+        <div id="reader_ad_01"></div>
         <div class="mainContenr"   id="content">
             <#if chapter.content??>${chapter.content}</#if>
         </div>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader2.js"></script>
-        </#if>
+        <div id="reader_ad_02"></div>
         <div class="backs">
-            <a href="<#if chapter.preChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.preChapterno?c}")}</#if>" class="pre">上一章</a>
+            <a href="${chapter.preChapterUrl}" class="pre">上一章</a>
             <a href="<#if enableChapterIndexPage>${article.chapterListUrl}<#else>${article.url}</#if>" class="backfor">返回目录</a>
-            <a href="<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>" class="next">下一章</a>
+            <a href="${chapter.nextChapterUrl}" class="next">下一章</a>
             <p>小提示： 按←键返回上一页，按→键进入上一页,您还可以
                  <a href="${encodeURL("/user/bookcase!add?articleno=${chapter.articleno?c}&chapterno=${chapter.chapterno?c}")}" title="加入书签"  target="_blank">加入书签</a>
             </p></div>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader3.js"></script>
-        </#if>
+        <div id="reader_ad_03"></div>
         </div>
        </section>
        <div class="attention">
@@ -179,17 +139,24 @@
     </div>
     </div>
 </div>
-<script language="JavaScript" type="text/JavaScript"> 
-
-</script>
+<div id="reader_ad_04"></div>
 </#macro>
 
-<#macro customizefooter> 
-    <div id="full2" style="width:37px; height:22px; position:fixed; left:50%; top:425px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_top" alt="返回顶部"></a>
-    </div>
-    <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_bottom" alt="跳至页尾"></a>
-    </div>
-    <script src="${contextPath}/themes/${themeName}/pc/js/news_top.js" type="text/javascript"></script>
+<#macro customizeJs>  
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
+<script type="text/javascript">
+    <!--
+        var preview_page = "${chapter.preChapterUrl}";
+        var next_page = "${chapter.nextChapterUrl}";
+        var index_page = '<#if enableChapterIndexPage>${article.chapterListUrl}<#else>${article.url}</#if>';
+        var readHistoryObject = new Object();
+        readHistoryObject.chapterno = ${chapter.chapterno?c};
+        readHistoryObject.articleno = ${chapter.articleno?c};
+        readHistoryObject.chaptername = "${chapter.chaptername}";
+        readHistoryObject.articlename = "${chapter.articlename}";
+        readHistoryObject.infoUrl="${article.url}";
+        readHistoryObject.chapterUrl = "${chapter.chapterUrl}";
+        document.onkeydown=jumpPage;
+    -->
+</script>
 </#macro>

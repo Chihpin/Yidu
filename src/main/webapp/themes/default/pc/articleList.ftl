@@ -10,16 +10,14 @@
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 <#else>
 <title>完本小说|${getText("label.system.title")}</title>
-<meta name="keywords" content="完本小说,"${getText("label.system.siteKeywords")}" />
+<meta name="keywords" content="完本小说,${getText("label.system.siteKeywords")}" />
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#if>
 </#macro>
 
 
 <#macro content>
-<#if adEffective?? && adEffective>
-<script type="text/javascript" src="${contextPath}/ad/list1.js"></script>
-</#if>
+<div id="list_ad_01"></div>
 <div class="mainnav" id="navList">
 <div class="main-index">位置：  &nbsp; > &nbsp; <a href="#"><#if fullflag ?? && fullflag>全本小说<#elseif category ??>${categorymap[category?c]}<#elseif author??>${author}的小说<#else>小说列表页</#if></a></div>
     <section class="section board-list board-list-collapse">
@@ -39,9 +37,7 @@
         </li>
         </#list>
     </ul>
-    <#if adEffective?? && adEffective>
-      <script type="text/javascript" src="${contextPath}/ad/list2.js"></script>
-    </#if>  
+    <div id="list_ad_02"></div>
           <div class="pages">
               <div class="pagelink" id="pagelink">
                 <#if fullflag?? && fullflag>
@@ -80,8 +76,6 @@
         </div>
     </section>
   </div>
-  <#if adEffective?? && adEffective>
-  <script type="text/javascript" src="${contextPath}/ad/list3.js"></script>
-  </#if>
+  <div id="list_ad_03"></div>
   </div>
 </#macro>

@@ -5,36 +5,7 @@
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  
 <#macro customizeimport>  
-<link href="${contextPath}/themes/${themeName}/pc/css/readtools.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
-<script src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
-<script type="text/javascript">
-    <!--
-    $(document).ready(function(){
-       var readhistory = $.cookie("readhistory");
-       if(! readhistory ){
-            readhistory = new Array();
-       }else{
-            readhistory = JSON.parse(readhistory);
-       }
-       var readObject = new Object();
-       readObject.chapterno = ${toChapterno?c};
-       readObject.articleno = ${chapter.articleno?c};
-       readObject.chaptername = "${chapter.chaptername}";
-       readObject.articlename = "${chapter.articlename}";
-       readObject.imgUrl = "${article.imgUrl}";
-       var index = readObject.articleno.in_array(readhistory);
-       if(index != -1){
-            readhistory.splice(index,1);
-       }
-       readhistory.splice(0,0,readObject);
-       if(readhistory.length > 10 ){
-            readhistory.splice(9,readhistory.length - 10);
-       }
-       $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' , expires: 365});
-    })
-    -->
-</script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/pc/css/readtools.css"/>
 </#macro>
 
 <#macro content>
@@ -53,14 +24,11 @@
     ${chapter.chaptername}</div>
     <section class="main b-detail" id="directs">
         <div class="bookInfo">
-                <div>
-					<ul>
-					<#list fullReadChapterList as c >
-						<li style="float:left;width:28%;padding:5px 20px;font-size:14px;"><a href="#${c.chapterno?c}">${c.chaptername}</a></li>
-					</#list>
-					</ul>
-				</div>
-                <div class="clear"></div>
+            <h1>
+                <span class="r"></span>
+                <em class="l">《${chapter.articlename}》</em>
+                <strong class="l jieqi_title">${chapter.chaptername}</strong>
+            </h1>
             <div class="toolbar">
             <ul>
                 <li>
@@ -77,7 +45,15 @@
                 </li>
                 <li>
                     <span class="fl">字体大小：</span>
-                    <input type='range' name='fontsize' id='fontsize' value='14' style='display:none' readonly min='12' max='30' />
+                    <div class="fl">
+                        <select onchange="setFontSize(this.value);" id="bcolor" name="bcolor">
+                        <option value="#E9FAFF">大小</option>
+                        <option value="16pt">默认</option><option value="10pt">10pt</option>
+                        <option value="12pt">12pt</option><option value="14pt">14pt</option>
+                        <option value="16pt">16pt</option><option value="18pt">18pt</option>
+                        <option value="20pt">20pt</option><option value="22pt">22pt</option>
+                        <option value="25pt">25pt</option><option value="30pt">30pt</option></select>
+                    </div>    
                 </li>
                 <li>
                     <span class="fl">字体颜色：</span>
@@ -100,9 +76,15 @@
             </ul>
 			<div style="clear:both;"></div>
         </div>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader1.js"></script>
-        </#if>
+        <div id="reader_ad_01"></div>
+        <div>
+            <ul>
+            <#list fullReadChapterList as c >
+                <li style="float:left;width:28%;padding:5px 20px;font-size:14px;"><a href="#${c.chapterno?c}">${c.chaptername}</a></li>
+            </#list>
+            </ul>
+        </div>
+        <div class="clear"></div>
         <div class="mainContenr"   id="content" style="overflow:hidden">
 			<#list fullReadChapterList as c >
                 <a name="${c.chapterno?c}">${c.chaptername}</a><br/>
@@ -110,12 +92,7 @@
 				<hr/><br/>				
             </#list>
         </div>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader2.js"></script>
-        </#if>
-        <#if adEffective?? && adEffective>
-        <script type="text/javascript" src="${contextPath}/ad/reader3.js"></script>
-        </#if>
+        <div id="reader_ad_02"></div>
         </div>
        </section>
        
@@ -155,6 +132,7 @@
     </div>
     </div>
 </div>
+<div id="reader_ad_04"></div>
 </#macro>
 
 <#macro customizefooter> 
@@ -165,5 +143,21 @@
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_bottom" alt="跳至页尾"></a>
     </div>
-    <script src="${contextPath}/themes/${themeName}/pc/js/news_top.js" type="text/javascript"></script>
+</#macro>
+
+<#macro customizeJs>  
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery.tools.min1.2.5.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
+<script type="text/javascript">
+    <!--
+        var readHistoryObject = new Object();
+        readHistoryObject.chapterno = ${chapter.chapterno?c};
+        readHistoryObject.articleno = ${chapter.articleno?c};
+        readHistoryObject.chaptername = "${chapter.chaptername}";
+        readHistoryObject.articlename = "${chapter.articlename}";
+        readHistoryObject.infoUrl="${article.url}";
+        readHistoryObject.chapterUrl = "${chapter.chapterUrl}";
+    -->
+</script>
 </#macro>

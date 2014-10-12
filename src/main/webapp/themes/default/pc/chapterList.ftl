@@ -4,32 +4,16 @@
 <title>${article.articlename}章节列表|${article.articlename}最新章节</title>
 <meta name="keywords" content="${article.articlename}章节列表,${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
 <meta name="description" content="《${article.articlename}》章节列表，,${article.articlename}最新章节，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
- 
-   <meta property="og:novel:read_url" content="${article.url}"/>
-
-   <!--选填-->
-   <meta property="og:novel:status" content="<#if article.fullflag>完结<#else>连载中</#if>"/>
-   <meta property="og:novel:update_time" content="${article.lastupdate?string("yyyy-MM-dd HH:mm")}"/>
-   <meta property="og:novel:click_cnt" content="${article.allvisit?c}"/>
-   <meta property="og:novel:latest_chapter_name" content="${article.lastchapter}"/>
-   <meta property="og:novel:latest_chapter_url" content="${article.lastChapterUrl}"/>
-
 </#macro>
 
-
-
 <#macro content>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/chapterList1.js"></script>
-    </#if>
+    <div id="chapterList_ad_01"></div>
     <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
         <a href="${encodeURL("/articleList?category=${article.category}")}" class="c009900">
         ${categorymap[article.category?c]}</a> &nbsp; > &nbsp; 
         <a href="${article.url}" class="c009900">${article.articlename}</a>
     </div>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/chapterList2.js"></script>
-    </#if>
+    <div id="chapterList_ad_02"></div>
     <div class="clear"></div>
     <div class="chapterNum">
         <a name="chapters"></a>
@@ -56,9 +40,7 @@
           </ul>
         </div>
     </div>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/chapterList3.js"></script>
-    </#if>
+    <div id="chapterList_ad_03"></div>
         <div class="navTab">
         <ul>
             <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
@@ -94,16 +76,16 @@
         </ul>
         </#if>
     </div>
-    
 </#macro>
 
 <#macro customizefooter> 
     <div id="full2" style="width:37px; height:22px; position:fixed; left:50%; top:425px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_top" alt="返回顶部"></a>
+        <a class="get_top" alt="返回顶部"></a>
     </div>
-    
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_bottom" alt="跳至页尾"></a>
+        <a class="get_bottom" alt="跳至页尾"></a>
     </div>
-    <script src="${contextPath}/themes/${themeName}/pc/js/news_top.js" type="text/javascript"></script>
+</#macro>
+<#macro customizeJs>  
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
 </#macro>

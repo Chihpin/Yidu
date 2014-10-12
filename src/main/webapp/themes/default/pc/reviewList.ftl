@@ -10,9 +10,7 @@
 </#macro>
 
 <#macro content>
-<#if adEffective?? && adEffective>
-<script type="text/javascript" src="${contextPath}/ad/reviewlist1.js"></script>
-</#if>
+<div id="review_ad_01"></div>
 <div class="mainnav" id="navList">
     <div class="main-index">位置：  &nbsp; > &nbsp; <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"><#if article?? >${article.articlename}</#if></a>&nbsp;>&nbsp; <#if article?? >${article.articlename}</#if>的评论</div>
     <div class="comment_left">
@@ -69,9 +67,7 @@
                     <input name="page" type="text" size="4" maxlength="6" onkeydown="if(event.keyCode==13){window.location='${listurlforjs}'+this.value+'.html'; return false;}" /></kbd>
              </div>
         <div class="blank"></div>
-          <#if adEffective?? && adEffective>
-          <script type="text/javascript" src="${contextPath}/ad/reviewlist2.js"></script>
-          </#if>
+         <div id="review_ad_02"></div>
         <!-- 我的回复框 -->
         <div id="commentbox" class="talker_form">
             <#if !loginFlag>
@@ -93,7 +89,5 @@
             </div>
         </div>
     </div>
-  <#if adEffective?? && adEffective>
-  <script type="text/javascript" src="${contextPath}/ad/reviewlist3.js"></script>
-  </#if>
+   <div id="review_ad_03"></div>
 </#macro>

@@ -28,9 +28,7 @@
 </#macro>
 
 <#macro content>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/info1.js"></script>
-    </#if>
+    <div id="info_ad_01"></div>
     <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
         <a href="${encodeURL("/articleList?category=${article.category}")}" class="c009900">
         ${categorymap[article.category?c]}</a> &nbsp; > &nbsp; 
@@ -44,7 +42,7 @@
         <div class="b-info">
           <h1>${article.articlename}</h1>
           <div class="infoDetail">
-                <div id="waa" style="height:72px;width:520px;overflow:hidden;">介绍:${article.introForHtml}</div>
+                <div id="waa" style="height:72px;width:700px;overflow:hidden;">介绍:${article.introForHtml}</div>
                 <a href="javascript:void(0)" id="show"  onclick="document.getElementById('waa').style.height='';document.getElementById('hidden').style.display='';document.getElementById('show').style.display='none';" style="float:right;">+ 展开全部</a>
                 <a href="javascript:void(0)" id="hidden" style="display:none;float:right;" onclick="document.getElementById('waa').style.height='72px';document.getElementById('hidden').style.display='none';document.getElementById('show').style.display='';">- 收回介绍</a> 
           </div>
@@ -55,38 +53,6 @@
               <a href="${encodeURL("/user/vote?articleno=${article.articleno?c}")}" target="_blank"  id="toupiao"  class="toupiao" rel="nofollow">给本书投票</a>
               <a href="/user/messageEdit?title=${article.articlename}-章节错误&content=举报原因如下：  "  class="error" target="_blank" rel="nofollow">内容报错</a>
           </div>
-        </div>
-
-        <div class="scores">
-            <h2>评分</h2>
-            <p id="fenshuview">10.0<br>
-                <img src="${contextPath}/themes/${themeName}/pc/images/s2.png" alt="评分图标">
-                <img src="${contextPath}/themes/${themeName}/pc/images/s2.png" alt="评分图标">
-                <img src="${contextPath}/themes/${themeName}/pc/images/s2.png" alt="评分图标">
-                <img src="${contextPath}/themes/${themeName}/pc/images/s2.png" alt="评分图标">
-                <img src="${contextPath}/themes/${themeName}/pc/images/s2.png" alt="评分图标">
-            </p>
-            <div class="sets">
-               <div class="scoreSet">
-                   <span>
-                        <img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标">
-                        <img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标">
-                        <img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标">
-                        <img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标">
-                   </span>
-                    <input type="hidden" value="8" id="fenshu" />
-                    <input type="hidden" value="7940" id="articleid" />
-                    <ul id="xingxing">
-                        <li value="10"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"><img src="/images/s1.png" alt="评分图标"></li>
-                        <li value="2"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"></li>
-                        <li value="4"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"></li>
-                        <li value="6"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"></li>
-                        <li value="8"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"></li>
-                        <li value="10"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"><img src="${contextPath}/themes/${themeName}/pc/images/s1.png" alt="评分图标"></li>
-                    </ul>
-                </div>
-                <input type="button" id="submitfenshu" value="确定"/>
-           </div>
         </div>
         <div class="clear"></div>
         <div class="author">
@@ -102,20 +68,17 @@
                 <dl><dt>TXT下载：</dt><dd><#if loginFlag><a href="${article.downloadUrl}" target="_blank"><font color="red" >全本下载</font></a><#else><font color="red" >不好意思，登录后才可以下载：）</#if></font></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>
-                    <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}" target="_blank"><#if article.lastchapter?? >${article.lastchapter}</#if></a>
+                    <a href="${article.lastChapterUrl}" target="_blank"><#if article.lastchapter?? >${article.lastchapter}</#if></a>
                     <em>更新于:[${article.lastupdate?string("MM-dd HH:mm")}]</em><br />
                     </dd>
                 </dl>
             </div>
-            <div class="adv"><#if adEffective?? && adEffective><script src="${contextPath}/ad/info2.js" type="text/javascript"></#if></script></div>
+            <div class="adv"><div id="info_ad_02"></div></div>
             <div class="clear"></div>
         </div>
     </section>
     </div>
-    <#if adEffective?? && adEffective>
-    <div class="bookNew"><script src="${contextPath}/ad/info3.js" type="text/javascript"></script></div>
-    </#if>
-    
+    <div id="info_ad_03"></div>
     <div class="clear"></div>
     <div class="comment_left">
         <div class="commenthead">
@@ -168,10 +131,7 @@
             </div>
         </div>
     </div>
-    <#if adEffective?? && adEffective>
-    <div class="bookNew"><script src="${contextPath}/ad/info4.js" type="text/javascript"></script></div>
-    </#if>
-
+    <div id="info_ad_04"></div>
     <#if !enableChapterIndexPage >
     <div class="clear"></div>
     <div class="chapterNum">
@@ -198,12 +158,8 @@
             </#list>
           </ul>
     </div>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/info5.js"></script>
+    <div id="info_ad_05"></div>
     </#if>
-    </#if>
-    
-    
         <div class="navTab">
         <ul>
             <li onmouseover="replaces(1,2)" id="for1" class="select"><a href="#">站长推荐</a></li>
@@ -242,11 +198,18 @@
 </#macro>
 
 <#macro customizefooter> 
+<#if !enableChapterIndexPage >
     <div id="full2" style="width:37px; height:22px; position:fixed; left:50%; top:425px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_top" alt="返回顶部"></a>
     </div>
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
     <a class="get_bottom" alt="跳至页尾"></a>
     </div>
-    <script src="${contextPath}/themes/${themeName}/pc/js/news_top.js" type="text/javascript"></script>
+</#if>
+</#macro>
+
+<#macro customizeJs>
+<#if !enableChapterIndexPage >
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
+</#if>
 </#macro>

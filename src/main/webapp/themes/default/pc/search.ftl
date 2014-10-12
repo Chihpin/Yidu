@@ -8,6 +8,7 @@
 
 <#macro content>
 <div class="mainnav" id="navList">
+    <div id="search_ad_01"></div>
     <table class="grid" width="100%" align="center">
     <caption>搜索结果</caption>
       <tr align="center">
@@ -29,6 +30,7 @@
       </tr>
       </#list>
     </table>
+    <div id="search_ad_02"></div>
     <div class="pages">
         <div class="pagelink" id="pagelink">
             <#assign listurl = "/search?key=${key?html}&page=">

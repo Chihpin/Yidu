@@ -3,10 +3,10 @@
 .content{width:958px;border:1px solid #d5d5d5;}
 .content .ChapterBottom{width:958px;}
 .ChapterName{text-align:center;font-size:30px;color:#da1a27;padding:15px 0;}
-.toolbar,.setBG,.setFont,.setFont span,#fontBtn{background:url(/images/text.gif) no-repeat}
+.toolbar,.setBG,.setFont,.setFont span,#fontBtn{background:url(../images/text.gif) no-repeat}
 .toolbar{width:958px;margin:0 auto;border-bottom:0;position:relative; text-align:center; height:40px; background-position:0 -76px; background-repeat:repeat-x;}
 .toolbar ul {position:relative; float:right; right:50%;}
-.toolbar li{position:relative;float:left;left:50%;padding:16px 10px 0 10px; height:16px; line-height:16px;width:180px;}
+.toolbar li{position:relative;float:left;left:50%;padding:10px 10px 0 10px; height:16px; line-height:16px;width:180px;}
 .toolbar li div{ vertical-align:middle;margin-top:1px !important;*margin-top:-3px!important;margin-top:-3px;display:inline;float:left;}
 .toolbar li span.fl{ float:left;}
 .toolbar li div select{margin-top:-4px !important;*margin-top:-1px!important;margin-top:-1px;}
@@ -26,7 +26,7 @@
 .booktext{padding:0 5%;line-height:150%;}
 .page{clear:both;width:420px;height:32px;margin:10px auto;overflow:hidden;}
 .page span{margin:0 10px;width:120px;display:inline-block;overflow:hidden;}
-.page a{display:block;font-size:14px;width:120px;height:32px;line-height:34px;background:url(btn.png) no-repeat;color:#000;}
+.page a{display:block;font-size:14px;width:120px;height:32px;line-height:34px;background:url(../images/btn.png) no-repeat;color:#000;}
 .page a:hover{color:#fff;font-weight:bold;}
 .page .pre a{background-position:0 0;padding-left:50px;}
 .page .pre a:hover{background-position:0 -32px}
@@ -43,8 +43,8 @@
 .ListCont {
 width:width:768px; border:1px solid #d5d5d5; float:left; overflow:hidden; }
 .Side { width:178px; border:1px solid #d5d5d5; float:right; overflow:hidden; }
-.ListCont .ChapterTitle { width:768px; height:29px; line-height:29px; background: url(/images/titlebg.gif) #fff repeat-x 0 -40px; }
-.ListCont .ChapterTitle h5, .ListCont .ChapterTitle h6 { float:left; padding-left:25px; line-height:29px; font-size:14px; background:url(/images/r_dot.gif) no-repeat 10px center; }
+.ListCont .ChapterTitle { width:768px; height:29px; line-height:29px; background: url(../images/titlebg.gif) #fff repeat-x 0 -40px; }
+.ListCont .ChapterTitle h5, .ListCont .ChapterTitle h6 { float:left; padding-left:25px; line-height:29px; font-size:14px; background:url(../images/r_dot.gif) no-repeat 10px center; }
 .ListCont .ChapterTitle span { float:right;font-size:12px;padding-right:10px;}
 .ListCont .ChapterTitle span a { color:red; }
 .ListCont .ChapterList { width:756px; padding:6px; overflow:hidden; }
@@ -53,8 +53,8 @@ width:width:768px; border:1px solid #d5d5d5; float:left; overflow:hidden; }
 .ListCont .notice strong { color:#004d00; }
 .ChapterBottom { width:768px; margin-top:10px; border-top:1px solid #d5d5d5; height:30px; line-height:32px; text-align:center; background:#fff; color:#ccc;}
 .ChapterBottom a,.ChapterBottom span { font-size:14px; margin:0 20px; color:#004d00;}
-.Side .title { background: url(/images/titlebg.gif) #f2f2f2 repeat-x; border-bottom:1px solid #d5d5d5; height:28px; overflow:hidden; clear:both; }
-.Side .title span { float:left; background: url(/images/titlebg.gif) no-repeat 0 -80px; height:28px; line-height:30px; padding-left:12px; font-size:14px; font-weight:bold; }
+.Side .title { background: url(../images/titlebg.gif) #f2f2f2 repeat-x; border-bottom:1px solid #d5d5d5; height:28px; overflow:hidden; clear:both; }
+.Side .title span { float:left; background: url(../images/titlebg.gif) no-repeat 0 -80px; height:28px; line-height:30px; padding-left:12px; font-size:14px; font-weight:bold; }
 .Side .cont { padding:5px; clear:both; }
 .Side .cont p { line-height:20px; text-indent:1em; color:#999; }
 .Side .cont p.t1 { text-indent:0; color:#333; line-height:24px; font-weight:bold; }

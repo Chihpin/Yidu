@@ -11,10 +11,7 @@
 </#macro>
 
 <#macro content>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/list1.js"></script>
-    </#if>
-    
+    <div id="top_ad_01"></div>
     <div class="topLefft">
         <h1>排行榜</h1>
         <ul>
@@ -50,6 +47,7 @@
           <dd class="authors">作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a></dd></dl>
         </#if>
         </#list>
+        <div id="top_ad_02"></div>
         <div class="mainnav" id="navList">
         <div class="pages">
               <div class="pagelink" id="pagelink">
@@ -79,8 +77,6 @@
         </div>
         </div>
     </div>
-    <#if adEffective?? && adEffective>
-    <script type="text/javascript" src="${contextPath}/ad/list3.js"></script>
-    </#if>
+    <div id="top_ad_03"></div>
 </div>
 </#macro>
