@@ -163,6 +163,15 @@ public class DownloadAction extends AbstractPublicBaseAction {
     @SkipValidation
     public String execute() {
         logger.debug("execute start.");
+
+        // 小说编号没有指定的话，直接退出
+        if (articleno == 0) {
+            addActionError(getText("errors.not.exsits.article"));
+            logger.warn("the articleno was not been set. abort download.");
+            logger.debug("execute abnormally end.");
+            return FREEMARKER_ERROR;
+        }
+
         setDownloadFileName(articleno + ".txt");
         long size = 0;
         try {
