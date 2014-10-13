@@ -2,6 +2,7 @@ package org.yidu.novel.action;
 
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TUser;
+import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
 import org.yidu.novel.utils.Utils;
 
@@ -97,8 +99,11 @@ public class QQLoginAction extends AbstractPublicBaseAction {
                         user.setLastlogin(new Date());
                         userService.save(user);
                     }
-
                     LoginManager.doLogin(user);
+                    // 保存用的登录信息
+                    Cookie cookie = CookieUtils.addUserCookie(user);
+                    // 添加cookie到response中
+                    ServletActionContext.getResponse().addCookie(cookie);
                 } else {
                     logger.warn("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
                 }

@@ -49,7 +49,7 @@ public class CookieUtils {
     public static Cookie addUserCookie(TUser user) {
         try {
             Cookie cookie = new Cookie(USER_COOKIE, URLEncoder.encode(user.getLoginid(), YiDuConstants.ENCODING_UTF_8)
-                    + "," + user.getPassword() + "," + user.getType());
+                    + "," + user.getPassword() + "," + user.getType() + "," + StringUtils.isNotBlank(user.getOpenid()));
             // 默认保持两年cookie保存两周
             cookie.setMaxAge(60 * 60 * 24 * 365);
             return cookie;
