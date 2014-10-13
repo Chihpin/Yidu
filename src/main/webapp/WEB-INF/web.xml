@@ -79,13 +79,13 @@
 
 
     <filter>
-        <filter-name>forbidFreemarkerFilter</filter-name>
-        <filter-class>org.yidu.novel.filter.ForbidFreemarkerFilter</filter-class>
+        <filter-name>forbidFilter</filter-name>
+        <filter-class>org.yidu.novel.filter.ForbidFilter</filter-class>
     </filter>	
 
 	<!-- The Filter-Mapping Setting -->
     <filter-mapping>
-        <filter-name>forbidFreemarkerFilter</filter-name>
+        <filter-name>forbidFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -123,7 +123,7 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/error404</location>
+		<location>/error/error404.html</location>
 	</error-page>
 
 </web-app>

@@ -49,6 +49,8 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      */
     private boolean hasError = false;
 
+    private boolean notFoundFlag = false;
+
     /**
      * 区块信息
      */
@@ -205,7 +207,14 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
             return FREEMARKER_ERROR;
         }
         logger.debug("execute normally end.");
+        if (notFoundFlag) {
+            return HTTPHEADER404;
+        }
         return FREEMARKER;
+    }
+
+    protected void setNotFound(boolean notFoundFlag) {
+        this.notFoundFlag = notFoundFlag;
     }
 
     /**
@@ -261,43 +270,60 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
     }
 
     public String getSiteTitle() {
-        return getText("label.system.title");
+
+        return getValueForKey("label.system.title");
     }
 
     public String getSiteKeyword() {
-        return getText("label.system.siteKeywords");
+        return getValueForKey("label.system.siteKeywords");
     }
 
     public String getSiteDescription() {
-        return getText("label.system.siteDescription");
+        return getValueForKey("label.system.siteDescription");
     }
 
     public String getSiteName() {
-        return getText("label.system.name");
+        return getValueForKey("label.system.name");
     }
 
     public String getSiteUrl() {
-        return getText("label.system.url");
+        return getValueForKey("label.system.url");
     }
 
     public String getSiteCopyright() {
-        return getText("label.system.copyright");
+        return getValueForKey("label.system.copyright");
     }
 
     public String getSiteSupport() {
-        return getText("label.system.support");
+        return getValueForKey("label.system.support");
     }
 
     public String getBeianNo() {
-        return getText("label.system.beianNo");
+        return getValueForKey("label.system.beianNo");
     }
 
     public String getAnalyticscode() {
-        return getText("label.system.analyticscode");
+        return getValueForKey("label.system.analyticscode");
     }
 
     public String getDomain() {
-        return getText("label.system.domain");
+        return getValueForKey("label.system.domain");
+    }
+
+    public String getServerName() {
+        return YiDuConstants.serverName.get();
+    }
+
+    private String getValueForKey(String key) {
+        if (isEnableSiteGroup()) {
+            return getText(key + "." + getServerName());
+        } else {
+            return getText(key);
+        }
+    }
+
+    public boolean isEnableSiteGroup() {
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_SITE_GROUP, false);
     }
 
 }

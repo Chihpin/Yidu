@@ -412,7 +412,7 @@ public class UrlRewriteFilter implements Filter {
         UrlRewriteWrappedResponse urlRewriteWrappedResponse = new UrlRewriteWrappedResponse(hsResponse, hsRequest,
                 urlRewriter);
 
-        if (YiDuConstants.singleBookFlag.get()) {
+        if (YiDuConstants.singleBookFlag.get() != null && YiDuConstants.singleBookFlag.get()) {
             // 当单本机能开放的时候，只做outbound-rule
             chain.doFilter(request, urlRewriteWrappedResponse);
             return;

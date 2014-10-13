@@ -49,7 +49,7 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
         @Result(name = AbstractBaseAction.GO_TOP, location = org.yidu.novel.action.IndexAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.GOTO_LOGIN, location = org.yidu.novel.action.LoginAction.URL, type = "redirect"),
         @Result(name = AbstractBaseAction.REDIRECT, location = "${backUrl}", type = "redirect"),
-        @Result(name = AbstractBaseAction.HTTPHEADER404, type = "httpheader", params = { "status", "404" }) })
+        @Result(name = AbstractBaseAction.HTTPHEADER404, type = "httpheader", params = { "error", "404" }) })
 public abstract class AbstractBaseAction extends ActionSupport implements ValidationWorkflowAware {
     /**
      * 串行化版本统一标识符
