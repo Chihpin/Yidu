@@ -155,7 +155,7 @@
         readHistoryObject.chaptername = "${chapter.chaptername}";
         readHistoryObject.articlename = "${chapter.articlename}";
         readHistoryObject.infoUrl="${article.url}";
-        readHistoryObject.chapterUrl = "${chapter.chapterUrl}";
+        readHistoryObject.chapterUrl = "${chapter.url}";
         document.onkeydown=jumpPage;
     -->
 </script>
