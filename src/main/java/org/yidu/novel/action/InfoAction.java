@@ -248,7 +248,7 @@ public class InfoAction extends AbstractPublicBaseAction {
 
             // 获取评论信息
             ReviewSearchBean reviewSearchBean = new ReviewSearchBean();
-            reviewSearchBean.setArticleno(articleno);
+            reviewSearchBean.setArticleno(article.getArticleno());
             // 获取评论件数
             reviewCount = reviewService.getCount(reviewSearchBean);
             // 获取评论

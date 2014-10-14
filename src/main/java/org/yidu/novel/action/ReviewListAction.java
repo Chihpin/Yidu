@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
+import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -16,6 +17,7 @@ import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TReview;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.LoginManager;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -47,6 +49,11 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
      * 小说编号
      */
     private int articleno;
+
+    /**
+     * 拼音
+     */
+    private String pinyin;
 
     /**
      * 页号
@@ -94,6 +101,27 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
      */
     public void setArticleno(int articleno) {
         this.articleno = articleno;
+    }
+
+    /**
+     * 获取pinyin
+     * 
+     * @return pinyin
+     */
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    /**
+     * 
+     * 设置pinyin
+     * 
+     * 
+     * @param pinyin
+     *            pinyin
+     */
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
 
     /**
@@ -263,13 +291,22 @@ public class ReviewListAction extends AbstractPublicListBaseAction {
         if (articleno != 0) {
             // 获取小说信息
             article = articleService.getByNo(articleno);
-        } else {
+        } else if (StringUtils.isNotBlank(pinyin)) {
+            ArticleSearchBean searchBean = new ArticleSearchBean();
+            searchBean.setPinyin(pinyin);
+            List<TArticle> articleList = articleService.find(searchBean);
+            if (Utils.isDefined(articleList)) {
+                article = articleList.get(0);
+            }
+        }
+        // 小说信息不存在的情况
+        if (article == null) {
             addActionError(getText("errors.not.exsits.article"));
             return;
         }
 
         ReviewSearchBean searchBean = new ReviewSearchBean();
-        BeanUtils.copyProperties(this, searchBean);
+        searchBean.setArticleno(article.getArticleno());
 
         pagination.setPageNumber(page == 0 ? 1 : page);
         pagination.setSortColumn(TReview.PROP_POSTDATE);
