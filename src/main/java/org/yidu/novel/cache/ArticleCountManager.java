@@ -37,6 +37,11 @@ public class ArticleCountManager {
     private static Map<String, Integer> articleCountMap;
 
     /**
+     * 小说件数处理线程
+     */
+    private static Thread loadArticleCountThread;
+
+    /**
      * 获得小说数量
      * 
      * @param key
@@ -60,7 +65,7 @@ public class ArticleCountManager {
 
         articleCountMap = new HashMap<String, Integer>();
 
-        new Thread(new Runnable() {
+        loadArticleCountThread = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -120,19 +125,37 @@ public class ArticleCountManager {
                         int fullcount = articleService.getCountByJDBC(searchBean);
                         articleCountMap.put("fullflag", fullcount);
 
-                        logger.info("ArticleCount Manager daemon process going to sleep.");
+                        logger.debug("ArticleCount Manager daemon process going to sleep.");
 
                         Thread.sleep(YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_ARTICLE_COUNT_INTERVAL, 120) * 60 * 1000);
 
                     } catch (Exception e) {
-                        logger.error("init initArticleCountManager failed.", e);
+                        if (!(e instanceof InterruptedException)) {
+                            logger.error("init initArticleCountManager failed.", e);
+                        }
                         break;
                     }
                 }
                 context.close();
             }
-        }).start();
+        });
+        loadArticleCountThread.start();
 
         logger.info("init ArticleCountManager normally end.");
     }
+
+    /**
+     * 销毁小说件数缓存
+     */
+    public static void dispose() {
+        loadArticleCountThread.interrupt();
+        try {
+            loadArticleCountThread.join();
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage(), e);
+        }
+        articleCountMap.clear();
+        articleCountMap = null;
+    }
+
 }

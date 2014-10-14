@@ -48,6 +48,11 @@ public class SingleBookManager {
     private static int MAX_ARTICLENO = 0;
 
     /**
+     * 单本处理线程
+     */
+    private static Thread loadSingleBookDataThread;
+
+    /**
      * 获得小说编号
      * 
      * @param key
@@ -80,7 +85,7 @@ public class SingleBookManager {
      */
     public static void initSingleBookManager() {
         logger.info("going to init SingleBookManager.");
-        new Thread(new Runnable() {
+        loadSingleBookDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 // TODO 新现成启动初始化，会导致刚启动时小说数不正确的问题，但是只是启动时，马上就恢复了，将来启动先加载
@@ -113,16 +118,19 @@ public class SingleBookManager {
                             // TODO 是否需要将拼音写回数据库
                             MAX_ARTICLENO = tArticle.getArticleno();
                         }
-                        logger.info("SingleBookManager Manager daemon process going to sleep.");
+                        logger.debug("SingleBookManager Manager daemon process going to sleep.");
                         Thread.sleep(YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, 120) * 60 * 1000);
                     } catch (Exception e) {
-                        logger.error("init SingleBookManager failed.", e);
+                        if (!(e instanceof InterruptedException)) {
+                            logger.error("init SingleBookManager failed.", e);
+                        }
                         break;
                     }
                 }
                 context.close();
             }
-        }).start();
+        });
+        loadSingleBookDataThread.start();
 
         logger.info("init SingleBookManager normally end.");
     }
@@ -150,5 +158,19 @@ public class SingleBookManager {
             }
             index++;
         }
+    }
+
+    /**
+     * 销毁小说件数缓存
+     */
+    public static void dispose() {
+        loadSingleBookDataThread.interrupt();
+        try {
+            loadSingleBookDataThread.join();
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage(), e);
+        }
+        ARTICLE_PINYIN2NO_MAP.clear();
+        ARTICLE_NO2PINYIN_MAP.clear();
     }
 }
