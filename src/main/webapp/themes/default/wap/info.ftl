@@ -69,7 +69,7 @@
 
     <div class="m2">
         <div class="title">
-            共<span id="spnChapters">${chapterList?size}</span>章节
+            共<span id="spnChapters"><#if chapterList?? >${chapterList?size}<#else>0 </#if></span>章节
             <a id="sort" class="more2" data-value="1">↑倒序排列</a>
         </div>
         <div class="m2">
