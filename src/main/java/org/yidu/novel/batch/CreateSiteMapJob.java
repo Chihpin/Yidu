@@ -87,13 +87,17 @@ public class CreateSiteMapJob extends QuartzJobBean {
             String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
             try {
                 String currentPath = CreateSiteMapJob.class.getClassLoader().getResource("").getPath();
+                log.debug(currentPath);
+                // 减16的字符是WEB-INF/classes/
+                if(currentPath.indexOf("WEB-INF") >= 0) {
+                	currentPath = currentPath.substring(0, currentPath.length() - 16);
+                }
                 String dir = currentPath + "/" + SITEMAP_DIR + "/";
+                log.debug("sitemap dir: " + dir);
                 if (!new File(dir).exists()) {
                     new File(dir).mkdirs();
                 }
-                // 减16的字符是WEB-INF/classes/
-                // String webRootPath = currentPath.substring(0,
-                // currentPath.length() - 16);
+                
                 if (SiteMapType.XML.getName().equalsIgnoreCase(
                         YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE))) {
                     List<TArticle> articleList = articleService.find(new ArticleSearchBean());
