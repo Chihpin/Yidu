@@ -46,7 +46,7 @@ public class SingleBookInterceptor extends AbstractInterceptor {
         invocation.addPreResultListener(new PreResultListener() {
             public void beforeResult(ActionInvocation invocation, String resultCode) {
                 // 如果是单本的话，改变返回值
-                if (YiDuConstants.singleBookFlag.get()) {
+                if (YiDuConstants.singleBookFlag.get() != null && YiDuConstants.singleBookFlag.get()) {
                     invocation.setResultCode(RESULT_CODE_SUFFIX_MOBILE + resultCode);
                     return;
                 }

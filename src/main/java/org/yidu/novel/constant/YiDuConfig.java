@@ -194,6 +194,11 @@ public class YiDuConfig {
     public static final String RELOAD_SINGLE_BOOK_INTERVAL = "reloadSingleBookInterval";
 
     /**
+     * 禁止访问的文件后缀
+     */
+    public static final String FORBID_FILES = "forbidFiles";
+
+    /**
      * 数据库JDBC URL
      */
     public static final String JDBC_URL = "jdbc.url";
