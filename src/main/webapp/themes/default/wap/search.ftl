@@ -97,7 +97,7 @@
                     for (var i = 0 ; i < res.items.length; i++) {
                         var item = res.items[i];
                         str.push('<div class="info i2">');
-                        str.push('    <a href="/book/'+Math.floor(item.articleno/1000)+'/'+item.articleno+'.html">');
+                        str.push('    <a href="/info/'+Math.floor(item.articleno/1000)+'/'+item.articleno+'.html">');
                         str.push('        <img src="'+item.imgUrl+'" />');
                         str.push('        <h3>' + item.articlename + '</h3>');
                         str.push('        <p>作者：' + item.author + '</p>');
