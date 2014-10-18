@@ -314,268 +314,92 @@ function addAd(){
 		return ;
 	}
 	if(isDefind($("#index_ad_01")) ){
-		$("#index_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群首页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="9296136348"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#index_ad_01").html('');
 	}
 	
 	if(isDefind($("#index_ad_02")) ){
-		$("#index_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群首页广告2 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="3249602748"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#index_ad_02").html('');
 	}
 	
 	if(isDefind($("#index_ad_03")) ){
-		$("#index_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群首页广告2 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="3249602748"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#index_ad_03").html('');
 	}
 	
 	if(isDefind($("#list_ad_01")) ){
-		$("#list_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群小说列表页广告1 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="7260999940"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#list_ad_01").html('');
 	}
 	
 	if(isDefind($("#list_ad_02")) ){
-		$("#list_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#list_ad_02").html('');
 	}
 
 	if(isDefind($("#list_ad_03")) ){
-		$("#list_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说列表页广告2 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="8737733146"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#list_ad_03").html('');
 	}
 	
 	if(isDefind($("#top_ad_01")) ){
-		$("#top_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#top_ad_01").html('');
 	}
 	//size 778*90
 	if(isDefind($("#top_ad_02")) ){
-		$("#top_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#top_ad_02").html('');
 	}	
 	
 	if(isDefind($("#top_ad_03")) ){
-		$("#top_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#top_ad_03").html('');
 	}
 	
 	if(isDefind($("#search_ad_01")) ){
-		$("#search_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#search_ad_01").html('');
 	}
 	
 	if(isDefind($("#search_ad_02")) ){
-		$("#search_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-			+'<!-- 站群小说列表页广告2 -->'
-			+'<ins class="adsbygoogle"'
-			+'     style="display:inline-block;width:970px;height:90px"'
-			+'     data-ad-client="ca-pub-0918341902931277"'
-			+'     data-ad-slot="8737733146"></ins>'
-			+'<script>'
-			+'(adsbygoogle = window.adsbygoogle || []).push({});'
-			+'</script>');
+		$("#search_ad_02").html('');
 	}
 
 	if(isDefind($("#info_ad_01")) ){
-		$("#info_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#info_ad_01").html('');
 	}
 	
 	if(isDefind($("#info_ad_02")) ){
-		$("#info_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告2 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:336px;height:280px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="1633268747"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#info_ad_02").html('');
 	}
 	
 	if(isDefind($("#info_ad_03")) ){
-		$("#info_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#info_ad_03").html('');
 	}
 	
 	if(isDefind($("#info_ad_04")) ){
-		$("#info_ad_04").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#info_ad_04").html('');
 	}
 	
 	if(isDefind($("#info_ad_05")) ){
-		$("#info_ad_05").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#info_ad_05").html('');
 	}
 	
 	if(isDefind($("#chapterList_ad_01")) ){
-		$("#chapterList_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群小说列表页广告1 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="7260999940"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#chapterList_ad_01").html('');
 	}
 	
 	if(isDefind($("#chapterList_ad_02")) ){
-		$("#chapterList_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群小说列表页广告1 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="7260999940"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#chapterList_ad_02").html('');
 	}
 	
 	if(isDefind($("#chapterList_ad_03")) ){
-		$("#chapterList_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-		+'<!-- 站群小说列表页广告1 -->'
-		+'<ins class="adsbygoogle"'
-		+'     style="display:inline-block;width:970px;height:90px"'
-		+'     data-ad-client="ca-pub-0918341902931277"'
-		+'     data-ad-slot="7260999940"></ins>'
-		+'<script>'
-		+'(adsbygoogle = window.adsbygoogle || []).push({});'
-		+'</script>');
+		$("#chapterList_ad_03").html('');
 	}
 	
 
 	if(isDefind($("#reader_ad_01")) ){
-		$("#reader_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说阅读页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="2691199547"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#reader_ad_01").html('');
 	}
 
 	if(isDefind($("#reader_ad_02")) ){
-		$("#reader_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说阅读页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="2691199547"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#reader_ad_02").html('');
 	}
 	
 	if(isDefind($("#reader_ad_03")) ){
-		$("#reader_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说阅读页广告2 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="5644665949"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#reader_ad_03").html('');
 	}
 	
 	if(isDefind($("#reader_ad_04")) ){
@@ -583,38 +407,14 @@ function addAd(){
 	}
 	
 	if(isDefind($("#review_ad_01")) ){
-		$("#review_ad_01").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#review_ad_01").html('');
 	}
 	
 	if(isDefind($("#review_ad_02")) ){
-		$("#review_ad_02").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#review_ad_02").html('');
 	}
 	
 	if(isDefind($("#review_ad_03")) ){
-		$("#review_ad_03").html('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-				+'<!-- 站群小说简介页广告1 -->'
-				+'<ins class="adsbygoogle"'
-				+'     style="display:inline-block;width:970px;height:90px"'
-				+'     data-ad-client="ca-pub-0918341902931277"'
-				+'     data-ad-slot="6203069144"></ins>'
-				+'<script>'
-				+'(adsbygoogle = window.adsbygoogle || []).push({});'
-				+'</script>');
+		$("#review_ad_03").html('');
 	}
 }
