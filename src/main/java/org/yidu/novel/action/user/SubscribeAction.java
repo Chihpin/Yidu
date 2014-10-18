@@ -157,15 +157,15 @@ public class SubscribeAction extends AbstractUserBaseAction {
         // 检查当前登录的最大件数
         SubscribeSearchBean searchBean = new SubscribeSearchBean();
         searchBean.setUserno(LoginManager.getLoginUser().getUserno());
-        int bookcaseCount = this.subscribeService.getCount(searchBean);
-        if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE, 30)) {
+        int subscribeCount = this.subscribeService.getCount(searchBean);
+        if (subscribeCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE, 30)) {
             addActionError(getText("errors.max.subscribe"));
             return FREEMARKER_ERROR;
         }
 
         searchBean.setUserno(articleno);
-        bookcaseCount = this.subscribeService.getCount(searchBean);
-        if (bookcaseCount > 0) {
+        subscribeCount = this.subscribeService.getCount(searchBean);
+        if (subscribeCount > 0) {
             // 已经存在啦，算了，告诉他成功啦！哈哈
             addActionMessage(getText("messages.proccess.success"));
             return FREEMARKER_MESSAGE;
