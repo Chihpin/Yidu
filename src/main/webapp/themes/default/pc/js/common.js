@@ -1,3 +1,6 @@
+var failedMessage = "服务器暂时无法处理您的请求，请稍后再试！";
+var successCode = "0";
+
 jQuery.cookie = function (key, value, options) {
 
     // key and at least value given, set cookie...
@@ -112,7 +115,7 @@ function onSubmitClick() {
 
 		},
 		error : function() {
-			alert("服务器暂时无法处理您的请求，请稍后再试！");
+			alert(failedMessage);
 		},
 	});
 }
@@ -121,24 +124,29 @@ function onSubmitClick() {
 var enableQQLogin = false;
 function initUserMenu(){
     $(document).ready(function(){
-        $.post(contextPath+'/checklogin',function(data){
-            if(data!=null){
-               var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
-                if(enableQQLogin && data.openid==null){
+        var userInfo =  $.cookie("user.cookie");
+        if(userInfo != null && userInfo != undefined) {
+            var reg = new RegExp('"',"g");  
+            userInfo = userInfo .replace(reg, ""); 
+            userInfoArr = userInfo.split(",");
+            loginid = userInfoArr[0];
+            userType = userInfoArr[2];
+            hasopenid = userInfoArr[3];
+            var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ loginid +"</a>";
+            if(enableQQLogin && hasopenid=="false"){
                     html = html + '&nbsp;&nbsp;&nbsp;<a href=\"'+contextPath+'/gotoQQLogin" \"><img src=\"'+contextPath+'/themes/default/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
-                }
-                if(data.type==30){
-                    html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/admin/index" style="color: rgb(240, 240, 240);">管理后台</a>';
-                }else if(data.type==20||data.type==40||data.type==41){
-                    html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/articleList" style="color: rgb(240, 240, 240);">小说管理</a>';
-                }
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/bookcase" style="color: rgb(240, 240, 240);">我的书架</a>';
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/message" style="color: rgb(240, 240, 240);">消息管理</a>';
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/subscribe" style="color: rgb(240, 240, 240);">订阅管理</a>';
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
-                $('#checklogin').html(html);
             }
-        });
+            if(userType==30){
+                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/admin/index" style="color: rgb(240, 240, 240);">管理后台</a>';
+             }else if(userType==20||userType==40||userType==41){
+                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/articleList" style="color: rgb(240, 240, 240);">小说管理</a>';
+            }
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/bookcase" style="color: rgb(240, 240, 240);">我的书架</a>';
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/message" style="color: rgb(240, 240, 240);">消息管理</a>';
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/subscribe" style="color: rgb(240, 240, 240);">订阅管理</a>';
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
+            $('#checklogin').html(html);
+        }
     });
 }
 
@@ -212,20 +220,89 @@ function loadReadHistory(){
 
 /** 初始化处理 */
 $(document).ready(function() {
-	
-	//初始化登录状态
+
+	// 初始化登录状态
 	initUserMenu();
-	
-	//初始化阅读履历
+
+	// 初始化阅读履历
 	loadReadHistory();
-	
-	// 给评论按钮绑定点击事件
-	$("#reviewSubmitbtn").click(onSubmitClick);
-	
-	//添加页面广告
+
+	// 初始化按钮事件
+	initButtonEvent();
+
+	// 添加页面广告
 	addAd();
 	
 });
+
+function initButtonEvent(){
+	// 绑定加入书架按钮点击事件
+	$("#addBookcaseButton").click(onAddBookcaseButtonClick);
+	// 绑定投票按钮点击事件
+	$("#voteButton").click(onVoteButtonClick);
+	// 绑定订阅按钮点击事件
+	$("#addSubscribeButton").click(onAddSubscribeButtonClick);
+	// 绑定评论按钮点击事件
+	$("#reviewSubmitbtn").click(onSubmitClick);
+}
+
+function onAddBookcaseButtonClick(){
+	var param = new Object();
+	param.articleno= $(this).attr('articleno');
+	param.chapterno= $(this).attr('chapterno');
+	param.action= 'addbookcase';
+	postAjaxRequest(param);
+}
+
+function onVoteButtonClick(){
+	var param = new Object();
+	param.articleno= $(this).attr('articleno');
+	param.action= 'vote';
+	postAjaxRequest(param);
+}
+
+function onAddSubscribeButtonClick(){
+	var param = new Object();
+	param.articleno= $(this).attr('articleno');
+	param.action= 'subscribe';
+	postAjaxRequest(param);
+}
+
+function onPostMessageButtonClick() {
+	$.layer({
+		type : 2,
+		title : '联系站长',
+		shadeClose : true,
+		maxmin : true,
+		fix : false,
+		area : [ '1024px', 500 ],
+		iframe : {
+			src : '/user/messageEdit?title='+$(this).attr('messageTitle') + '&content=' +$(this).attr('messageContent')
+		}
+	});
+}
+
+function postAjaxRequest(param){
+	$.ajax({
+		type : "post",
+		url : "/ajaxService",
+		data : param,
+		async : false,
+		success : function(data) {
+			if (data.code == successCode ) {
+				layer.msg(data.result,3 ,{
+                    type:9, 
+                    shade: [0]
+                }); 
+			} else {
+				layer.msg(data.err);
+			}
+		},
+		error : function() {
+			alert(failedMessage);
+		},
+	});
+}
 
 function isDefind( obj ){
 	return typeof obj != "undefined" ;

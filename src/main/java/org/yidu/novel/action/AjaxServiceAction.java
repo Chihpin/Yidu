@@ -14,6 +14,7 @@ import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.BookcaseSearchBean;
 import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.bean.SubscribeSearchBean;
 import org.yidu.novel.bean.UserSearchBean;
 import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
@@ -23,6 +24,7 @@ import org.yidu.novel.dto.JsonInfoDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TBookcase;
 import org.yidu.novel.entity.TChapter;
+import org.yidu.novel.entity.TSubscribe;
 import org.yidu.novel.entity.TUser;
 import org.yidu.novel.utils.CookieUtils;
 import org.yidu.novel.utils.LoginManager;
@@ -80,6 +82,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         public static final String SEARCH = "search";
         public static final String REGISTER = "register";
         public static final String VOTE = "vote";
+        public static final String SUBSCRIBE = "subscribe";
     }
 
     /**
@@ -132,6 +135,10 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
      * 小说编号
      */
     private int articleno;
+    /**
+     * 小说编号
+     */
+    private int chapterno;
     private int index;
     /**
      * 排序
@@ -208,6 +215,27 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
 
     public void setArticleno(int articleno) {
         this.articleno = articleno;
+    }
+
+    /**
+     * 获取chapterno
+     * 
+     * @return chapterno
+     */
+    public int getChapterno() {
+        return chapterno;
+    }
+
+    /**
+     * 
+     * 设置chapterno
+     * 
+     * 
+     * @param chapterno
+     *            chapterno
+     */
+    public void setChapterno(int chapterno) {
+        this.chapterno = chapterno;
     }
 
     public int getIndex() {
@@ -318,6 +346,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             register();
         } else if (StringUtils.equals(action, ProccessType.VOTE)) {
             doVote();
+        } else if (StringUtils.equals(action, ProccessType.SUBSCRIBE)) {
+            doSubscribe();
         } else {
             dto.setCode(ReturnCode.FAILED);
             dto.setErr(getText("errors.unknown"));
@@ -327,6 +357,44 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         return JSON_RESULT;
     }
 
+    private void doSubscribe() {
+        logger.debug("doSubscribe start.");
+
+        if (!doCheckLogin() || !doCheckArticleno()) {
+            logger.debug("doSubscribe abnormally end.");
+            return;
+        }
+
+        // 检查当前登录的最大件数
+        SubscribeSearchBean searchBean = new SubscribeSearchBean();
+        searchBean.setUserno(LoginManager.getLoginUser().getUserno());
+        int subscribeCount = this.subscribeService.getCount(searchBean);
+        if (subscribeCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_SUBSCRIBE, 30)) {
+            dto.setCode(ReturnCode.FAILED);
+            dto.setResult(getText("errors.max.subscribe"));
+            logger.debug("doSubscribe abnormally end.");
+            return;
+        }
+
+        searchBean.setUserno(articleno);
+        subscribeCount = this.subscribeService.getCount(searchBean);
+        if (subscribeCount > 0) {
+            // 已经存在啦，算了，告诉他成功啦！哈哈
+            dto.setCode(ReturnCode.SUCCESS);
+            dto.setResult(getText("messages.subscribe.add.success"));
+            logger.debug("the record is exists.");
+            return;
+        }
+
+        TSubscribe subscribe = new TSubscribe();
+        subscribe.setArticleno(articleno);
+        subscribe.setUserno(LoginManager.getLoginUser().getUserno());
+        this.subscribeService.save(subscribe);
+        dto.setCode(ReturnCode.SUCCESS);
+        dto.setResult(getText("messages.subscribe.add.success"));
+        logger.debug("doSubscribe normally end.");
+    }
+
     /**
      * <p>
      * 推荐处理
@@ -334,14 +402,34 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
      */
     private void doVote() {
         logger.debug("doVote start.");
-        if (LoginManager.isLoginFlag() && articleno != 0) {
-            articleService.updateVoteStatistic(articleno);
-            dto.setCode(ReturnCode.SUCCESS);
-            logger.debug("doVote normally end.");
-        } else {
-            dto.setCode(ReturnCode.FAILED);
+
+        if (!doCheckLogin() || !doCheckArticleno()) {
             logger.debug("doVote abnormally end.");
+            return;
         }
+
+        articleService.updateVoteStatistic(articleno);
+        dto.setCode(ReturnCode.SUCCESS);
+        dto.setResult(getText("messages.vote.success"));
+        logger.debug("doVote normally end.");
+    }
+
+    private boolean doCheckLogin() {
+        if (!LoginManager.isLoginFlag()) {
+            dto.setCode(ReturnCode.FAILED);
+            dto.setResult(getText("errors.notLogin"));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean doCheckArticleno() {
+        if (articleno == 0) {
+            dto.setCode(ReturnCode.FAILED);
+            dto.setResult(getText("errors.not.exsits.article"));
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -482,8 +570,8 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
     private void addBookcase() {
         logger.debug("addBookcase start.");
 
-        if (articleno == 0) {
-            dto.setCode(ReturnCode.FAILED);
+        if (!doCheckLogin() || !doCheckArticleno()) {
+            logger.debug("doVote abnormally end.");
             return;
         }
 
@@ -493,6 +581,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         int bookcaseCount = this.bookcaseService.getCount(searchBean);
         if (bookcaseCount > YiDuConstants.yiduConf.getInt(YiDuConfig.MAX_BOOKCASE)) {
             dto.setCode(ReturnCode.FAILED);
+            dto.setErr(getText("errors.max.bookcase"));
             return;
         }
 
@@ -507,7 +596,19 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
             BeanUtils.copyProperties(article, bookcase);
         } else {
             dto.setCode(ReturnCode.FAILED);
+            dto.setErr(getText("errors.not.exsits.article"));
             return;
+        }
+
+        if (chapterno != 0) {
+            TChapter chapter = this.chapterService.getByNo(chapterno);
+            if (chapter != null && chapter.getChapterno() != 0) {
+                BeanUtils.copyProperties(chapter, bookcase);
+            } else {
+                dto.setCode(ReturnCode.FAILED);
+                dto.setErr(getText("errors.not.exsits.chapter"));
+                return;
+            }
         }
         bookcase.setCreatetime(new Date());
         bookcase.setUserno(LoginManager.getLoginUser().getUserno());
@@ -515,6 +616,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         this.bookcaseService.save(bookcase);
 
         dto.setCode(ReturnCode.SUCCESS);
+        dto.setResult(getText("messages.bookcase.add.success"));
         logger.debug("addBookcase normally end.");
     }
 

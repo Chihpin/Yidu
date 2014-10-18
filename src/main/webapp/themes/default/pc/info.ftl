@@ -48,9 +48,9 @@
           </div>
           <div class="b-oper">
               <a href="<#if !enableChapterIndexPage >#chapters<#else>${article.chapterListUrl}</#if>" class="reader" title="${article.articlename}免费阅读">开始阅读</a>
-              <a href="${encodeURL("/user/bookcase!add?articleno=${article.articleno?c}")}" target="_blank" class="mehide" rel="nofollow" >加入书架</a>
-              <a href="${encodeURL("/user/subscribe!add?articleno=${article.articleno?c}")}" target="_blank" class="subscribe" rel="nofollow" >订阅本书</a>
-              <a href="${encodeURL("/user/vote?articleno=${article.articleno?c}")}" target="_blank"  id="toupiao"  class="toupiao" rel="nofollow">给本书投票</a>
+              <a href="javascript:return false;" articleno="${article.articleno?c}"  id="addBookcaseButton" class="mehide" rel="nofollow" >加入书架</a>
+              <a href="javascript:return false;" articleno="${article.articleno?c}"  id="addSubscribeButton" class="subscribe" rel="nofollow" >订阅本书</a>
+              <a href="javascript:return false;" articleno="${article.articleno?c}"  id="voteButton"  class="toupiao" rel="nofollow">推荐本书</a>
               <a href="/user/messageEdit?title=${article.articlename}-章节错误&content=举报原因如下：  "  class="error" target="_blank" rel="nofollow">内容报错</a>
           </div>
         </div>
@@ -209,6 +209,7 @@
 </#macro>
 
 <#macro customizeJs>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
 <#if !enableChapterIndexPage >
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
 </#if>
