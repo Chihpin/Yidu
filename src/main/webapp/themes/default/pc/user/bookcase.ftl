@@ -32,7 +32,7 @@
                     <td class="odd"><a href="${encodeURL("/reader?subdir=${bookcase.subdir?c}&articleno=${bookcase.articleno?c}&chapterno=${bookcase.lastchapterno?c}")}" target="_blank">${bookcase.lastchapter}</a>
                     </td>
                     <td class="even"><#if bookcase.chapterno??><a href="${encodeURL("/reader?subdir=${bookcase.subdir?c}&articleno=${bookcase.articleno?c}&chapterno=${bookcase.chapterno?c}")}" target="_blank">${bookcase.chaptername}</a></#if></td>
-                    <td class="even" align="center"><a href="javascript:if(confirm('确实要将本书移出书架么？')) document.location='${encodeURL("/user/bookcase!delete?bookcaseno${bookcase.bookcaseno?c}")}';">移除</a></td>
+                    <td class="even" align="center"><a href="javascript:if(confirm('确实要将本书移出书架么？')) document.location='${encodeURL("/user/bookcase!delete?bookcaseno=${bookcase.bookcaseno?c}")}';">移除</a></td>
              </tr>
              </#list>
             </tbody>
