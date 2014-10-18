@@ -65,12 +65,6 @@
 <table class="grid" align="center" cellspacing="1" width="800">
 <caption><s:text name="label.admin.config.edit.caption3" /></caption>
 <tbody>
-    <tr align="left" valign="middle">
-       <td class="odd" width="25%"><s:text name="label.admin.config.edit.skipAuthCheck" /></td>
-       <td class="even">
-           <s:radio list="collections['collectionProperties.boolean']" name="skipAuthCheck" ></s:radio>
-       </td>
-    </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" width="25%"><s:text name="label.admin.config.edit.cleanUrl" /></td>

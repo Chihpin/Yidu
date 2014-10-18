@@ -40,10 +40,6 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      */
     private String themeName;
     /**
-     * 是否跳过登录校验
-     */
-    private boolean skipAuthCheck;
-    /**
      * 是否开启缓存
      */
     private boolean cacheEffective;
@@ -208,14 +204,6 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     public void setThemeName(String themeName) {
         this.themeName = themeName;
-    }
-
-    public boolean isSkipAuthCheck() {
-        return skipAuthCheck;
-    }
-
-    public void setSkipAuthCheck(boolean skipAuthCheck) {
-        this.skipAuthCheck = skipAuthCheck;
     }
 
     public boolean isCacheEffective() {
@@ -770,7 +758,6 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         initCollections(new String[] { "collectionProperties.boolean" });
         filePath = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
         relativeIamgePath = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
-        skipAuthCheck = YiDuConstants.yiduConf.getBoolean(YiDuConfig.SKIP_AUTH_CHECK, false);
         cacheEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CACHE_EFFECTIVE, true);
         cleanUrl = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CLEAN_URL, true);
         gzipEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.GZIP_EFFECTIVE, true);
@@ -828,7 +815,6 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
         YiDuConstants.yiduConf.setProperty(YiDuConfig.FILE_PATH, filePath);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.RELATIVE_IAMGE_PATH, relativeIamgePath);
-        YiDuConstants.yiduConf.setProperty(YiDuConfig.SKIP_AUTH_CHECK, skipAuthCheck);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CACHE_EFFECTIVE, cacheEffective);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CLEAN_URL, cleanUrl);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.GZIP_EFFECTIVE, gzipEffective);
