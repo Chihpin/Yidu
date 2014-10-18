@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#assign categorymap = categoryData?eval>
- <#if assignContent?exists>  
+<#if assignContent?exists>  
       <@assignContent/>
 </#if>
 <#if titleContent?exists>  
@@ -40,6 +40,7 @@
 <script src="${contextPath}/themes/${themeName}/pc/js/lib/html5.js"></script>
 <![endif]-->
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js"></script>
 <!--[if IE 6]>
 <script src="${contextPath}/themes/${themeName}/pc/js/DD_belatedPNG_0.0.8a-min.js"></script>

@@ -209,7 +209,6 @@
 </#macro>
 
 <#macro customizeJs>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
 <#if !enableChapterIndexPage >
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
 </#if>

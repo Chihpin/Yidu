@@ -236,6 +236,8 @@ $(document).ready(function() {
 });
 
 function initButtonEvent(){
+	// 绑定检索按钮点击事件
+	$("#searchbuttom").click(onSearchButtomClick);
 	// 绑定加入书架按钮点击事件
 	$("#addBookcaseButton").click(onAddBookcaseButtonClick);
 	// 绑定投票按钮点击事件
@@ -244,6 +246,15 @@ function initButtonEvent(){
 	$("#addSubscribeButton").click(onAddSubscribeButtonClick);
 	// 绑定评论按钮点击事件
 	$("#reviewSubmitbtn").click(onSubmitClick);
+}
+
+function onSearchButtomClick(){
+	var key = $("#key").val();
+	if(key == null || key == "" || key.replace(/^\s+|\s+$/g,"").length == 0){
+		layer.msg("请至少输入一个检索关键字");
+	}else{
+		window.location = "/search?key="+key;
+	}
 }
 
 function onAddBookcaseButtonClick(){

@@ -1,7 +1,7 @@
 <#include "common.ftl"/>
 
-<#macro titleContent>  
-<title>${key?html}的搜索结果|${getText("label.system.title")}</title>
+<#macro titleContent>
+<title><#if key??>${key?html}的搜索结果<#else>小说搜索</#if>|${getText("label.system.title")}</title>
 <meta name="keywords" content="${getText("label.system.siteKeywords")}"/>
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 </#macro>  
@@ -31,6 +31,7 @@
       </#list>
     </table>
     <div id="search_ad_02"></div>
+    <#if key??>
     <div class="pages">
         <div class="pagelink" id="pagelink">
             <#assign listurl = "/search?key=${key?html}&page=">
@@ -56,5 +57,6 @@
                 <input name="page" type="text" size="4" maxlength="6" onkeydown="if(event.keyCode==13){window.location='${listurlforjs}'+this.value+'.html'; return false;}" /></kbd>
         </div>
     </div>
+    </#if>
 </div>
 </#macro>

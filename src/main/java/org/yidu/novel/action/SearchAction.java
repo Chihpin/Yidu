@@ -3,7 +3,7 @@ package org.yidu.novel.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;

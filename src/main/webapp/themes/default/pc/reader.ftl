@@ -143,7 +143,6 @@
 </#macro>
 
 <#macro customizeJs>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/tools.js"></script>
 <script type="text/javascript">
     <!--
