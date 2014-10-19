@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.LinkedMap;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.bean.ArticleSearchBean;
@@ -256,10 +257,24 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
                     blocks.put(tSystemBlock.getBlockid(), articleList);
 
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.CUSTONIZE_ARTICLE_LIST) {
+
                     ArticleSearchBean articleSearchBean = new ArticleSearchBean();
                     articleSearchBean.setArticlenos(tSystemBlock.getContent());
                     List<TArticle> articleList = articleService.find(articleSearchBean);
-                    blocks.put(tSystemBlock.getBlockid(), articleList);
+                    // 为了维持和设置一样重新排序
+                    List<TArticle> newArticleList = new ArrayList<TArticle>();
+                    String[] articlenos = StringUtils.split(tSystemBlock.getContent(), ",");
+                    for (String no : articlenos) {
+                        for (TArticle article : articleList) {
+                            if (StringUtils.equals(no, String.valueOf(article.getArticleno()))) {
+                                newArticleList.add(article);
+                                // 减少循环次数，将已经取出的元素删掉
+                                articleList.remove(article);
+                                break;
+                            }
+                        }
+                    }
+                    blocks.put(tSystemBlock.getBlockid(), newArticleList);
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.HTML) {
                     blocks.put(tSystemBlock.getBlockid(), tSystemBlock.getContent());
                 }
