@@ -24,13 +24,13 @@
     <@customizetop/>
 </#if>
 
-<#if (pageType == 1 || pageType == 7 || pageType == 6 || pageType == 26 || pageType == 5 ) > 
+<#if (pageType == 1 || pageType == 7 || pageType == 2 || pageType == 26 || pageType == 5 ) > 
     <#if search?exists>  
         <@search/>
     </#if>
 </#if>
 
-<#if (pageType == 1 || pageType == 7 || pageType == 6 || pageType == 26 ) > 
+<#if (pageType == 1 || pageType == 7 || pageType == 2 || pageType == 26 ) > 
     <#if menu?exists>  
         <@menu/>
     </#if>
@@ -50,7 +50,7 @@
 
 <#macro search>
     <#if pageType != 5>
-    <form action="${contextPath}/mobileSearch" method="get" id="seach">
+    <form action="${contextPath}/search" method="get" id="seach">
     </#if>
     <div class="search">
         <#if pageType != 5>
@@ -102,8 +102,8 @@
             <li><a href="javascript:Util.goBack();"></a></li>
             <#if pageType == 7> 
             <li>小说排行榜</li>
-            <#elseif pageType == 6>
-            <li>小说分类</li>
+            <#elseif pageType == 2>
+            <li><#if category?? && category!=0 >${categorymap[category?c]}<#elseif author?? >${author}的小说</title><#else>完本小说</#if></li>
             <#elseif pageType == 26>
             <li>我的书架</li>
             <#elseif pageType == 3>
@@ -117,7 +117,7 @@
             </#if>
             <li><a href="${contextPath}/"></a></li>
             <li><a href="${encodeURL("/user/center")}"></a></li>
-            <li><a href="${encodeURL("/mobileSearch")}"></a></li>
+            <li><a href="${encodeURL("/search")}"></a></li>
         </ul>
     </div>
 </#if>
@@ -128,7 +128,7 @@
         <ul>
             <li <#if pageType == 1 > class="curr"</#if>><a href="${contextPath}/">首页</a></li>
             <li <#if pageType == 7 > class="curr"</#if>><a href="${encodeURL("/top")}">排行</a></li>
-            <li <#if pageType == 6 > class="curr"</#if>><a href="${encodeURL("/mobileCategory")}">分类</a></li>
+            <li <#if pageType == 2 > class="curr"</#if>><a href="${encodeURL("/articleList?category=1")}">分类</a></li>
             <li <#if pageType == 26 > class="curr"</#if>><a href="${encodeURL("/bookcase")}">书架</a></li>
         </ul>
     </div>

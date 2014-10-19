@@ -331,3 +331,15 @@
 window.onload = function () {
     Site.initGotoTop();
 }
+
+//定义方法
+var in_array = function(arr) {
+	for ( var i = 0, k = arr.length; i < k; i++) {
+		if (this == arr[i].articleno) {
+			return i;
+		}
+	}
+	return -1;
+};
+Number.prototype.in_array = in_array;
+String.prototype.in_array = in_array;

@@ -161,7 +161,7 @@
             }
             Util.Loading();
             
-             var readhistory = $.cookie("readhistory");
+             var readhistory = $.cookie("mobilereadhistory");
                if(! readhistory ){
                     readhistory = new Array();
                }else{

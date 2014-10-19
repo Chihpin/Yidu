@@ -144,6 +144,16 @@ public class TopAction extends AbstractPublicListBaseAction {
         Gson gson = new Gson();
         return gson.toJson(YiDuConstants.TOP_NAME_MAP, Map.class);
     }
+    
+    /**
+     * 获取排行榜名字的JSON数据
+     * 
+     * @return 排行榜名字的JSON数据
+     */
+    public String getMobileTopNameJsonData() {
+        Gson gson = new Gson();
+        return gson.toJson(YiDuConstants.MOBILE_TOP_NAME_MAP, Map.class);
+    }
 
     @Override
     public String getTempName() {

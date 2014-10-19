@@ -185,9 +185,7 @@
             init();
             search();
         });
-
     </script>
-
 
 </#macro>
 

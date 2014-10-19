@@ -46,16 +46,36 @@ public class YiDuConstants {
         private static final long serialVersionUID = -2355068040470822368L;
         {
             put("lastupdate", "最近更新");
-            put("allvisit", "总排行榜");
+            put("allvisit", "总点击榜");
             put("allvote", "总推荐榜");
-            put("monthvisit", "月排行榜");
+            put("monthvisit", "月点击榜");
             put("monthvote", "月推荐榜");
-            put("weekvisit", "周排行榜");
+            put("weekvisit", "周点击榜");
             put("weekvote", "周推荐榜");
-            put("dayvisit", "日排行榜");
+            put("dayvisit", "日点击榜");
             put("dayvote", "日推荐榜");
             put("postdate", "最新入库");
             put("size", "字数排行");
+        }
+    };
+    
+    /**
+     * 排行榜名字MAP
+     */
+    public static final Map<String, String> MOBILE_TOP_NAME_MAP = new LinkedHashMap<String, String>() {
+        private static final long serialVersionUID = -2355068040470822368L;
+        {
+            put("lastupdate", "更新榜");
+            put("allvisit", "总点击");
+            put("allvote", "总推荐");
+            put("monthvisit", "月点击");
+            put("monthvote", "月推荐");
+            put("weekvisit", "周点击");
+            put("weekvote", "周推荐");
+            put("dayvisit", "日点击");
+            put("dayvote", "日推荐");
+            put("postdate", "入库榜");
+            put("size", "字数榜");
         }
     };
 

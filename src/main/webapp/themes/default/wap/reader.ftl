@@ -16,8 +16,6 @@
             <li><a class="button blue r3" href="<#if chapter.nextChapterno ==0>${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}<#else>${encodeURL("/reader?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}&chapterno=${chapter.nextChapterno?c}")}</#if>">下一章</a></li>
         </ul>
     </div>
-
-
 </#macro>
 
 <#macro content>
@@ -27,9 +25,15 @@
             <#if chapter.content??>${chapter.content}</#if>
         </div>
     </div>
+    <script src="${contextPath}/themes/${themeName}/wap/js/lib/jquery.cookie.js"></script>
     <script language="JavaScript" type="text/JavaScript"> 
         $(document).ready(function(){
-           var readhistory = $.cookie("readhistory");
+            replaceWord();
+            saveHistory();
+        })
+    
+    function saveHistory(){
+            var readhistory = $.cookie("mobilereadhistory");
            if(! readhistory ){
                 readhistory = new Array();
            }else{
@@ -49,27 +53,27 @@
            if(readhistory.length > 10 ){
                 readhistory.splice(9,readhistory.length - 10);
            }
-           $.cookie("readhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
-        })
+           $.cookie("mobilereadhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
     
-        window.onload = function() {
-            var str = document.getElementById("content").innerHTML;//这里是整个页面代码 ,也可以指定id
-            str = str.replace(/\<script[\s\S]+?\<\/script\>/gi, "");
-            str = str.replace(/\<styltyp[\s\S]+?\<\/styl\>/gi, "");
-            str = str.replace(/\<style[\s\S]+?\<\/style\>/gi, "");
-            str = str.replace(/\<a[\s\S].+?\<\/a\>/gi, "");
-            str = str.replace(/Www.+?ggyy\.net/gi, "");
-            str = str.replace(/Www.+?Com/gi, "");
-            str = str.replace(/Www.+?net/gi, "");
-            str = str.replace(/Www.+?cc/gi, "");
-            str = str.replace(/&lt;br.+?&gt;/gi, "<br />");
-            str = str.replace(/&amp;hllp;/gi, "&hellip;").replace(/&amp;ldqo;/gi,
-                    "&ldquo;").replace(/ldqo/gi, "ldquo").replace(/&amp;rdqo;/gi,
-                    "&rdquo;").replace(/&amp;dash;/gi, "&mdash;");
-            document.getElementById("content").innerHTML = str;
-        }
+    }
+    
+    function replaceWord(){
+        var str = document.getElementById("content").innerHTML;//这里是整个页面代码 ,也可以指定id
+        str = str.replace(/\<script[\s\S]+?\<\/script\>/gi, "");
+        str = str.replace(/\<styltyp[\s\S]+?\<\/styl\>/gi, "");
+        str = str.replace(/\<style[\s\S]+?\<\/style\>/gi, "");
+        str = str.replace(/\<a[\s\S].+?\<\/a\>/gi, "");
+        str = str.replace(/Www.+?ggyy\.net/gi, "");
+        str = str.replace(/Www.+?Com/gi, "");
+        str = str.replace(/Www.+?net/gi, "");
+        str = str.replace(/Www.+?cc/gi, "");
+        str = str.replace(/&lt;br.+?&gt;/gi, "<br />");
+        str = str.replace(/&amp;hllp;/gi, "&hellip;").replace(/&amp;ldqo;/gi,
+                "&ldquo;").replace(/ldqo/gi, "ldquo").replace(/&amp;rdqo;/gi,
+                "&rdquo;").replace(/&amp;dash;/gi, "&mdash;");
+        document.getElementById("content").innerHTML = str;
+    }
     </script>
-    
     <@customizetop/>
 
 </#macro>
