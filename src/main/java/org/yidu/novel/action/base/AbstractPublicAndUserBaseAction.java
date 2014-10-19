@@ -285,7 +285,6 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
     }
 
     public String getSiteTitle() {
-
         return getValueForKey("label.system.title");
     }
 
@@ -325,20 +324,8 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
         return getValueForKey("label.system.domain");
     }
 
-    public String getServerName() {
-        return YiDuConstants.serverName.get();
-    }
-
     private String getValueForKey(String key) {
-        if (isEnableSiteGroup()) {
-            return getText(key + "." + getServerName());
-        } else {
-            return getText(key);
-        }
-    }
-
-    public boolean isEnableSiteGroup() {
-        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_SITE_GROUP, false);
+        return getText(key);
     }
 
 }

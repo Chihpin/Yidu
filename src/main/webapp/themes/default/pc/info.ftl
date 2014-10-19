@@ -23,10 +23,6 @@
 
 </#macro>
 
-<#macro customizeimport>  
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/review.js"></script>
-</#macro>
-
 <#macro content>
     <div id="info_ad_01"></div>
     <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
@@ -65,7 +61,7 @@
                 <dl><dt>全文长度：</dt><dd><#if article.size ??>${article.size}<#else>0</#if>字</dd></dl>
                 <dl><dt>总点击量：</dt><dd>${article.allvisit}</dd></dl>
                 <dl><dt>总推荐量：</dt><dd>${article.allvote}</dd></dl>
-                <dl><dt>TXT下载：</dt><dd><#if loginFlag><a href="${article.downloadUrl}" target="_blank"><font color="red" >全本下载</font></a><#else><font color="red" >不好意思，登录后才可以下载：）</#if></font></dd></dl>
+                <dl><dt>TXT下载：</dt><dd id="downloadUrl"><font id="info_download"></font></dd></dl>
                 <dl class="bookNew"><dt>最新章节：</dt>
                     <dd>
                     <a href="${article.lastChapterUrl}" target="_blank"><#if article.lastchapter?? >${article.lastchapter}</#if></a>
@@ -126,7 +122,7 @@
                     <div class="box_l"> 
                         <div>已输入字数：<span id="comment_text_word">0</span>  (评论最少5字最多500字) </div>
                     </div>
-                    <input type="submit" class="release_btn submit_comment_btn" value=" " id= "submitbtn" name="submitbtn">
+                    <input type="submit" class="release_btn submit_comment_btn" value=" " id= "reviewSubmitbtn" name="submitbtn">
                 </div>
             </div>
         </div>
@@ -209,6 +205,10 @@
 </#macro>
 
 <#macro customizeJs>
+<script type="text/javascript">
+var downloadUrl = "${article.downloadUrl}";
+var downloadTitle = "${article.articlename}";
+</script>
 <#if !enableChapterIndexPage >
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/news_top.js"></script>
 </#if>

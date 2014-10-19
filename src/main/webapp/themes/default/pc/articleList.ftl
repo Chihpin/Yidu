@@ -19,7 +19,7 @@
 <#macro content>
 <div id="list_ad_01"></div>
 <div class="mainnav" id="navList">
-<div class="main-index">位置：  &nbsp; > &nbsp; <a href="#"><#if fullflag ?? && fullflag>全本小说<#elseif category ??>${categorymap[category?c]}<#elseif author??>${author}的小说<#else>小说列表页</#if></a></div>
+<div class="main-index">位置：  &nbsp; > &nbsp; <a href="#"><#if fullflag ?? && fullflag>全本小说<#elseif category ?? && category!=0>${categorymap[category?c]}<#elseif author??>${author}的小说<#else>小说列表页</#if></a></div>
     <section class="section board-list board-list-collapse">
     <ul class="seeWell cf">
         <#list articleList as article>
@@ -43,7 +43,7 @@
                 <#if fullflag?? && fullflag>
                 <#assign listurl = "/articleList?fullflag=true&page=" >
                 <#assign listurlforjs = "${contextPath}/wanben/" >
-                <#elseif category??>
+                <#elseif category?? && category !=0 >
                 <#assign listurl = "/articleList?category=${category}&page=">
                 <#assign listurlforjs = "${contextPath}/list/${category}/" >
                 <#elseif author??>

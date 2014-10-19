@@ -31,7 +31,7 @@
                 <a href="javascript:return false;" articleno="${article.articleno?c}"  id="voteButton"  title="推荐本书" class="l" rel="nofollow">推荐本书</a>
                 <a href="javascript:return false;" articleno="${article.articleno?c}"  id="addSubscribeButton" title="订阅本书" class="l" rel="nofollow">订阅本书</a>
                 <a href="/user/messageEdit?title=${article.articlename}-章节错误&content= 关于《${article.articlename}》举报原因如下，错误章节： ${chapter.chaptername}  "  class="l" target="_blank" rel="nofollow">内容报错</a>
-                <a href="/user/messageEdit?title=${article.articlename}-更新太慢啦!&content=${article.articlename} 更新太慢了,请加快速度,别的网站都有最新章节了.(请您最好告诉我们现在有哪个网站更新速度比我们快，以便使我们知道进度落后的状况) 以下网站比http://${siteUrl}更新的快:：  "  class="l" target="_blank" rel="nofollow">更新慢了</a>
+                <a href="/user/messageEdit?title=${article.articlename}-更新太慢啦!&content=${article.articlename} 更新太慢了,请加快速度,别的网站都有最新章节了.(请您最好告诉我们现在有哪个网站更新速度比我们快，以便使我们知道进度落后的状况) 以下网站比${siteName}更新的快:  "  class="l" target="_blank" rel="nofollow">更新慢了</a>
                 <div class="clear"></div>
             </h1>
             <div class="toolbar">

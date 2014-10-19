@@ -30,7 +30,7 @@
                     <input type="checkbox" id="checkid[]" name="checkid[]" value="${message.messageno?c}">&nbsp;<span class="hottext"><#if message.isread?? && message.isread>未读</#if></span> </td>
                     <td class="even">${message.loginid}</td>
                     <td class="odd">${message.title}</td>
-                    <td class="even">${message.title}</td>
+                    <td class="even">${message.content}</td>
                     <td class="even" align="center"><a href="javascript:if(confirm('确实要删除这条消息么？')) document.location='${encodeURL("/user/message!delete?messageno${message.messageno?c}")}';">移除</a></td>
              </tr>
              </#list>

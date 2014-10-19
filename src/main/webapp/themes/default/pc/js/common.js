@@ -1,5 +1,6 @@
 var failedMessage = "服务器暂时无法处理您的请求，请稍后再试！";
 var successCode = "0";
+var loginid ="";
 
 jQuery.cookie = function (key, value, options) {
 
@@ -123,31 +124,29 @@ function onSubmitClick() {
 //初始化用户菜单
 var enableQQLogin = false;
 function initUserMenu(){
-    $(document).ready(function(){
-        var userInfo =  $.cookie("user.cookie");
-        if(userInfo != null && userInfo != undefined) {
-            var reg = new RegExp('"',"g");  
-            userInfo = userInfo .replace(reg, ""); 
-            userInfoArr = userInfo.split(",");
-            loginid = userInfoArr[0];
-            userType = userInfoArr[2];
-            hasopenid = userInfoArr[3];
-            var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ loginid +"</a>";
-            if(enableQQLogin && hasopenid=="false"){
-                    html = html + '&nbsp;&nbsp;&nbsp;<a href=\"'+contextPath+'/gotoQQLogin" \"><img src=\"'+contextPath+'/themes/default/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
-            }
-            if(userType==30){
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/admin/index" style="color: rgb(240, 240, 240);">管理后台</a>';
-             }else if(userType==20||userType==40||userType==41){
-                html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/articleList" style="color: rgb(240, 240, 240);">小说管理</a>';
-            }
-            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/bookcase" style="color: rgb(240, 240, 240);">我的书架</a>';
-            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/message" style="color: rgb(240, 240, 240);">消息管理</a>';
-            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/subscribe" style="color: rgb(240, 240, 240);">订阅管理</a>';
-            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
-            $('#checklogin').html(html);
+    var userInfo =  $.cookie("user.cookie");
+    if(userInfo != null && userInfo != undefined) {
+        var reg = new RegExp('"',"g");  
+        userInfo = userInfo .replace(reg, ""); 
+        userInfoArr = userInfo.split(",");
+        loginid = userInfoArr[0];
+        userType = userInfoArr[2];
+        hasopenid = userInfoArr[3];
+        var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ loginid +"</a>";
+        if(enableQQLogin && hasopenid=="false"){
+                html = html + '&nbsp;&nbsp;&nbsp;<a href=\"'+contextPath+'/gotoQQLogin" \"><img src=\"'+contextPath+'/themes/default/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
         }
-    });
+        if(userType==30){
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/admin/index" style="color: rgb(240, 240, 240);">管理后台</a>';
+         }else if(userType==20||userType==40||userType==41){
+            html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/articleList" style="color: rgb(240, 240, 240);">小说管理</a>';
+        }
+        html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/bookcase" style="color: rgb(240, 240, 240);">我的书架</a>';
+        html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/message" style="color: rgb(240, 240, 240);">消息管理</a>';
+        html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/subscribe" style="color: rgb(240, 240, 240);">订阅管理</a>';
+        html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
+        $('#checklogin').html(html);
+    }
 }
 
 $(function() {
@@ -224,11 +223,11 @@ $(document).ready(function() {
 	// 初始化登录状态
 	initUserMenu();
 
-	// 初始化阅读履历
-	loadReadHistory();
-
 	// 初始化按钮事件
 	initButtonEvent();
+
+	// 初始化阅读履历
+	loadReadHistory();
 
 	// 添加页面广告
 	addAd();
@@ -236,6 +235,8 @@ $(document).ready(function() {
 });
 
 function initButtonEvent(){
+	// 添加下载连接
+	addDownloadUrl();
 	// 绑定检索按钮点击事件
 	$("#searchbuttom").click(onSearchButtomClick);
 	// 绑定加入书架按钮点击事件
@@ -427,5 +428,15 @@ function addAd(){
 	
 	if(isDefind($("#review_ad_03")) ){
 		$("#review_ad_03").html('');
+	}
+}
+
+function addDownloadUrl(){
+	if($("#info_download").length>0){
+		if( loginid != "") {
+			$("#info_download").html("<a href=\""+downloadUrl+"\" title=\""+downloadTitle+"txt全集下载\" rel=\"nofollow\">全文下载</a>");
+		} else {
+			$("#info_download").html("登陆后可下载"+downloadTitle+"全集电子书");
+		}
 	}
 }

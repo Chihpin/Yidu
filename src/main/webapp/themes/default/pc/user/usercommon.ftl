@@ -11,7 +11,7 @@
                <li <#if pageType==22>class="current"</#if>><a href="${encodeURL("/user/message")}">查看短信</a></li>
             </ul>
             <ul>
-               <li <#if pageType==20>class="current"</#if>><a href="${encodeURL("/user/subscribe")}">小说订阅</a></li>
+               <li <#if pageType==20>class="current"</#if>><a href="${encodeURL("/user/subscribe")}">订阅管理</a></li>
             </ul>
             <ul>
                <li <#if pageType==23>class="current"</#if>><a href="${encodeURL("/user/useredit")}">编辑资料</a></li>

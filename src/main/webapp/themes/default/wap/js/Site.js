@@ -330,7 +330,7 @@
 
 window.onload = function () {
     Site.initGotoTop();
-}
+};
 
 //定义方法
 var in_array = function(arr) {

@@ -5,10 +5,6 @@
 <meta name="keywords" content="<#if article?? >${article.articlename}</#if>的评论,${getText("label.system.siteKeywords")}" />
 </#macro>
 
-<#macro customizeimport>  
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/review.js"></script>
-</#macro>
-
 <#macro content>
 <div id="review_ad_01"></div>
 <div class="mainnav" id="navList">
@@ -25,12 +21,12 @@
             <#list reviewList as review>
                 <li class="line">
                 <div class="has_avatar">
-                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/pc/images/90_avatar_middle.jpg"></a>
+                    <a target="_blank" class="a_avatar50" href="${encodeURL("/userInfo?userno=${review.userno?c}")}"><img width="50" height="50" alt="${review.loginid}" src="${contextPath}/themes/${themeName}/pc/images/90_avatar_middle.jpg"></a>
                 </div>
                 <div class="replycontent">
                     <div class="t_t">
                         <div>
-                            <a target="_blank" title="${review.loginid}" class="commenter" href="${encodeURL("/userInfo?userno=${review.userno}")}">${review.loginid}</a>
+                            <a target="_blank" title="${review.loginid}" class="commenter" href="${encodeURL("/userInfo?userno=${review.userno?c}")}">${review.loginid}</a>
                             <span class="time">评论于：${review.postdate?string("yyyy-MM-dd HH:mm")}</span>
                         </div>
                     </div>
@@ -45,7 +41,7 @@
         <div class="pages">
               <div class="pagelink" id="pagelink">
                 <#assign listurl = "/reviewList?subdir=${article.subdir?c}&articleno=${articleno?c}&page=" >
-                <#assign listurlforjs = "${contextPath}/reviewList/${articleno}/" >
+                <#assign listurlforjs = "${contextPath}/reviewList/${articleno?c}/" >
                 <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages?c}</em>
                 <a href="${encodeURL(listurl +"1")}" class="first">1</a>
                 <#list pagination.pageNumberList as pagenum >
@@ -84,7 +80,7 @@
                     <div class="box_l"> 
                         <div>已输入字数：<span id="comment_text_word">0</span>  (评论最少5字最多500字) </div>
                     </div>
-                    <input type="submit" class="release_btn submit_comment_btn" value=" " id= "submitbtn" name="submitbtn">
+                    <input type="submit" class="release_btn submit_comment_btn" value=" " id= "reviewSubmitbtn" name="submitbtn">
                 </div>
             </div>
         </div>

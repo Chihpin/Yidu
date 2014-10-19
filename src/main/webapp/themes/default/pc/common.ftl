@@ -3,88 +3,25 @@
   <div class="shadow" <#if pageType?? && pageType==4> style="height:1px;" </#if>></div>
   <header id="global-head" <#if pageType?? && pageType==4> style="height:45px;" </#if>>
     <div>
-      <nav class="site-navigation cf">
+      <nav class="site-navigation cf" style="width: 320px;">
       <a class="home" href="${contextPath}/">首页</a>
       <a href="${encodeURL("/siteMap")}">网站地图</a>
       <a href="${encodeURL("/articleList?fullflag=true")}">完本小说</a>
       <a href="${encodeURL("/saveShortcut")}">创建桌面快捷</a>
       </nav>
-      <div class="hd-follow" style="width:500px;text-align:right;" >
+      <div class="hd-follow" style="width:630px;text-align:right;" >
         <div class="myhide"><a href="#" class="hides">浏览记录</a>
           <div class="hideInfo">
             <ul id="readhistory">
-                <script>
-                    $(document).ready(function(){
-                       var readhistory = $.cookie("readhistory");
-                       if(! readhistory ){
-                            readhistory = new Array();
-                       }else{
-                            readhistory = JSON.parse(readhistory);
-                       }
-                       var html ="";
-                       for(i=0; i < readhistory.length;i++){
-                            html = html + ' <li class=""><a class="close" href = "javascript:return false" articleno = '+readhistory[i].articleno+' ></a><a href="${contextPath}/info/'+Math.floor(readhistory[i].articleno/1000)+'/'+readhistory[i].articleno +'.html" class="f14">'+readhistory[i].articlename+'</a><br>'
-                            html = html + ' 最近浏览:<a href="${contextPath}/reader/'+Math.floor(readhistory[i].articleno/1000)+'/'+readhistory[i].articleno+'/'+readhistory[i].chapterno+'.html" >'+readhistory[i].chaptername+'</a></li>'
-                       }
-                       $('#readhistory').html(html);
-                       
-                       $('.hideInfo ul li').hover(function(){
-                            $(this).addClass('hover');
-                        },function(){
-                            $(this).removeClass('hover');
-                        })
-                        $('.hideInfo .close').click(function(){
-                            var articleno = $(this).attr('articleno');
-                            var index = articleno.in_array(readhistory);
-                            if(index != -1){
-                                readhistory.splice(index,1);
-                            }
-                            $.cookie("readhistory",JSON.stringify(readhistory),{path:"/",expires: 365});
-
-                            var len=$(this).parents("ul").children("li").length;
-                            if(len!=1){$(this).parent("li").remove();}
-                            else{$(this).parents(".hideInfo").children("p").remove();
-                            $(this).parents(".hideInfo").children("span").show();
-                            $(this).parent("li").remove();}
-                            });
-                    })
-               </script>
             </ul>
             <p>*提示：浏览记录仅放置最近浏览的10本书籍</p>
             <span>浏览记录是空的</span>
           </div>
         </div>
           <span id="checklogin">
-          <script>
-            var enableQQLogin = <#if enableQQLogin>true<#else>false</#if>;
-            if(enableQQLogin){ 
-                document.writeln("<a href=\"${contextPath}/gotoQQLogin\"><img src=\"${contextPath}/themes/${themeName}/pc/images/qq_login.gif\" class=\"vm\" alt=\"QQ登录\"></a>&nbsp;&nbsp;");
-            }
-            document.writeln("<a href=\"${contextPath}/login\" style=\"color:#F0F0F0\">访客登录</a>&nbsp;&nbsp;");
-            document.writeln("<a href=\"${contextPath}/register\" style=\"color:#F0F0F0\">免费注册</a>&nbsp;&nbsp;");
-          
-            $(document).ready(function(){
-                $.post('${contextPath}/checklogin',function(data){
-                    if(data!=null){
-                       var html = '你好   <a href="${encodeURL("/user/useredit")}" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
-                        if(enableQQLogin && data.openid==null){
-                            html = html + '&nbsp;&nbsp;&nbsp;<a href=\"${contextPath}/gotoQQLogin" \"><img src=\"${contextPath}/themes/${themeName}/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
-                        }
-                        if(data.type==30){
-                            html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/admin/index")}" style="color: rgb(240, 240, 240);">管理后台</a>';
-                        }else if(data.type==20||data.type==40||data.type==41){
-                            html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/articleList")}" style="color: rgb(240, 240, 240);">小说管理</a>';
-                        }
-                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/message")}" style="color: rgb(240, 240, 240);">消息管理</a>';
-                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/bookcase")}" style="color: rgb(240, 240, 240);">我的书架</a>';
-                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/user/subscribe")}" style="color: rgb(240, 240, 240);">订阅管理</a>';
-                        html = html + '&nbsp;&nbsp;&nbsp;<a href="${encodeURL("/logout")}" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
-                        $('#checklogin').html(html);
-                    }
-                })
-            })
-           
-          </script>
+            <#if enableQQLogin><a href="/gotoQQLogin"><img src="/themes/default/pc/images/qq_login.gif" class="vm" alt="QQ登录"></a></#if>
+            <a href="${contextPath}/login" style="color:#F0F0F0">访客登录</a>&nbsp;&nbsp;
+            <a href="${contextPath}/register" style="color:#F0F0F0">免费注册</a>&nbsp;&nbsp;
           </span>
         </div>
     </div>
