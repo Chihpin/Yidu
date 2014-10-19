@@ -163,7 +163,7 @@ public class SubscribeAction extends AbstractUserBaseAction {
             return FREEMARKER_ERROR;
         }
 
-        searchBean.setUserno(articleno);
+        searchBean.setArticleno(articleno);
         subscribeCount = this.subscribeService.getCount(searchBean);
         if (subscribeCount > 0) {
             // 已经存在啦，算了，告诉他成功啦！哈哈
