@@ -142,7 +142,7 @@ a:hover { text-decoration:underline }
 /**#dialog1 { position:absolute; top:0px; left:0px; border:16px solid #ebebeb; background: #fff; font-size: 12px; line-height:120%; visibility: hidden; color:#666; }**/
 #mask { position:absolute; top:0px; left:0px; background: #777777; filter: Alpha(opacity=30); opacity: 0.3; }
 table.grid { border-collapse: collapse; padding: 3px; margin: auto; }
-table.grid caption, .gridtop { background: #ecf5fa; vertical-align: middle; text-align: center; padding: 3px; color:#009900; font-weight: bold; font-size:16px; margin: auto; height:37px; line-height:37px; text-align:left; padding-left:20px; margin-bottom:20px; }
+table.grid caption, .gridtop { background: #ecf5fa; vertical-align: middle; text-align: center; padding: 3px; color:#009900; font-weight: bold; font-size:16px; margin: auto; height:37px; line-height:37px; text-align:left; padding-left:20px; margin-bottom:5px; }
 table.grid caption a { float:right; height:22px; line-height:22px; margin-right:10px; display:inline; color:#ff6600; font-size:18px; }
 table.grid th, .head { border: 1px solid #E7E7E7; background: #f5f5f5; color:#054e86; text-align: center; font-weight: bold; font-size: 12px; padding: 3px; }
 table.grid td { padding: 3px; background-color: #ffffff !important; }
