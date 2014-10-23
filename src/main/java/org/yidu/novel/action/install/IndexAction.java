@@ -21,6 +21,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.action.base.AbstractInstallBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
+import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -569,6 +570,11 @@ public class IndexAction extends AbstractInstallBaseAction {
             File languageFile = new File(languageConf.getPath());
             out = new FileOutputStream(languageFile);
             languageConf.save(out);
+
+            YiDuConstants.yiduConf.setProperty(YiDuConfig.URI, url);
+            File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());
+            out = new FileOutputStream(yiduConfFile);
+            YiDuConstants.yiduConf.save(out);
 
             lockFile.createNewFile();
 
