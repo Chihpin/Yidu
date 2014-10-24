@@ -8,6 +8,12 @@
 <table class="grid" align="center" cellspacing="1" width="800">
 <caption><s:text name="label.admin.config.edit.caption1" /></caption>
 <tbody>
+
+    <tr align="left" valign="middle">
+       <td class="odd" width="25%"><s:text name="label.admin.config.edit.uri" /></td>
+       <td class="even"><s:textfield name ="uri" size="40" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+
     <tr align="left" valign="middle">
        <td class="odd" width="25%"><s:text name="label.admin.config.edit.filePath" /></td>
        <td class="even"><s:textfield name ="filePath" size="40" maxlength="100" cssClass="text" theme="simple"/><span class="hottext">填写绝对路径</span></td>

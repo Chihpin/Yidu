@@ -27,6 +27,12 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      * 串行化版本统一标识符
      */
     private static final long serialVersionUID = -6768164951656460867L;
+
+    /**
+     * uri
+     */
+    private String uri;
+
     /**
      * TXT文件路径
      */
@@ -181,6 +187,27 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      * 重新加载小说信息周期(单位：分)
      */
     private int reloadSingleBookInterval;
+
+    /**
+     * 获取uri
+     * 
+     * @return uri
+     */
+    public String getUri() {
+        return uri;
+    }
+
+    /**
+     * 
+     * 设置uri
+     * 
+     * 
+     * @param uri
+     *            uri
+     */
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 
     public String getFilePath() {
         return filePath;
@@ -756,6 +783,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
+        uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
         filePath = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
         relativeIamgePath = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         cacheEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CACHE_EFFECTIVE, true);
@@ -813,6 +841,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     public String save() {
 
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.URI, uri);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.FILE_PATH, filePath);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.RELATIVE_IAMGE_PATH, relativeIamgePath);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CACHE_EFFECTIVE, cacheEffective);
