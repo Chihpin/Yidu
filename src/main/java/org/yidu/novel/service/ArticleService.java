@@ -3,6 +3,7 @@ package org.yidu.novel.service;
 import java.util.List;
 
 import org.yidu.novel.bean.ArticleSearchBean;
+import org.yidu.novel.dto.CategoryCountDTO;
 import org.yidu.novel.entity.TArticle;
 
 /**
@@ -123,5 +124,12 @@ public interface ArticleService {
      * @return 推荐列表
      */
     List<TArticle> findRandomRecommendArticleList(final int count);
+    
+    /**
+     * 获取各个分类的小说数量<br>
+     * 
+     * @return 各分类的小说数量
+     */
+    List<CategoryCountDTO> getCountPerCategory();
 
 }

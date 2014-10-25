@@ -81,6 +81,30 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      */
     private boolean createSiteMap;
     /**
+     * 站点地图类型
+     */
+    private String siteMapType;
+    /**
+     * 列表站点地图
+     */
+    private String xmlSiteMapListWithNoPageURL;
+    /**
+     * 列表站点地图
+     */
+    private String xmlSiteMapListURL;
+    /**
+     * 简介页站点地图
+     */
+    private String xmlSiteMapInfoURL;
+    /**
+     * 章节列表站点地图
+     */
+    private String xmlSiteMapChaterListURL;
+    /**
+     * 阅读页站点地图
+     */
+    private String xmlSiteMapReaderURL;
+    /**
      * 存放TXT的编码
      */
     private String txtEncoding;
@@ -295,6 +319,132 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     public void setCreateSiteMap(boolean createSiteMap) {
         this.createSiteMap = createSiteMap;
+    }
+
+    /**
+     * 获取siteMapType
+     * 
+     * @return siteMapType
+     */
+    public String getSiteMapType() {
+        return siteMapType;
+    }
+
+    /**
+     * 
+     * 设置siteMapType
+     * 
+     * 
+     * @param siteMapType
+     *            siteMapType
+     */
+    public void setSiteMapType(String siteMapType) {
+        this.siteMapType = siteMapType;
+    }
+
+    /**
+     * 获取xmlSiteMapListWithNoPageURL
+     * 
+     * @return xmlSiteMapListWithNoPageURL
+     */
+    public String getXmlSiteMapListWithNoPageURL() {
+        return xmlSiteMapListWithNoPageURL;
+    }
+
+    /**
+     * 
+     * 设置xmlSiteMapListWithNoPageURL
+     * 
+     * 
+     * @param xmlSiteMapListWithNoPageURL
+     *            xmlSiteMapListWithNoPageURL
+     */
+    public void setXmlSiteMapListWithNoPageURL(String xmlSiteMapListWithNoPageURL) {
+        this.xmlSiteMapListWithNoPageURL = xmlSiteMapListWithNoPageURL;
+    }
+
+    /**
+     * 获取xmlSiteMapListURL
+     * 
+     * @return xmlSiteMapListURL
+     */
+    public String getXmlSiteMapListURL() {
+        return xmlSiteMapListURL;
+    }
+
+    /**
+     * 
+     * 设置xmlSiteMapListURL
+     * 
+     * 
+     * @param xmlSiteMapListURL
+     *            xmlSiteMapListURL
+     */
+    public void setXmlSiteMapListURL(String xmlSiteMapListURL) {
+        this.xmlSiteMapListURL = xmlSiteMapListURL;
+    }
+
+    /**
+     * 获取xmlSiteMapInfoURL
+     * 
+     * @return xmlSiteMapInfoURL
+     */
+    public String getXmlSiteMapInfoURL() {
+        return xmlSiteMapInfoURL;
+    }
+
+    /**
+     * 
+     * 设置xmlSiteMapInfoURL
+     * 
+     * 
+     * @param xmlSiteMapInfoURL
+     *            xmlSiteMapInfoURL
+     */
+    public void setXmlSiteMapInfoURL(String xmlSiteMapInfoURL) {
+        this.xmlSiteMapInfoURL = xmlSiteMapInfoURL;
+    }
+
+    /**
+     * 获取xmlSiteMapChaterListURL
+     * 
+     * @return xmlSiteMapChaterListURL
+     */
+    public String getXmlSiteMapChaterListURL() {
+        return xmlSiteMapChaterListURL;
+    }
+
+    /**
+     * 
+     * 设置xmlSiteMapChaterListURL
+     * 
+     * 
+     * @param xmlSiteMapChaterListURL
+     *            xmlSiteMapChaterListURL
+     */
+    public void setXmlSiteMapChaterListURL(String xmlSiteMapChaterListURL) {
+        this.xmlSiteMapChaterListURL = xmlSiteMapChaterListURL;
+    }
+
+    /**
+     * 获取xmlSiteMapReaderURL
+     * 
+     * @return xmlSiteMapReaderURL
+     */
+    public String getXmlSiteMapReaderURL() {
+        return xmlSiteMapReaderURL;
+    }
+
+    /**
+     * 
+     * 设置xmlSiteMapReaderURL
+     * 
+     * 
+     * @param xmlSiteMapReaderURL
+     *            xmlSiteMapReaderURL
+     */
+    public void setXmlSiteMapReaderURL(String xmlSiteMapReaderURL) {
+        this.xmlSiteMapReaderURL = xmlSiteMapReaderURL;
     }
 
     public String getTxtEncoding() {
@@ -795,6 +945,13 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         themeName = YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME);
         createIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_INDEXPAGE, true);
         createSiteMap = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_SITEMAP, true);
+        siteMapType = YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE);
+        xmlSiteMapListWithNoPageURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_WITH_NO_PAGE_URL);
+        xmlSiteMapListURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_URL);
+        xmlSiteMapInfoURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_INFO_URL);
+        xmlSiteMapChaterListURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_CHATERLIST_URL);
+        xmlSiteMapReaderURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_READER_URL);
+
         txtEncoding = YiDuConstants.yiduConf.getString(YiDuConfig.TXT_ENCODING);
 
         addReviewWithoutLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ADD_REVIEW_WITHOUT_LOGIN, true);
@@ -853,6 +1010,13 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.THEME_NAME, themeName);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_INDEXPAGE, createIndexPage);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_SITEMAP, createSiteMap);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.SITEMAP_TYPE, siteMapType);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_LIST_WITH_NO_PAGE_URL, xmlSiteMapListWithNoPageURL);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_LIST_URL, xmlSiteMapListURL);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_INFO_URL, xmlSiteMapInfoURL);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_CHATERLIST_URL, xmlSiteMapChaterListURL);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_READER_URL, xmlSiteMapReaderURL);
+
         YiDuConstants.yiduConf.setProperty(YiDuConfig.TXT_ENCODING, txtEncoding);
 
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ADD_REVIEW_WITHOUT_LOGIN, addReviewWithoutLogin);

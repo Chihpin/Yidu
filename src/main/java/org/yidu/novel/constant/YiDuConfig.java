@@ -102,13 +102,25 @@ public class YiDuConfig {
      */
     public static final String SITEMAP_TYPE = "siteMapType";
     /**
+     * XML网站地图内的列表页URL（不含页号）
+     */
+    public static final String XML_SITEMAP_LIST_WITH_NO_PAGE_URL = "xmlSiteMapListWithNoPageURL";
+    /**
+     * XML网站地图内的列表页URL
+     */
+    public static final String XML_SITEMAP_LIST_URL = "xmlSiteMapListURL";
+    /**
      * XML网站地图内的小说信息URL
      */
-    public static final String XML_SITEMAP_ARTICLE_URL = "xmlSiteMapArticleURL";
+    public static final String XML_SITEMAP_INFO_URL = "xmlSiteMapInfoURL";
+    /**
+     * XML网站地图内的章节列表信息URL
+     */
+    public static final String XML_SITEMAP_CHATERLIST_URL = "xmlSiteMapChaterListURL";
     /**
      * XML网站地图内的章节信息URL
      */
-    public static final String XML_SITEMAP_CHAPTER_URL = "xmlSiteMapChapterURL";
+    public static final String XML_SITEMAP_READER_URL = "xmlSiteMapReaderURL";
     /**
      * 信息页显示评论数量
      */

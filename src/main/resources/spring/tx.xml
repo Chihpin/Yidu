@@ -29,7 +29,8 @@
 							<prop key="delete">PROPAGATION_REQUIRED</prop>
 							<prop key="find">PROPAGATION_REQUIRED</prop>
 							<prop key="findRandomRecommendArticleList">PROPAGATION_REQUIRED</prop>
-							
+							<prop key="getCount">PROPAGATION_REQUIRED</prop>
+							<prop key="getCountPerCategory">PROPAGATION_REQUIRED</prop>
 						</props>
 					</property>
 				</bean>

@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.ArticleSearchBean;
+import org.yidu.novel.dto.CategoryCountDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
@@ -144,6 +145,12 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         hql.append("SELECT count(*) FROM TArticle where deleteflag = false ");
         buildCondtion(searchBean, hql, params);
         return this.getIntResult(hql.toString(), params);
+    }
+
+    @Override
+    public List<CategoryCountDTO> getCountPerCategory() {
+        String sql = " SELECT category,count(*) FROM t_article where deleteflag = false group by category ";
+        return this.yiduJdbcTemplate.query(sql, new BeanPropertyRowMapper<CategoryCountDTO>(CategoryCountDTO.class));
     }
 
     @Override

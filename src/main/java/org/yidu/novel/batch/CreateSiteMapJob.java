@@ -1,6 +1,8 @@
 package org.yidu.novel.batch;
 
 import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,12 +19,14 @@ import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.constant.YiDuConstants.SiteMapType;
+import org.yidu.novel.dto.CategoryCountDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.service.ChapterService;
 import org.yidu.novel.utils.DateUtils;
 import org.yidu.novel.utils.FileUtils;
+import org.yidu.novel.utils.Pagination;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -40,6 +44,36 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * 输出log
      */
     private Log log = LogFactory.getLog(this.getClass());
+    /**
+     * 优先级 1
+     */
+    private static final String PRIORITY_1 = "1";
+
+    /**
+     * 优先级 0.9
+     */
+    private static final String PRIORITY_09 = "0.9";
+
+    /**
+     * 优先级 0.8
+     */
+    private static final String PRIORITY_08 = "0.8";
+
+    /**
+     * 优先级 0.7
+     */
+    private static final String PRIORITY_07 = "0.7";
+
+    /**
+     * 优先级 0.5
+     */
+    private static final String PRIORITY_05 = "0.5";
+
+    /**
+     * 每个文件默认的URL数量
+     */
+    private static final int COUNT_PER_FILE = 40000;
+
     /**
      * 网站地图路径
      */
@@ -85,29 +119,26 @@ public class CreateSiteMapJob extends QuartzJobBean {
         boolean createSiteMapFlag = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_SITEMAP, false);
         if (createSiteMapFlag) {
             String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+            String sitemapUri = uri + (StringUtils.endsWith(uri, "/") ? "" : "/") + SITEMAP_DIR + "/";
             try {
                 String currentPath = CreateSiteMapJob.class.getClassLoader().getResource("").getPath();
+                File f = new File(currentPath).getParentFile().getParentFile();
+                currentPath = f.getAbsolutePath();
                 log.debug(currentPath);
-                // 减16的字符是WEB-INF/classes/
-                if(currentPath.indexOf("WEB-INF") >= 0) {
-                	currentPath = currentPath.substring(0, currentPath.length() - 16);
+                String sitemapDir = currentPath + "/" + SITEMAP_DIR + "/";
+
+                log.debug("sitemap dir: " + sitemapDir);
+                if (!new File(sitemapDir).exists()) {
+                    new File(sitemapDir).mkdirs();
                 }
-                String dir = currentPath + "/" + SITEMAP_DIR + "/";
-                log.debug("sitemap dir: " + dir);
-                if (!new File(dir).exists()) {
-                    new File(dir).mkdirs();
-                }
-                
+
                 if (SiteMapType.XML.getName().equalsIgnoreCase(
                         YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE))) {
-                    List<TArticle> articleList = articleService.find(new ArticleSearchBean());
-                    List<TChapter> chapterList = chapterService.find(new ChapterSearchBean());
-                    int fileIndex = 1;
-                    createBaiduXmlSiteMap(articleList, chapterList, dir, fileIndex);
+                    createXmlSiteMap(sitemapDir, sitemapUri);
                 } else {
                     String responseBody = Utils.getContentFromUri(uri + SiteMapAction.URL);
                     if (StringUtils.isNotBlank(responseBody)) {
-                        File destFile = new File(dir + "/index.html");
+                        File destFile = new File(sitemapDir + "/index.html");
                         FileUtils.writeFile(destFile, responseBody, false);
                     }
                 }
@@ -118,86 +149,179 @@ public class CreateSiteMapJob extends QuartzJobBean {
         }
     }
 
-    /**
-     * 创建符合百度规范的xml格式的sitemap
-     * 
-     * @param articleList
-     *            小说列表
-     * @param chapterList
-     *            章节列表
-     * @param siteMapDir
-     *            网站地图路径
-     * @param fileIndex
-     *            文件索引
-     * @throws Exception
-     *             处理异常
-     */
-    public void createBaiduXmlSiteMap(List<TArticle> articleList, List<TChapter> chapterList, String siteMapDir,
-            int fileIndex) throws Exception {
+    private void createXmlSiteMap(String sitemapDir, String sitemapUri) {
+
+        List<String> articleListUrlList = ceateIndexAndListBaiduXmlSiteMap(sitemapDir, sitemapUri);
+        List<String> infoUrlList = ceateInfoBaiduXmlSiteMap(sitemapDir, sitemapUri);
+        List<String> chapterListUrlList = ceateChapterListBaiduXmlSiteMap(sitemapDir, sitemapUri);
+        List<String> chapterUrlList = ceateReaderBaiduXmlSiteMap(sitemapDir, sitemapUri);
+
+        // 生成sitemap索引文件
         StringBuffer indexBuffer = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         indexBuffer.append("<sitemapindex>\n");
+        // 添加List页的sitemap
+        for (String url : articleListUrlList) {
+            appendIndex(indexBuffer, url);
+        }
+        // 添加info页的sitemap
+        for (String url : infoUrlList) {
+            appendIndex(indexBuffer, url);
+        }
+        // 添加章节列表的sitemap
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+            // 添加info页的sitemap
+            for (String url : chapterListUrlList) {
+                appendIndex(indexBuffer, url);
+            }
+        }
+        // 添加reader页的sitemap
+        for (String url : chapterUrlList) {
+            appendIndex(indexBuffer, url);
+        }
+        indexBuffer.append("</sitemapindex>");
+        String fileName = sitemapDir + "sitemap.xml";
+        FileUtils.writeFile(new File(fileName), indexBuffer.toString(), false);
+    }
 
-        String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
-        uri = uri.endsWith("/") ? uri : uri + "/";
+    /**
+     * 制作小说列表和主页的网站地图<br>
+     * 分类合计不会超过50000行，所以这里就不分文件啦
+     * 
+     * @param sitemapUri
+     * 
+     * @param 文件列表
+     */
+    private List<String> ceateIndexAndListBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
 
         StringBuffer sb = new StringBuffer();
+        sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sb.append("<urlsest>\n");
+        // 添加主页
+        sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI), PRIORITY_1, new Date()));
+        // 获取各个分类小说件数
+        List<CategoryCountDTO> categoryCountList = articleService.getCountPerCategory();
+        if (Utils.isDefined(categoryCountList)) {
+            for (CategoryCountDTO categoryCount : categoryCountList) {
+                // 计算分页数
+                int pages = categoryCount.getCount() / YiDuConstants.yiduConf.getInt(YiDuConfig.COUNT_PER_PAGE, 15);
+                if (categoryCount.getCount() % YiDuConstants.yiduConf.getInt(YiDuConfig.COUNT_PER_PAGE, 15) > 0) {
+                    pages++;
+                }
+                for (int i = 1; i <= pages; i++) {
+                    String url = "";
+                    if (i == 1) {
+                        url = MessageFormat.format(
+                                YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_WITH_NO_PAGE_URL),
+                                categoryCount.getCategory());
+                    } else {
+                        url = MessageFormat.format(YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_URL),
+                                categoryCount.getCategory(), i);
+                    }
+                    sb.append(createURL(url, PRIORITY_09, new Date()));
+                }
+            }
+        }
+        sb.append("</urlsest>");
+        String fileName = sitemapDir + "sitemap_list.xml";
+        FileUtils.writeFile(new File(fileName), sb.toString(), false);
+        List<String> urlList = new ArrayList<String>();
+        urlList.add(sitemapUri + "sitemap_list.xml");
+        return urlList;
+    }
+
+    /**
+     * 制作小说介绍页的网站地图<br>
+     * 
+     * @param sitemapUri
+     * 
+     * @param 文件列表
+     */
+    private List<String> ceateInfoBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+        int count = articleService.getCount(new ArticleSearchBean());
+        int files = count / COUNT_PER_FILE;
+        if (count % COUNT_PER_FILE > 0) {
+            files++;
+        }
+
+        List<String> urlList = new ArrayList<String>();
+        String fileNameFormat = "sitemap_info_{0}.xml";
         String fileName = "";
-        // xml格式的sitemap每个文件最大支持10M，或5万条url， 这里设置每10000条URL写一次文件
-
-        // 写章节阅读页
-        for (int i = 0; i < chapterList.size(); i++) {
-            TChapter chapter = chapterList.get(i);
-            // 首次
-            if (i % 10000 == 0) {
-                sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-                sb.append("<urlsest>\n");
+        for (int i = 1; i <= files; i++) {
+            StringBuffer sb = new StringBuffer();
+            sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            sb.append("<urlsest>\n");
+            ArticleSearchBean searchBean = new ArticleSearchBean();
+            Pagination pagination = new Pagination(COUNT_PER_FILE, i);
+            searchBean.setPagination(pagination);
+            List<TArticle> articleList = articleService.find(searchBean);
+            for (TArticle article : articleList) {
+                sb.append(createURL(constructURL(article), PRIORITY_08, new Date()));
             }
-            sb.append(createURL(chapter));
-
-            // 写文件
-            if ((i + 1) % 10000 == 0) {
-                sb.append("</urlsest>");
-                fileName = siteMapDir + "sitemap_" + fileIndex + ".xml";
-                FileUtils.writeFile(new File(fileName), sb.toString(), false);
-                appendIndex(fileIndex, indexBuffer, uri);
-                fileIndex++;
-            }
+            sb.append("</urlsest>");
+            fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
+            FileUtils.writeFile(new File(fileName), sb.toString(), false);
+            urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
         }
-        sb.append("</urlsest>");
-        fileName = siteMapDir + "sitemap_" + fileIndex + ".xml";
-        FileUtils.writeFile(new File(fileName), sb.toString(), false);
-        appendIndex(fileIndex, indexBuffer, uri);
-        fileIndex++;
+        return urlList;
+    }
 
-        // 写小说信息页
-        for (int i = 0; i < articleList.size(); i++) {
-            TArticle article = articleList.get(i);
-            // 首次
-            if (i % 10000 == 0) {
-                sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-                sb.append("<urlsest>\n");
-            }
-            sb.append(createURL(article));
-
-            // 写文件
-            if ((i + 1) % 10000 == 0) {
-                sb.append("</urlsest>");
-                fileName = siteMapDir + "sitemap_" + fileIndex + ".xml";
-                FileUtils.writeFile(new File(fileName), sb.toString(), false);
-                appendIndex(fileIndex, indexBuffer, uri);
-                fileIndex++;
-            }
+    private List<String> ceateChapterListBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+        int count = articleService.getCount(new ArticleSearchBean());
+        int files = count / COUNT_PER_FILE;
+        if (count % COUNT_PER_FILE > 0) {
+            files++;
         }
-        sb.append("</urlsest>");
-        fileName = siteMapDir + "sitemap_" + fileIndex + ".xml";
-        FileUtils.writeFile(new File(fileName), sb.toString(), false);
 
-        appendIndex(fileIndex, indexBuffer, uri);
-        indexBuffer.append("</sitemapindex>");
+        List<String> urlList = new ArrayList<String>();
+        String fileNameFormat = "sitemap_chapterList_{0}.xml";
+        String fileName = "";
+        for (int i = 1; i <= files; i++) {
+            StringBuffer sb = new StringBuffer();
+            sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            sb.append("<urlsest>\n");
+            ArticleSearchBean searchBean = new ArticleSearchBean();
+            Pagination pagination = new Pagination(COUNT_PER_FILE, i);
+            searchBean.setPagination(pagination);
+            List<TArticle> articleList = articleService.find(searchBean);
+            for (TArticle article : articleList) {
+                sb.append(createURL(constructChapterListURL(article), PRIORITY_07, new Date()));
+            }
+            sb.append("</urlsest>");
+            fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
+            FileUtils.writeFile(new File(fileName), sb.toString(), false);
+            urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
+        }
+        return urlList;
+    }
 
-        fileName = siteMapDir + "sitemap.xml";
-        FileUtils.writeFile(new File(fileName), indexBuffer.toString(), false);
+    private List<String> ceateReaderBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
 
+        int count = chapterService.getCount(new ChapterSearchBean());
+        int files = count / COUNT_PER_FILE;
+        if (count % COUNT_PER_FILE > 0) {
+            files++;
+        }
+
+        List<String> urlList = new ArrayList<String>();
+        String fileNameFormat = "sitemap_reader_{0}.xml";
+        String fileName = "";
+        for (int i = 1; i <= files; i++) {
+            StringBuffer sb = new StringBuffer();
+            sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            sb.append("<urlsest>\n");
+            ChapterSearchBean searchBean = new ChapterSearchBean();
+            Pagination pagination = new Pagination(COUNT_PER_FILE, i);
+            searchBean.setPagination(pagination);
+            List<TChapter> chapterList = chapterService.find(searchBean);
+            for (TChapter chapter : chapterList) {
+                sb.append(createURL(constructURL(chapter), PRIORITY_05, new Date()));
+            }
+            sb.append("</urlsest>");
+            fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
+            FileUtils.writeFile(new File(fileName), sb.toString(), false);
+            urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
+        }
+        return urlList;
     }
 
     /**
@@ -210,46 +334,28 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * @param uri
      *            路径
      */
-    private void appendIndex(int fileIndex, StringBuffer indexBuffer, String uri) {
-        String indexLoc = uri + SITEMAP_DIR + "/sitemap_" + fileIndex + ".xml";
+    private void appendIndex(StringBuffer indexBuffer, String url) {
         indexBuffer.append("\t<sitemap>\n");
-        indexBuffer.append("\t\t<loc>" + indexLoc + "</loc>\n");
+        indexBuffer.append("\t\t<loc>" + url + "</loc>\n");
         indexBuffer.append("\t\t<lastmod>" + DateUtils.format(new Date()) + "</lastmod>\n");
         indexBuffer.append("\t</sitemap>\n");
     }
 
     /**
-     * 向sitemap文件中添加章节阅读页&lt;url&gt;xxx&lt;/url&gt;
+     * 向sitemap文件中添加List页&lt;url&gt;xxx&lt;/url&gt;
      * 
-     * @param chapter
-     *            章节信息
-     * @return 创建URL
+     * @param cotegory
+     *            分类信息
+     * @param page
+     *            页号
+     * @return List页URL
      */
-    private String createURL(TChapter chapter) {
+    private String createURL(String url, String priority, Date lastmod) {
         StringBuffer sb = new StringBuffer("\t<url>\n");
-        String loc = constructURL(chapter);
-        sb.append("\t\t<loc>" + loc + "</loc>\n");
-        sb.append("\t\t<lastmod>" + DateUtils.format(chapter.getPostdate()) + "</lastmod>\n");
+        sb.append("\t\t<loc>" + url + "</loc>\n");
+        sb.append("\t\t<lastmod>" + DateUtils.format(lastmod) + "</lastmod>\n");
         sb.append("\t\t<changefreq>always</changefreq>\n");
-        sb.append("\t\t<priority>1.0</priority>\n");
-        sb.append("\t</url>\n");
-        return sb.toString();
-    }
-
-    /**
-     * 向sitemap文件中添加小说信息页&lt;url&gt;xxx&lt;/url&gt;
-     * 
-     * @param article
-     *            小说信息
-     * @return 小说URL
-     */
-    private String createURL(TArticle article) {
-        StringBuffer sb = new StringBuffer("\t<url>\n");
-        String loc = constructURL(article);
-        sb.append("\t\t<loc>" + loc + "</loc>\n");
-        sb.append("\t\t<lastmod>" + DateUtils.format(article.getLastupdate()) + "</lastmod>\n");
-        sb.append("\t\t<changefreq>always</changefreq>\n");
-        sb.append("\t\t<priority>1.0</priority>\n");
+        sb.append("\t\t<priority>" + priority + "</priority>\n");
         sb.append("\t</url>\n");
         return sb.toString();
     }
@@ -262,12 +368,11 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * @return 小说阅读页URL
      */
     private String constructURL(TChapter chapter) {
-        String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_CHAPTER_URL);
+        String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_READER_URL);
         String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
         int subDir = chapter.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = chapter.getArticleno();
         int chapterNo = chapter.getChapterno();
-        // /reader/{sub_dir}/{article_no}/{chapter_no}.html
         loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
                 .replace("{chapter_no}", String.valueOf(chapterNo));
         if (!uri.endsWith("/") && !loc.startsWith("/")) {
@@ -284,7 +389,27 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * @return 小说信息页URL
      */
     private String constructURL(TArticle article) {
-        String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_ARTICLE_URL);
+        String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_INFO_URL);
+        String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
+        int articleNo = article.getArticleno();
+        // /info/{sub_dir}/{article_no}.html
+        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo));
+        if (!uri.endsWith("/") && !loc.startsWith("/")) {
+            uri += "/";
+        }
+        return uri + loc;
+    }
+
+    /**
+     * 构造章节列表信息页URL
+     * 
+     * @param article
+     *            小说信息
+     * @return 章节列表页URL
+     */
+    private String constructChapterListURL(TArticle article) {
+        String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_CHATERLIST_URL);
         String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
         int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = article.getArticleno();
