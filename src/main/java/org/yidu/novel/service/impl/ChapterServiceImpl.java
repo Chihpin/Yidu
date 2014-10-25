@@ -150,4 +150,12 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         return this.find(hql.toString(), params);
     }
 
+    @Override
+    public void deleteAllByArticlno(int articleno) {
+        StringBuffer sql = new StringBuffer("update TChapter set deleteflag=false where articleno = ?");
+        List<Object> params = new ArrayList<Object>();
+        // 追加小说号条件
+        params.add(articleno);
+        sqlQuery(sql.toString(), params);
+    }
 }

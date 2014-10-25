@@ -103,4 +103,12 @@ public interface ChapterService {
      */
     List<TChapter> getChapterInSegement(Integer articleno, Integer chapterno, Integer toChapterno);
 
+    /**
+     * 通过小说编号删除章节信息
+     * 
+     * @param articleno
+     *            小说编号
+     */
+    void deleteAllByArticlno(final int articleno);
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 import org.yidu.novel.action.base.AbstractAdminListBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.entity.TArticle;
@@ -96,10 +97,9 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         BeanUtils.copyProperties(this, searchBean);
         searchBean.setPagination(null);
         chapterList = chapterService.find(searchBean);
-
     }
 
-    public String delete() throws Exception {
+    public String delete() {
         if (chapterno == 0) {
             addActionError(getText("errors.required.input",
                     new String[] { getText("label.admin.chapter.list.chapterno") }));
@@ -123,7 +123,26 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         articleService.save(article);
         loadData();
         return INPUT;
+    }
 
+    @Transactional
+    public String deleteAll() {
+        if (articleno == 0) {
+            addActionError(getText("errors.required.input",
+                    new String[] { getText("label.admin.chapter.list.articleno") }));
+        }
+
+        chapterService.deleteAllByArticlno(articleno);
+
+        // 更新最新章节信息
+        TArticle article = articleService.getByNo(articleno);
+        article.setSize(0);
+        article.setLastchapterno(null);
+        article.setLastchapter(null);
+        article.setLastupdate(null);
+        articleService.save(article);
+        loadData();
+        return REDIRECT;
     }
 
 }

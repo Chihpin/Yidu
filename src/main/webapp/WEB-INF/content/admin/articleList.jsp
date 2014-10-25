@@ -32,21 +32,17 @@
                 <input type="submit" id="searchbuttom" value="搜索">
             </td>
             <td>&nbsp;&nbsp;</td>
-            <td>待审文章 | 已审文章 | 隐藏文章 | 冷门文章 | 空文章
+            <td>
+            <a href="<s:url value="/admin/articleList" escapeAmp="false"><s:param name="allvisit" value="0" /><s:param name="category"  value="category"/></s:url>">冷门文章</a> | 
+            <a href="<s:url value="/admin/articleList" escapeAmp="false"><s:param name="hasChapter" value="false" /><s:param name="category"  value="category"/></s:url>">空文章</a>
             </td>
         </tr>
     </table>
-    <table align="center">
+    <table  align="center">
     	<tr>
-    		<td style="width:180px;">
-	    	<s:select list="#{1:'删除'}" listKey="key" listValue="value" style="width:90%;"
-	    			headerKey="" headerValue="选择操作" id="operate"></s:select>
-	    	</td>
-	    	<td><input type="button" name="oper_apply" id="oper_apply" value="应用"/></td>
-	    	<td style="width:180px;"></td>
-	    	<td style="width:180px;"></td>
-	    	<td style="width:180px;"></td>
-	    	<td style="width:180px;"></td>
+	    	<td > [<a href="javascript:selectAll()">全选</a>] [<a href="javascript:unSelectAll()">全取消</a>]</td>
+	    	<td>[<a href="javascript:operApply()">批量删除</a>]</td>
+	    	<td > [<a href="<s:property value="contextPath" />/admin/articleEdit">添加小说</a>] </td>
     	</tr>
     </table>
     <table class="yidu-table" align="center">
@@ -55,13 +51,12 @@
             <col width="150px">
             <col width="100px">
             <col width="120px">
-            <col width="200px">
+            <col width="280px">
             <col width="120px">
-            <col width="230px">
+            <col width="150px">
         </colgroup>
         <tr>
-        	<th><input type="checkbox" id="selectAll" /></th>
-        
+        	<th></th>
             <th class="sortable <s:if test="pagination.sortColumn.equals('articlename')">sorted <s:property value="pagination.sortClass"/> </s:if>">
             <a href="#" onclick="fnPagination(6,'articlename');"><s:text name="label.admin.article.list.articlename" /></a></th>
 
@@ -91,7 +86,7 @@
             <td><s:property value="#article.author" /></td>
             <td><s:property value="#article.lastchapter" /></td>
             <td><s:date name="#article.lastupdate" format="yyyy/MM/dd HH:mm" /></td>
-            <td>待审 推荐/不荐
+            <td>
                 <a href="<s:property value="contextPath" />/admin/articleEdit?articleno=<s:property value='#article.articleno' />"><s:text name="label.admin.list.modify" /></a>
                 <a href="javascript:confirmDelete('<s:property value="contextPath" />/admin/articleList!delete?articleno=<s:property value='#article.articleno' />')"><s:text name="label.admin.list.delete" /></a>
                 <a href="<s:property value="contextPath" />/admin/chapterList?articleno=<s:property value='#article.articleno' />"><s:text name="label.admin.article.list.chapter" /></a>
@@ -103,11 +98,6 @@
         <tr>
             <td class="pagination-label" width="100%" nowrap="nowrap">
                     <jsp:include page="/WEB-INF/content/admin/commom/pagination.jsp" />
-            </td>
-        </tr>
-        <tr>
-            <td class="pagination-label" width="100%" nowrap="nowrap">
-                <a href="<s:property value="contextPath" />/admin/articleEdit"><s:text name="label.admin.list.add" /></a>
             </td>
         </tr>
     </table>

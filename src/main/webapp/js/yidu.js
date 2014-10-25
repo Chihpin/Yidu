@@ -84,22 +84,20 @@ function confirmDelete(delUrl) {
 }
 
 function selectAll() {
-	if($("#selectAll").attr("checked")) {
-		$("input[name='article_articleno']").attr("checked",true);
-	} else {
-		$("input[name='article_articleno']").attr("checked",false);
-	}
+	$("input[name='article_articleno']").attr("checked",true);
+}
+
+function unSelectAll() {
+	$("input[name='article_articleno']").attr("checked",false);
 }
 
 function operApply() {
-	var _oper = $("#operate").val();
-	if(_oper != "") {
-		var arrChk=$("input[name='article_articleno']:checked");
+	var arrChk = $("input[name='article_articleno']:checked");
+	if (arrChk.length > 0) {
 		var params = "";
-	    $(arrChk).each(function(){
-	       params = params + this.value + ",";                        
-	    }); 
-	    document.location = '/admin/articleList!delete?articleNoList='+params;
+		$(arrChk).each(function() {
+			params = params + this.value + ",";
+		});
+		document.location = '/admin/articleList!delete?articleNoList=' + params;
 	}
-	
 }
