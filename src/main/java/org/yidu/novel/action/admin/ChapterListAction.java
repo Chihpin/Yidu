@@ -142,7 +142,7 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         article.setLastupdate(null);
         articleService.save(article);
         loadData();
-        return REDIRECT;
+        return INPUT;
     }
 
 }
