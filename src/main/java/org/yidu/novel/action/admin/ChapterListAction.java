@@ -94,6 +94,7 @@ public class ChapterListAction extends AbstractAdminListBaseAction {
         article = articleService.getByNo(articleno);
         ChapterSearchBean searchBean = new ChapterSearchBean();
         BeanUtils.copyProperties(this, searchBean);
+        searchBean.setPagination(null);
         chapterList = chapterService.find(searchBean);
 
     }
