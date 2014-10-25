@@ -63,7 +63,7 @@ function replaces(num, size) {
 	}
 }
 
-//定义方法
+// 定义方法
 var in_array = function(arr) {
 	for ( var i = 0, k = arr.length; i < k; i++) {
 		if (this == arr[i].articleno) {
@@ -97,6 +97,10 @@ function stat_text_word(ob) {
 }
 
 function onSubmitClick() {
+	if($("#review").val() ==DFL_SUG_TEXT ){
+		layer.msg("请认真填写评论，谢谢！"); 
+		return;
+	}
 	$.ajax({
 		type : "post",
 		url : "/reviewList!addReview",
@@ -108,15 +112,19 @@ function onSubmitClick() {
 		async : false,
 		success : function(data) {
 			if (data == "success") {
-				alert("添加评论成功！感谢您的参与：）");
-				location.reload();
+				layer.msg("添加评论成功！感谢您的参与：）",3 ,{
+                    type:9, 
+                    shade: [0]
+                });
+				setTimeout(function() {
+					location.reload();
+				}, 3000);
 			} else {
-				alert(data);
+				layer.msg(data);
 			}
-
 		},
 		error : function() {
-			alert(failedMessage);
+			layer.msg(failedMessage);
 		},
 	});
 }
@@ -311,7 +319,7 @@ function postAjaxRequest(param){
 			}
 		},
 		error : function() {
-			alert(failedMessage);
+			layer.msg(failedMessage);
 		},
 	});
 }
