@@ -70,6 +70,20 @@ public class CreateSiteMapJob extends QuartzJobBean {
     private static final String PRIORITY_05 = "0.5";
 
     /**
+     * 更新频率-总是更新
+     */
+    private static final String CHANGEFREQ_ALWAYS = "always";
+    /**
+     * 更新频率-每天更新
+     */
+    private static final String CHANGEFREQ_DAILY = "daily";
+
+    /**
+     * 更新频率-每月更新
+     */
+    private static final String CHANGEFREQ_MONTHLY = "monthly";
+
+    /**
      * 每个文件默认的URL数量
      */
     private static final int COUNT_PER_FILE = 40000;
@@ -197,7 +211,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
         sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         sb.append("<urlsest>\n");
         // 添加主页
-        sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI), PRIORITY_1, new Date()));
+        sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI), new Date(), CHANGEFREQ_ALWAYS, PRIORITY_1));
         // 获取各个分类小说件数
         List<CategoryCountDTO> categoryCountList = articleService.getCountPerCategory();
         if (Utils.isDefined(categoryCountList)) {
@@ -217,7 +231,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
                         url = MessageFormat.format(YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_URL),
                                 categoryCount.getCategory(), i);
                     }
-                    sb.append(createURL(url, PRIORITY_09, new Date()));
+                    sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI) + url, new Date(),
+                            CHANGEFREQ_ALWAYS, PRIORITY_09));
                 }
             }
         }
@@ -255,7 +270,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TArticle> articleList = articleService.find(searchBean);
             for (TArticle article : articleList) {
-                sb.append(createURL(constructURL(article), PRIORITY_08, new Date()));
+                sb.append(createURL(constructURL(article), article.getLastupdate(), CHANGEFREQ_DAILY, PRIORITY_08));
             }
             sb.append("</urlsest>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -284,7 +299,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TArticle> articleList = articleService.find(searchBean);
             for (TArticle article : articleList) {
-                sb.append(createURL(constructChapterListURL(article), PRIORITY_07, new Date()));
+                sb.append(createURL(constructChapterListURL(article), article.getLastupdate(), CHANGEFREQ_DAILY,
+                        PRIORITY_07));
             }
             sb.append("</urlsest>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -314,7 +330,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TChapter> chapterList = chapterService.find(searchBean);
             for (TChapter chapter : chapterList) {
-                sb.append(createURL(constructURL(chapter), PRIORITY_05, new Date()));
+                sb.append(createURL(constructURL(chapter), chapter.getPostdate(), CHANGEFREQ_MONTHLY, PRIORITY_05));
             }
             sb.append("</urlsest>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -344,17 +360,21 @@ public class CreateSiteMapJob extends QuartzJobBean {
     /**
      * 向sitemap文件中添加List页&lt;url&gt;xxx&lt;/url&gt;
      * 
-     * @param cotegory
-     *            分类信息
-     * @param page
-     *            页号
+     * @param url
+     *            url
+     * @param lastmod
+     *            最后更新时间
+     * @param changefreq
+     *            更新频率
+     * @param priority
+     *            优先级
      * @return List页URL
      */
-    private String createURL(String url, String priority, Date lastmod) {
+    private String createURL(String url, Date lastmod, String changefreq, String priority) {
         StringBuffer sb = new StringBuffer("\t<url>\n");
         sb.append("\t\t<loc>" + url + "</loc>\n");
         sb.append("\t\t<lastmod>" + DateUtils.format(lastmod) + "</lastmod>\n");
-        sb.append("\t\t<changefreq>always</changefreq>\n");
+        sb.append("\t\t<changefreq>" + changefreq + "</changefreq>\n");
         sb.append("\t\t<priority>" + priority + "</priority>\n");
         sb.append("\t</url>\n");
         return sb.toString();
