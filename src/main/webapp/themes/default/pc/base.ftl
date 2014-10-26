@@ -6,6 +6,15 @@
 <!--[if (gt IE 9)|!(IE)]><html><!--<![endif]-->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--[if lt IE 9]>
+<script src="${contextPath}/themes/${themeName}/pc/js/lib/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script src="${contextPath}/themes/${themeName}/pc/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>
+  DD_belatedPNG.fix('.png_bg');
+</script>
+<![endif]-->
 <#assign categorymap = categoryData?eval>
 <#if assignContent?exists>  
       <@assignContent/>
@@ -36,18 +45,9 @@
     </#if>
     </div>
  </div>
-<!--[if lt IE 9]>
-<script src="${contextPath}/themes/${themeName}/pc/js/lib/html5.js"></script>
-<![endif]-->
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js"></script>
-<!--[if IE 6]>
-<script src="${contextPath}/themes/${themeName}/pc/js/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-  DD_belatedPNG.fix('.png_bg');
-</script>
-<![endif]-->
 <script type="text/javascript">
         enableQQLogin = <#if enableQQLogin>true<#else>false</#if>;
         adEffective = <#if adEffective?? && adEffective>true<#else>false</#if>;

@@ -417,7 +417,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
     private boolean doCheckLogin() {
         if (!LoginManager.isLoginFlag()) {
             dto.setCode(ReturnCode.FAILED);
-            dto.setResult(getText("errors.notLogin"));
+            dto.setErr(getText("errors.notLogin"));
             return false;
         }
         return true;
@@ -426,7 +426,7 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
     private boolean doCheckArticleno() {
         if (articleno == 0) {
             dto.setCode(ReturnCode.FAILED);
-            dto.setResult(getText("errors.not.exsits.article"));
+            dto.setErr(getText("errors.not.exsits.article"));
             return false;
         }
         return true;
