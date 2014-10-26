@@ -231,7 +231,8 @@ public class InfoAction extends AbstractPublicBaseAction {
         }
 
         if (article != null) {
-            if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+            if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)
+                    || (YiDuConstants.singleBookFlag.get() != null && YiDuConstants.singleBookFlag.get())) {
                 // 获取章节信息
                 ChapterSearchBean searchBean = new ChapterSearchBean();
                 searchBean.setArticleno(article.getArticleno());
