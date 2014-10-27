@@ -3,7 +3,7 @@
 <!--[if IE 7 ]><html class="ie ie7"><![endif]-->
 <!--[if IE 8 ]><html class="ie ie8"><![endif]-->
 <!--[if IE 9 ]><html class="ie ie9"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><html><!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><html><![endif]-->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--[if lt IE 9]>
@@ -47,7 +47,10 @@
  </div>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/layer.min.js"></script>
-<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js"></script>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/common.js" charset="UTF-8"></script>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/lib/json.js"></script>
+<![endif]-->
 <script type="text/javascript">
         enableQQLogin = <#if enableQQLogin>true<#else>false</#if>;
         adEffective = <#if adEffective?? && adEffective>true<#else>false</#if>;

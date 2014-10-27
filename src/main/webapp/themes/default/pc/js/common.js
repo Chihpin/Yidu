@@ -40,7 +40,7 @@ function cookie_encode(string){
 	return ns;
 }
 
-function repales_rell1(num, size) {
+function repales_rell(num, size) {
 	for ( var i = 1; i <= size; i++) {
 		if (i == num) {
 			$("#cttd" + i).show();
@@ -51,6 +51,7 @@ function repales_rell1(num, size) {
 		}
 	}
 }
+
 function replaces(num, size) {
 	for ( var i = 1; i <= size; i++) {
 		if (i == num) {
@@ -125,7 +126,7 @@ function onSubmitClick() {
 		},
 		error : function() {
 			layer.msg(failedMessage);
-		},
+		}
 	});
 }
 
@@ -233,6 +234,9 @@ $(document).ready(function() {
 
 	// 初始化按钮事件
 	initButtonEvent();
+	
+//	// 初始化事件
+//	initRepalesRellEvent();
 
 	// 初始化阅读履历
 	loadReadHistory();
@@ -241,6 +245,10 @@ $(document).ready(function() {
 	addAd();
 	
 });
+
+//function initRepalesRellEvent{
+//	$("#searchbuttom").click(onSearchButtomClick);
+//}
 
 function initButtonEvent(){
 	// 添加下载连接
@@ -320,7 +328,7 @@ function postAjaxRequest(param){
 		},
 		error : function() {
 			layer.msg(failedMessage);
-		},
+		}
 	});
 }
 

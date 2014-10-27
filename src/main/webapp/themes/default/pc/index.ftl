@@ -63,11 +63,11 @@
 <#macro content>
    <div id="index_ad_01"></div>
    <p class="b-all-switch normal">好看的:
-      <a href="javascript:;" class="select" id="ask1" onMouseOver="repales_rell1(1,5)">都市言情</a>
-      <a href="javascript:;" id="ask2" onMouseOver="repales_rell1(2,5)">玄幻魔法</a>
-      <a href="javascript:;" id="ask3" onMouseOver="repales_rell1(3,5)">历史军事</a>
-      <a href="javascript:;" id="ask4" onMouseOver="repales_rell1(4,5)">恐怖灵异</a>
-      <a href="javascript:;" id="ask5" onMouseOver="repales_rell1(5,5)">武侠修真</a>
+      <a href="javascript:;" class="select" id="ask1" onMouseOver="repales_rell(1,5)">都市言情</a>
+      <a href="javascript:;" id="ask2" onMouseOver="repales_rell(2,5)">玄幻魔法</a>
+      <a href="javascript:;" id="ask3" onMouseOver="repales_rell(3,5)">历史军事</a>
+      <a href="javascript:;" id="ask4" onMouseOver="repales_rell(4,5)">恐怖灵异</a>
+      <a href="javascript:;" id="ask5" onMouseOver="repales_rell(5,5)">武侠修真</a>
    </p>
 
     <#if recommendblock?exists>
@@ -86,6 +86,7 @@
           <@recommendblock articleList=blocks.index_wuxia_tuijian id="cttd5" style="display:none;"/>
     </#if>
     <div id="index_ad_02"></div>
+    <div class="clear"></div>
     <div id="J_random_board" class="random-board cf board">
         <#if lastupdateblock?exists>
           <@lastupdateblock articleList=blocks.last_update_list/>
