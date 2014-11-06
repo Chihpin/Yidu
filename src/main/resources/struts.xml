@@ -13,6 +13,7 @@
     <constant name="struts.devMode" value="false" />
     <constant name="struts.i18n.reload" value="false" />
     <constant name="struts.custom.i18n.resources" value="language.package" />
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
     <package name="yidu-default" extends="struts-default">
         <result-types>
             <result-type name="json" class="org.apache.struts2.json.JSONResult">
