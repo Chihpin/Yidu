@@ -8,7 +8,7 @@
 
 <#macro content>
 
-<@s.form action="register" validate="true" method="post">
+<@s.form action="register" validate="true" method="post" onsubmit="$('#register_submit').css('cursor','wait');">
 <script type="text/javascript" src="${contextPath}/themes/${themeName}/pc/js/formcommon.js"></script>
     <center>
         <span id="ErrorList"><@s.fielderror /> <@s.actionerror /></span>
@@ -51,7 +51,7 @@
         <tr>
           <td class="odd" width="25%">&nbsp;
           <td class="even">
-              <@s.submit method="register" cssClass="submit" name="submit" theme="simple" cssStyle="cursor:pointer;" value=" 提 交 "/>
+              <@s.submit method="register" cssClass="submit" name="submit" theme="simple" cssStyle="cursor:pointer;"  value=" 提 交 "/>
           </td>
         </tr>
       </tbody>

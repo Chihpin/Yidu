@@ -167,4 +167,8 @@ public class UserServiceImpl extends HibernateSupportServiceImpl implements User
         return null;
     }
 
+    @Override
+    public void lockTUser() {
+        this.yiduJdbcTemplate.execute("lock table t_user in EXCLUSIVE mode");
+    }
 }

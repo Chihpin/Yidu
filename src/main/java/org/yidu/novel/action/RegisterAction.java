@@ -145,6 +145,9 @@ public class RegisterAction extends AbstractPublicBaseAction {
             addActionError(getText("errors.repassword"));
             return FREEMARKER;
         }
+
+        userService.lockTUser();
+
         // 重复检查
         UserSearchBean searchBean = new UserSearchBean();
         searchBean.setLoginid(loginid);

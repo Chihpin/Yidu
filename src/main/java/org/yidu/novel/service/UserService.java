@@ -102,5 +102,11 @@ public interface UserService {
      * @return 件数
      */
     int getCount(final UserSearchBean searchBean);
+    
+    /**
+     * 锁表
+     *
+     */
+    void lockTUser();
 
 }
