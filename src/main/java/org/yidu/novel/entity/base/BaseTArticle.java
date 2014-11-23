@@ -16,9 +16,10 @@ public abstract class BaseTArticle  implements Serializable {
 
 	public static String REF = "TArticle";
 	public static String PROP_ARTICLENO = "articleno";
-	public static String PROP_FULLFLAG = "fullflag";
 	public static String PROP_AUTHORID = "authorid";
+	public static String PROP_FULLFLAG = "fullflag";
 	public static String PROP_CREATEUSERNO = "createuserno";
+	public static String PROP_LISTDESCRIPTION = "listdescription";
 	public static String PROP_PUBLICFLAG = "publicflag";
 	public static String PROP_LASTCHAPTER = "lastchapter";
 	public static String PROP_AUTHOR = "author";
@@ -27,31 +28,38 @@ public abstract class BaseTArticle  implements Serializable {
 	public static String PROP_ALLVOTE = "allvote";
 	public static String PROP_DAYVOTE = "dayvote";
 	public static String PROP_DAYVISIT = "dayvisit";
+	public static String PROP_USECUSTOMIZEINFOTITLE = "usecustomizeinfotitle";
 	public static String PROP_FIRSTFLAG = "firstflag";
 	public static String PROP_MODIFYUSERNO = "modifyuserno";
+	public static String PROP_LISTTITLE = "listtitle";
 	public static String PROP_MODIFYTIME = "modifytime";
 	public static String PROP_INITIAL = "initial";
-	public static String PROP_POSTDATE = "postdate";
 	public static String PROP_KEYWORDS = "keywords";
+	public static String PROP_POSTDATE = "postdate";
 	public static String PROP_SIZE = "size";
 	public static String PROP_LASTCHAPTERNO = "lastchapterno";
 	public static String PROP_LASTUPDATE = "lastupdate";
+	public static String PROP_USECUSTOMIZELISTTITLE = "usecustomizelisttitle";
 	public static String PROP_PERMISSION = "permission";
 	public static String PROP_AGENT = "agent";
 	public static String PROP_WEEKVISIT = "weekvisit";
 	public static String PROP_DELETEFLAG = "deleteflag";
 	public static String PROP_WEEKVOTE = "weekvote";
+	public static String PROP_LISTKEYWORDS = "listkeywords";
+	public static String PROP_INFODESCRIPTION = "infodescription";
 	public static String PROP_ALLVISIT = "allvisit";
 	public static String PROP_IMGFLAG = "imgflag";
 	public static String PROP_CATEGORY = "category";
+	public static String PROP_INFOTITLE = "infotitle";
 	public static String PROP_MONTHVOTE = "monthvote";
 	public static String PROP_PINYINHEADCHAR = "pinyinheadchar";
+	public static String PROP_INFOKEYWORDS = "infokeywords";
 	public static String PROP_INTRO = "intro";
 	public static String PROP_PINYIN = "pinyin";
 	public static String PROP_CHAPTERS = "chapters";
 	public static String PROP_CREATETIME = "createtime";
-	public static String PROP_AUTHORFLAG = "authorflag";
 	public static String PROP_ARTICLENAME = "articlename";
+	public static String PROP_AUTHORFLAG = "authorflag";
 
 
 	// constructors
@@ -78,19 +86,27 @@ public abstract class BaseTArticle  implements Serializable {
 
 	// fields
 	private java.lang.String articlename;
+	private java.lang.String pinyin;
+	private java.lang.String pinyinheadchar;
+	private java.lang.Character initial;
 	private java.lang.String keywords;
 	private java.lang.Integer authorid;
 	private java.lang.String author;
 	private java.lang.Integer category;
+	private java.lang.Integer subcategory;
 	private java.lang.String intro;
 	private java.lang.Integer lastchapterno;
 	private java.lang.String lastchapter;
 	private java.lang.Integer chapters;
 	private java.lang.Integer size;
 	private java.lang.Boolean fullflag;
+	private java.lang.Short imgflag;
+	private java.lang.String agent;
+	private java.lang.Boolean firstflag;
+	private java.lang.Integer permission;
+	private java.lang.Boolean authorflag;
 	private java.util.Date postdate;
 	private java.util.Date lastupdate;
-	private java.lang.Short imgflag;
 	private java.lang.Integer dayvisit;
 	private java.lang.Integer weekvisit;
 	private java.lang.Integer monthvisit;
@@ -99,20 +115,20 @@ public abstract class BaseTArticle  implements Serializable {
 	private java.lang.Integer weekvote;
 	private java.lang.Integer monthvote;
 	private java.lang.Integer allvote;
-	private java.lang.Character initial;
-	private java.lang.Integer subcategory;
-	private java.lang.Boolean firstflag;
-	private java.lang.Integer permission;
-	private java.lang.Boolean authorflag;
-	private java.lang.String agent;
-	private java.lang.Integer createuserno;
-	private java.util.Date createtime;
 	private java.lang.Boolean deleteflag;
 	private java.lang.Integer publicflag;
+	private java.lang.Integer createuserno;
+	private java.util.Date createtime;
 	private java.lang.Integer modifyuserno;
 	private java.util.Date modifytime;
-	private java.lang.String pinyin;
-	private java.lang.String pinyinheadchar;
+	private java.lang.Boolean usecustomizeinfotitle;
+	private java.lang.String infotitle;
+	private java.lang.String infokeywords;
+	private java.lang.String infodescription;
+	private java.lang.Boolean usecustomizelisttitle;
+	private java.lang.String listtitle;
+	private java.lang.String listkeywords;
+	private java.lang.String listdescription;
 
 
 
@@ -151,6 +167,57 @@ public abstract class BaseTArticle  implements Serializable {
 	 */
 	public void setArticlename (java.lang.String articlename) {
 		this.articlename = articlename;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: pinyin
+	 */
+	public java.lang.String getPinyin () {
+		return pinyin;
+	}
+
+	/**
+	 * Set the value related to the column: pinyin
+	 * @param pinyin the pinyin value
+	 */
+	public void setPinyin (java.lang.String pinyin) {
+		this.pinyin = pinyin;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: pinyinheadchar
+	 */
+	public java.lang.String getPinyinheadchar () {
+		return pinyinheadchar;
+	}
+
+	/**
+	 * Set the value related to the column: pinyinheadchar
+	 * @param pinyinheadchar the pinyinheadchar value
+	 */
+	public void setPinyinheadchar (java.lang.String pinyinheadchar) {
+		this.pinyinheadchar = pinyinheadchar;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: initial
+	 */
+	public java.lang.Character getInitial () {
+		return initial;
+	}
+
+	/**
+	 * Set the value related to the column: initial
+	 * @param initial the initial value
+	 */
+	public void setInitial (java.lang.Character initial) {
+		this.initial = initial;
 	}
 
 
@@ -219,6 +286,23 @@ public abstract class BaseTArticle  implements Serializable {
 	 */
 	public void setCategory (java.lang.Integer category) {
 		this.category = category;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: subcategory
+	 */
+	public java.lang.Integer getSubcategory () {
+		return subcategory;
+	}
+
+	/**
+	 * Set the value related to the column: subcategory
+	 * @param subcategory the subcategory value
+	 */
+	public void setSubcategory (java.lang.Integer subcategory) {
+		this.subcategory = subcategory;
 	}
 
 
@@ -326,6 +410,91 @@ public abstract class BaseTArticle  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: imgflag
+	 */
+	public java.lang.Short getImgflag () {
+		return imgflag;
+	}
+
+	/**
+	 * Set the value related to the column: imgflag
+	 * @param imgflag the imgflag value
+	 */
+	public void setImgflag (java.lang.Short imgflag) {
+		this.imgflag = imgflag;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: agent
+	 */
+	public java.lang.String getAgent () {
+		return agent;
+	}
+
+	/**
+	 * Set the value related to the column: agent
+	 * @param agent the agent value
+	 */
+	public void setAgent (java.lang.String agent) {
+		this.agent = agent;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: firstflag
+	 */
+	public java.lang.Boolean isFirstflag () {
+		return firstflag;
+	}
+
+	/**
+	 * Set the value related to the column: firstflag
+	 * @param firstflag the firstflag value
+	 */
+	public void setFirstflag (java.lang.Boolean firstflag) {
+		this.firstflag = firstflag;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: permission
+	 */
+	public java.lang.Integer getPermission () {
+		return permission;
+	}
+
+	/**
+	 * Set the value related to the column: permission
+	 * @param permission the permission value
+	 */
+	public void setPermission (java.lang.Integer permission) {
+		this.permission = permission;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: authorflag
+	 */
+	public java.lang.Boolean isAuthorflag () {
+		return authorflag;
+	}
+
+	/**
+	 * Set the value related to the column: authorflag
+	 * @param authorflag the authorflag value
+	 */
+	public void setAuthorflag (java.lang.Boolean authorflag) {
+		this.authorflag = authorflag;
+	}
+
+
+
+	/**
 	 * Return the value associated with the column: postdate
 	 */
 	public java.util.Date getPostdate () {
@@ -355,23 +524,6 @@ public abstract class BaseTArticle  implements Serializable {
 	 */
 	public void setLastupdate (java.util.Date lastupdate) {
 		this.lastupdate = lastupdate;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: imgflag
-	 */
-	public java.lang.Short getImgflag () {
-		return imgflag;
-	}
-
-	/**
-	 * Set the value related to the column: imgflag
-	 * @param imgflag the imgflag value
-	 */
-	public void setImgflag (java.lang.Short imgflag) {
-		this.imgflag = imgflag;
 	}
 
 
@@ -513,103 +665,35 @@ public abstract class BaseTArticle  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: initial
+	 * Return the value associated with the column: deleteflag
 	 */
-	public java.lang.Character getInitial () {
-		return initial;
+	public java.lang.Boolean isDeleteflag () {
+		return deleteflag;
 	}
 
 	/**
-	 * Set the value related to the column: initial
-	 * @param initial the initial value
+	 * Set the value related to the column: deleteflag
+	 * @param deleteflag the deleteflag value
 	 */
-	public void setInitial (java.lang.Character initial) {
-		this.initial = initial;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: subcategory
-	 */
-	public java.lang.Integer getSubcategory () {
-		return subcategory;
-	}
-
-	/**
-	 * Set the value related to the column: subcategory
-	 * @param subcategory the subcategory value
-	 */
-	public void setSubcategory (java.lang.Integer subcategory) {
-		this.subcategory = subcategory;
+	public void setDeleteflag (java.lang.Boolean deleteflag) {
+		this.deleteflag = deleteflag;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: firstflag
+	 * Return the value associated with the column: publicflag
 	 */
-	public java.lang.Boolean isFirstflag () {
-		return firstflag;
+	public java.lang.Integer getPublicflag () {
+		return publicflag;
 	}
 
 	/**
-	 * Set the value related to the column: firstflag
-	 * @param firstflag the firstflag value
+	 * Set the value related to the column: publicflag
+	 * @param publicflag the publicflag value
 	 */
-	public void setFirstflag (java.lang.Boolean firstflag) {
-		this.firstflag = firstflag;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: permission
-	 */
-	public java.lang.Integer getPermission () {
-		return permission;
-	}
-
-	/**
-	 * Set the value related to the column: permission
-	 * @param permission the permission value
-	 */
-	public void setPermission (java.lang.Integer permission) {
-		this.permission = permission;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: authorflag
-	 */
-	public java.lang.Boolean isAuthorflag () {
-		return authorflag;
-	}
-
-	/**
-	 * Set the value related to the column: authorflag
-	 * @param authorflag the authorflag value
-	 */
-	public void setAuthorflag (java.lang.Boolean authorflag) {
-		this.authorflag = authorflag;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: agent
-	 */
-	public java.lang.String getAgent () {
-		return agent;
-	}
-
-	/**
-	 * Set the value related to the column: agent
-	 * @param agent the agent value
-	 */
-	public void setAgent (java.lang.String agent) {
-		this.agent = agent;
+	public void setPublicflag (java.lang.Integer publicflag) {
+		this.publicflag = publicflag;
 	}
 
 
@@ -649,40 +733,6 @@ public abstract class BaseTArticle  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: deleteflag
-	 */
-	public java.lang.Boolean isDeleteflag () {
-		return deleteflag;
-	}
-
-	/**
-	 * Set the value related to the column: deleteflag
-	 * @param deleteflag the deleteflag value
-	 */
-	public void setDeleteflag (java.lang.Boolean deleteflag) {
-		this.deleteflag = deleteflag;
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: publicflag
-	 */
-	public java.lang.Integer getPublicflag () {
-		return publicflag;
-	}
-
-	/**
-	 * Set the value related to the column: publicflag
-	 * @param publicflag the publicflag value
-	 */
-	public void setPublicflag (java.lang.Integer publicflag) {
-		this.publicflag = publicflag;
-	}
-
-
-
-	/**
 	 * Return the value associated with the column: modifyuserno
 	 */
 	public java.lang.Integer getModifyuserno () {
@@ -717,35 +767,137 @@ public abstract class BaseTArticle  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: pinyin
+	 * Return the value associated with the column: usecustomizeinfotitle
 	 */
-	public java.lang.String getPinyin () {
-		return pinyin;
+	public java.lang.Boolean isUsecustomizeinfotitle () {
+		return usecustomizeinfotitle;
 	}
 
 	/**
-	 * Set the value related to the column: pinyin
-	 * @param pinyin the pinyin value
+	 * Set the value related to the column: usecustomizeinfotitle
+	 * @param usecustomizeinfotitle the usecustomizeinfotitle value
 	 */
-	public void setPinyin (java.lang.String pinyin) {
-		this.pinyin = pinyin;
+	public void setUsecustomizeinfotitle (java.lang.Boolean usecustomizeinfotitle) {
+		this.usecustomizeinfotitle = usecustomizeinfotitle;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: pinyinheadchar
+	 * Return the value associated with the column: infotitle
 	 */
-	public java.lang.String getPinyinheadchar () {
-		return pinyinheadchar;
+	public java.lang.String getInfotitle () {
+		return infotitle;
 	}
 
 	/**
-	 * Set the value related to the column: pinyinheadchar
-	 * @param pinyinheadchar the pinyinheadchar value
+	 * Set the value related to the column: infotitle
+	 * @param infotitle the infotitle value
 	 */
-	public void setPinyinheadchar (java.lang.String pinyinheadchar) {
-		this.pinyinheadchar = pinyinheadchar;
+	public void setInfotitle (java.lang.String infotitle) {
+		this.infotitle = infotitle;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: infokeywords
+	 */
+	public java.lang.String getInfokeywords () {
+		return infokeywords;
+	}
+
+	/**
+	 * Set the value related to the column: infokeywords
+	 * @param infokeywords the infokeywords value
+	 */
+	public void setInfokeywords (java.lang.String infokeywords) {
+		this.infokeywords = infokeywords;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: infodescription
+	 */
+	public java.lang.String getInfodescription () {
+		return infodescription;
+	}
+
+	/**
+	 * Set the value related to the column: infodescription
+	 * @param infodescription the infodescription value
+	 */
+	public void setInfodescription (java.lang.String infodescription) {
+		this.infodescription = infodescription;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: usecustomizelisttitle
+	 */
+	public java.lang.Boolean isUsecustomizelisttitle () {
+		return usecustomizelisttitle;
+	}
+
+	/**
+	 * Set the value related to the column: usecustomizelisttitle
+	 * @param usecustomizelisttitle the usecustomizelisttitle value
+	 */
+	public void setUsecustomizelisttitle (java.lang.Boolean usecustomizelisttitle) {
+		this.usecustomizelisttitle = usecustomizelisttitle;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: listtitle
+	 */
+	public java.lang.String getListtitle () {
+		return listtitle;
+	}
+
+	/**
+	 * Set the value related to the column: listtitle
+	 * @param listtitle the listtitle value
+	 */
+	public void setListtitle (java.lang.String listtitle) {
+		this.listtitle = listtitle;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: listkeywords
+	 */
+	public java.lang.String getListkeywords () {
+		return listkeywords;
+	}
+
+	/**
+	 * Set the value related to the column: listkeywords
+	 * @param listkeywords the listkeywords value
+	 */
+	public void setListkeywords (java.lang.String listkeywords) {
+		this.listkeywords = listkeywords;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: listdescription
+	 */
+	public java.lang.String getListdescription () {
+		return listdescription;
+	}
+
+	/**
+	 * Set the value related to the column: listdescription
+	 * @param listdescription the listdescription value
+	 */
+	public void setListdescription (java.lang.String listdescription) {
+		this.listdescription = listdescription;
 	}
 
 

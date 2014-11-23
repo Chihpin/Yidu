@@ -1,10 +1,16 @@
 <#include "common.ftl"/>
 
 <#macro titleContent>
+<#if article.usecustomizeinfotitle ?? && article.usecustomizeinfotitle >
+<title>${article.infotitle}</title>
+<meta name="keywords" content="${article.infokeywords}" />
+<meta name="description" content="${article.infodescription}" />
+<#else>
 <title>${article.articlename}|${article.articlename}最新章节|${article.articlename}TXT下载</title>
 <meta name="keywords" content="${article.articlename},${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
 <meta name="description" content="《${article.articlename}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${categorymap[article.category?c]}</#if>小说，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
-  <!--360结构化-->
+</#if>
+    <!--360结构化-->
    <meta property="og:type" content="novel"/>
    <meta property="og:title" content="${article.articlename?html}"/>
    <meta property="og:description" content="<#if (article.intro ?length != 0)>${article.intro?html}<#else>暂无简介</#if>"/>

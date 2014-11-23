@@ -62,6 +62,15 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     private String articlespicFileName;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
+    private Boolean usecustomizeinfotitle;
+    private String infotitle;
+    private String infokeywords;
+    private String infodescription;
+    private Boolean usecustomizelisttitle;
+    private String listtitle;
+    private String listkeywords;
+    private String listdescription;
+
     public int getArticleno() {
         return articleno;
     }
@@ -139,7 +148,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getFirstflag() {
-        return firstflag== null ? false : firstflag;
+        return firstflag == null ? false : firstflag;
     }
 
     public void setFirstflag(Boolean firstflag) {
@@ -155,7 +164,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Boolean getAuthorflag() {
-        return authorflag== null ? false : authorflag;
+        return authorflag == null ? false : authorflag;
     }
 
     public void setAuthorflag(Boolean authorflag) {
@@ -266,13 +275,182 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         this.articlespicFileName = articlespicFileName;
     }
 
+    /**
+     * 获取usecustomizeinfotitle
+     * 
+     * @return usecustomizeinfotitle
+     */
+    public Boolean getUsecustomizeinfotitle() {
+        return usecustomizeinfotitle;
+    }
+
+    /**
+     * 
+     * 设置usecustomizeinfotitle
+     * 
+     * 
+     * @param usecustomizeinfotitle
+     *            usecustomizeinfotitle
+     */
+    public void setUsecustomizeinfotitle(Boolean usecustomizeinfotitle) {
+        this.usecustomizeinfotitle = usecustomizeinfotitle;
+    }
+
+    /**
+     * 获取infotitle
+     * 
+     * @return infotitle
+     */
+    public String getInfotitle() {
+        return infotitle;
+    }
+
+    /**
+     * 
+     * 设置infotitle
+     * 
+     * 
+     * @param infotitle
+     *            infotitle
+     */
+    public void setInfotitle(String infotitle) {
+        this.infotitle = infotitle;
+    }
+
+    /**
+     * 获取infokeywords
+     * 
+     * @return infokeywords
+     */
+    public String getInfokeywords() {
+        return infokeywords;
+    }
+
+    /**
+     * 
+     * 设置infokeywords
+     * 
+     * 
+     * @param infokeywords
+     *            infokeywords
+     */
+    public void setInfokeywords(String infokeywords) {
+        this.infokeywords = infokeywords;
+    }
+
+    /**
+     * 获取infodescription
+     * 
+     * @return infodescription
+     */
+    public String getInfodescription() {
+        return infodescription;
+    }
+
+    /**
+     * 
+     * 设置infodescription
+     * 
+     * 
+     * @param infodescription
+     *            infodescription
+     */
+    public void setInfodescription(String infodescription) {
+        this.infodescription = infodescription;
+    }
+
+    /**
+     * 获取usecustomizelisttitle
+     * 
+     * @return usecustomizelisttitle
+     */
+    public Boolean getUsecustomizelisttitle() {
+        return usecustomizelisttitle;
+    }
+
+    /**
+     * 
+     * 设置usecustomizelisttitle
+     * 
+     * 
+     * @param usecustomizelisttitle
+     *            usecustomizelisttitle
+     */
+    public void setUsecustomizelisttitle(Boolean usecustomizelisttitle) {
+        this.usecustomizelisttitle = usecustomizelisttitle;
+    }
+
+    /**
+     * 获取listtitle
+     * 
+     * @return listtitle
+     */
+    public String getListtitle() {
+        return listtitle;
+    }
+
+    /**
+     * 
+     * 设置listtitle
+     * 
+     * 
+     * @param listtitle
+     *            listtitle
+     */
+    public void setListtitle(String listtitle) {
+        this.listtitle = listtitle;
+    }
+
+    /**
+     * 获取listkeywords
+     * 
+     * @return listkeywords
+     */
+    public String getListkeywords() {
+        return listkeywords;
+    }
+
+    /**
+     * 
+     * 设置listkeywords
+     * 
+     * 
+     * @param listkeywords
+     *            listkeywords
+     */
+    public void setListkeywords(String listkeywords) {
+        this.listkeywords = listkeywords;
+    }
+
+    /**
+     * 获取listdescription
+     * 
+     * @return listdescription
+     */
+    public String getListdescription() {
+        return listdescription;
+    }
+
+    /**
+     * 
+     * 设置listdescription
+     * 
+     * 
+     * @param listdescription
+     *            listdescription
+     */
+    public void setListdescription(String listdescription) {
+        this.listdescription = listdescription;
+    }
+
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
         // 初始化类别下拉列表选项
         initCollections(new String[] { "collectionProperties.article.category",
                 "collectionProperties.article.fullflag", "collectionProperties.article.authorflag",
-                "collectionProperties.article.permission", "collectionProperties.article.firstflag" });
+                "collectionProperties.article.permission", "collectionProperties.article.firstflag",
+                "collectionProperties.boolean" });
         // 编辑
         if (articleno != 0) {
             TArticle article = articleService.getByNo(articleno);

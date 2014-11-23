@@ -54,6 +54,14 @@ public class TArticle extends BaseTArticle {
         return isDeleteflag();
     }
 
+    public Boolean getUsecustomizeinfotitle() {
+        return isUsecustomizeinfotitle();
+    }
+
+    public Boolean getUsecustomizelisttitle() {
+        return isUsecustomizelisttitle();
+    }
+
     /**
      * 获取HTML格式的小说简介信息
      * 

@@ -102,6 +102,58 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2"><s:text name="label.admin.article.edit.seo" /></td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.usecustomizeinfotitle" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.boolean']" name="usecustomizeinfotitle" ></s:radio>
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.infotitle" /></td>
+                    <td>
+                        <s:textfield id="infotitle" name="infotitle" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.infokeywords" /></td>
+                    <td>
+                        <s:textfield id="infokeywords" name="infokeywords" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.infodescription" /></td>
+                    <td>
+                        <s:textfield id="infodescription" name="infodescription" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.usecustomizelisttitle" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.boolean']" name="usecustomizelisttitle" ></s:radio>
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.listtitle" /></td>
+                    <td>
+                        <s:textfield id="listtitle" name="listtitle" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.listkeywords" /></td>
+                    <td>
+                        <s:textfield id="listkeywords" name="listkeywords" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><s:text name="label.admin.article.edit.listdescription" /></td>
+                    <td>
+                        <s:textfield id="listdescription" name="listdescription" cssClass="tb-rounded" /> 
+                    </td>
+                </tr>
+
+                <tr>
                     <td colspan="2"><s:text name="label.admin.article.edit.statcaption" /></td>
                 </tr>
                 <tr>

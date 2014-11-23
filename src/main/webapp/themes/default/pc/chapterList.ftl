@@ -1,9 +1,15 @@
 <#include "common.ftl"/>
 
 <#macro titleContent>
+<#if article.usecustomizelisttitle ??  && article.usecustomizelisttitle >
+<title>${article.listtitle}</title>
+<meta name="keywords" content="${article.listkeywords}" />
+<meta name="description" content="${article.listdescription}" />
+<#else>
 <title>${article.articlename}章节列表|${article.articlename}最新章节</title>
 <meta name="keywords" content="${article.articlename}章节列表,${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
 <meta name="description" content="《${article.articlename}》章节列表，,${article.articlename}最新章节，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
+</#if>
 </#macro>
 
 <#macro content>
