@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.dto.CategoryCountDTO;
 import org.yidu.novel.entity.TArticle;
@@ -168,6 +169,7 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
     }
 
     @Override
+    @Transactional
     public void cleanStatistics() {
         logger.info("cleanStatistics start");
         String sql = "update t_article set dayvote = 0 ,dayvisit = 0";
