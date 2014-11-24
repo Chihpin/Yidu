@@ -65,7 +65,7 @@
 
 	<bean id="createSiteMapTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="createSiteMapJob" />
-		<property name="cronExpression" value="0 15 2 * 1 ?" />
+		<property name="cronExpression" value="0 15 2 * * 1" />
 	</bean>
 
 	<bean id="sendSubscribeMailJob" class="org.springframework.scheduling.quartz.JobDetailBean">
