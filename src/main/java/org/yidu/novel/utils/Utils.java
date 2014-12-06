@@ -515,4 +515,10 @@ public class Utils {
         return new String(randBuffer);
     }
 
+    // 字符转义
+    public static final String escapePropterties(String value) {
+        // TODO 可能需要扩展
+        return StringUtils.replace(value, ",", "\\,");
+    }
+    
 }

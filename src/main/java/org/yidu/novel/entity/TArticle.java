@@ -20,6 +20,7 @@ import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.base.BaseTArticle;
+import org.yidu.novel.utils.Utils;
 
 public class TArticle extends BaseTArticle {
     private static final long serialVersionUID = 1L;
@@ -163,7 +164,13 @@ public class TArticle extends BaseTArticle {
         if (StringUtils.equals("nocover.jpg", fileName)) {
             imgUrl = imgUrl + fileName;
         } else {
-            imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "/" + getArticleno() + "/" + fileName;
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, false)) {
+                imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "-" + getArticleno() + "-"
+                        + Utils.convert2MD5(imgUrl+fileName) + fileName;
+            } else {
+                imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "/" + getArticleno() + "/"
+                        + fileName;
+            }
         }
         return imgUrl;
     }

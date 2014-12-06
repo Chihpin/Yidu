@@ -46,7 +46,7 @@ public class YiDuConfig {
     /**
      * 图片文件路径
      */
-    public static final String IAMGE_PATH = "iamgePath";
+    public static final String IMAGE_PATH = "iamgePath";
 
     /**
      * 图片相对文件路径
@@ -193,6 +193,11 @@ public class YiDuConfig {
     public static final String ENABLE_SINGLE_BOOK = "enableSingleBook";
 
     /**
+     * 是否开启图片URL优化
+     */
+    public static final String ENABLE_CLEAN_IMAGE_URL = "enableCleanImageUrl";
+
+    /**
      * 根域名
      */
     public static final String ROOT_DOMAIN = "rootDomain";
@@ -209,6 +214,11 @@ public class YiDuConfig {
      * 禁止访问的文件后缀
      */
     public static final String FORBID_FILES = "forbidFiles";
+
+    /**
+     * 过滤关键字
+     */
+    public static final String FILTER_KEYWORD = "filterKeyWord";
 
     /**
      * 数据库JDBC URL

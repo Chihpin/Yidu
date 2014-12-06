@@ -444,11 +444,17 @@ public class UrlRewriteFilter implements Filter {
                 if (!fileExists) {
                     requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
                 }
-            } else if (!org.apache.commons.lang3.StringUtils.endsWithAny(hsRequest.getRequestURI(), "css", "js", "jpg",
-                    "png", "gif")) {
+            } else if (!org.apache.commons.lang3.StringUtils.endsWithAny(hsRequest.getRequestURI(), "css", "js")) {
                 // 只有非静态文件才做伪静态解析
                 // TODO 这个东西貌似会把301重定向给搞坏，可能都需要重新设置
-                requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+                if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, false)
+                        && org.apache.commons.lang3.StringUtils.startsWith(hsRequest.getRequestURI(),
+                                YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH))) {
+                    requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+                } else if (!org.apache.commons.lang3.StringUtils.endsWithAny(hsRequest.getRequestURI(), "jpg", "gif",
+                        "png")) {
+                    requestRewritten = urlRewriter.processRequest(hsRequest, urlRewriteWrappedResponse, chain);
+                }
             }
         } else {
             if (log.isDebugEnabled()) {

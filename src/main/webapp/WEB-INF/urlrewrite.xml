@@ -34,6 +34,12 @@
 		<to>$1</to>
 	</outbound-rule>
 
+    <rule>
+        <from>^/cover/(\d*)-(\d*)-[a-z0-9A-Z]{32}(.+?)$</from>
+        <to last="true">/cover/$1/$2/$3</to>
+    </rule>
+
+
 	<!-- 小说列表开始 -->
 
 	<rule>

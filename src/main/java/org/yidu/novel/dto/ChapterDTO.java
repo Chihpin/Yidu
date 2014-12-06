@@ -2,6 +2,7 @@ package org.yidu.novel.dto;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.yidu.novel.action.ChapterListAction;
 import org.yidu.novel.action.ReaderAction;
@@ -85,6 +86,11 @@ public class ChapterDTO extends TChapter {
      * @return content
      */
     public String getContent() {
+        String keywords = YiDuConstants.yiduConf.getString(YiDuConfig.FILTER_KEYWORD);
+        String[] keywordArr = StringUtils.split(keywords, ",");
+        for (String string : keywordArr) {
+            content = content.replaceAll(string, "");
+        }
         return content;
     }
 

@@ -124,7 +124,7 @@ class GZIPResponseWrapper extends HttpServletResponseWrapper {
         }
 
         if (stream != null) {
-            throw new IllegalStateException("getOutputStream() has already been called!");
+            return null;
         }
 
         stream = createOutputStream();

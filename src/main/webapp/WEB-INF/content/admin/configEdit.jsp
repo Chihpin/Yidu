@@ -78,6 +78,13 @@
            <s:radio list="collections['collectionProperties.boolean']" name="cleanUrl" ></s:radio>
        </td>
     </tr>
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.enableCleanImageUrl"/></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="enableCleanImageUrl" ></s:radio>
+       </td>
+    </tr>
 
 
     <tr align="left" valign="middle">
@@ -231,6 +238,11 @@
        <td class="odd" width="30%"><s:text name="label.admin.config.edit.xmlSiteMapReaderURL" /></td>
        <td class="even"><s:textfield name ="xmlSiteMapReaderURL" size="25" cssClass="text" theme="simple"/></td>
     </tr>        
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.filterKeyWord" /></td>
+       <td class="even"><s:textfield name ="filterKeyWord" size="25" cssClass="text" theme="simple"/></td>
+    </tr>
 </tbody>
 </table>
 <br />

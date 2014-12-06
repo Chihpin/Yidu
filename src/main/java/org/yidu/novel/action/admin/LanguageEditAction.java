@@ -6,10 +6,10 @@ import java.io.OutputStream;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -126,14 +126,14 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
             PropertiesConfiguration languageConf = new PropertiesConfiguration(Thread.currentThread()
                     .getContextClassLoader().getResource("language/package.properties"));
 
-            languageConf.setProperty(YiDuConfig.TITLE, escape(title));
-            languageConf.setProperty(YiDuConfig.SITEKEYWORDS, escape(siteKeywords));
-            languageConf.setProperty(YiDuConfig.SITEDESCRIPTION, escape(siteDescription));
-            languageConf.setProperty(YiDuConfig.NAME, escape(name));
-            languageConf.setProperty(YiDuConfig.URL, escape(url));
-            languageConf.setProperty(YiDuConfig.COPYRIGHT, escape(copyright));
-            languageConf.setProperty(YiDuConfig.BEIANNO, escape(beianNo));
-            languageConf.setProperty(YiDuConfig.ANALYTICSCODE, escape(analyticscode));
+            languageConf.setProperty(YiDuConfig.TITLE, Utils.escapePropterties(title));
+            languageConf.setProperty(YiDuConfig.SITEKEYWORDS, Utils.escapePropterties(siteKeywords));
+            languageConf.setProperty(YiDuConfig.SITEDESCRIPTION, Utils.escapePropterties(siteDescription));
+            languageConf.setProperty(YiDuConfig.NAME, Utils.escapePropterties(name));
+            languageConf.setProperty(YiDuConfig.URL, Utils.escapePropterties(url));
+            languageConf.setProperty(YiDuConfig.COPYRIGHT, Utils.escapePropterties(copyright));
+            languageConf.setProperty(YiDuConfig.BEIANNO, Utils.escapePropterties(beianNo));
+            languageConf.setProperty(YiDuConfig.ANALYTICSCODE, Utils.escapePropterties(analyticscode));
 
             File languageFile = new File(languageConf.getPath());
             OutputStream out = new FileOutputStream(languageFile);
@@ -150,9 +150,4 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
 
     }
 
-    // 字符转义
-    private String escape(String value) {
-        // TODO 可能需要扩展
-        return StringUtils.replace(value, ",", "\\,");
-    }
 }

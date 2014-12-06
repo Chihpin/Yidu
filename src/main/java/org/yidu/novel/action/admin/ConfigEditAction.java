@@ -11,6 +11,7 @@ import org.yidu.novel.action.QQLoginAction;
 import org.yidu.novel.action.base.AbstractAdminEditBaseAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.utils.Utils;
 
 /**
  * <p>
@@ -211,6 +212,16 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      * 重新加载小说信息周期(单位：分)
      */
     private int reloadSingleBookInterval;
+
+    /**
+     * 是否开启图片URL优化
+     */
+    private boolean enableCleanImageUrl;
+
+    /**
+     * 过滤关键字
+     */
+    private String filterKeyWord;
 
     /**
      * 获取uri
@@ -930,6 +941,48 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.reloadSingleBookInterval = reloadSingleBookInterval;
     }
 
+    /**
+     * 获取enableCleanImageUrl
+     * 
+     * @return enableCleanImageUrl
+     */
+    public boolean isEnableCleanImageUrl() {
+        return enableCleanImageUrl;
+    }
+
+    /**
+     * 
+     * 设置enableCleanImageUrl
+     * 
+     * 
+     * @param enableCleanImageUrl
+     *            enableCleanImageUrl
+     */
+    public void setEnableCleanImageUrl(boolean enableCleanImageUrl) {
+        this.enableCleanImageUrl = enableCleanImageUrl;
+    }
+
+    /**
+     * 获取filterKeyWord
+     * 
+     * @return filterKeyWord
+     */
+    public String getFilterKeyWord() {
+        return filterKeyWord;
+    }
+
+    /**
+     * 
+     * 设置filterKeyWord
+     * 
+     * 
+     * @param filterKeyWord
+     *            filterKeyWord
+     */
+    public void setFilterKeyWord(String filterKeyWord) {
+        this.filterKeyWord = filterKeyWord;
+    }
+
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
@@ -977,6 +1030,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         rootDomain = YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
         excludeSubDomain = YiDuConstants.yiduConf.getString(YiDuConfig.EXCLUDE_SUB_DOMAIN);
         reloadSingleBookInterval = YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, 120);
+        enableCleanImageUrl = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, false);
+        filterKeyWord = YiDuConstants.yiduConf.getString(YiDuConfig.FILTER_KEYWORD);
 
         // 设定文件初期读入
         try {
@@ -1042,6 +1097,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ROOT_DOMAIN, rootDomain);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.EXCLUDE_SUB_DOMAIN, excludeSubDomain);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, reloadSingleBookInterval);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, enableCleanImageUrl);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.FILTER_KEYWORD, Utils.escapePropterties(filterKeyWord));
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());
