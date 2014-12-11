@@ -94,6 +94,22 @@ public class ChapterDTO extends TChapter {
         return content;
     }
 
+    public String getEsccapeContent() {
+        String escapeContent = StringUtils.replace(this.content, "<", "&lt;");
+        escapeContent = StringUtils.replace(escapeContent, ">", "&gt;");
+        return escapeContent;
+    }
+
+    public String getReplacedContent() {
+        String keywords = YiDuConstants.yiduConf.getString("filterKeyWord");
+        String[] keywordArr = StringUtils.split(keywords, ",");
+        String replaced = content;
+        for (String string : keywordArr) {
+            replaced = replaced.replaceAll(string, "");
+        }
+        return replaced;
+    }
+
     /**
      * 
      * 设置content
