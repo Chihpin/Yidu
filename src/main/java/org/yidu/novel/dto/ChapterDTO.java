@@ -91,11 +91,11 @@ public class ChapterDTO extends TChapter {
         for (String string : keywordArr) {
             content = content.replaceAll(string, "");
         }
-        return content;
+        return content == null ? "" : content;
     }
 
     public String getEsccapeContent() {
-        String escapeContent = StringUtils.replace(this.content, "<", "&lt;");
+        String escapeContent = StringUtils.replace(this.getContent(), "<", "&lt;");
         escapeContent = StringUtils.replace(escapeContent, ">", "&gt;");
         return escapeContent;
     }
@@ -103,7 +103,7 @@ public class ChapterDTO extends TChapter {
     public String getReplacedContent() {
         String keywords = YiDuConstants.yiduConf.getString("filterKeyWord");
         String[] keywordArr = StringUtils.split(keywords, ",");
-        String replaced = content;
+        String replaced = getContent();
         for (String string : keywordArr) {
             replaced = replaced.replaceAll(string, "");
         }
