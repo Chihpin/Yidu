@@ -133,21 +133,15 @@ function onSubmitClick() {
 //初始化用户菜单
 var enableQQLogin = false;
 function initUserMenu(){
-    var userInfo =  $.cookie("user.cookie");
-    if(userInfo != null && userInfo != undefined) {
-        var reg = new RegExp('"',"g");  
-        userInfo = userInfo .replace(reg, ""); 
-        userInfoArr = userInfo.split(",");
-        loginid = userInfoArr[0];
-        userType = userInfoArr[2];
-        hasopenid = userInfoArr[3];
-        var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ loginid +"</a>";
-        if(enableQQLogin && hasopenid=="false"){
+	$.post('/checklogin',function(data){
+        if(data!=null){
+        var html = '你好   <a href="'+contextPath+'/user/useredit" style="color: rgb(240, 240, 240);"> '+ data.loginid +"</a>";
+        if(typeof data.openid === "undefined"){
                 html = html + '&nbsp;&nbsp;&nbsp;<a href=\"'+contextPath+'/gotoQQLogin" \"><img src=\"'+contextPath+'/themes/default/pc/images/qq_bind_small.gif\" alt=\"QQ绑定\"></a>';
         }
-        if(userType==30){
+        if(data.type==30){
             html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/admin/index" style="color: rgb(240, 240, 240);">管理后台</a>';
-         }else if(userType==20||userType==40||userType==41){
+         }else if(data.type==20||data.type==40||data.type==41){
             html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/articleList" style="color: rgb(240, 240, 240);">小说管理</a>';
         }
         html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/bookcase" style="color: rgb(240, 240, 240);">我的书架</a>';
@@ -155,7 +149,7 @@ function initUserMenu(){
         html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/user/subscribe" style="color: rgb(240, 240, 240);">订阅管理</a>';
         html = html + '&nbsp;&nbsp;&nbsp;<a href="'+contextPath+'/logout" style="color: rgb(240, 240, 240);" class="out">退出</a>&nbsp;&nbsp;';
         $('#checklogin').html(html);
-    }
+    }})
 }
 
 $(function() {
