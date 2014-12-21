@@ -39,6 +39,11 @@ public class ChapterDTO extends TChapter {
     private String content;
 
     /**
+     * 拼音
+     */
+    private String pinyin;
+
+    /**
      * 获取 nextChapterno
      * 
      * @return nextChapterno
@@ -81,6 +86,27 @@ public class ChapterDTO extends TChapter {
     }
 
     /**
+     * 获取pinyin
+     * 
+     * @return pinyin
+     */
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    /**
+     * 
+     * 设置pinyin
+     * 
+     * 
+     * @param pinyin
+     *            pinyin
+     */
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    /**
      * 获取 content
      * 
      * @return content
@@ -91,7 +117,7 @@ public class ChapterDTO extends TChapter {
         for (String string : keywordArr) {
             content = content.replaceAll(string, "");
         }
-        return content == null ? "" : content;
+        return content;
     }
 
     public String getEsccapeContent() {
@@ -119,7 +145,22 @@ public class ChapterDTO extends TChapter {
      *            content
      */
     public void setContent(String content) {
-        this.content = content;
+        this.content = (content == null ? "" : content);
+    }
+
+    /**
+     * 获取章节列表URL
+     * 
+     * @return 分类列表URL
+     */
+    public String getUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+                + "&chapterno=" + getChapterno());
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ReaderAction.URL + "?pinyin=" + pinyin + "&chapterno=" + getChapterno());
+        }
+        return url;
     }
 
     /**
@@ -129,7 +170,12 @@ public class ChapterDTO extends TChapter {
      */
     public String getChapterListUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+        String url = response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno="
+                + getArticleno());
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ChapterListAction.URL + "?pinyin=" + pinyin);
+        }
+        return url;
     }
 
     /**
@@ -141,8 +187,13 @@ public class ChapterDTO extends TChapter {
     public String getNextChapterUrl() {
         if (getNextChapterno() != 0) {
             HttpServletResponse response = ServletActionContext.getResponse();
-            return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
-                    + "&chapterno=" + getNextChapterno());
+            String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno="
+                    + getArticleno() + "&chapterno=" + getNextChapterno());
+
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+                url = response.encodeURL(ReaderAction.URL + "?pinyin=" + pinyin + "&chapterno=" + getNextChapterno());
+            }
+            return url;
         } else {
             if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
                 return getChapterListUrl();
@@ -160,15 +211,20 @@ public class ChapterDTO extends TChapter {
     public String getPreChapterUrl() {
         if (getPreChapterno() != 0) {
             HttpServletResponse response = ServletActionContext.getResponse();
-            return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
-                    + "&chapterno=" + getPreChapterno());
+            String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno="
+                    + getArticleno() + "&chapterno=" + getPreChapterno());
+
+            if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+                url = response.encodeURL(ReaderAction.URL + "?pinyin=" + pinyin + "&chapterno=" + getPreChapterno());
+            }
+            return url;
+
         } else {
             if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
                 return getChapterListUrl();
             } else {
                 return getInfoUrl();
             }
-
         }
     }
 

@@ -221,6 +221,11 @@ public class YiDuConfig {
     public static final String FILTER_KEYWORD = "filterKeyWord";
 
     /**
+     * 启用拼音url
+     */
+    public static final String ENABLE_PINYINURL = "enablePinyinUrl";
+
+    /**
      * 数据库JDBC URL
      */
     public static final String JDBC_URL = "jdbc.url";

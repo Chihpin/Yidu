@@ -166,7 +166,7 @@ public class TArticle extends BaseTArticle {
         } else {
             if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, false)) {
                 imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "-" + getArticleno() + "-"
-                        + Utils.convert2MD5(imgUrl+fileName) + fileName;
+                        + Utils.convert2MD5(imgUrl + fileName) + fileName;
             } else {
                 imgUrl = imgUrl + getArticleno() / YiDuConstants.SUB_DIR_ARTICLES + "/" + getArticleno() + "/"
                         + fileName;
@@ -182,17 +182,12 @@ public class TArticle extends BaseTArticle {
      */
     public String getUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(InfoAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
-    }
+        String url = response.encodeURL(InfoAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
 
-    /**
-     * 获取小说介绍页拼音形式的URL
-     * 
-     * @return 小说介绍页拼音形式的URL
-     */
-    public String getPinyinUrl() {
-        HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(InfoAction.URL + "?pinyin=" + getPinyin());
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(InfoAction.URL + "?pinyin=" + getPinyin());
+        }
+        return url;
     }
 
     /**
@@ -222,8 +217,13 @@ public class TArticle extends BaseTArticle {
      */
     public String getLastChapterUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+        String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                 + "&chapterno=" + getLastchapterno());
+
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ReaderAction.URL + "?pinyin=" + getPinyin() + "&chapterno=" + getLastchapterno());
+        }
+        return url;
     }
 
     /**
@@ -234,16 +234,6 @@ public class TArticle extends BaseTArticle {
     public String getThumbnailLastChapterUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
         return response.encodeURL(ReaderAction.URL + "?chapterno=" + getLastchapterno());
-    }
-
-    /**
-     * 获取最新章节的拼音形式的URL
-     * 
-     * @return 最新章节的拼音形式的URL
-     */
-    public String getPinyinLastChapterUrl() {
-        HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?pinyin=" + getPinyin() + "&chapterno=" + getLastchapterno());
     }
 
     /**
@@ -293,7 +283,13 @@ public class TArticle extends BaseTArticle {
      */
     public String getChapterListUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+        String url = response.encodeURL(ChapterListAction.URL + "?subdir=" + getSubdir() + "&articleno="
+                + getArticleno());
+
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ChapterListAction.URL + "?pinyin=" + getPinyin());
+        }
+        return url;
     }
 
     /**

@@ -85,7 +85,13 @@
            <s:radio list="collections['collectionProperties.boolean']" name="enableCleanImageUrl" ></s:radio>
        </td>
     </tr>
-
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.enablePinyinUrl"/></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="enablePinyinUrl" ></s:radio>
+       </td>
+    </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" width="30%"><s:text name="label.admin.config.edit.adEffective" /></td>

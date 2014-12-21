@@ -266,7 +266,8 @@ public class ReaderAction extends AbstractPublicBaseAction {
             }
             articleService.updateVisitStatistic(chapter.getArticleno());
         }
-
+        // 设置拼音信息
+        chapter.setPinyin(article.getPinyin());
         logger.debug("loadData normally end.");
     }
 

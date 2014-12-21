@@ -60,10 +60,12 @@ public class TChapter extends BaseTChapter {
      */
     public String getUrl() {
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+        String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                 + "&chapterno=" + getChapterno());
+
+        return url;
     }
-    
+
     /**
      * 获取章节URL
      * 

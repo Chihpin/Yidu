@@ -9,8 +9,8 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.entity.TArticle;
-import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.utils.Utils;
 
 /**
@@ -55,7 +55,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     /**
      * 章节列表信息
      */
-    private List<TChapter> chapterList;
+    private List<ChapterDTO> chapterList;
 
     /**
      * 获取 articleno
@@ -121,11 +121,11 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     }
 
     /**
-     * 获取 chapterList
+     * 获取chapterList
      * 
      * @return chapterList
      */
-    public List<TChapter> getChapterList() {
+    public List<ChapterDTO> getChapterList() {
         return chapterList;
     }
 
@@ -137,7 +137,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
      * @param chapterList
      *            chapterList
      */
-    public void setChapterList(List<TChapter> chapterList) {
+    public void setChapterList(List<ChapterDTO> chapterList) {
         this.chapterList = chapterList;
     }
 
@@ -175,7 +175,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
             BeanUtils.copyProperties(this, searchBean);
             chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean);
             if (!Utils.isDefined(chapterList)) {
-                chapterList = chapterService.find(searchBean);
+                chapterList = chapterService.findWithPinyin(searchBean);
                 if (Utils.isDefined(chapterList)) {
                     CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
                             chapterList);

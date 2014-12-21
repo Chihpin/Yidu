@@ -224,6 +224,11 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     private String filterKeyWord;
 
     /**
+     * 启用拼音URL
+     */
+    private boolean enablePinyinUrl;
+
+    /**
      * 获取uri
      * 
      * @return uri
@@ -983,6 +988,27 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.filterKeyWord = filterKeyWord;
     }
 
+    /**
+     * 获取enablePinyinUrl
+     * 
+     * @return enablePinyinUrl
+     */
+    public boolean isEnablePinyinUrl() {
+        return enablePinyinUrl;
+    }
+
+    /**
+     * 
+     * 设置enablePinyinUrl
+     * 
+     * 
+     * @param enablePinyinUrl
+     *            enablePinyinUrl
+     */
+    public void setEnablePinyinUrl(boolean enablePinyinUrl) {
+        this.enablePinyinUrl = enablePinyinUrl;
+    }
+
     @Override
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
@@ -1032,6 +1058,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         reloadSingleBookInterval = YiDuConstants.yiduConf.getInt(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, 120);
         enableCleanImageUrl = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, false);
         filterKeyWord = YiDuConstants.yiduConf.getString(YiDuConfig.FILTER_KEYWORD);
+        enablePinyinUrl = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false);
 
         // 设定文件初期读入
         try {
@@ -1099,6 +1126,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.RELOAD_SINGLE_BOOK_INTERVAL, reloadSingleBookInterval);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_CLEAN_IMAGE_URL, enableCleanImageUrl);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.FILTER_KEYWORD, Utils.escapePropterties(filterKeyWord));
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_PINYINURL, enablePinyinUrl);
 
         try {
             File yiduConfFile = new File(YiDuConstants.yiduConf.getPath());

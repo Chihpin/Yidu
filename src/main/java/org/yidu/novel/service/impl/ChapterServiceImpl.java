@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.service.ChapterService;
 import org.yidu.novel.utils.Pagination;
@@ -157,5 +159,38 @@ public class ChapterServiceImpl extends HibernateSupportServiceImpl implements C
         // 追加小说号条件
         params.add(articleno);
         sqlQuery(sql.toString(), params);
+    }
+
+    @Override
+    public List<ChapterDTO> findWithPinyin(ChapterSearchBean searchBean) {
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("select tc.* ,ta.pinyin from t_chapter tc join t_article ta on tc.articleno = ta.articleno "
+                + "WHERE  tc.deleteflag=false  ");
+        List<Object> params = new ArrayList<Object>();
+        // 追加小说ID条件
+        if (searchBean.getArticleno() != 0) {
+            sql.append(" AND tc.articleno = ? ");
+            params.add(searchBean.getArticleno());
+        }
+        if (Utils.isDefined(searchBean.getChapternoList())) {
+            sql.append(" AND tc.chapterno in ( " + StringUtils.join(searchBean.getChapternoList(), ",") + ") ");
+        }
+
+        if (Utils.isDefined(searchBean.getArticlenoList())) {
+            sql.append(" AND tc.articleno in ( " + StringUtils.join(searchBean.getArticlenoList(), ",") + ") ");
+        }
+
+        if (Utils.isDefined(searchBean.getDateRange())) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.sss");
+            sql.append(" AND tc.postdate >= '" + sdf.format(searchBean.getDateRange().getMinimum()) + "'");
+            sql.append(" AND tc.postdate < '" + sdf.format(searchBean.getDateRange().getMaximum()) + "'");
+        }
+
+        sql.append(" ORDER BY tc.articleno asc ,tc.chapterno ASC ");
+
+        return yiduJdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<ChapterDTO>(
+                ChapterDTO.class));
+
     }
 }

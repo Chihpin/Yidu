@@ -87,7 +87,7 @@ public class BookcaseServiceImpl extends HibernateSupportServiceImpl implements 
         // 初期SQL做成
         StringBuffer sql = new StringBuffer();
         sql.append("Select tb.*,ta.lastchapterno,ta.lastchapter,ta.chapters,ta.size,ta.fullflag,ta.lastupdate "
-                + " ,ta.imgflag "
+                + " ,ta.imgflag ,ta.pinyin  "
                 + "      FROM t_bookcase tb                                                                     "
                 + "      LEFT JOIN t_article ta ON tb.articleno = ta.articleno                                  "
                 + "WHERE tb.userno= ");

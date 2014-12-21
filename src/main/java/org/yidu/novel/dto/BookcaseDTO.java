@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.yidu.novel.action.InfoAction;
 import org.yidu.novel.action.ReaderAction;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -54,6 +55,8 @@ public class BookcaseDTO extends TBookcase {
      * 图片标识
      */
     private Integer imgflag;
+
+    private String pinyin;
 
     /**
      * 获取最新章节编号
@@ -199,6 +202,27 @@ public class BookcaseDTO extends TBookcase {
     }
 
     /**
+     * 获取pinyin
+     * 
+     * @return pinyin
+     */
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    /**
+     * 
+     * 设置pinyin
+     * 
+     * 
+     * @param pinyin
+     *            pinyin
+     */
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    /**
      * 获得图片URL
      * 
      * @return 图片URL
@@ -241,9 +265,46 @@ public class BookcaseDTO extends TBookcase {
      * @return 最新章节URL
      */
     public String getLastChapterUrl() {
+
         HttpServletResponse response = ServletActionContext.getResponse();
-        return response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+        String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
                 + "&chapterno=" + getLastchapterno());
+
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ReaderAction.URL + "?pinyin=" + getPinyin() + "&chapterno=" + getLastchapterno());
+        }
+        return url;
+    }
+
+    /**
+     * 获取最新章节URL
+     * 
+     * @return 最新章节URL
+     */
+    public String getBookmarkUrl() {
+
+        HttpServletResponse response = ServletActionContext.getResponse();
+        String url = response.encodeURL(ReaderAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno()
+                + "&chapterno=" + getChapterno());
+
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(ReaderAction.URL + "?pinyin=" + getPinyin() + "&chapterno=" + getChapterno());
+        }
+        return url;
+    }
+
+    /**
+     * 获取最新章节URL
+     * 
+     * @return 最新章节URL
+     */
+    public String getInfoUrl() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        String url = response.encodeURL(InfoAction.URL + "?subdir=" + getSubdir() + "&articleno=" + getArticleno());
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_PINYINURL, false)) {
+            url = response.encodeURL(InfoAction.URL + "?pinyin=" + getPinyin());
+        }
+        return url;
     }
 
 }

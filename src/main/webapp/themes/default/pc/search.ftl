@@ -21,8 +21,8 @@
       </tr>
       <#list articleList as article>
       <tr>
-        <td class="even"><a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">${article.articlename}</a></td>
-        <td class="even"><a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}" target="_blank"> ${article.lastchapter}</a></td>
+        <td class="even"><a href="${article.url}">${article.articlename}</a></td>
+        <td class="even"><a href="${article.lastChapterUrl}" target="_blank"> ${article.lastchapter}</a></td>
         <td class="odd"><a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a></td>
         <td class="odd">${article.size}</td>
         <td class="odd" align="center">${article.lastupdate?string("MM-dd HH:mm")}</td>

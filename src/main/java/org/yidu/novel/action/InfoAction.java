@@ -9,6 +9,7 @@ import org.yidu.novel.bean.ReviewSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 import org.yidu.novel.entity.TReview;
@@ -56,7 +57,7 @@ public class InfoAction extends AbstractPublicBaseAction {
     /**
      * 章节列表信息
      */
-    private List<TChapter> chapterList;
+    private List<ChapterDTO> chapterList;
     /**
      * 评论件数
      */
@@ -130,11 +131,11 @@ public class InfoAction extends AbstractPublicBaseAction {
     }
 
     /**
-     * 获取 chapterList
+     * 获取chapterList
      * 
      * @return chapterList
      */
-    public List<TChapter> getChapterList() {
+    public List<ChapterDTO> getChapterList() {
         return chapterList;
     }
 
@@ -146,7 +147,7 @@ public class InfoAction extends AbstractPublicBaseAction {
      * @param chapterList
      *            chapterList
      */
-    public void setChapterList(List<TChapter> chapterList) {
+    public void setChapterList(List<ChapterDTO> chapterList) {
         this.chapterList = chapterList;
     }
 
@@ -239,7 +240,7 @@ public class InfoAction extends AbstractPublicBaseAction {
                 chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
                         searchBean);
                 if (!Utils.isDefined(chapterList)) {
-                    chapterList = chapterService.find(searchBean);
+                    chapterList = chapterService.findWithPinyin(searchBean);
                     if (Utils.isDefined(chapterList)) {
                         CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
                                 chapterList);

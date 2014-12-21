@@ -3,6 +3,7 @@ package org.yidu.novel.service;
 import java.util.List;
 
 import org.yidu.novel.bean.ChapterSearchBean;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.entity.TChapter;
 
 /**
@@ -49,6 +50,15 @@ public interface ChapterService {
      * @return 章节列表
      */
     List<TChapter> find(final ChapterSearchBean searchBean);
+    
+    /**
+     * 根据条件取得章节列表
+     * 
+     * @param searchBean
+     *            检索条件
+     * @return 章节列表
+     */
+    List<ChapterDTO> findWithPinyin(final ChapterSearchBean searchBean);
 
     /**
      * 根据条件取得章节件数
