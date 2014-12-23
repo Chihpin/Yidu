@@ -7,8 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,6 +38,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.struts2.ServletActionContext;
+import org.wltea.analyzer.IKSegmentation;
+import org.wltea.analyzer.Lexeme;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TChapter;
@@ -520,5 +525,24 @@ public class Utils {
         // TODO 可能需要扩展
         return StringUtils.replace(value, ",", "\\,");
     }
-    
+
+    /**
+     * 从文字列中提取关键字，用于模糊匹配
+     * 
+     * @param content
+     * @return 关键字
+     */
+    public static final List<String> getKeyWords(String content) {
+        IKSegmentation segmentation = new IKSegmentation(new StringReader(content), false);
+        Lexeme lexeme = null;
+        List<String> keywords = new ArrayList<String>();
+        try {
+            while (null != (lexeme = segmentation.next())) {
+                keywords.add(lexeme.getLexemeText());
+            }
+        } catch (Exception e) {
+        }
+        return keywords;
+    }
+
 }

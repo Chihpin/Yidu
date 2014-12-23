@@ -244,4 +244,26 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
         return this.yiduJdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<TArticle>(
                 TArticle.class));
     }
+
+    @Override
+    public List<TArticle> findRelativeArticleList(List<String> keys, String sortCol, boolean isAsc, int limitNum) {
+
+        List<Object> params = new ArrayList<Object>();
+        params.addAll(keys);
+        params.add(sortCol);
+
+        String cond = "";
+        boolean isFirst = true;
+        for (int i = 0; i < keys.size(); i++) {
+            if (isFirst) {
+                cond += " ?  % articlename ";
+                isFirst = false;
+            } else {
+                cond += (" OR ?  % articlename ");
+            }
+        }
+        String sql = "SELECT * FROM t_article where " + cond + "  order by ?  " + (isAsc ? "ASC" : "DESC") + " limit "
+                + limitNum;
+        return this.yiduJdbcTemplate.query(sql, params.toArray(), new BeanPropertyRowMapper<TArticle>(TArticle.class));
+    }
 }

@@ -58,7 +58,7 @@ public class YiDuConstants {
             put("size", "字数排行");
         }
     };
-    
+
     /**
      * 排行榜名字MAP
      */
@@ -268,12 +268,17 @@ public class YiDuConstants {
         /**
          * 随机类型
          */
-        public static final short RODMON_LIST = 40;
+        public static final short RANDOM_LIST = 40;
 
         /**
-         * 类型
+         * 推荐类型
          */
-        public static final short BACK_LIST = 50;
+        public static final short RECOMMEND_LIST = 50;
+
+        /**
+         * 相关小说
+         */
+        public static final short RELATIVE_LIST = 60;
 
     }
 

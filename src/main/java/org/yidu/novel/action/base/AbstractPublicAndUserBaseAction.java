@@ -163,7 +163,6 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      * @return 模版名
      */
     public String getThemeName() {
-
         return YiDuConstants.yiduConf.getString("themeName", "default");
     }
 
@@ -184,6 +183,10 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
 
     protected int getRecommondCategory() {
         return 0;
+    }
+
+    protected String getRelativeArticleName() {
+        return null;
     }
 
     protected String getBlockKey() {
@@ -223,6 +226,7 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      */
     protected void loadBlock() {
         logger.debug("loadBlock start.");
+
         // 从缓存中把首页用的区块信息取出
         blocks = CacheManager.getObject(getBlockKey(), null);
         if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.CACHE_EFFECTIVE, false) || !Utils.isDefined(blocks)) {
@@ -246,18 +250,19 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
                     articleSearchBean.setPagination(pagination);
                     List<TArticle> articleList = articleService.find(articleSearchBean);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
-                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RODMON_LIST) {
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RANDOM_LIST) {
+                    // 随机推荐区块
                     List<TArticle> articleList = articleService.findRandomRecommendArticleList(limitnum);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
 
-                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.BACK_LIST) {
-                    // TODO 暂未开放，貌似没什么用啊
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RECOMMEND_LIST) {
+                    // 按小说分类和编号推荐区块
                     List<TArticle> articleList = articleService.findRecommendArticleList(getRecommondCategory(),
                             getRecommondArticleno(), limitnum);
                     blocks.put(tSystemBlock.getBlockid(), articleList);
 
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.CUSTONIZE_ARTICLE_LIST) {
-
+                    // 自定义小说列表
                     ArticleSearchBean articleSearchBean = new ArticleSearchBean();
                     articleSearchBean.setArticlenos(tSystemBlock.getContent());
                     List<TArticle> articleList = articleService.find(articleSearchBean);
@@ -276,10 +281,24 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
                     }
                     blocks.put(tSystemBlock.getBlockid(), newArticleList);
                 } else if (tSystemBlock.getType() == YiDuConstants.BlockType.HTML) {
+                    // HTML区块
                     blocks.put(tSystemBlock.getBlockid(), tSystemBlock.getContent());
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RELATIVE_LIST) {
+                    // 相关小说区块（名字匹配）
+                    String articleName = getRelativeArticleName();
+                    if (StringUtils.isBlank(articleName)) {
+                        // 小说名是空的话，直接跳过啦
+                        continue;
+                    }
+                    List<String> keys = Utils.getKeyWords(articleName);
+                    // 取相关小说
+                    List<TArticle> articleList = articleService.findRelativeArticleList(keys,
+                            tSystemBlock.getSortcol(), tSystemBlock.getIsasc(), tSystemBlock.getLimitnum());
+
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
                 }
-                CacheManager.putObject(getBlockKey(), null, blocks);
             }
+            CacheManager.putObject(getBlockKey(), null, blocks);
         }
         logger.debug("loadBlock normally end.");
     }

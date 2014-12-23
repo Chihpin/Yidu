@@ -116,6 +116,18 @@ public interface ArticleService {
     List<TArticle> findRecommendArticleList(final int category, final int articleno, final int count);
 
     /**
+     * 根据关键和件数取得相关小说列表<br>
+     * 
+     * @param keys
+     *            相似关键字
+     * @param count
+     *            件数
+     * @return 推荐列表
+     */
+
+    List<TArticle> findRelativeArticleList(List<String> keys, String sortCol, boolean isAsc, int limitNum);
+
+    /**
      * 根据小说分类取得随机推荐列表<br>
      * 将来算法可能会更新，暂时做成这样
      * 
@@ -124,7 +136,7 @@ public interface ArticleService {
      * @return 推荐列表
      */
     List<TArticle> findRandomRecommendArticleList(final int count);
-    
+
     /**
      * 获取各个分类的小说数量<br>
      * 

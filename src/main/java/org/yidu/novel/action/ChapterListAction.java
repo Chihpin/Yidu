@@ -215,4 +215,12 @@ public class ChapterListAction extends AbstractPublicBaseAction {
     protected int getRecommondCategory() {
         return article.getCategory() == null ? 0 : article.getCategory();
     }
+
+    @Override
+    protected String getRelativeArticleName() {
+        if (Utils.isDefined(article)) {
+            return article.getArticlename();
+        }
+        return null;
+    }
 }

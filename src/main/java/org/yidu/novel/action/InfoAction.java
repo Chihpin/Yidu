@@ -308,4 +308,12 @@ public class InfoAction extends AbstractPublicBaseAction {
         }
     }
 
+    @Override
+    protected String getRelativeArticleName() {
+        if (Utils.isDefined(article)) {
+            return article.getArticlename();
+        }
+        return null;
+    }
+
 }

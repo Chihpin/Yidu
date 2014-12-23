@@ -311,4 +311,12 @@ public class ReaderAction extends AbstractPublicBaseAction {
             return 0;
         }
     }
+
+    @Override
+    protected String getRelativeArticleName() {
+        if (Utils.isDefined(article)) {
+            return article.getArticlename();
+        }
+        return null;
+    }
 }
