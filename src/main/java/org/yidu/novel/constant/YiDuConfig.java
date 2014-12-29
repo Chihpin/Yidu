@@ -277,5 +277,9 @@ public class YiDuConfig {
      * 统计代码
      */
     public static final String ANALYTICSCODE = "label.system.analyticscode";
+    /**
+     * 小说分类
+     */
+    public static final String CATEGORY = "collectionProperties.article.category";
 
 }

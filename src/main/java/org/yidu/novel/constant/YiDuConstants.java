@@ -592,4 +592,11 @@ public class YiDuConstants {
         public static final String ASC = "ASC";
     }
 
+    public static final class CacheCountType {
+        public static final String FULLFLAG = "fullflag";
+        public static final String ALL = "all";
+        public static final String TAG = "tag";
+        public static final String AUTHOR = "author";
+    }
+
 }

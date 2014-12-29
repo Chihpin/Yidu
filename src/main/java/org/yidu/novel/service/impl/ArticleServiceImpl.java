@@ -13,6 +13,7 @@ import org.yidu.novel.dto.CategoryCountDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.service.ArticleService;
 import org.yidu.novel.utils.Pagination;
+import org.yidu.novel.utils.Utils;
 
 /**
  * 
@@ -112,6 +113,12 @@ public class ArticleServiceImpl extends HibernateSupportServiceImpl implements A
             // 作者号指定的话，添加作者号
             hql.append(" AND authorid = ? ");
             params.add(searchBean.getAuthorid());
+        }
+
+        if (Utils.isDefined(searchBean.getTag())) {
+            // 标签指定的话，添加标签条件
+            hql.append(" AND articlename like '%"
+                    + StringEscapeUtils.escapeSql(searchBean.getTag()) + "%'");
         }
 
         if (searchBean.getPageType() != ArticleSearchBean.PageType.authorPage

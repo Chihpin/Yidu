@@ -35,6 +35,7 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
     private String copyright;
     private String beianNo;
     private String analyticscode;
+    private String category;
 
     public String getTitle() {
         return title;
@@ -100,6 +101,14 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
         this.analyticscode = analyticscode;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     protected void loadData() {
         // 设定文件初期读入
@@ -114,6 +123,8 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
             copyright = languageConf.getString(YiDuConfig.COPYRIGHT);
             beianNo = languageConf.getString(YiDuConfig.BEIANNO);
             analyticscode = languageConf.getString(YiDuConfig.ANALYTICSCODE);
+            analyticscode = languageConf.getString(YiDuConfig.ANALYTICSCODE);
+            category = languageConf.getString(YiDuConfig.CATEGORY);
         } catch (ConfigurationException e) {
             logger.error(e);
         }
@@ -134,6 +145,7 @@ public class LanguageEditAction extends AbstractAdminEditBaseAction {
             languageConf.setProperty(YiDuConfig.COPYRIGHT, Utils.escapePropterties(copyright));
             languageConf.setProperty(YiDuConfig.BEIANNO, Utils.escapePropterties(beianNo));
             languageConf.setProperty(YiDuConfig.ANALYTICSCODE, Utils.escapePropterties(analyticscode));
+            languageConf.setProperty(YiDuConfig.CATEGORY, Utils.escapePropterties(category));
 
             File languageFile = new File(languageConf.getPath());
             OutputStream out = new FileOutputStream(languageFile);

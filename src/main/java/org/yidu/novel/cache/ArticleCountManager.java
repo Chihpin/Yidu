@@ -113,17 +113,20 @@ public class ArticleCountManager {
                         }
 
                         logger.debug("going to init all count.");
-                        articleCountMap.put("all", allcount);
+                        articleCountMap.put(YiDuConstants.CacheCountType.ALL, allcount);
 
                         logger.debug("going to init author count.");
-                        // TODO 默认设为10个，估计超过10个的很少！
-                        articleCountMap.put("author", 10);
+                        //默认只显示一页！
+                        articleCountMap.put(YiDuConstants.CacheCountType.AUTHOR, YiDuConstants.yiduConf.getInteger(YiDuConfig.COUNT_PER_PAGE, 20));
+
+                        // 默认tag只显示一页！
+                        articleCountMap.put(YiDuConstants.CacheCountType.TAG, YiDuConstants.yiduConf.getInteger(YiDuConfig.COUNT_PER_PAGE, 20));
 
                         logger.debug("going to init fullflg count.");
                         ArticleSearchBean searchBean = new ArticleSearchBean();
                         searchBean.setFullflag(true);
                         int fullcount = articleService.getCountByJDBC(searchBean);
-                        articleCountMap.put("fullflag", fullcount);
+                        articleCountMap.put(YiDuConstants.CacheCountType.FULLFLAG, fullcount);
 
                         logger.debug("ArticleCount Manager daemon process going to sleep.");
 

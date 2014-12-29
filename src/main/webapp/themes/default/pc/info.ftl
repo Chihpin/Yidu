@@ -6,7 +6,7 @@
 <meta name="keywords" content="${article.infokeywords}" />
 <meta name="description" content="${article.infodescription}" />
 <#else>
-<title>${article.articlename}|${article.articlename}最新章节|${article.articlename}TXT下载</title>
+<title>${article.articlename?html}|${article.articlename}最新章节|${article.articlename}TXT下载</title>
 <meta name="keywords" content="${article.articlename},${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
 <meta name="description" content="《${article.articlename}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${categorymap[article.category?c]}</#if>小说，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
 </#if>
@@ -39,7 +39,7 @@
     <section class="main b-detail">
         <div class="detail">
             <#if article.fullflag><img src="${contextPath}/themes/${themeName}/pc/images/only.png" class="leftso png_bg" alt="完本图标"><#else><img src="${contextPath}/themes/${themeName}/pc/images/only2.png" class="leftso png_bg"  alt="连载中图标"></#if>
-            <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"  class="l mr11">
+            <a href="${article.url}"  class="l mr11">
                  <img src="<#if article.imgUrl ?? >${article.imgUrl}</#if>" style="width: 120px; height: 150px" alt="${article.articlename}"/></a>
         <div class="b-info">
           <h1>${article.articlename}</h1>
@@ -74,6 +74,7 @@
                     <em>更新于:[${article.lastupdate?string("MM-dd HH:mm")}]</em><br />
                     </dd>
                 </dl>
+                <dl><dt>标签：</dt><dd><#list article.tagList as tag><a href="${tag.url}" target="_blank">${tag.tag}</a>&nbsp;&nbsp;</#list></dd></dl>
             </div>
             <div class="adv"><div id="info_ad_02"></div></div>
             <div class="clear"></div>

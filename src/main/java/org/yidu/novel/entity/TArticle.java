@@ -1,6 +1,8 @@
 package org.yidu.novel.entity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,7 @@ import org.yidu.novel.action.user.VoteAction;
 import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.dto.TagDTO;
 import org.yidu.novel.entity.base.BaseTArticle;
 import org.yidu.novel.utils.Utils;
 
@@ -126,6 +129,7 @@ public class TArticle extends BaseTArticle {
      * 
      * @return 小说类别名字
      */
+    @Deprecated
     public String getCategoryStr() {
         String[] categoryArr = new String[] { "玄幻魔法", "武侠修真", "都市言情", "历史军事", "侦探推理", "网游动漫", "科幻小说", "恐怖灵异", "散文诗词",
                 "其他类型" };
@@ -314,6 +318,24 @@ public class TArticle extends BaseTArticle {
         } else {
             return YiDuConstants.yiduConf.getString(YiDuConfig.ROOT_DOMAIN);
         }
+    }
+
+    /**
+     * 获取小说tag的URL
+     * 
+     * @return 小说介绍页拼音形式的URL
+     */
+    public List<TagDTO> getTagList() {
+        List<String> tags = Utils.getKeyWords(getArticlename());
+        List<TagDTO> tagList = new ArrayList<TagDTO>();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        for (String tag : tags) {
+            TagDTO tagdto = new TagDTO();
+            tagdto.setTag(tag);
+            tagdto.setUrl(response.encodeURL(ArticleListAction.URL + "?tag=" + tag));
+            tagList.add(tagdto);
+        }
+        return tagList;
     }
 
     /**

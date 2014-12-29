@@ -48,6 +48,10 @@
        <td class="even"><s:textarea name="analyticscode" cssClass="tb-rounded"  cols="30" rows="5"/></td>
     </tr>
     <tr align="left" valign="middle">
+       <td class="odd" width="20%"><s:text name="label.admin.language.edit.category" /></td>
+       <td class="even"><s:textfield name="category" size="25"  cssClass="text"/></td>
+    </tr>
+    <tr align="left" valign="middle">
        <td class="odd" colspan="2">
             <s:submit name="submit" value="%{getText('label.admin.edit.add')}" method="save" cssClass="submitButton" theme = "simple"/>
        </td>

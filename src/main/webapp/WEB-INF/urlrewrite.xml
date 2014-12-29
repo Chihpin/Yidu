@@ -102,6 +102,27 @@
 		<from>^/articleList\?author=(.+?)(;jsessionid=.*)?$</from>
 		<to last="true">/author/$1\.html</to>
 	</outbound-rule>
+	
+	<!-- tag -->
+	<rule>
+        <from>^/tag/(.+?)/(\d*)\.html$</from>
+        <to last="true">/articleList\?tag=$1&amp;page=$2</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/articleList\?tag=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
+        <to last="true">/tag/$1/$2\.html</to>
+    </outbound-rule>
+
+    <rule>
+        <from>^/tag/(.+?)\.html$</from>
+        <to last="true">/articleList\?tag=$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>^/articleList\?tag=(.+?)(;jsessionid=.*)?$</from>
+        <to last="true">/tag/$1\.html</to>
+    </outbound-rule>
 
 	<rule>
 		<from>^/search/(.+?)/(\d*)\.html$</from>

@@ -60,6 +60,10 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      * 完本标志
      */
     private Boolean fullflag;
+    /**
+     * 标签
+     */
+    private String tag;
 
     /**
      * 小说列表
@@ -150,6 +154,14 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         this.fullflag = fullflag;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     /**
      * 获取 articleList
      * 
@@ -195,11 +207,13 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
                 // 分类
                 count = ArticleCountManager.getArticleCount(String.valueOf(category));
             } else if (Utils.isDefined(author)) {
-                count = ArticleCountManager.getArticleCount("author");
+                count = ArticleCountManager.getArticleCount(YiDuConstants.CacheCountType.AUTHOR);
             } else if (fullflag != null && fullflag) {
-                count = ArticleCountManager.getArticleCount("fullflag");
+                count = ArticleCountManager.getArticleCount(YiDuConstants.CacheCountType.FULLFLAG);
+            } else if (Utils.isDefined(tag)) {
+                count = ArticleCountManager.getArticleCount(YiDuConstants.CacheCountType.TAG);
             } else {
-                count = ArticleCountManager.getArticleCount("all");
+                count = ArticleCountManager.getArticleCount(YiDuConstants.CacheCountType.ALL);
             }
         } else {
             Object countInfo = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_COUNT_PREFIX,

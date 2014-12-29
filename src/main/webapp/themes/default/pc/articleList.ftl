@@ -5,8 +5,12 @@
 <title>${categorymap[category?c]}小说|${getText("label.system.title")}</title>
 <meta name="keywords" content="${categorymap[category?c]},${categorymap[category?c]}小说,${getText("label.system.siteKeywords")}" />
 <#elseif author?? >
-<title>${author}的小说|${getText("label.system.title")}</title>
-<meta name="keywords" content="${author}的小说,${getText("label.system.siteKeywords")}" />
+<title>${author?html}的小说|${getText("label.system.title")}</title>
+<meta name="keywords" content="${author?html}的小说,${getText("label.system.siteKeywords")}" />
+<meta name="description" content="${getText("label.system.siteDescription")}" />
+<#elseif tag?? >
+<title>标签：${tag?html}的小说|${getText("label.system.title")}</title>
+<meta name="keywords" content="标签：${tag?html}的小说,${getText("label.system.siteKeywords")}" />
 <meta name="description" content="${getText("label.system.siteDescription")}" />
 <#else>
 <title>完本小说|${getText("label.system.title")}</title>
@@ -19,7 +23,7 @@
 <#macro content>
 <div id="list_ad_01"></div>
 <div class="mainnav" id="navList">
-<div class="main-index">位置：  &nbsp; > &nbsp; <a href="#"><#if fullflag ?? && fullflag>全本小说<#elseif category ?? && category!=0>${categorymap[category?c]}<#elseif author??>${author}的小说<#else>小说列表页</#if></a></div>
+<div class="main-index">位置：  &nbsp; > &nbsp; <a href="#"><#if fullflag ?? && fullflag>全本小说<#elseif category ?? && category!=0>${categorymap[category?c]}<#elseif tag ??>标签：${tag?html}的小说<#elseif author??>${author?html}的小说<#else>小说列表页</#if></a></div>
     <section class="section board-list board-list-collapse">
     <ul class="seeWell cf">
         <#list articleList as article>
@@ -37,21 +41,25 @@
         </li>
         </#list>
     </ul>
+
     <div id="list_ad_02"></div>
           <div class="pages">
               <div class="pagelink" id="pagelink">
                 <#if fullflag?? && fullflag>
-                <#assign listurl = "/articleList?fullflag=true&page=" >
-                <#assign listurlforjs = "${contextPath}/wanben/" >
+                    <#assign listurl = "/articleList?fullflag=true&page=" >
+                    <#assign listurlforjs = "${contextPath}/wanben/" >
                 <#elseif category?? && category !=0 >
-                <#assign listurl = "/articleList?category=${category}&page=">
-                <#assign listurlforjs = "${contextPath}/list/${category}/" >
+                    <#assign listurl = "/articleList?category=${category}&page=">
+                    <#assign listurlforjs = "${contextPath}/list/${category}/" >
                 <#elseif author??>
-                <#assign listurl = "/articleList?author=${author}&page=">
-                <#assign listurlforjs = "${contextPath}/list/${author}/" >
-        <#else>
-                <#assign listurl = "/articleList?page=">
-                <#assign listurlforjs = "${contextPath}/list/" >
+                    <#assign listurl = "/articleList?author=${author?html}&page=">
+                    <#assign listurlforjs = "${contextPath}/list/${author?html}/" >
+                <#elseif tag??>
+                    <#assign listurl = "/articleList?tag=${tag?html}&page=">
+                    <#assign listurlforjs = "${contextPath}/list/${tag?html}/" >
+                <#else>
+                    <#assign listurl = "/articleList?page=">
+                    <#assign listurlforjs = "${contextPath}/list/" >
                 </#if>
                 <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages?c}</em>
                 <a href="${encodeURL(listurl +"1")}" class="first">1</a>
