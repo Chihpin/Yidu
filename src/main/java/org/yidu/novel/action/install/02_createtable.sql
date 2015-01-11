@@ -199,6 +199,14 @@ CREATE TABLE t_article
     createtime timestamp without time zone,
     modifyuserno integer,
     modifytime timestamp without time zone,
+    usecustomizeinfotitle boolean DEFAULT false,
+    infotitle character varying(150),
+    infokeywords character varying(150),
+    infodescription character varying(200),
+    usecustomizelisttitle boolean DEFAULT false,
+    listtitle character varying(150),
+    listkeywords character varying(150),
+    listdescription character varying(200),
     PRIMARY KEY (articleno)
 ) WITHOUT OIDS;
 
