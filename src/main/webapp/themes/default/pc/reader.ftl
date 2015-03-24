@@ -74,9 +74,9 @@
                 </li>
                 <li id="sudu">
                     <span class="fl">滚动速度：</span>
-                    <a id="sudu50" href="javascript:setSpeed(50);">快</a>
-                    <a id="sudu100" href="javascript:setSpeed(100);" class="this">中</a>
-                    <a id="sudu150" href="javascript:setSpeed(150);">慢</a>
+                    <a id="sudu50" href="javascript:setSpeed(50);" rel="nofollow">快</a>
+                    <a id="sudu100" href="javascript:setSpeed(100);" class="this" rel="nofollow">中</a>
+                    <a id="sudu150" href="javascript:setSpeed(150);" rel="nofollow">慢</a>
                 </li>
             </ul>
         </div>
@@ -98,8 +98,8 @@
        <div class="attention">
             <em>阅读提示：</em><br/>
             1、本站会员登录后，将免费体会到最顺畅的阅读方式[<em>最少广告</em>]。<br/>
-            2、<em>注册本站会员</em>，将《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
-            3、免费小说《<a href="${encodeURL("/info?subdir=${chapter.subdir?c}&articleno=${chapter.articleno?c}")}" class="article_title"><em>${chapter.articlename}</em></a>》 ${chapter.chaptername}所描述的内容只是作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
+            2、<em>注册本站会员</em>，将《<a href="${article.url}" class="article_title"><em>${chapter.articlename}</em></a>》加入书架，可以通过书架更快的了解更新信息。<br/>
+            3、免费小说《<a href="${article.url}" class="article_title"><em>${chapter.articlename}</em></a>》 ${chapter.chaptername}所描述的内容只是作者个人观点，与本站的立场无关，本站只为广大用户提供阅读平台。
         </div>
         
      <div class="navTab">

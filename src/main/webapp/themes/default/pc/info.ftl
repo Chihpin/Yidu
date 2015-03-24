@@ -140,7 +140,7 @@
     <div class="chapterNum">
         <a name="chapters"></a>
           <ul>
-            <h1>《${article.articlename}》分卷阅读<#if !loginFlag>([<a href="${encodeURL("/login")}">登陆</a>]后开放)</#if></h1>
+            <h1>《${article.articlename}》分卷阅读<#if !loginFlag>([<a href="${encodeURL("/login")}" rel="nofollow">登陆</a>]后开放)</#if></h1>
             <#list chapterList as chapter>
                 <#if chapter.chaptertype == 0>
 					<#if loginFlag>

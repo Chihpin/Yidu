@@ -7,7 +7,7 @@
       <a class="home" href="${contextPath}/">首页</a>
       <a href="${encodeURL("/siteMap")}">网站地图</a>
       <a href="${encodeURL("/articleList?fullflag=true")}">完本小说</a>
-      <a href="${encodeURL("/saveShortcut")}">创建桌面快捷</a>
+      <a href="${encodeURL("/saveShortcut")}" rel="nofollow">创建桌面快捷</a>
       </nav>
       <div class="hd-follow" style="width:630px;text-align:right;" >
         <div class="myhide"><a href="#" class="hides">浏览记录</a>
@@ -19,9 +19,9 @@
           </div>
         </div>
           <span id="checklogin">
-            <#if enableQQLogin><a href="/gotoQQLogin"><img src="/themes/default/pc/images/qq_login.gif" class="vm" alt="QQ登录"></a></#if>
-            <a href="${contextPath}/login" style="color:#F0F0F0">访客登录</a>&nbsp;&nbsp;
-            <a href="${contextPath}/register" style="color:#F0F0F0">免费注册</a>&nbsp;&nbsp;
+            <#if enableQQLogin><a href="/gotoQQLogin" rel="nofollow"><img src="/themes/default/pc/images/qq_login.gif" class="vm" alt="QQ登录"></a></#if>
+            <a href="${contextPath}/login" style="color:#F0F0F0" rel="nofollow">访客登录</a>&nbsp;&nbsp;
+            <a href="${contextPath}/register" style="color:#F0F0F0" rel="nofollow">免费注册</a>&nbsp;&nbsp;
           </span>
         </div>
     </div>

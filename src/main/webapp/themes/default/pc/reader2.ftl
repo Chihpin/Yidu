@@ -69,9 +69,9 @@
                 </li>
                 <li id="sudu">
                     <span class="fl">滚动速度：</span>
-                    <a id="sudu50" href="javascript:setSpeed(50);">快</a>
-                    <a id="sudu100" href="javascript:setSpeed(100);" class="this">中</a>
-                    <a id="sudu150" href="javascript:setSpeed(150);">慢</a>
+                    <a id="sudu50" href="javascript:setSpeed(50);" rel="nofollow">快</a>
+                    <a id="sudu100" href="javascript:setSpeed(100);" class="this" rel="nofollow">中</a>
+                    <a id="sudu150" href="javascript:setSpeed(150);" rel="nofollow">慢</a>
                 </li>
             </ul>
 			<div style="clear:both;"></div>
@@ -137,11 +137,11 @@
 
 <#macro customizefooter> 
     <div id="full2" style="width:37px; height:22px; position:fixed; left:50%; top:425px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_top" alt="返回顶部"></a>
+    <a class="get_top" alt="返回顶部" rel="nofollow"></a>
     </div>
     
     <div id="full" style="width:37px; height:22px; position:fixed; left:50%; top:562px; margin-left:493px;  z-index:100; text-align:center; cursor:pointer;">
-    <a class="get_bottom" alt="跳至页尾"></a>
+    <a class="get_bottom" alt="跳至页尾" rel="nofollow"></a>
     </div>
 </#macro>
 
