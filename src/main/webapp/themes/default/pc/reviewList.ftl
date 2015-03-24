@@ -8,7 +8,7 @@
 <#macro content>
 <div id="review_ad_01"></div>
 <div class="mainnav" id="navList">
-    <div class="main-index">位置：  &nbsp; > &nbsp; <a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"><#if article?? >${article.articlename}</#if></a>&nbsp;>&nbsp; <#if article?? >${article.articlename}</#if>的评论</div>
+    <div class="main-index">位置：  &nbsp; > &nbsp; <a href="${article.url}"><#if article?? >${article.articlename}</#if></a>&nbsp;>&nbsp; <#if article?? >${article.articlename}</#if>的评论</div>
     <div class="comment_left">
         <div class="commenthead">
             <div class="ti">

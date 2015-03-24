@@ -25,10 +25,10 @@
         <ul class="seeWell cf">
         <#list articleList as article>
         <#if article_index lt 3>
-            <li><a class="l mr10" title="${article.articlename}" href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}" target="_blank">
+            <li><a class="l mr10" title="${article.articlename}" href="${article.url}" target="_blank">
             <img style="width: 120px; height: 150px" src="${article.imgUrl}" alt="${article.articlename}"></a>
             <#if article.fullflag ><img src="${contextPath}/themes/${themeName}/pc/images/only.png"  alt="完本图标" class="topss png_bg"><#else><img src="${contextPath}/themes/${themeName}/pc/images/only2.png"  alt="连载中图标" class="topss png_bg"></#if>
-            <span class="l"><a class="clearfix stitle" href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">
+            <span class="l"><a class="clearfix stitle" href="${article.url}">
             <em <#if article_index ==0 >class="first"</#if>>${article_index + 1}</em>${article.articlename}</a>
             类型：<a href="${encodeURL("/articleList?category=${article.category}&page=1")}"><#if article.category!=0>${categorymap[article.category?c]}</#if></a><br/> 
             作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>
@@ -42,7 +42,7 @@
         <#if article_index gt 2 >
           <dl><dt><em>${article_index + 1}</em>[
           <a href="${encodeURL("/articleList?category=${article.category}&page=1")}"> <#if article.category!=0>${categorymap[article.category?c]}</#if></a>]</dt>
-          <dd class="title"><a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">${article.articlename}</a></dd>
+          <dd class="title"><a href="${article.url}">${article.articlename}</a></dd>
           <dd class="state">最新章节：<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}"><#if article.lastchapter?? >${article.lastchapter}</#if>（ </a> [${article.lastupdate?string("MM-dd HH:mm")}]</dd>
           <dd class="authors">作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a></dd></dl>
         </#if>
