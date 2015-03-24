@@ -61,7 +61,7 @@
                     <#assign listurl = "/articleList?page=">
                     <#assign listurlforjs = "${contextPath}/list/" >
                 </#if>
-                <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages?c}</em>
+                <em id="pagestats">${pagination.pageNumber?c}/${pagination.totalPages?c}</em>
                 <a href="${encodeURL(listurl +"1")}" class="first">1</a>
                 <#list pagination.pageNumberList as pagenum >
                     <#if pagenum_index == 0 && (pagenum > 1 )>
