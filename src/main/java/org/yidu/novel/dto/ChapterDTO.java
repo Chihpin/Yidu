@@ -113,7 +113,7 @@ public class ChapterDTO extends TChapter {
      */
     public String getContent() {
         String keywords = YiDuConstants.yiduConf.getString(YiDuConfig.FILTER_KEYWORD);
-        String[] keywordArr = StringUtils.split(keywords, ",");
+        String[] keywordArr = StringUtils.split(keywords, "#");
         for (String string : keywordArr) {
             content = content.replaceAll(string, "");
         }
