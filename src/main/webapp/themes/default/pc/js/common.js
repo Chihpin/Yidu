@@ -443,10 +443,11 @@ function addAd(){
 
 function addDownloadUrl(){
 	if($("#info_download").length>0){
-		if( loginid != "") {
+		$.post('/checklogin',function(data){
+	        if(data!=null){
 			$("#info_download").html("<a href=\""+downloadUrl+"\" title=\""+downloadTitle+"txt全集下载\" rel=\"nofollow\">全文下载</a>");
 		} else {
 			$("#info_download").html("登陆后可下载"+downloadTitle+"全集电子书");
-		}
+		}});
 	}
 }
