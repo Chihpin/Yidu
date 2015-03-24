@@ -71,6 +71,11 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     private List<TArticle> articleList = new ArrayList<TArticle>();
 
     /**
+     * 全本的最新入库小说列表 TODO 区块对应
+     */
+    private List<TArticle> lastPostFullArticleList = new ArrayList<TArticle>();
+
+    /**
      * 获取category
      * 
      * @return category
@@ -183,6 +188,14 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
         this.articleList = articleList;
     }
 
+    public List<TArticle> getLastPostFullArticleList() {
+        return lastPostFullArticleList;
+    }
+
+    public void setLastPostFullArticleList(List<TArticle> lastPostFullArticleList) {
+        this.lastPostFullArticleList = lastPostFullArticleList;
+    }
+
     @Override
     public String getTempName() {
         return "articleList";
@@ -235,6 +248,18 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
             articleList = articleService.find(searchBean);
             CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX, searchBean, articleList);
         }
+
+        if (Utils.isDefined(fullflag) && fullflag) {
+            lastPostFullArticleList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX
+                    + fullflag, searchBean);
+            if (!Utils.isDefined(lastPostFullArticleList)) {
+                searchBean.getPagination().setSortColumn(TArticle.PROP_POSTDATE);
+                lastPostFullArticleList = articleService.find(searchBean);
+                CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_ARTICEL_LIST_PREFIX + fullflag,
+                        searchBean, lastPostFullArticleList);
+            }
+        }
+
         logger.debug("normally end.");
     }
 
