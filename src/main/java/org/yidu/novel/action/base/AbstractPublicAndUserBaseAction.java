@@ -144,7 +144,7 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
      * @return GetText
      */
     public GetTextMethod getGetText() {
-        return new GetTextMethod(this);
+        return new GetTextMethod();
     }
 
     /**

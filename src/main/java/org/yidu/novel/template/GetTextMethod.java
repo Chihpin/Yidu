@@ -2,7 +2,7 @@ package org.yidu.novel.template;
 
 import java.util.List;
 
-import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;
@@ -20,19 +20,18 @@ import freemarker.template.TemplateModelException;
  */
 public class GetTextMethod implements TemplateMethodModel {
 
-    /**
-     * ActionSupport
-     */
-    private ActionSupport action;
+    private static PropertiesConfiguration languageConf;
 
-    /**
-     * 带参数的构造函数
-     * 
-     * @param action
-     *            ActionSupport对象
-     */
-    public GetTextMethod(ActionSupport action) {
-        this.action = action;
+    private PropertiesConfiguration getProperties() {
+        if (languageConf == null) {
+            try {
+                languageConf = new PropertiesConfiguration(Thread.currentThread().getContextClassLoader()
+                        .getResource("language/package.properties"));
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        }
+        return languageConf;
     }
 
     /**
@@ -51,6 +50,6 @@ public class GetTextMethod implements TemplateMethodModel {
             throw new TemplateModelException("Wrong arguments!");
         }
         // 返回getText执行结果
-        return action.getText((String) argList.get(0));
+        return getProperties().getProperty((String) argList.get(0));
     }
 }
