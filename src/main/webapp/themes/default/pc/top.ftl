@@ -54,7 +54,7 @@
                 <#assign listurl = "/top?sortColumn=${sortColumn}&page=">
                 <#assign listurlforjs = "${contextPath}/top/${sortColumn}/" >
                 <em id="pagestats">${pagination.pageNumber}/${pagination.totalPages?c}</em>
-                <a href="${encodeURL(listurl +"1")}" class="first">1</a>
+                <a href="${encodeURL(listurl +"1")}" class="first">首页</a>
                 <#list pagination.pageNumberList as pagenum >
                     <#if pagenum_index == 0 && (pagenum > 1 )>
                         <a href="${encodeURL(listurl+ (pagenum-1)?c)}" class="prev">&lt;</a>
@@ -69,7 +69,7 @@
                 <#if mxpagenum?? && (mxpagenum < pagination.totalPages)>
                      <a href="${encodeURL(listurl + (mxpagenum+1)?c)}" class="next">&gt;</a>
                 </#if>
-                <a href="${encodeURL(listurl + pagination.totalPages?c)}">${pagination.totalPages?c}</a>
+                <a href="${encodeURL(listurl + pagination.totalPages?c)}">尾页</a>
                 <kbd>
                     <input name="page" type="text" size="4" maxlength="6" onkeydown="if(event.keyCode==13){window.location='${listurlforjs}'+this.value+'.html'; return false;}" /></kbd>
              </div>
