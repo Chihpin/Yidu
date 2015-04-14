@@ -173,6 +173,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
             // 获取章节信息
             ChapterSearchBean searchBean = new ChapterSearchBean();
             BeanUtils.copyProperties(this, searchBean);
+            searchBean.setArticleno(article.getArticleno());
             chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean);
             if (!Utils.isDefined(chapterList)) {
                 chapterList = chapterService.findWithPinyin(searchBean);
