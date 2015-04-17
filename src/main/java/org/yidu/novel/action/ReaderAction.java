@@ -319,4 +319,12 @@ public class ReaderAction extends AbstractPublicBaseAction {
         }
         return null;
     }
+
+    @Override
+    protected String getAuthor() {
+        if (Utils.isDefined(article)) {
+            return article.getAuthor();
+        }
+        return null;
+    }
 }

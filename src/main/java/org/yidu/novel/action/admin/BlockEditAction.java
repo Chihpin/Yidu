@@ -43,6 +43,7 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
     private Short type;
     private String sortcol;
     private Boolean isasc;
+    private Boolean isfinish;
     private Integer limitnum;
     private String content;
 
@@ -73,8 +74,8 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
 
     @Validations(
     // 必须
-    requiredStrings = { @RequiredStringValidator(message = "${getText(\"errors.required.input\", "
-            + "{getText(\"label.admin.block.edit.blockname\")})}") })
+            requiredStrings = { @RequiredStringValidator(message = "${getText(\"errors.required.input\", "
+                    + "{getText(\"label.admin.block.edit.blockname\")})}") })
     public void setBlockname(String blockname) {
         this.blockname = blockname;
     }
@@ -122,6 +123,14 @@ public class BlockEditAction extends AbstractAdminEditBaseAction {
 
     public void setIsasc(Boolean isasc) {
         this.isasc = isasc;
+    }
+
+    public Boolean getIsfinish() {
+        return this.isfinish == null ? false : isfinish;
+    }
+
+    public void setIsfinish(Boolean isfinish) {
+        this.isfinish = isfinish;
     }
 
     public Integer getLimitnum() {

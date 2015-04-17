@@ -41,6 +41,11 @@
                 <comment>isasc</comment>
             </column>
         </property>
+        <property name="isfinish" type="java.lang.Boolean">
+            <column name="isfinish">
+                <comment>isfinish</comment>
+            </column>
+        </property>
         <property name="limitnum" type="java.lang.Integer">
             <column name="limitnum">
                 <comment>limitnum</comment>

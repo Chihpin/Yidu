@@ -27,6 +27,7 @@ public abstract class BaseTSystemBlock  implements Serializable {
 	public static String PROP_MODIFYTIME = "modifytime";
 	public static String PROP_CONTENT = "content";
 	public static String PROP_ISASC = "isasc";
+	public static String PROP_ISFINISH = "isfinish";
 	public static String PROP_BLOCKNO = "blockno";
 
 
@@ -59,6 +60,7 @@ public abstract class BaseTSystemBlock  implements Serializable {
 	private java.lang.Integer category;
 	private java.lang.String sortcol;
 	private java.lang.Boolean isasc;
+	private java.lang.Boolean isfinish;
 	private java.lang.Integer limitnum;
 	private java.lang.String content;
 	private java.lang.Short target;
@@ -190,7 +192,20 @@ public abstract class BaseTSystemBlock  implements Serializable {
 		this.isasc = isasc;
 	}
 
+	/**
+     * Return the value associated with the column: isfinish
+     */
+    public java.lang.Boolean isIsfinish () {
+        return isfinish;
+    }
 
+    /**
+     * Set the value related to the column: isfinish
+     * @param isfinish the isfinish value
+     */
+    public void setIsfinish (java.lang.Boolean isfinish) {
+        this.isfinish = isfinish;
+    }
 
 	/**
 	 * Return the value associated with the column: limitnum

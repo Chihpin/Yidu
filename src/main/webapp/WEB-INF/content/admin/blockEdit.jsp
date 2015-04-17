@@ -70,6 +70,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><s:text name="label.admin.block.edit.isfinish" /></td>
+                    <td>
+                        <s:radio list="collections['collectionProperties.boolean']" name="isfinish"></s:radio>
+                    </td>
+                </tr>
+                <tr>
                     <td><s:text name="label.admin.block.edit.limitnum" /></td>
                     <td>
                         <s:textfield id="limitnum" name="limitnum" cssClass="tb-rounded" /> 

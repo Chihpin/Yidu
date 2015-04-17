@@ -22,6 +22,7 @@ CREATE TABLE t_system_block
     category int,
     sortcol varchar(32),
     isasc boolean,
+    isfinish boolean,
     limitnum int,
     content text,
     target smallint,

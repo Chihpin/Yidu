@@ -189,6 +189,10 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
         return null;
     }
 
+    protected String getAuthor() {
+        return null;
+    }
+
     protected String getBlockKey() {
         return CacheManager.CacheKeyPrefix.CACHE_KEY_GLOBAL_BLOCK;
     }
@@ -294,6 +298,22 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
                     // 取相关小说
                     List<TArticle> articleList = articleService.findRelativeArticleList(keys,
                             tSystemBlock.getSortcol(), tSystemBlock.getIsasc(), tSystemBlock.getLimitnum());
+
+                    blocks.put(tSystemBlock.getBlockid(), articleList);
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RANDOM_LIST) {
+                    // 同作者区块
+                    String author = getAuthor();
+                    if (StringUtils.isBlank(author)) {
+                        // 作者名是空的话，直接跳过啦
+                        continue;
+                    }
+                    ArticleSearchBean articleSearchBean = new ArticleSearchBean();
+                    articleSearchBean.setAuthor(author);
+                    Pagination pagination = new Pagination(limitnum, 1);
+                    pagination.setSortColumn(tSystemBlock.getSortcol());
+                    pagination.setSortOrder(tSystemBlock.getIsasc() ? "ASC" : "DESC");
+                    articleSearchBean.setPagination(pagination);
+                    List<TArticle> articleList = articleService.find(articleSearchBean);
 
                     blocks.put(tSystemBlock.getBlockid(), articleList);
                 }

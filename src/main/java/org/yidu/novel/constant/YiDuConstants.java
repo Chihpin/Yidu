@@ -279,6 +279,11 @@ public class YiDuConstants {
          * 相关小说
          */
         public static final short RELATIVE_LIST = 60;
+        
+        /**
+         * 相同作者小说
+         */
+        public static final short SAME_AUTHOR_LIST = 70;
 
     }
 
