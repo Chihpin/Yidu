@@ -43,7 +43,7 @@
           <dl><dt><em>${article_index + 1}</em>[
           <a href="${encodeURL("/articleList?category=${article.category}&page=1")}"> <#if article.category!=0>${categorymap[article.category?c]}</#if></a>]</dt>
           <dd class="title"><a href="${article.url}">${article.articlename}</a></dd>
-          <dd class="state">最新章节：<a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}"><#if article.lastchapter?? >${article.lastchapter}</#if>（ </a> [${article.lastupdate?string("MM-dd HH:mm")}]</dd>
+          <dd class="state">最新章节：<a href="${article.lastChapterUrl}"><#if article.lastchapter?? >${article.lastchapter}</#if>（ </a> [${article.lastupdate?string("MM-dd HH:mm")}]</dd>
           <dd class="authors">作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a></dd></dl>
         </#if>
         </#list>
