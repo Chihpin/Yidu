@@ -178,6 +178,11 @@
     </tr>
 
     <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.mailSmtpPort" /></td>
+       <td class="even"><s:textfield name ="mailSmtpPort" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+
+    <tr align="left" valign="middle">
        <td class="odd" width="30%"><s:text name="label.admin.config.edit.mailSmtpUsername" /></td>
        <td class="even"><s:textfield name ="mailSmtpUsername" size="25" maxlength="100" cssClass="text" theme="simple"/></td>
     </tr>
