@@ -209,7 +209,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
 
         StringBuffer sb = new StringBuffer();
         sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        sb.append("<urlsest>\n");
+        sb.append("<urlset>\n");
         // 添加主页
         sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI), new Date(), CHANGEFREQ_ALWAYS, PRIORITY_1));
         // 获取各个分类小说件数
@@ -236,7 +236,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
                 }
             }
         }
-        sb.append("</urlsest>");
+        sb.append("</urlset>");
         String fileName = sitemapDir + "sitemap_list.xml";
         FileUtils.writeFile(new File(fileName), sb.toString(), false);
         List<String> urlList = new ArrayList<String>();
@@ -264,7 +264,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
             sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            sb.append("<urlsest>\n");
+            sb.append("<urlset>\n");
             ArticleSearchBean searchBean = new ArticleSearchBean();
             Pagination pagination = new Pagination(COUNT_PER_FILE, i);
             searchBean.setPagination(pagination);
@@ -272,7 +272,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
             for (TArticle article : articleList) {
                 sb.append(createURL(constructURL(article), article.getLastupdate(), CHANGEFREQ_DAILY, PRIORITY_08));
             }
-            sb.append("</urlsest>");
+            sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
             FileUtils.writeFile(new File(fileName), sb.toString(), false);
             urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
@@ -293,7 +293,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
             sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            sb.append("<urlsest>\n");
+            sb.append("<urlset>\n");
             ArticleSearchBean searchBean = new ArticleSearchBean();
             Pagination pagination = new Pagination(COUNT_PER_FILE, i);
             searchBean.setPagination(pagination);
@@ -302,7 +302,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
                 sb.append(createURL(constructChapterListURL(article), article.getLastupdate(), CHANGEFREQ_DAILY,
                         PRIORITY_07));
             }
-            sb.append("</urlsest>");
+            sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
             FileUtils.writeFile(new File(fileName), sb.toString(), false);
             urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
@@ -324,7 +324,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
             sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            sb.append("<urlsest>\n");
+            sb.append("<urlset>\n");
             ChapterSearchBean searchBean = new ChapterSearchBean();
             Pagination pagination = new Pagination(COUNT_PER_FILE, i);
             searchBean.setPagination(pagination);
@@ -332,7 +332,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
             for (TChapter chapter : chapterList) {
                 sb.append(createURL(constructURL(chapter), chapter.getPostdate(), CHANGEFREQ_MONTHLY, PRIORITY_05));
             }
-            sb.append("</urlsest>");
+            sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
             FileUtils.writeFile(new File(fileName), sb.toString(), false);
             urlList.add(MessageFormat.format(sitemapUri + fileNameFormat, i));
