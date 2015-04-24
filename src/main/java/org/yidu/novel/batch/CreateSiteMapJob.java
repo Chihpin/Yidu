@@ -393,8 +393,16 @@ public class CreateSiteMapJob extends QuartzJobBean {
         int subDir = chapter.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = chapter.getArticleno();
         int chapterNo = chapter.getChapterno();
-        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
-                .replace("{chapter_no}", String.valueOf(chapterNo));
+
+        if (StringUtils.contains(loc, "{pinyin}")) {
+            TArticle article = articleService.getByNo(articleNo);
+            loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
+                    .replace("{chapter_no}", String.valueOf(chapterNo))
+                    .replace("{pinyin}", String.valueOf(article.getPinyin()));
+        } else {
+            loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
+                    .replace("{chapter_no}", String.valueOf(chapterNo));
+        }
         if (!uri.endsWith("/") && !loc.startsWith("/")) {
             uri += "/";
         }
@@ -414,7 +422,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
         int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = article.getArticleno();
         // /info/{sub_dir}/{article_no}.html
-        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo));
+        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
+                .replace("{pinyin}", String.valueOf(article.getPinyin()));
         if (!uri.endsWith("/") && !loc.startsWith("/")) {
             uri += "/";
         }
@@ -434,7 +443,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
         int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = article.getArticleno();
         // /info/{sub_dir}/{article_no}.html
-        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo));
+        loc = loc.replace("{sub_dir}", String.valueOf(subDir)).replace("{article_no}", String.valueOf(articleNo))
+                .replace("{pinyin}", String.valueOf(article.getPinyin()));
         if (!uri.endsWith("/") && !loc.startsWith("/")) {
             uri += "/";
         }
