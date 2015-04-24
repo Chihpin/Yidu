@@ -140,6 +140,10 @@
     <div class="chapterNum">
         <a name="chapters"></a>
           <ul>
+            
+            <h1>《${article.articlename}》最新章节</b>（提示：已启用缓存技术，最新章节可能会延时显示，登录书架即可实时查看。）</h1>
+                <#list chapterList?reverse as chapter><#if (chapter_index lt 9)><li><a href="${chapter.url}">${chapter.chaptername}</a></li></#if></#list>
+            
             <h1>《${article.articlename}》分卷阅读<#if !loginFlag>([<a href="${encodeURL("/login")}" rel="nofollow">登陆</a>]后开放)</#if></h1>
             <#list chapterList as chapter>
                 <#if chapter.chaptertype == 0>

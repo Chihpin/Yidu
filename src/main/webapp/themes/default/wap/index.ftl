@@ -11,7 +11,7 @@
         <div class="title">${title}</div>
         <div id="divChange${id}" class="info m2">
             <#if articleList?? && (articleList?size > 0) >
-            <a href="${encodeURL("/info?subdir=${articleList[0].subdir?c}&articleno=${articleList[0].articleno?c}")}">
+            <a href="${articleList[0].url}">
                 <img src="${articleList[0].imgUrl}" />
                 <h3>${articleList[0].articlename?html}</h3>
                 <p>作者：${articleList[0].author?html}</p>
@@ -22,7 +22,7 @@
         <ul id="ulChange${id}" class="list">
         <#list articleList as article>
             <#if article_index !=0>    
-                <li><a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}">${categorymap[article.category?c]}：${article.articlename?html}</a></li>
+                <li><a href="${article.url}">${categorymap[article.category?c]}：${article.articlename?html}</a></li>
             </#if>
         </#list>
         </ul>
@@ -35,7 +35,7 @@
         <div class="rec">
             <ul>
             <#list blocks.index_hot_list_mobile as article>
-                <li><a href="${encodeURL("/info?subdir=${article.subdir?c}&articleno=${article.articleno?c}")}"><img height="117px" width="91px" src="${article.imgUrl}" /></a></li>
+                <li><a href="${article.url}"><img height="117px" width="91px" src="${article.imgUrl}" /></a></li>
             </#list>
             </ul>
         </div>

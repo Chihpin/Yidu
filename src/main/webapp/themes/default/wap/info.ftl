@@ -30,7 +30,7 @@
     <div id="panels" class="m2">
         <div class="box"> 
             <div class="new">
-                <a href="${encodeURL("/reader?subdir=${article.subdir?c}&articleno=${article.articleno?c}&chapterno=${article.lastchapterno?c}")}">
+                <a href="${article.lastChapterUrl}">
                     <p class="name">最新章节：<#if article.lastchapter?? >${article.lastchapter?html}</#if></p>
                     <p class="time">更新时间：${article.lastupdate?string("yyyy-MM-dd HH:mm:ss")}</p>
                 </a>
