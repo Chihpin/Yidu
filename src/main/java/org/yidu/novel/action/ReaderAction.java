@@ -195,7 +195,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
     @Override
     public String getTempName() {
         if (toChapterno != 0 && toChapterno > chapterno) {
-            return "reader2";
+            return "rangereader";
         }
         return "reader";
     }
