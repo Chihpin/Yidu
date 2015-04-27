@@ -263,6 +263,7 @@ public class InfoAction extends AbstractPublicBaseAction {
             articleService.updateVisitStatistic(article.getArticleno());
         } else {
             addActionError(getText("errors.not.exsits.article"));
+            setNotFound(true);
         }
         logger.debug("loadData normally end.");
     }

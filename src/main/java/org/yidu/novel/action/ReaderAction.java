@@ -208,6 +208,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
             List<TChapter> segChapterList = chapterService.getChapterInSegement(articleno, chapterno, toChapterno);
             if (segChapterList == null || segChapterList.size() == 0) {
                 addActionError(getText("errors.not.exsits.chapter"));
+                setNotFound(true);
             } else {
                 for (TChapter tchapter : segChapterList) {
                     ChapterDTO chapterDto = new ChapterDTO();
@@ -244,6 +245,7 @@ public class ReaderAction extends AbstractPublicBaseAction {
 
                 } else {
                     addActionError(getText("errors.not.exsits.chapter"));
+                    setNotFound(true);
                     return;
                 }
             }

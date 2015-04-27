@@ -209,15 +209,15 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
         loadData();
         // 读取区块
         loadBlock();
+        if (notFoundFlag) {
+            return HTTPHEADER404;
+        }
         if (this.hasErrors()) {
             logger.debug("execute abnormally end.");
             setHasError(true);
             return FREEMARKER_ERROR;
         }
         logger.debug("execute normally end.");
-        if (notFoundFlag) {
-            return HTTPHEADER404;
-        }
         return FREEMARKER;
     }
 

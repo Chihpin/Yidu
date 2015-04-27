@@ -185,6 +185,7 @@ public class ChapterListAction extends AbstractPublicBaseAction {
 
         } else {
             addActionError(getText("errors.not.exsits.article"));
+            setNotFound(true);
         }
         if (articleno != 0) {
             articleService.updateVisitStatistic(articleno);
