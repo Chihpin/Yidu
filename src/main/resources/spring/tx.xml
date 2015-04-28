@@ -31,6 +31,9 @@
 							<prop key="findRandomRecommendArticleList">PROPAGATION_REQUIRED</prop>
 							<prop key="getCount">PROPAGATION_REQUIRED</prop>
 							<prop key="getCountPerCategory">PROPAGATION_REQUIRED</prop>
+							<prop key="getArticleListByLastUpdateTime">PROPAGATION_REQUIRED</prop>
+							<prop key="getChapterListByLastUpdateTime">PROPAGATION_REQUIRED</prop>
+							<prop key="getByNo">PROPAGATION_REQUIRED</prop>
 						</props>
 					</property>
 				</bean>

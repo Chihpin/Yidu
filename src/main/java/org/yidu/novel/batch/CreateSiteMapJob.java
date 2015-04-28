@@ -84,6 +84,11 @@ public class CreateSiteMapJob extends QuartzJobBean {
     private static final String CHANGEFREQ_MONTHLY = "monthly";
 
     /**
+     * 更新频率-永不更新
+     */
+    private static final String CHANGEFREQ_NEVER = "never";
+
+    /**
      * 每个文件默认的URL数量
      */
     private static final int COUNT_PER_FILE = 40000;
@@ -100,6 +105,14 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * 章节关联操作服务
      */
     private ChapterService chapterService;
+    /**
+     * 是否是制作手机移动地图
+     */
+    private boolean isCreateMobileSiteMap = false;
+    /**
+     * 手机移动地图的文件前缀
+     */
+    private String sitemapPrefix = "mobile";
 
     /**
      * 
