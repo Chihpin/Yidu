@@ -29,7 +29,7 @@
     <#if hasError || ( pageType?? && pageType!=4) >
     <p class="site-logo">
         <a href="${contextPath}/" title="${getText("label.system.title")}">
-        <img src="${contextPath}/themes/${themeName}/pc/images/logo-medium.png" alt="${getText("label.system.title")} - logo"></a>
+        <img src="${contextPath}/themes/${themeName}/pc/images/logo.png" alt="${getText("label.system.title")} - logo"></a>
     </p>
     <div class="site-search">
     <form action="${contextPath}/search" method="get" >

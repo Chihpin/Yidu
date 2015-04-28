@@ -866,7 +866,7 @@ select {
 }
 
 .top>ul>li:nth-child(2) {
-	background: url(../images/logo_h.png) center no-repeat;
+	background: url(../images/logo.png) center no-repeat;
 	background-size: auto 32px;
 }
 
