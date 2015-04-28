@@ -75,7 +75,7 @@ public class SubscribeServiceImpl extends HibernateSupportServiceImpl implements
         sql.append("SELECT ts.subscribeno, ta.* , tu.userno,tu.loginid,tu.email FROM t_subscribe ts ");
         sql.append(" join t_article ta on ts.articleno = ta.articleno ");
         sql.append(" join t_user tu on tu.userno = ts.userno ");
-        sql.append(" where 1=1 ");
+        sql.append(" where ta.deleteflag = false and  tu.deleteflag = false ");
         if (Utils.isDefined(searchBean.getUserno())) {
             sql.append(" AND ts.userno =  " + searchBean.getUserno());
         }
