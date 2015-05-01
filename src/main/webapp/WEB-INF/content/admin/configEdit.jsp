@@ -15,6 +15,10 @@
     </tr>
 
     <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.mobileUri" /></td>
+       <td class="even"><s:textfield name ="mobileUri" size="40" maxlength="100" cssClass="text" theme="simple"/></td>
+    </tr>
+    <tr align="left" valign="middle">
        <td class="odd" width="30%"><s:text name="label.admin.config.edit.filePath" /></td>
        <td class="even"><s:textfield name ="filePath" size="40" maxlength="100" cssClass="text" theme="simple"/><span class="hottext">填写绝对路径</span></td>
     </tr>

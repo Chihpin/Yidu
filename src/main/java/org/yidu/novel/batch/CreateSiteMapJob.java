@@ -84,11 +84,6 @@ public class CreateSiteMapJob extends QuartzJobBean {
     private static final String CHANGEFREQ_MONTHLY = "monthly";
 
     /**
-     * 更新频率-永不更新
-     */
-    private static final String CHANGEFREQ_NEVER = "never";
-
-    /**
      * 每个文件默认的URL数量
      */
     private static final int COUNT_PER_FILE = 40000;
@@ -105,14 +100,11 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * 章节关联操作服务
      */
     private ChapterService chapterService;
-    /**
-     * 是否是制作手机移动地图
-     */
-    private boolean isCreateMobileSiteMap = false;
+
     /**
      * 手机移动地图的文件前缀
      */
-    private String sitemapPrefix = "mobile";
+    private String mobileSitemapPrefix = "mobile_";
 
     /**
      * 
@@ -161,7 +153,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
 
                 if (SiteMapType.XML.getName().equalsIgnoreCase(
                         YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE))) {
-                    createXmlSiteMap(sitemapDir, sitemapUri);
+                    createXmlSiteMap(sitemapDir, sitemapUri, false);
+                    createXmlSiteMap(sitemapDir, sitemapUri, true);
                 } else {
                     String responseBody = Utils.getContentFromUri(uri + SiteMapAction.URL);
                     if (StringUtils.isNotBlank(responseBody)) {
@@ -176,12 +169,16 @@ public class CreateSiteMapJob extends QuartzJobBean {
         }
     }
 
-    private void createXmlSiteMap(String sitemapDir, String sitemapUri) {
+    private void createXmlSiteMap(String sitemapDir, String sitemapUri, boolean isCreateMobileSiteMap) {
 
-        List<String> articleListUrlList = ceateIndexAndListBaiduXmlSiteMap(sitemapDir, sitemapUri);
-        List<String> infoUrlList = ceateInfoBaiduXmlSiteMap(sitemapDir, sitemapUri);
-        List<String> chapterListUrlList = ceateChapterListBaiduXmlSiteMap(sitemapDir, sitemapUri);
-        List<String> chapterUrlList = ceateReaderBaiduXmlSiteMap(sitemapDir, sitemapUri);
+        List<String> articleListUrlList = ceateIndexAndListBaiduXmlSiteMap(sitemapDir, sitemapUri,
+                isCreateMobileSiteMap);
+        List<String> infoUrlList = ceateInfoBaiduXmlSiteMap(sitemapDir, sitemapUri, isCreateMobileSiteMap);
+        List<String> chapterListUrlList = new ArrayList<String>();
+        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
+            chapterListUrlList = ceateChapterListBaiduXmlSiteMap(sitemapDir, sitemapUri, isCreateMobileSiteMap);
+        }
+        List<String> chapterUrlList = ceateReaderBaiduXmlSiteMap(sitemapDir, sitemapUri, isCreateMobileSiteMap);
 
         // 生成sitemap索引文件
         StringBuffer indexBuffer = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -194,19 +191,20 @@ public class CreateSiteMapJob extends QuartzJobBean {
         for (String url : infoUrlList) {
             appendIndex(indexBuffer, url);
         }
-        // 添加章节列表的sitemap
-        if (YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)) {
-            // 添加info页的sitemap
-            for (String url : chapterListUrlList) {
-                appendIndex(indexBuffer, url);
-            }
+        // 添加c页的sitemap
+        for (String url : chapterListUrlList) {
+            appendIndex(indexBuffer, url);
         }
         // 添加reader页的sitemap
         for (String url : chapterUrlList) {
             appendIndex(indexBuffer, url);
         }
         indexBuffer.append("</sitemapindex>");
+
         String fileName = sitemapDir + "sitemap.xml";
+        if (isCreateMobileSiteMap) {
+            fileName = sitemapDir + mobileSitemapPrefix + "sitemap.xml";
+        }
         FileUtils.writeFile(new File(fileName), indexBuffer.toString(), false);
     }
 
@@ -218,13 +216,18 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * 
      * @param 文件列表
      */
-    private List<String> ceateIndexAndListBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+    private List<String> ceateIndexAndListBaiduXmlSiteMap(String sitemapDir, String sitemapUri,
+            boolean isCreateMobileSiteMap) {
 
         StringBuffer sb = new StringBuffer();
         sb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         sb.append("<urlset>\n");
+        String siteUrl = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        if (isCreateMobileSiteMap) {
+            siteUrl = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
+        }
         // 添加主页
-        sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI), new Date(), CHANGEFREQ_ALWAYS, PRIORITY_1));
+        sb.append(createURL(siteUrl, new Date(), CHANGEFREQ_ALWAYS, PRIORITY_1));
         // 获取各个分类小说件数
         List<CategoryCountDTO> categoryCountList = articleService.getCountPerCategory();
         if (Utils.isDefined(categoryCountList)) {
@@ -245,15 +248,22 @@ public class CreateSiteMapJob extends QuartzJobBean {
                                 categoryCount.getCategory(), i);
                     }
                     sb.append(createURL(YiDuConstants.yiduConf.getString(YiDuConfig.URI) + url, new Date(),
-                            CHANGEFREQ_ALWAYS, PRIORITY_09));
+                            CHANGEFREQ_ALWAYS, PRIORITY_08));
                 }
             }
         }
         sb.append("</urlset>");
         String fileName = sitemapDir + "sitemap_list.xml";
+        if (isCreateMobileSiteMap) {
+            fileName = sitemapDir + mobileSitemapPrefix + "sitemap_list.xml";
+        }
         FileUtils.writeFile(new File(fileName), sb.toString(), false);
         List<String> urlList = new ArrayList<String>();
-        urlList.add(sitemapUri + "sitemap_list.xml");
+        fileName = sitemapUri + "sitemap_list.xml";
+        if (isCreateMobileSiteMap) {
+            fileName = sitemapUri + mobileSitemapPrefix + "sitemap_list.xml";
+        }
+        urlList.add(fileName);
         return urlList;
     }
 
@@ -264,7 +274,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
      * 
      * @param 文件列表
      */
-    private List<String> ceateInfoBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+    private List<String> ceateInfoBaiduXmlSiteMap(String sitemapDir, String sitemapUri, boolean isCreateMobileSiteMap) {
         int count = articleService.getCount(new ArticleSearchBean());
         int files = count / COUNT_PER_FILE;
         if (count % COUNT_PER_FILE > 0) {
@@ -273,6 +283,9 @@ public class CreateSiteMapJob extends QuartzJobBean {
 
         List<String> urlList = new ArrayList<String>();
         String fileNameFormat = "sitemap_info_{0}.xml";
+        if (isCreateMobileSiteMap) {
+            fileNameFormat = mobileSitemapPrefix + "sitemap_info_{0}.xml";
+        }
         String fileName = "";
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
@@ -283,7 +296,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TArticle> articleList = articleService.find(searchBean);
             for (TArticle article : articleList) {
-                sb.append(createURL(constructURL(article), article.getLastupdate(), CHANGEFREQ_DAILY, PRIORITY_08));
+                sb.append(createURL(constructURL(article, isCreateMobileSiteMap), article.getLastupdate(),
+                        CHANGEFREQ_DAILY, PRIORITY_09));
             }
             sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -293,7 +307,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
         return urlList;
     }
 
-    private List<String> ceateChapterListBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+    private List<String> ceateChapterListBaiduXmlSiteMap(String sitemapDir, String sitemapUri,
+            boolean isCreateMobileSiteMap) {
         int count = articleService.getCount(new ArticleSearchBean());
         int files = count / COUNT_PER_FILE;
         if (count % COUNT_PER_FILE > 0) {
@@ -302,6 +317,9 @@ public class CreateSiteMapJob extends QuartzJobBean {
 
         List<String> urlList = new ArrayList<String>();
         String fileNameFormat = "sitemap_chapterList_{0}.xml";
+        if (isCreateMobileSiteMap) {
+            fileNameFormat = mobileSitemapPrefix + "sitemap_chapterList_{0}.xml";
+        }
         String fileName = "";
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
@@ -312,8 +330,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TArticle> articleList = articleService.find(searchBean);
             for (TArticle article : articleList) {
-                sb.append(createURL(constructChapterListURL(article), article.getLastupdate(), CHANGEFREQ_DAILY,
-                        PRIORITY_07));
+                sb.append(createURL(constructChapterListURL(article, isCreateMobileSiteMap), article.getLastupdate(),
+                        CHANGEFREQ_DAILY, PRIORITY_07));
             }
             sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -323,7 +341,7 @@ public class CreateSiteMapJob extends QuartzJobBean {
         return urlList;
     }
 
-    private List<String> ceateReaderBaiduXmlSiteMap(String sitemapDir, String sitemapUri) {
+    private List<String> ceateReaderBaiduXmlSiteMap(String sitemapDir, String sitemapUri, boolean isCreateMobileSiteMap) {
 
         int count = chapterService.getCount(new ChapterSearchBean());
         int files = count / COUNT_PER_FILE;
@@ -333,6 +351,9 @@ public class CreateSiteMapJob extends QuartzJobBean {
 
         List<String> urlList = new ArrayList<String>();
         String fileNameFormat = "sitemap_reader_{0}.xml";
+        if (isCreateMobileSiteMap) {
+            fileNameFormat = mobileSitemapPrefix + "sitemap_reader_{0}.xml";
+        }
         String fileName = "";
         for (int i = 1; i <= files; i++) {
             StringBuffer sb = new StringBuffer();
@@ -343,7 +364,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
             searchBean.setPagination(pagination);
             List<TChapter> chapterList = chapterService.find(searchBean);
             for (TChapter chapter : chapterList) {
-                sb.append(createURL(constructURL(chapter), chapter.getPostdate(), CHANGEFREQ_MONTHLY, PRIORITY_05));
+                sb.append(createURL(constructURL(chapter, isCreateMobileSiteMap), chapter.getPostdate(),
+                        CHANGEFREQ_MONTHLY, PRIORITY_05));
             }
             sb.append("</urlset>");
             fileName = MessageFormat.format(sitemapDir + fileNameFormat, i);
@@ -400,9 +422,12 @@ public class CreateSiteMapJob extends QuartzJobBean {
      *            章节信息
      * @return 小说阅读页URL
      */
-    private String constructURL(TChapter chapter) {
+    private String constructURL(TChapter chapter, boolean isCreateMobileSiteMap) {
         String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_READER_URL);
         String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        if (isCreateMobileSiteMap) {
+            uri = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
+        }
         int subDir = chapter.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = chapter.getArticleno();
         int chapterNo = chapter.getChapterno();
@@ -429,9 +454,12 @@ public class CreateSiteMapJob extends QuartzJobBean {
      *            小说信息
      * @return 小说信息页URL
      */
-    private String constructURL(TArticle article) {
+    private String constructURL(TArticle article, boolean isCreateMobileSiteMap) {
         String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_INFO_URL);
         String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        if (isCreateMobileSiteMap) {
+            uri = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
+        }
         int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = article.getArticleno();
         // /info/{sub_dir}/{article_no}.html
@@ -450,9 +478,12 @@ public class CreateSiteMapJob extends QuartzJobBean {
      *            小说信息
      * @return 章节列表页URL
      */
-    private String constructChapterListURL(TArticle article) {
+    private String constructChapterListURL(TArticle article, boolean isCreateMobileSiteMap) {
         String loc = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_CHATERLIST_URL);
         String uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        if (isCreateMobileSiteMap) {
+            uri = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
+        }
         int subDir = article.getArticleno() / YiDuConstants.SUB_DIR_ARTICLES;
         int articleNo = article.getArticleno();
         // /info/{sub_dir}/{article_no}.html

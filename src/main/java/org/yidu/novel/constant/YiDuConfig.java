@@ -16,6 +16,10 @@ public class YiDuConfig {
      */
     public static final String URI = "uri";
     /**
+     * mobile URL
+     */
+    public static final String MOBILE_URI = "mobileUri";
+    /**
      * content文件路径
      */
     public static final String CONTENT_FILE_PATH = "contentFilePath";

@@ -33,7 +33,10 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      * uri
      */
     private String uri;
-
+    /**
+     * mobile uri
+     */
+    private String mobileUri;
     /**
      * TXT文件路径
      */
@@ -237,16 +240,16 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         return uri;
     }
 
-    /**
-     * 
-     * 设置uri
-     * 
-     * 
-     * @param uri
-     *            uri
-     */
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public String getMobileUri() {
+        return mobileUri;
+    }
+
+    public void setMobileUri(String mobileUri) {
+        this.mobileUri = mobileUri;
     }
 
     public String getFilePath() {
@@ -1013,6 +1016,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     protected void loadData() {
         initCollections(new String[] { "collectionProperties.boolean" });
         uri = YiDuConstants.yiduConf.getString(YiDuConfig.URI);
+        mobileUri = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
         filePath = YiDuConstants.yiduConf.getString(YiDuConfig.FILE_PATH);
         relativeIamgePath = YiDuConstants.yiduConf.getString(YiDuConfig.RELATIVE_IAMGE_PATH);
         cacheEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CACHE_EFFECTIVE, true);
@@ -1081,6 +1085,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
     public String save() {
 
         YiDuConstants.yiduConf.setProperty(YiDuConfig.URI, uri);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.MOBILE_URI, mobileUri);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.FILE_PATH, filePath);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.RELATIVE_IAMGE_PATH, relativeIamgePath);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CACHE_EFFECTIVE, cacheEffective);
