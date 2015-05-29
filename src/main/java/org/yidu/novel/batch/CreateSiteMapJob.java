@@ -361,6 +361,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
             sb.append("<urlset>\n");
             ChapterSearchBean searchBean = new ChapterSearchBean();
             Pagination pagination = new Pagination(COUNT_PER_FILE, i);
+            pagination.setSortColumn(TChapter.PROP_CHAPTERNO);
+            pagination.setSortOrder("ASC");
             searchBean.setPagination(pagination);
             List<TChapter> chapterList = chapterService.find(searchBean);
             for (TChapter chapter : chapterList) {
