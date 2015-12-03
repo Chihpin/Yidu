@@ -133,7 +133,11 @@ public class TArticle extends BaseTArticle {
     public String getCategoryStr() {
         String[] categoryArr = new String[] { "玄幻魔法", "武侠修真", "都市言情", "历史军事", "侦探推理", "网游动漫", "科幻小说", "恐怖灵异", "散文诗词",
                 "其他类型" };
-        return categoryArr[getCategory() - 1];
+        if(getCategory()<10){
+            return categoryArr[getCategory() - 1];
+        }else{
+            return categoryArr[9];
+        }
     }
 
     /**
