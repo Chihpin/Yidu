@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.bean.ChapterSearchBean;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TChapter;
 
 import com.opensymphony.xwork2.Action;
@@ -171,8 +174,12 @@ public class DownloadAction extends AbstractPublicBaseAction {
             logger.debug("execute abnormally end.");
             return FREEMARKER_ERROR;
         }
-
-        setDownloadFileName(articleno + ".txt");
+        TArticle article = articleService.getByNo(articleno);
+        try {
+			setDownloadFileName(URLEncoder.encode(article.getArticlename() + ".txt", "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			setDownloadFileName(articleno + ".txt");
+		}
         long size = 0;
         try {
             Vector<InputStream> vector = new Vector<InputStream>();
