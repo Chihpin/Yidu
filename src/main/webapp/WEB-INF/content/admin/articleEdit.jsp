@@ -97,8 +97,8 @@
                 </tr>
                 <tr>
                     <td><s:text name="label.admin.article.edit.postdate" /></td>
-                    <td>
-                        <s:textfield id="postdateStr" name="postdateStr" cssClass="tb-rounded" /> 
+                    <td> 格式:yyyy/MM/dd hh:mm  例:2014/10/08 21:28
+                        <s:textfield id="postdateStr" name="postdateStr" cssClass="tb-rounded" />
                     </td>
                 </tr>
                 <tr>
