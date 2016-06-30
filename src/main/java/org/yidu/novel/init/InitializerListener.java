@@ -16,6 +16,7 @@ import org.quartz.impl.StdScheduler;
 import org.springframework.web.context.WebApplicationContext;
 import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.cache.CategoryCacheManager;
 import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -62,6 +63,9 @@ public class InitializerListener implements ServletContextListener {
                 // 初始化小说拼音和编号映射件数MAP
                 SingleBookManager.initSingleBookManager();
             }
+            
+            // 初始化分类信息MAP
+            CategoryCacheManager.initCategoryCacheManager();
 
             logger.info("Initialize successfully.");
         } catch (Exception e) {

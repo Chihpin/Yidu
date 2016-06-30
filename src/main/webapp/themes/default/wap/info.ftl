@@ -3,7 +3,7 @@
 <#macro titleContent>
 <title>${article.articlename?html}|${article.articlename?html}最新章节|${article.articlename?html}TXT下载</title>
 <meta name="keywords" content="${article.articlename?html},${article.articlename?html}最新章节,${article.articlename?html}TXT下载,${article.articlename?html}无广告,${getText("label.system.name")}" />
-<meta name="description" content="《${article.articlename?html}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${categorymap[article.category?c]}</#if>小说，${getText("label.system.name")}免费提供${article.articlename?html}最新的清爽干净的文字章节在线阅读!" />
+<meta name="description" content="《${article.articlename?html}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${article.categoryStr}</#if>小说，${getText("label.system.name")}免费提供${article.articlename?html}最新的清爽干净的文字章节在线阅读!" />
 </#macro>
 
 <#macro content>
@@ -13,7 +13,7 @@
                 <img src="<#if article.imgUrl ?? >${article.imgUrl}</#if>" />
                 <h3>${article.articlename?html}</h3>
                 <p>作者：${article.author?html}</p>
-                <p>类别：<#if article.category!=0>${categorymap[article.category?c]}</#if></p>
+                <p>类别：<#if article.category!=0>${article.categoryStr}</#if></p>
                 <p>字数：<#if article.size ??>${article.size}<#else>0</#if></p>
                 <p>点击：${article.allvisit}</p>
                 <em id="isWanjie" class="wj4"></em>

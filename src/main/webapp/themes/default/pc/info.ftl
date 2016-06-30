@@ -8,14 +8,14 @@
 <#else>
 <title>${article.articlename?html}|${article.articlename}最新章节|${article.articlename}TXT下载</title>
 <meta name="keywords" content="${article.articlename},${article.articlename}最新章节,${article.articlename}TXT下载,${article.articlename}无广告,${getText("label.system.name")}" />
-<meta name="description" content="《${article.articlename}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${categorymap[article.category?c]}</#if>小说，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
+<meta name="description" content="《${article.articlename}》情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的<#if article.category!=0>${article.categoryStr}</#if>小说，${getText("label.system.name")}免费提供${article.articlename}最新的清爽干净的文字章节在线阅读!" />
 </#if>
     <!--360结构化-->
    <meta property="og:type" content="novel"/>
    <meta property="og:title" content="${article.articlename?html}"/>
    <meta property="og:description" content="<#if (article.intro ?length != 0)>${article.intro?html}<#else>暂无简介</#if>"/>
    <meta property="og:image" content="${article.imgUrl}"/>
-   <meta property="og:novel:category" content="<#if article.category!=0>${categorymap[article.category?c]}</#if>"/>
+   <meta property="og:novel:category" content="<#if article.category!=0>${article.categoryStr}</#if>"/>
    <meta property="og:novel:author" content="${article.author?html}"/>
    <meta property="og:novel:book_name" content="${article.articlename?html}"/>
    <meta property="og:novel:read_url" content="${article.url}"/>
@@ -33,7 +33,7 @@
     <div id="info_ad_01"></div>
     <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
         <a href="${encodeURL("/articleList?category=${article.category}")}" class="c009900">
-        ${categorymap[article.category?c]}</a> &nbsp; > &nbsp; 
+        ${article.categoryStr}</a> &nbsp; > &nbsp; 
         ${article.articlename}
     </div>
     <section class="main b-detail">
@@ -60,7 +60,7 @@
         <div class="author">
             <div class="bookDetail">
                 <dl><dt>类别：</dt><dd><a href="${encodeURL("/articleList?category=${article.category}&page=1")}"
-                    target="_blank" title="<#if article.category!=0>${categorymap[article.category?c]}</#if>"><#if article.category!=0>${categorymap[article.category?c]}</#if></a></dd></dl>
+                    target="_blank" title="<#if article.category!=0>${article.categoryStr}</#if>"><#if article.category!=0>${article.categoryStr}</#if></a></dd></dl>
                 <dl><dt>状态：</dt><dd><#if article.fullflag>完结<#else>连载中</#if></dd></dl>
                 <dl class="bookso"><dt>作      者：</dt><dd> <a href="${encodeURL("/articleList?author=${article.author}")}">
                     ${article.author}</a></dd></dl>

@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.map.LinkedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.bean.SystemBlockSearchBean;
 import org.yidu.novel.cache.CacheManager;
+import org.yidu.novel.cache.CategoryCacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
@@ -103,16 +103,7 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
     public String getCategoryData() {
 
         Gson gson = new Gson();
-        LinkedMap pulldown = new LinkedMap();
-        String value = getText("collectionProperties.article.category");
-        String[] items = value.split(",");
-        for (String item : items) {
-            String[] property = item.split(":");
-            if (property.length == 2) {
-                pulldown.put(property[0], property[1]);
-            }
-        }
-        return gson.toJson(pulldown);
+        return gson.toJson(CategoryCacheManager.getCategoryInfo());
     }
 
     /**

@@ -25,7 +25,7 @@
               <#list articleList as article>
               <tr>
                     <td class="even">${article.articlename}</td>
-                    <td class="odd">${categorymap[article.category?c]}</td>
+                    <td class="odd">${article.categoryStr}</td>
                     <td class="odd"><#if article.lastchapter??>${article.lastchapter}</#if></td>
                     <td class="even" align="center">
                         <a href='${encodeURL("/user/articleEdit?articleno=${article.articleno?c}")}' >编辑</a>

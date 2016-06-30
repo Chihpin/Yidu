@@ -16,7 +16,7 @@
     <div id="chapterList_ad_01"></div>
     <div class="mainnav"><div class="main-index"> 位置：  &nbsp; > &nbsp; 
         <a href="${encodeURL("/articleList?category=${article.category}")}" class="c009900">
-        ${categorymap[article.category?c]}</a> &nbsp; > &nbsp; 
+        ${article.categoryStr}</a> &nbsp; > &nbsp; 
         <a href="${article.url}" class="c009900">${article.articlename}</a>
     </div>
     <div id="chapterList_ad_02"></div>

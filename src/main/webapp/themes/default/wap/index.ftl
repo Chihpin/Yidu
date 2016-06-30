@@ -22,7 +22,7 @@
         <ul id="ulChange${id}" class="list">
         <#list articleList as article>
             <#if article_index !=0>    
-                <li><a href="${article.url}">${categorymap[article.category?c]}：${article.articlename?html}</a></li>
+                <li><a href="${article.url}">${article.categoryStr}：${article.articlename?html}</a></li>
             </#if>
         </#list>
         </ul>

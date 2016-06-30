@@ -30,7 +30,7 @@
             <#if article.fullflag ><img src="${contextPath}/themes/${themeName}/pc/images/only.png"  alt="完本图标" class="topss png_bg"><#else><img src="${contextPath}/themes/${themeName}/pc/images/only2.png"  alt="连载中图标" class="topss png_bg"></#if>
             <span class="l"><a class="clearfix stitle" href="${article.url}">
             <em <#if article_index ==0 >class="first"</#if>>${article_index + 1}</em>${article.articlename}</a>
-            类型：<a href="${encodeURL("/articleList?category=${article.category}&page=1")}"><#if article.category!=0>${categorymap[article.category?c]}</#if></a><br/> 
+            类型：<a href="${encodeURL("/articleList?category=${article.category}&page=1")}"><#if article.category!=0>${article.categoryStr}</#if></a><br/> 
             作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a>
             <br>点击数：<label>${article.allvisit}</label>
             <a class="readTo" href="<#if !enableChapterIndexPage >${article.url}<#else>${article.chapterListUrl}</#if>">马上阅读</a></span></li>
@@ -41,7 +41,7 @@
         <#list articleList as article>
         <#if article_index gt 2 >
           <dl><dt><em>${article_index + 1}</em>[
-          <a href="${encodeURL("/articleList?category=${article.category}&page=1")}"> <#if article.category!=0>${categorymap[article.category?c]}</#if></a>]</dt>
+          <a href="${encodeURL("/articleList?category=${article.category}&page=1")}"> <#if article.category!=0>${article.categoryStr}</#if></a>]</dt>
           <dd class="title"><a href="${article.url}">${article.articlename}</a></dd>
           <dd class="state">最新章节：<a href="${article.lastChapterUrl}"><#if article.lastchapter?? >${article.lastchapter}</#if>（ </a> [${article.lastupdate?string("MM-dd HH:mm")}]</dd>
           <dd class="authors">作者：<a href="${encodeURL("/articleList?author=${article.author}")}">${article.author}</a></dd></dl>

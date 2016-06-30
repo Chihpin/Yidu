@@ -18,6 +18,7 @@ import org.yidu.novel.action.ReviewListAction;
 import org.yidu.novel.action.user.BookcaseAction;
 import org.yidu.novel.action.user.SubscribeAction;
 import org.yidu.novel.action.user.VoteAction;
+import org.yidu.novel.cache.CategoryCacheManager;
 import org.yidu.novel.cache.SingleBookManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
@@ -129,15 +130,8 @@ public class TArticle extends BaseTArticle {
      * 
      * @return 小说类别名字
      */
-    @Deprecated
     public String getCategoryStr() {
-        String[] categoryArr = new String[] { "玄幻魔法", "武侠修真", "都市言情", "历史军事", "侦探推理", "网游动漫", "科幻小说", "恐怖灵异", "散文诗词",
-                "其他类型" };
-        if(getCategory()<10){
-            return categoryArr[getCategory() - 1];
-        }else{
-            return categoryArr[9];
-        }
+    	return CategoryCacheManager.getCategoryInfoById(String.valueOf(getCategory()));
     }
 
     /**

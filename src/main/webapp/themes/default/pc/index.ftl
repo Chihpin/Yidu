@@ -32,7 +32,7 @@
         <#list articleList as article>
             <li>
                 <em class="r">${article.lastupdate?string("MM-dd HH:mm")}</em>
-                <a href="${encodeURL("/articleList?category=${article.category}&page=1")}" title = "<#if article.category!=0>${categorymap[article.category?c]}</#if>">[&nbsp;<#if article.category!=0>${categorymap[article.category?c]}</#if>&nbsp;]</a>
+                <a href="${encodeURL("/articleList?category=${article.category}&page=1")}" title = "<#if article.category!=0>${article.categoryStr}</#if>">[&nbsp;<#if article.category!=0>${article.categoryStr}</#if>&nbsp;]</a>
                 <a class="poptext" href="${article.url}"
                     title="${article.articlename}最新章节" class="f14">${article.articlename}</a>
                 <a class="poptext" href="${article.lastChapterUrl}" ><#if article.lastchapter?? >${article.lastchapter}</#if></a>
@@ -50,7 +50,7 @@
         <#list articleList as article>
         <li class="top3">
             <span class="order">${article_index+1}</span>
-            <span class="chapter"><a href="${encodeURL("/articleList?category=${article.category}")}" title="<#if article.category!=0>${categorymap[article.category?c]}</#if>" target="_blank">[<#if article.category!=0>${categorymap[article.category?c]}</#if>]</a></span>
+            <span class="chapter"><a href="${encodeURL("/articleList?category=${article.category}")}" title="<#if article.category!=0>${article.categoryStr}</#if>" target="_blank">[<#if article.category!=0>${article.categoryStr}</#if>]</a></span>
             <a target="_blank" href="${article.url}" title="${article.articlename}最新章节">${article.articlename}</a> 
             <span class="chapter"><a href="${article.lastChapterUrl}" title="${article.lastchapter}">${article.lastchapter}</a></span>
         </li>
