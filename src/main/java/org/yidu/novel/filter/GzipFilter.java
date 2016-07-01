@@ -21,7 +21,7 @@ import org.yidu.novel.constant.YiDuConstants;
  * </p>
  * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
- * @version 1.0.0
+ * @version 1.1.9
  * @author shinpa.you
  */
 public class GzipFilter implements Filter {

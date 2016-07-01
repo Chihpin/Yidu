@@ -9,7 +9,7 @@ import java.util.Date;
  * </p>
  * Copyright(c) 2014 YiDu-Novel. All rights reserved.
  * 
- * @version 1.0.0
+ * @version 1.1.9
  * @author shinpa.you
  */
 public class ArticleSearchBean extends BaseSearchBean {

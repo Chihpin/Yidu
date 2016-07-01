@@ -21,7 +21,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * 支持自定义干扰线的数量； 支持自定义验证码图文颜色
  * 
  * @author shinpa.you
- * @version 1.0
+ * @version 1.1.9
  */
 public class SecurityImage {
     /**

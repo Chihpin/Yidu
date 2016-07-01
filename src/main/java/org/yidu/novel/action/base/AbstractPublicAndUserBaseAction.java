@@ -31,7 +31,7 @@ import com.google.gson.Gson;
  * </p>
  * Copyright(c) 2013 YiDu-Novel. All rights reserved.
  * 
- * @version 1.0.0
+ * @version 1.1.9
  * @author shinpa.you
  */
 public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction {

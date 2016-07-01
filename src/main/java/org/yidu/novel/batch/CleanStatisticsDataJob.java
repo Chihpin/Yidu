@@ -15,7 +15,7 @@ import org.yidu.novel.service.ArticleService;
  * </p>
  * Copyright(c) 2013 YiDu-Novel. All rights reserved.
  * 
- * @version 1.0.0
+ * @version 1.1.9
  * @author shinpa.you
  */
 public class CleanStatisticsDataJob extends QuartzJobBean {
