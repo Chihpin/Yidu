@@ -30,7 +30,7 @@ public class FreeMarkertUtil {
     /**
      * 输出log
      */
-    private static Log logger = LogFactory.getLog(SecurityImage.class);
+    private static Log logger = LogFactory.getLog(FreeMarkertUtil.class);
 
     /**
      * freemarker配置
