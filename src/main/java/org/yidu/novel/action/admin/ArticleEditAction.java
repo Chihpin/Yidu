@@ -247,7 +247,8 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
         try {
             this.postdate = sdf.parse(postdateStr);
         } catch (ParseException e) {
-            this.addFieldError(postdateStr, getText("errors.format.date"));
+        
+            this.postdate = new Date();
         }
     }
 
@@ -469,11 +470,6 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     public String save() {
         logger.debug("save start.");
 
-        // 初始化类别下拉列表选项
-        initCollections(new String[] { "collectionProperties.article.category",
-                "collectionProperties.article.fullflag", "collectionProperties.article.authorflag",
-                "collectionProperties.article.permission", "collectionProperties.article.firstflag" });
-
         TArticle article = new TArticle();
         if (articleno != 0) {
             article = articleService.getByNo(articleno);
@@ -510,11 +506,9 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
                     Utils.saveArticlespic(article.getArticleno(), articlespic, articlespicFileName);
                 } catch (Exception e) {
                     addActionError(getText("errors.file.save"));
-                    return INPUT;
                 }
             } else {
                 addActionError(getText("errors.file.type"));
-                return INPUT;
             }
 
             if (StringUtils.equals(getArticlespicContentType(), YiDuConstants.ImgageMateType.JPG)) {
@@ -525,6 +519,16 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
                 article.setImgflag(YiDuConstants.ImageType.PNG);
             }
         }
+
+        if(hasActionErrors()){
+            // 初始化类别下拉列表选项
+            initCollections(new String[] { "collectionProperties.article.category",
+                    "collectionProperties.article.fullflag", "collectionProperties.article.authorflag",
+                    "collectionProperties.article.permission", "collectionProperties.article.firstflag" });
+        	return INPUT;
+        }
+
+        articleService.save(article);
 
         logger.debug("save normally end.");
         return REDIRECT;
