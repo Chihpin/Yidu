@@ -56,9 +56,9 @@ public class TopAction extends AbstractPublicListBaseAction {
      * 
      * @return page
      */
-    public int getPage() {
-        return page;
-    }
+	public int getPage() {
+		return page == 0 ? 1 : page;
+	}
 
     /**
      * 

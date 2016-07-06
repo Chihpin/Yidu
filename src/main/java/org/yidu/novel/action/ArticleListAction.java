@@ -102,7 +102,7 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
      * @return page
      */
     public int getPage() {
-        return page;
+        return page ==0 ? 1 : page;
     }
 
     /**
