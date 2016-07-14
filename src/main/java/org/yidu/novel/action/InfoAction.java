@@ -232,8 +232,8 @@ public class InfoAction extends AbstractPublicBaseAction {
         }
 
         if (article != null) {
-            if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)
-                    || (YiDuConstants.singleBookFlag.get() != null && YiDuConstants.singleBookFlag.get())) {
+//            if (!YiDuConstants.yiduConf.getBoolean(YiDuConfig.ENABLE_CHAPTER_INDEX_PAGE, false)
+//                    || (YiDuConstants.singleBookFlag.get() != null && YiDuConstants.singleBookFlag.get())) {
                 // 获取章节信息
                 ChapterSearchBean searchBean = new ChapterSearchBean();
                 searchBean.setArticleno(article.getArticleno());
@@ -246,7 +246,7 @@ public class InfoAction extends AbstractPublicBaseAction {
                                 chapterList);
                     }
                 }
-            }
+//            }
 
             // 获取评论信息
             ReviewSearchBean reviewSearchBean = new ReviewSearchBean();
