@@ -93,6 +93,20 @@ public class TArticle extends BaseTArticle {
         return getIntro();
     }
 
+    public String getIntroOmit55() {
+        if (getIntro() != null && getIntro().length() > 55) {
+            return getIntro().substring(0, 55) + "...";
+        }
+        return getIntro();
+    }
+    
+    public String getIntroOmit30() {
+        if (getIntro() != null && getIntro().length() > 30) {
+            return getIntro().substring(0, 30) + "...";
+        }
+        return getIntro();
+    }
+    
     /**
      * 获得子目录 <br>
      * 默认是小说号/1000
