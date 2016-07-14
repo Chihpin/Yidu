@@ -291,7 +291,7 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
                             tSystemBlock.getSortcol(), tSystemBlock.getIsasc(), tSystemBlock.getLimitnum());
 
                     blocks.put(tSystemBlock.getBlockid(), articleList);
-                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.RANDOM_LIST) {
+                } else if (tSystemBlock.getType() == YiDuConstants.BlockType.SAME_AUTHOR_LIST) {
                     // 同作者区块
                     String author = getAuthor();
                     if (StringUtils.isBlank(author)) {
