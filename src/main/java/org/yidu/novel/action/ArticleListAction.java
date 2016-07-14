@@ -2,6 +2,7 @@ package org.yidu.novel.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +14,8 @@ import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.utils.Utils;
+
+import com.google.gson.Gson;
 
 /**
  * 
@@ -199,6 +202,16 @@ public class ArticleListAction extends AbstractPublicListBaseAction {
     @Override
     public String getTempName() {
         return "articleList";
+    }
+    
+    /**
+     * 获取排行榜名字的JSON数据
+     * 
+     * @return 排行榜名字的JSON数据
+     */
+    public String getTopNameJsonData() {
+        Gson gson = new Gson();
+        return gson.toJson(YiDuConstants.TOP_NAME_MAP, Map.class);
     }
 
     @Override

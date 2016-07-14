@@ -2,6 +2,7 @@ package org.yidu.novel.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +11,8 @@ import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.entity.TArticle;
+
+import com.google.gson.Gson;
 
 /**
  * <p>
@@ -46,7 +49,7 @@ public class SearchAction extends AbstractPublicListBaseAction {
      * @return page
      */
     public int getPage() {
-        return page;
+    	return page ==0 ? 1 : page;
     }
 
     /**
@@ -106,6 +109,17 @@ public class SearchAction extends AbstractPublicListBaseAction {
     public String getTempName() {
         return "search";
     }
+    
+    /**
+     * 获取排行榜名字的JSON数据
+     * 
+     * @return 排行榜名字的JSON数据
+     */
+    public String getTopNameJsonData() {
+        Gson gson = new Gson();
+        return gson.toJson(YiDuConstants.TOP_NAME_MAP, Map.class);
+    }
+    
 
     @Override
     protected void loadData() {
