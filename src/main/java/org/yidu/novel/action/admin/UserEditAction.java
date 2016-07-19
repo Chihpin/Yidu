@@ -225,6 +225,7 @@ public class UserEditAction extends AbstractAdminEditBaseAction {
         if (StringUtils.isNotEmpty(password)) {
             user.setPassword(Utils.convert2MD5(password));
         }
+        user.setActivedflag(true);
         user.setModifytime(new Date());
         user.setModifyuserno(LoginManager.getLoginUser().getUserno());
         userService.save(user);
