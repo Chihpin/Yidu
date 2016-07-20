@@ -97,7 +97,7 @@ public class ArticleListAction extends AbstractAdminListBaseAction {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key = StringUtils.trim(key);
     }
 
     public int getPage() {
