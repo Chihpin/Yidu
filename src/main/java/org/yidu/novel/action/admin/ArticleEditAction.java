@@ -132,7 +132,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public void setFullflag(Boolean fullflag) {
-        this.fullflag = fullflag;
+        this.fullflag = fullflag == null ? false : fullflag;;
     }
 
     public Date getPostdate() {
@@ -152,7 +152,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public void setFirstflag(Boolean firstflag) {
-        this.firstflag = firstflag;
+        this.firstflag = firstflag == null ? false : firstflag;
     }
 
     public Integer getPermission() {
@@ -160,7 +160,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public void setPermission(Integer permission) {
-        this.permission = permission;
+        this.permission = permission == null ? YiDuConstants.PermissionType.UNPERMISSION : permission;
     }
 
     public Boolean getAuthorflag() {
@@ -168,7 +168,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public void setAuthorflag(Boolean authorflag) {
-        this.authorflag = authorflag;
+        this.authorflag = authorflag == null ? false : authorflag;
     }
 
     public String getAgent() {
@@ -180,7 +180,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getDayvisit() {
-        return dayvisit;
+        return dayvisit == null ? 0 : dayvisit;
     }
 
     public void setDayvisit(Integer dayvisit) {
@@ -188,7 +188,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getWeekvisit() {
-        return weekvisit;
+        return weekvisit == null ? 0 : weekvisit;
     }
 
     public void setWeekvisit(Integer weekvisit) {
@@ -196,7 +196,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getMonthvisit() {
-        return monthvisit;
+        return monthvisit == null ? 0 : monthvisit;
     }
 
     public void setMonthvisit(Integer monthvisit) {
@@ -204,7 +204,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getAllvisit() {
-        return allvisit;
+        return allvisit == null ? 0 : allvisit;
     }
 
     public void setAllvisit(Integer allvisit) {
@@ -212,7 +212,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getDayvote() {
-        return dayvote;
+        return dayvote == null ? 0 : dayvote;
     }
 
     public void setDayvote(Integer dayvote) {
@@ -220,7 +220,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getWeekvote() {
-        return weekvote;
+        return weekvote == null ? 0 : weekvote;
     }
 
     public void setWeekvote(Integer weekvote) {
@@ -228,7 +228,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getMonthvote() {
-        return monthvote;
+        return monthvote == null ? 0 : monthvote;
     }
 
     public void setMonthvote(Integer monthvote) {
@@ -236,7 +236,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
     }
 
     public Integer getAllvote() {
-        return allvote;
+        return allvote == null ? 0 : allvote;
     }
 
     public void setAllvote(Integer allvote) {
@@ -282,7 +282,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
      * @return usecustomizeinfotitle
      */
     public Boolean getUsecustomizeinfotitle() {
-        return usecustomizeinfotitle;
+        return usecustomizeinfotitle == null ? false : usecustomizeinfotitle;
     }
 
     /**
@@ -294,7 +294,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
      *            usecustomizeinfotitle
      */
     public void setUsecustomizeinfotitle(Boolean usecustomizeinfotitle) {
-        this.usecustomizeinfotitle = usecustomizeinfotitle;
+        this.usecustomizeinfotitle = usecustomizeinfotitle == null ? false : usecustomizeinfotitle;
     }
 
     /**
@@ -366,7 +366,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
      * @return usecustomizelisttitle
      */
     public Boolean getUsecustomizelisttitle() {
-        return usecustomizelisttitle;
+        return usecustomizelisttitle == null ? false : usecustomizelisttitle;
     }
 
     /**
@@ -378,7 +378,7 @@ public class ArticleEditAction extends AbstractAdminEditBaseAction {
      *            usecustomizelisttitle
      */
     public void setUsecustomizelisttitle(Boolean usecustomizelisttitle) {
-        this.usecustomizelisttitle = usecustomizelisttitle;
+        this.usecustomizelisttitle = usecustomizelisttitle == null ? false : usecustomizelisttitle;
     }
 
     /**
