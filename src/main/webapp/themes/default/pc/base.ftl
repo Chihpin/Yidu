@@ -1,3 +1,4 @@
+<@compress single_line=true>
 <!DOCTYPE HTML>
 <!--[if lt IE 7 ]><html class="ie ie6"><![endif]-->
 <!--[if IE 7 ]><html class="ie ie7"><![endif]-->
@@ -5,6 +6,8 @@
 <!--[if IE 9 ]><html class="ie ie9"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><html><![endif]-->
 <head>
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--[if lt IE 9]>
 <script src="${contextPath}/themes/${themeName}/pc/js/lib/html5.js"></script>
@@ -75,3 +78,4 @@
 </script>
 </body>  
 </html>
+</@>

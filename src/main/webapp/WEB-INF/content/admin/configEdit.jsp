@@ -103,6 +103,13 @@
            <s:radio list="collections['collectionProperties.boolean']" name="adEffective" ></s:radio>
        </td>
     </tr>
+    
+    <tr align="left" valign="middle">
+       <td class="odd" width="30%"><s:text name="label.admin.config.edit.compressEffective" /></td>
+       <td class="even">
+           <s:radio list="collections['collectionProperties.boolean']" name="compressEffective" ></s:radio>
+       </td>
+    </tr>
 
     <tr align="left" valign="middle">
        <td class="odd" width="30%"><s:text name="label.admin.config.edit.addReviewWithoutLogin" /></td>

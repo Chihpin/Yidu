@@ -40,6 +40,10 @@ public class YiDuConfig {
      */
     public static final String AD_EFFECTIVE = "adEffective";
     /**
+     * 是否启用压缩源码
+     */
+    public static final String COMPRESS_EFFECTIVE = "compressEffective";
+    /**
      * 是否启用伪静态
      */
     public static final String CLEAN_URL = "cleanUrl";

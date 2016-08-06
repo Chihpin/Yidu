@@ -75,6 +75,8 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      */
 
     private int maxBookcase;
+    
+    private boolean compressEffective;
 
     /**
      * 是否生成静态首页
@@ -324,7 +326,15 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         this.maxBookcase = maxBookcase;
     }
 
-    public boolean isCreateIndexPage() {
+    public boolean isCompressEffective() {
+		return compressEffective;
+	}
+
+	public void setCompressEffective(boolean compressEffective) {
+		this.compressEffective = compressEffective;
+	}
+
+	public boolean isCreateIndexPage() {
         return createIndexPage;
     }
 
@@ -1034,7 +1044,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         xmlSiteMapInfoURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_INFO_URL);
         xmlSiteMapChaterListURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_CHATERLIST_URL);
         xmlSiteMapReaderURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_READER_URL);
-
+        compressEffective = YiDuConstants.yiduConf.getBoolean(YiDuConfig.COMPRESS_EFFECTIVE,false);
         txtEncoding = YiDuConstants.yiduConf.getString(YiDuConfig.TXT_ENCODING);
 
         addReviewWithoutLogin = YiDuConstants.yiduConf.getBoolean(YiDuConfig.ADD_REVIEW_WITHOUT_LOGIN, true);
@@ -1105,7 +1115,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_READER_URL, xmlSiteMapReaderURL);
 
         YiDuConstants.yiduConf.setProperty(YiDuConfig.TXT_ENCODING, txtEncoding);
-
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.COMPRESS_EFFECTIVE,compressEffective);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ADD_REVIEW_WITHOUT_LOGIN, addReviewWithoutLogin);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.ENABLE_MOBILE_SITE, enableMobileSite);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.JUDG_MOBILESITE_BY_DOMIAN, judgmobilesitebydomian);

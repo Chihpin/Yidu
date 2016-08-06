@@ -357,5 +357,17 @@ public abstract class AbstractPublicAndUserBaseAction extends AbstractBaseAction
     private String getValueForKey(String key) {
         return getText(key);
     }
+    
+    /**
+     * 
+     * <p>
+     * 获取启用广告标识
+     * </p>
+     * 
+     * @return 启用广告标识
+     */
+    public boolean getCompressPage() {
+        return YiDuConstants.yiduConf.getBoolean(YiDuConfig.COMPRESS_EFFECTIVE, true);
+    }
 
 }
