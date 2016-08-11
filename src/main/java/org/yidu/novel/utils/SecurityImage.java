@@ -5,16 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * 验证码生成器类，可生成数字、大写、小写字母及三者混合类型的验证码。 支持自定义验证码字符数量； 支持自定义验证码图片的大小； 支持自定义需排除的特殊字符；
@@ -27,7 +21,7 @@ public class SecurityImage {
     /**
      * 输出log
      */
-    private static Log logger = LogFactory.getLog(SecurityImage.class);
+//    private static Log logger = LogFactory.getLog(SecurityImage.class);
     /**
      * 生成验证码图片
      * 
@@ -102,17 +96,17 @@ public class SecurityImage {
      */
     private static ByteArrayInputStream convertImageToStream(BufferedImage image) {
         ByteArrayInputStream inputStream = null;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        JPEGImageEncoder jpeg = JPEGCodec.createJPEGEncoder(bos);
-        try {
-            jpeg.encode(image);
-            byte[] bts = bos.toByteArray();
-            inputStream = new ByteArrayInputStream(bts);
-        } catch (ImageFormatException e) {
-            logger.error(e.getMessage(), e);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        JPEGImageEncoder jpeg = JPEGCodec.createJPEGEncoder(bos);
+//        try {
+//            jpeg.encode(image);
+//            byte[] bts = bos.toByteArray();
+//            inputStream = new ByteArrayInputStream(bts);
+//        } catch (ImageFormatException e) {
+//            logger.error(e.getMessage(), e);
+//        } catch (IOException e) {
+//            logger.error(e.getMessage(), e);
+//        }
         return inputStream;
     }
 }
