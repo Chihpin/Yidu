@@ -16,6 +16,7 @@ CREATE INDEX t_article_dayvote_index ON t_article  (dayvote);
 CREATE INDEX t_article_postdate_index ON t_article  (postdate);
 CREATE INDEX t_article_size_index ON t_article  (size);
 CREATE INDEX t_chapter_articleno_index  ON t_chapter (articleno);
+CREATE INDEX t_chapter_articleno_chapterno_deleteflag_chaptertype_index on t_chapter (articleno,chapterno,deleteflag,chaptertype);
 CREATE INDEX t_chapter_chaptername_index  ON t_chapter (chaptername);
 CREATE INDEX t_credithistory_userno_index ON t_credit_history (userno);
 CREATE INDEX t_review_articleno ON t_review (articleno);
