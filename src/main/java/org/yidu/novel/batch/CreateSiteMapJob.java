@@ -154,6 +154,8 @@ public class CreateSiteMapJob extends QuartzJobBean {
                 if (SiteMapType.XML.getName().equalsIgnoreCase(
                         YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE))) {
                     createXmlSiteMap(sitemapDir, sitemapUri, false);
+                    uri = YiDuConstants.yiduConf.getString(YiDuConfig.MOBILE_URI);
+                    sitemapUri = uri + (StringUtils.endsWith(uri, "/") ? "" : "/") + SITEMAP_DIR + "/";
                     createXmlSiteMap(sitemapDir, sitemapUri, true);
                 } else {
                     String responseBody = Utils.getContentFromUri(uri + SiteMapAction.URL);
