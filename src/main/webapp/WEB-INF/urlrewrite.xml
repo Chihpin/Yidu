@@ -15,6 +15,24 @@
         <to last="true">/cover/$1/$2/$3</to>
     </rule>
 
+<!--
+    <rule>
+        <name>Domain Name Check</name>
+        <condition name="host" operator="notequal">www.51yd.org</condition>
+        <condition name="host" operator="notequal">m.51yd.org</condition>
+        <from>^/(.*)</from>
+        <to type="permanent-redirect">http://www.51yd.org/$1</to>
+    </rule>
+
+    <rule>
+        <name>USER AGENT Check</name>
+        <condition name="host" operator="notequal">m.51yd.org</condition>
+        <condition name="user-agent">(android|blackberry|googlebot-mobile|iemobile|iphone|ipod|opera mobile)</condition>
+        <from>^/(.*)</from>
+        <to type="redirect">http://m.51yd.org/$1</to>
+    </rule>
+ -->
+
 	<!-- 小说列表开始 -->
 
 	<rule>
@@ -128,6 +146,11 @@
 		<from>^/search/(.+?)/(\d*)\.html$</from>
 		<to last="true">/search\?key=$1&amp;page=$2</to>
 	</rule>
+	
+	<rule>
+        <from>^/search/(.+?)\.html$</from>
+        <to last="true">/search\?key=$1</to>
+    </rule>
 
 	<outbound-rule>
 		<from>^/search\?key=(.+?)&amp;page=(\d*)(;jsessionid=.*)?$</from>
@@ -326,23 +349,7 @@
 		<to last="true">/$1/$2\.html</to>
 	</outbound-rule>
 
- <!--
-	<rule>
-		<name>Domain Name Check</name>
-		<condition name="host" operator="notequal">www.51yd.org</condition>
-		<condition name="host" operator="notequal">m.51yd.org</condition>
-		<from>^/(.*)</from>
-		<to type="permanent-redirect">http://www.51yd.org/$1</to>
-	</rule>
-
-	<rule>
-		<name>USER AGENT Check</name>
-		<condition name="host" operator="notequal">m.51yd.org</condition>
-		<condition name="user-agent">(android|blackberry|googlebot-mobile|iemobile|iphone|ipod|opera mobile)</condition>
-		<from>^/(.*)</from>
-		<to type="redirect">http://m.51yd.org/$1</to>
-	</rule>
- -->
+ 
 
 </urlrewrite>
 
