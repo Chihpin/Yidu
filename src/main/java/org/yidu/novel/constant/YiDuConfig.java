@@ -82,6 +82,11 @@ public class YiDuConfig {
      */
     public static final String CREATE_SITEMAP = "createSiteMap";
     /**
+     * 是否生成机构化数据
+     */
+    public static final String CREATE_STRUCTURINGDATA="createStructuringData";
+
+    /**
      * 模版名称
      */
     public static final String THEME_NAME = "themeName";

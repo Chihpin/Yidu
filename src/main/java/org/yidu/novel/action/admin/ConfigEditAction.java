@@ -87,6 +87,10 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
      */
     private boolean createSiteMap;
     /**
+     * 是否生成机构化数据
+     */
+    private boolean createStructuringData;
+    /**
      * 站点地图类型
      */
     private String siteMapType;
@@ -348,6 +352,14 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
 
     public void setCreateSiteMap(boolean createSiteMap) {
         this.createSiteMap = createSiteMap;
+    }
+
+    public boolean isCreateStructuringData() {
+        return createStructuringData;
+    }
+
+    public void setCreateStructuringData(boolean createStructuringData) {
+        this.createStructuringData = createStructuringData;
     }
 
     /**
@@ -1038,6 +1050,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         themeName = YiDuConstants.yiduConf.getString(YiDuConfig.THEME_NAME);
         createIndexPage = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_INDEXPAGE, true);
         createSiteMap = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_SITEMAP, true);
+        createStructuringData = YiDuConstants.yiduConf.getBoolean(YiDuConfig.CREATE_STRUCTURINGDATA, true);
         siteMapType = YiDuConstants.yiduConf.getString(YiDuConfig.SITEMAP_TYPE);
         xmlSiteMapListWithNoPageURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_WITH_NO_PAGE_URL);
         xmlSiteMapListURL = YiDuConstants.yiduConf.getString(YiDuConfig.XML_SITEMAP_LIST_URL);
@@ -1107,6 +1120,7 @@ public class ConfigEditAction extends AbstractAdminEditBaseAction {
         YiDuConstants.yiduConf.setProperty(YiDuConfig.THEME_NAME, themeName);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_INDEXPAGE, createIndexPage);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_SITEMAP, createSiteMap);
+        YiDuConstants.yiduConf.setProperty(YiDuConfig.CREATE_STRUCTURINGDATA, createStructuringData);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.SITEMAP_TYPE, siteMapType);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_LIST_WITH_NO_PAGE_URL, xmlSiteMapListWithNoPageURL);
         YiDuConstants.yiduConf.setProperty(YiDuConfig.XML_SITEMAP_LIST_URL, xmlSiteMapListURL);

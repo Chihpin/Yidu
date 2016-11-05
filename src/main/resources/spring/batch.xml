@@ -89,6 +89,22 @@
 		<property name="jobDetail" ref="sendSubscribeMailJob" />
 		<property name="cronExpression" value="0 */15 * * * ?" />
 	</bean>
+	
+	<bean id="createStructuringDataJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="org.yidu.novel.batch.CreateStructuringDataJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="articleService">
+                    <ref bean="articleService" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="createStructuringDataTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="createStructuringDataJob" />
+        <property name="cronExpression" value="0 0 */1 * * ?" />
+    </bean>	
 
 	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
@@ -98,6 +114,7 @@
 				<ref bean="createIndexTimerTrigger" />
 				<ref bean="createSiteMapTimerTrigger" />
 				<ref bean="sendSubscribeMailTimerTrigger" />
+				<ref bean="createStructuringDataTimerTrigger" />
 			</list>
 		</property>
 	</bean>
