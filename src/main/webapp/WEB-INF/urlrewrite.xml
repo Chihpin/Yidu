@@ -14,6 +14,12 @@
         <from>^/cover/(\d*)-(\d*)-[a-z0-9A-Z]{32}(.+?)$</from>
         <to last="true">/cover/$1/$2/$3</to>
     </rule>
+    
+    <rule>
+        <from>^/struts/webconsole.html$</from>
+        <set type="status">403</set>
+        <to>NULL</to>
+    </rule>
 
 <!--
     <rule>
