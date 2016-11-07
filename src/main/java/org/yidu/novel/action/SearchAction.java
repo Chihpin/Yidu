@@ -124,7 +124,10 @@ public class SearchAction extends AbstractPublicListBaseAction {
     @Override
     protected void loadData() {
         logger.debug("loadData start.");
-
+        //不指定关键字的时候，默认设置为空，防止模版报错
+        if (key == null) {
+            key = "";
+        }
         ArticleSearchBean searchBean = new ArticleSearchBean();
         BeanUtils.copyProperties(this, searchBean);
         searchBean.setPageType(ArticleSearchBean.PageType.publicPage);
