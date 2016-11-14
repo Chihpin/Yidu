@@ -1,4 +1,4 @@
-<@compress single_line=true>
+<@compress single_line= compressPage >
 <!DOCTYPE HTML>
 <!--[if lt IE 7 ]><html class="ie ie6"><![endif]-->
 <!--[if IE 7 ]><html class="ie ie7"><![endif]-->
