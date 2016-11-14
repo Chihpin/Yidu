@@ -14,18 +14,18 @@
    <meta property="og:type" content="novel"/>
    <meta property="og:title" content="${article.articlename?html}"/>
    <meta property="og:description" content="<#if (article.intro ?length != 0)>${article.intro?html}<#else>暂无简介</#if>"/>
-   <meta property="og:image" content="${article.imgUrl}"/>
+   <meta property="og:image" content="${siteUrl}${article.imgUrl}"/>
    <meta property="og:novel:category" content="<#if article.category!=0>${article.categoryStr}</#if>"/>
    <meta property="og:novel:author" content="${article.author?html}"/>
    <meta property="og:novel:book_name" content="${article.articlename?html}"/>
-   <meta property="og:novel:read_url" content="${article.url}"/>
+   <meta property="og:novel:read_url" content="${siteUrl}${article.url}"/>
 
    <!--选填-->
    <meta property="og:novel:status" content="<#if article.fullflag>完结<#else>连载中</#if>"/>
    <meta property="og:novel:update_time" content="${article.lastupdate?string("yyyy-MM-dd HH:mm")}"/>
    <meta property="og:novel:click_cnt" content="${article.allvisit?c}"/>
    <meta property="og:novel:latest_chapter_name" content="${article.lastchapter}"/>
-   <meta property="og:novel:latest_chapter_url" content="${article.lastChapterUrl}"/>
+   <meta property="og:novel:latest_chapter_url" content="${siteUrl}${article.lastChapterUrl}"/>
 
 </#macro>
 
