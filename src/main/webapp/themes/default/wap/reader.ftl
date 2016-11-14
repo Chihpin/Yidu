@@ -28,7 +28,6 @@
     <script src="${contextPath}/themes/${themeName}/wap/js/lib/jquery.cookie.js"></script>
     <script language="JavaScript" type="text/JavaScript"> 
         $(document).ready(function(){
-            replaceWord();
             saveHistory();
         })
     
@@ -54,26 +53,7 @@
                 readhistory.splice(9,readhistory.length - 10);
            }
            $.cookie("mobilereadhistory",JSON.stringify(readhistory),{path:'/' ,expires: 365});
-    
     }
-    
-    function replaceWord(){
-        var str = document.getElementById("content").innerHTML;//这里是整个页面代码 ,也可以指定id
-        str = str.replace(/\<script[\s\S]+?\<\/script\>/gi, "");
-        str = str.replace(/\<styltyp[\s\S]+?\<\/styl\>/gi, "");
-        str = str.replace(/\<style[\s\S]+?\<\/style\>/gi, "");
-        str = str.replace(/\<a[\s\S].+?\<\/a\>/gi, "");
-        str = str.replace(/Www.+?ggyy\.net/gi, "");
-        str = str.replace(/Www.+?Com/gi, "");
-        str = str.replace(/Www.+?net/gi, "");
-        str = str.replace(/Www.+?cc/gi, "");
-        str = str.replace(/&lt;br.+?&gt;/gi, "<br />");
-        str = str.replace(/&amp;hllp;/gi, "&hellip;").replace(/&amp;ldqo;/gi,
-                "&ldquo;").replace(/ldqo/gi, "ldquo").replace(/&amp;rdqo;/gi,
-                "&rdquo;").replace(/&amp;dash;/gi, "&mdash;");
-        document.getElementById("content").innerHTML = str;
-    }
-    </script>
     <@customizetop/>
 
 </#macro>

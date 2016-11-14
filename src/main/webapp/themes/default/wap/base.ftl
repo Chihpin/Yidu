@@ -11,8 +11,7 @@
 <meta name="author" content="www.51yd.org"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/themes/${themeName}/wap/css/mobilecss.css" rel="stylesheet" />
 <script src="${contextPath}/themes/${themeName}/wap/js/lib/jquery-2.1.1.min.js"></script>
-<script src="${contextPath}/themes/${themeName}/wap/js/JX.js"></script>
-<script src="${contextPath}/themes/${themeName}/wap/js/Site.js"></script>
+<script src="${contextPath}/themes/${themeName}/wap/js/common.js"></script>
 </head>
 <body>
 
@@ -141,6 +140,7 @@
     </div>
     <div class="copyright">${getText("label.system.copyright")}</div>
 </div>
+<script src="${contextPath}/themes/${themeName}/wap/js/page.js"></script>
 </#macro>
 
 	<script>
