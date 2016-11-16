@@ -9,6 +9,7 @@ public class UpgradeBean {
         public static final int XML = 4;
         public static final int JSP = 5;
         public static final int FTL = 6;
+        public static final int SQL = 7;
     }
 
     /**
@@ -31,6 +32,10 @@ public class UpgradeBean {
      * propteries文件的内容
      */
     private String content;
+    /**
+     * sql
+     */
+    private String sql;
 
     // TODO XML文件的更新
 
@@ -72,6 +77,14 @@ public class UpgradeBean {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
     }
 
 }

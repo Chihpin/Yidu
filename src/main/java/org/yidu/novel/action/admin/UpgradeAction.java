@@ -138,6 +138,10 @@ public class UpgradeAction extends AbstractAdminBaseAction {
                     logger.error(e);
                 }
                 break;
+            case FileType.SQL:
+                // 执行文件
+                upgradeService.excuteUpgradeSql(rb.getSql());
+                break;
             default:
                 break;
             }

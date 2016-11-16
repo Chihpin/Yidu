@@ -18,6 +18,7 @@ import org.yidu.novel.service.MessageService;
 import org.yidu.novel.service.ReviewService;
 import org.yidu.novel.service.SubscribeService;
 import org.yidu.novel.service.SystemBlockService;
+import org.yidu.novel.service.UpgradeService;
 import org.yidu.novel.service.UserService;
 
 import com.opensymphony.xwork2.Action;
@@ -35,8 +36,7 @@ import com.opensymphony.xwork2.interceptor.ValidationWorkflowAware;
  * @version 1.1.9
  * @author shinpa.you
  */
-@Results({
-        @Result(name = AbstractBaseAction.FREEMARKER_ERROR, location = "/themes/${themeName}/pc/error.ftl", type = "freemarker"),
+@Results({ @Result(name = AbstractBaseAction.FREEMARKER_ERROR, location = "/themes/${themeName}/pc/error.ftl", type = "freemarker"),
         @Result(name = AbstractBaseAction.FREEMARKER_MESSAGE, type = "freemarker", location = "/themes/${themeName}/pc/message.ftl"),
         @Result(name = AbstractBaseAction.FREEMARKER, type = "freemarker", location = "/themes/${themeName}/pc/${tempName}.ftl"),
         @Result(name = AbstractBaseAction.MOBILE_FREEMARKER_ERROR, location = "/themes/${themeName}/wap/error.ftl", type = "freemarker"),
@@ -159,6 +159,11 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     protected SubscribeService subscribeService;
 
     /**
+     * 升级服务
+     */
+    protected UpgradeService upgradeService;
+
+    /**
      * 
      * 设置userService
      * 
@@ -260,6 +265,10 @@ public abstract class AbstractBaseAction extends ActionSupport implements Valida
     @Autowired
     public void setSubscribeService(SubscribeService subscribeService) {
         this.subscribeService = subscribeService;
+    }
+
+    public void setUpgradeService(UpgradeService upgradeService) {
+        this.upgradeService = upgradeService;
     }
 
     @Override
