@@ -1,3 +1,4 @@
+<@compress single_line= compressPage >
 <!DOCTYPE html>
 <html>
 <head>
