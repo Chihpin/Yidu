@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.yidu.novel.action.base.AbstractPublicListBaseAction;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.cache.CacheManager;
@@ -91,7 +91,7 @@ public class SearchAction extends AbstractPublicListBaseAction {
      * @return key
      */
     public String getKey() {
-        return key;
+        return StringEscapeUtils.escapeHtml4(key);
     }
 
     /**
@@ -129,7 +129,8 @@ public class SearchAction extends AbstractPublicListBaseAction {
             key = "";
         }
         ArticleSearchBean searchBean = new ArticleSearchBean();
-        BeanUtils.copyProperties(this, searchBean);
+//        BeanUtils.copyProperties(this, searchBean);
+        searchBean.setKey(key);
         searchBean.setPageType(ArticleSearchBean.PageType.publicPage);
         pagination.setPageNumber(page == 0 ? 1 : page);
         pagination.setSortColumn("lastupdate");
