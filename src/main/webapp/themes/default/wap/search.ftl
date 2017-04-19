@@ -50,7 +50,7 @@
 
 <#macro customizefooter>
 
- <script type="text/javascript">
+<script type="text/javascript">
     var _sort = 1;
     var _index = 0;
     var _size = 10;

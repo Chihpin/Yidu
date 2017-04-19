@@ -20,6 +20,7 @@ import org.yidu.novel.cache.ArticleCountManager;
 import org.yidu.novel.cache.CacheManager;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
+import org.yidu.novel.dto.ChapterDTO;
 import org.yidu.novel.dto.JsonInfoDTO;
 import org.yidu.novel.entity.TArticle;
 import org.yidu.novel.entity.TBookcase;
@@ -875,10 +876,10 @@ public class AjaxServiceAction extends AbstractPublicBaseAction {
         }
         searchBean.setPagination(pagination);
 
-        List<TChapter> chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
+        List<ChapterDTO> chapterList = CacheManager.getObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX,
                 searchBean);
         if (!Utils.isDefined(chapterList)) {
-            chapterList = chapterService.find(searchBean);
+            chapterList = chapterService.findWithPinyin(searchBean);
             if (Utils.isDefined(chapterList)) {
                 CacheManager.putObject(CacheManager.CacheKeyPrefix.CACHE_KEY_CHAPTER_LIST_PREFIX, searchBean,
                         chapterList);

@@ -131,11 +131,10 @@ var getDirectory = function (index , callback) {
                 var tmp = [];
                 for (var i = 0; i < result.items.length; i++) {
                     var item = result.items[i];
-                    var link = "/reader/"+Math.floor(_articleno/1000)+"/"+_articleno+"/"+item.chapterno+".html";
+                    var link = item.url;
                     tmp.push('<li>');
                     tmp.push('<a href="' + link + '">' + item.chaptername + '</a>');
                     if (_hisgoryId == item.chapterno) tmp.push('<em class="sq"></em>');
-                    
                     tmp.push('</li>');
                 }
                 $("#chapterlist").html(tmp.join(""));
@@ -245,7 +244,7 @@ var search = function (callback) {
             for (var i = 0 ; i < res.items.length; i++) {
                 var item = res.items[i];
                 str.push('<div class="info i2">');
-                str.push('    <a href="/info/'+Math.floor(item.articleno/1000)+'/'+item.articleno+'.html">');
+                str.push('    <a href="'+item.url+'">');
                 str.push('        <img src="'+item.imgUrl+'" />');
                 str.push('        <h3>' + item.articlename + '</h3>');
                 str.push('        <p>作者：' + item.author + '</p>');
