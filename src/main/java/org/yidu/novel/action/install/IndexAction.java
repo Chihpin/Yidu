@@ -558,10 +558,10 @@ public class IndexAction extends AbstractInstallBaseAction {
             PropertiesConfiguration languageConf = new PropertiesConfiguration(Thread.currentThread()
                     .getContextClassLoader().getResource("language/package.properties"));
 
-            languageConf.setProperty(YiDuConfig.TITLE, title);
-            languageConf.setProperty(YiDuConfig.SITEKEYWORDS, siteKeywords);
-            languageConf.setProperty(YiDuConfig.SITEDESCRIPTION, siteDescription);
-            languageConf.setProperty(YiDuConfig.NAME, name);
+            languageConf.setProperty(YiDuConfig.TITLE, Utils.escapePropterties(title));
+            languageConf.setProperty(YiDuConfig.SITEKEYWORDS, Utils.escapePropterties(siteKeywords));
+            languageConf.setProperty(YiDuConfig.SITEDESCRIPTION, Utils.escapePropterties(siteDescription));
+            languageConf.setProperty(YiDuConfig.NAME, Utils.escapePropterties(name));
             languageConf.setProperty(YiDuConfig.URL, url);
             languageConf.setProperty(YiDuConfig.COPYRIGHT, copyright);
             languageConf.setProperty(YiDuConfig.BEIANNO, beianNo);
