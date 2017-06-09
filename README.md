@@ -32,3 +32,8 @@ Postgresql
 官方论坛地址：
 -----------------------------------
 http://www.51yd.org/
+
+捐赠：
+-----------------------------------
+任性的打赏作者，支持继续开发！
+![image](http://www.51yd.org/alipay.jpg) ![image](http://www.51yd.org/weixin.jpg)
