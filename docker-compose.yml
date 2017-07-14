@@ -1,0 +1,65 @@
+version: '2'
+services:
+
+  web:
+    image: 'f498f9d0fa81' #yidu:last
+    ports: 
+      - "8080:8080"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - yidu-network
+    environment:
+      - YIDU_DB_HOST=chihpin.com
+      - YIDU_DB_PORT=5433
+      - YIDU_DB_NAME=yidu
+      - YIDU_DB_USER=postgres
+      - YIDU_DB_PWD=postgres
+    # volumes:
+      # - ./docker/webapps:/usr/local/tomcat/webapps
+      # - ./docker/yidu:/usr/local/yidu
+    restart: always
+      
+
+  # web:
+  #   image: tomcat:7.0.79-jre7-alpine
+  #   ports: 
+  #     - "8080:8080"
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - yidu-network
+  #   volumes:
+  #     - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
+  #   restart: always
+
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - yidu-network
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      # - POSTGRES_DB=postgres
+    volumes:
+      - ./data/:/var/lib/postgresql/data
+    restart: always
+  
+networks:
+  yidu-network:
+    driver: bridge
+  # man:
+  #   build: .
+  #   image: czbin/YiDuNovel
+  #   ports: 
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./target/YiDuNovel.war:/usr/local/tomcat/webapps/YiDuNovel.war
