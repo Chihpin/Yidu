@@ -1,8 +1,5 @@
 #!/bin/bash
 
-catalina.sh run
+yidu_config.sh > ${YIDU_HOME}/log.txt
 
-yidu_config.sh
-
-catalina.sh stop
 catalina.sh run

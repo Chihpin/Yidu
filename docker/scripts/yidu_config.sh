@@ -9,9 +9,11 @@
     # ------------------------------------------------------------------------------------------------------
     # update jdbc properties
     # ------------------------------------------------------------------------------------------------------
-    mkdir -p $YIDU_HOME/WEB-INF/classes
-    jdbc=$YIDU_HOME/WEB-INF/classes/jdbc.properties
-    cp $YIDU_HOME/conf/jdbc.properties ${jdbc}
+    cd $YIDU_HOME
+
+    mkdir -p WEB-INF/classes
+    jdbc=WEB-INF/classes/jdbc.properties
+    cp conf/jdbc.properties ${jdbc}
 
     sed -i "s,driverClassName=*,driverClassName=org.postgresql.Driver,g" ${jdbc}
     sed -i "s,url=*,url=jdbc:postgresql:\/\/${YIDU_DB_HOST}:${YIDU_DB_PORT}\/${YIDU_DB_NAME},g" ${jdbc}
@@ -35,12 +37,16 @@
     # cp ${jdbc} $CATALINA_HOME/webapps/ROOT/WEB-INF/classes/jdbc.properties
     echo $(whoami)
 
-    zip -ur $CATALINA_HOME/webapps/ROOT.war WEB-INF/classes/jdbc.properties
+    # https://stackoverflow.com/questions/45104097/dockerize-tomcat-web-app-with-custom-configuration-via-env
+    # https://superuser.com/questions/413888/how-to-update-one-file-located-in-a-zip-subdirectory
+    zip -ur $CATALINA_HOME/webapps/ROOT.war WEB-INF
 
+    # mkdir test_war
+    # cd test_war
     # unzip $CATALINA_HOME/webapps/ROOT.war
-
+    
+    rm -r $YIDU_HOME/WEB-INF
+    cd $CATALINA_HOME
     # ------------------------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------------------
-    # rm -r $YIDU_HOME/WEB-INF
-
     echo -e "${Green}----[Config][Success]----------------------------------------------------------------------------------${Clear}"
