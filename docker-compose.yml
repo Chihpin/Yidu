@@ -1,29 +1,7 @@
 version: '2'
 services:
 
-  web:
-    image: 'f498f9d0fa81' #yidu:last
-    ports: 
-      - "8080:8080"
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    networks:
-      - yidu-network
-    environment:
-      - YIDU_DB_HOST=chihpin.com
-      - YIDU_DB_PORT=5433
-      - YIDU_DB_NAME=yidu
-      - YIDU_DB_USER=postgres
-      - YIDU_DB_PWD=postgres
-    # volumes:
-      # - ./docker/webapps:/usr/local/tomcat/webapps
-      # - ./docker/yidu:/usr/local/yidu
-    restart: always
-      
-
-  # web:
+  # test:
   #   image: tomcat:7.0.79-jre7-alpine
   #   ports: 
   #     - "8080:8080"
@@ -36,6 +14,27 @@ services:
   #   volumes:
   #     - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
   #   restart: always
+
+  yidu:
+    image: 'f498f9d0fa81' #yidu:last
+    ports: 
+      - "8080:8080"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - yidu-network
+    environment:
+      - YIDU_DB_HOST=172.16.1.101.com # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      - YIDU_DB_PORT=5433
+      - YIDU_DB_NAME=yidu
+      - YIDU_DB_USER=postgres
+      - YIDU_DB_PWD=postgres
+    # volumes:
+      # - ./docker/webapps:/usr/local/tomcat/webapps
+      # - ./docker/yidu:/usr/local/yidu
+    restart: always
 
 
   postgres:
@@ -56,10 +55,4 @@ services:
 networks:
   yidu-network:
     driver: bridge
-  # man:
-  #   build: .
-  #   image: czbin/YiDuNovel
-  #   ports: 
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./target/YiDuNovel.war:/usr/local/tomcat/webapps/YiDuNovel.war
+
