@@ -1,6 +1,6 @@
 FROM tomcat:9.0.0-jre8-alpine
 
-MAINTAINER YiDuNovel
+MAINTAINER chihpin@users.noreply.github.com
 
 ENV YIDU_HOME $CATALINA_HOME/yidu
 ENV PATH $YIDU_HOME/scripts:$PATH

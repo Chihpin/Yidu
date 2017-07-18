@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RuleConfigInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <NovelIntro>
+  <RegexName>NovelIntro</RegexName>
+  <Pattern>&lt;meta property="og:description" content="((.|\n)*?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelIntro>
+ <PubContentText>
+  <RegexName>PubContentText</RegexName>
+  <Pattern>&lt;div id="acontent" class="acontent"&gt;((.|\n)*?)&lt;br/&gt;&lt;/div&gt;</Pattern>
+  <Method/>
+  <FilterPattern>wap.23us.com
+顶.{2,40}说
+w.{6,30}m
+頂.{2,40}说
+頂.{2,40}說
+ｗ.{6,30}ｍ
+ps：想听到更多你们的声音.{40,80}更多支持！
+我的小说.{2,40}将在官方微信平台上.{40,100}速度抓紧啦！
+想知道.{40,100}关注公众号，再也不会错过每次更新！
+小说.{80,100}速度抓紧啦！
+ps：看《.{1,10}》背后的独家故事，听你们对小说的更多建议，关注公众号（微信添加朋友-添加公众号-输入dd即可），悄悄告诉我吧！
+天上掉馅饼的好活动，炫酷手机等你拿！关注起~點/公众号（微信添加朋友-添加公众号-输入dd即可），马上参加！人人有奖，现在立刻关注dd微信公众号！
+ｗｗｗ．２３ｕｓ．ｃｏｍ
+ｗｗｗ。23uｓ。ｃｏｍ
+ｗｗｗ。２３ｕｓ。ｃｏｍ
+www。23us。com
+w-w-w\.23us\.c-o-m
+wap\.23wx\.com
+ｗｗｗ．２３ＷＸ．ｃｏｍ
+ｗｗｗ。23ｗｘ。ｃｏｍ
+ｗｗｗ。２３ｗｘ。ｃｏｍ
+www。23wx。com
+ＷwＷ\.23wＸ\.cＯＭ
+www\.23wx\.com
+＝顶＝点＝小说＝
+@顶@点@小说
+-顶-点-小-说-
+:顶:点:小说3w\.23wx\.com
+《顶》《点》小说
+\?顶\?点\?小说
+［顶\]\[点］小说
+&lt;顶&gt;&lt;点&gt;小说
+$顶$点$小说
+顶\.点。小说
+飘天文学
+&lt;script.+?&lt;/script&gt;|&lt;div.+?&gt;|&lt;/div&gt;|&lt;p&gt;|&lt;/p&gt;
+3w.{6,30}com
+www.{6,30}com
+www.{6,30}cn
+www.{6,30}net
+www.{6,30}org
+&lt;font.+?&lt;/font&gt;
+&lt;a.+?&lt;/a&gt;
+【&lt;b&gt;(.|\n)*?&lt;/B&gt;】♂</FilterPattern>
+  <Options/>
+ </PubContentText>
+ <NovelSearchUrl>
+  <RegexName>NovelSearchUrl</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelSearchUrl>
+ <NovelList_GetNovelKey>
+  <RegexName>NovelList_GetNovelKey</RegexName>
+  <Pattern>&lt;td&gt;&lt;a href="/reader/(\d+)/index.html" class="note iconfont" target="_blank" title="目录"&gt;&amp;#xee32;&lt;/a&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelList_GetNovelKey>
+ <NovelListUrl>
+  <RegexName>NovelListUrl</RegexName>
+  <Pattern>http://www.hk020.com/top/lastupdate.html
+http://www.hk020.com/top/lastupdate/2.html
+http://www.hk020.com/top/lastupdate/3.html</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelListUrl>
+ <PubChapterRegion>
+  <RegexName>PubChapterRegion</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubChapterRegion>
+ <NovelName>
+  <RegexName>NovelName</RegexName>
+  <Pattern>&lt;meta property="og:title" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelName>
+ <NovelSearch_GetNovelName>
+  <RegexName>NovelSearch_GetNovelName</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelSearch_GetNovelName>
+ <NovelList_GetNovelKey2>
+  <RegexName>NovelList_GetNovelKey2</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelList_GetNovelKey2>
+ <LagerSort>
+  <RegexName>LagerSort</RegexName>
+  <Pattern>&lt;meta property="og:novel:category" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </LagerSort>
+ <SmallSort>
+  <RegexName>SmallSort</RegexName>
+  <Pattern>&lt;meta property="og:novel:category" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </SmallSort>
+ <GetSiteUrl>
+  <RegexName>GetSiteUrl</RegexName>
+  <Pattern>http://www.hk020.com</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </GetSiteUrl>
+ <TestSearchNovelName>
+  <RegexName>TestSearchNovelName</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </TestSearchNovelName>
+ <NovelDegree>
+  <RegexName>NovelDegree</RegexName>
+  <Pattern>&lt;meta property="og:novel:status" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelDegree>
+ <PubContentText_FT2JT>
+  <RegexName>PubContentText_FT2JT</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubContentText_FT2JT>
+ <NovelAuthor>
+  <RegexName>NovelAuthor</RegexName>
+  <Pattern>&lt;meta property="og:novel:author" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelAuthor>
+ <NovelInfo_GetNovelPubKey>
+  <RegexName>NovelInfo_GetNovelPubKey</RegexName>
+  <Pattern>&lt;meta property="og:novel:read_url" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelInfo_GetNovelPubKey>
+ <PubContentText_ASCII>
+  <RegexName>PubContentText_ASCII</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubContentText_ASCII>
+ <NovelCover>
+  <RegexName>NovelCover</RegexName>
+  <Pattern>&lt;meta property="og:image" content="(.+?)"/&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelCover>
+ <RuleVersion>
+  <RegexName>RuleVersion</RegexName>
+  <Pattern>2</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </RuleVersion>
+ <PubContentText_BJ2QJ>
+  <RegexName>PubContentText_BJ2QJ</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubContentText_BJ2QJ>
+ <NovelInfoExtra>
+  <RegexName>NovelInfoExtra</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelInfoExtra>
+ <PubIndexUrl>
+  <RegexName>PubIndexUrl</RegexName>
+  <Pattern>{NovelPubKey}</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubIndexUrl>
+ <NovelDefaultCoverUrl>
+  <RegexName>NovelDefaultCoverUrl</RegexName>
+  <Pattern>http://www.hk020.com/cover/nocover.jpg</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelDefaultCoverUrl>
+ <PubContentUrl2>
+  <RegexName>PubContentUrl2</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubContentUrl2>
+ <PubContentUrl>
+  <RegexName>PubContentUrl</RegexName>
+  <Pattern>{ChapterKey}</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubContentUrl>
+ <GetSiteName>
+  <RegexName>GetSiteName</RegexName>
+  <Pattern>采集站</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </GetSiteName>
+ <PubChapterName>
+  <RegexName>PubChapterName</RegexName>
+  <Pattern>&lt;a href=".+?" title=".+?"&gt;(.+?)&lt;/a&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubChapterName>
+ <GetSiteCharset>
+  <RegexName>GetSiteCharset</RegexName>
+  <Pattern>utf8</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </GetSiteCharset>
+ <PubChapter_GetChapterKey>
+  <RegexName>PubChapter_GetChapterKey</RegexName>
+  <Pattern>&lt;a href="(.+?)" title=".+?"&gt;.+?&lt;/a&gt;</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </PubChapter_GetChapterKey>
+ <NovelSearch_GetNovelKey>
+  <RegexName>NovelSearch_GetNovelKey</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelSearch_GetNovelKey>
+ <NovelKeyword>
+  <RegexName>NovelKeyword</RegexName>
+  <Pattern/>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelKeyword>
+ <NovelUrl>
+  <RegexName>NovelUrl</RegexName>
+  <Pattern>http://www.hk020.com/info/{NovelKey}.html</Pattern>
+  <Method/>
+  <FilterPattern/>
+  <Options/>
+ </NovelUrl>
+</RuleConfigInfo>

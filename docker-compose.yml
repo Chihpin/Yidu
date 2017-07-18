@@ -15,7 +15,23 @@ services:
   #     - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
   #   restart: always
 
+  
+  yidu_spider:
+    container_name: yidu_spider
+    image: 'f498f9d0fa81' #yidu_spider:last
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - yidu-network
+    volumes:
+      - ./app:/usr/local/spider/ROOT
+    restart: always
+
+
   yidu:
+    container_name: yidu
     image: 'f498f9d0fa81' #yidu:last
     ports: 
       - "8080:8080"
@@ -37,7 +53,8 @@ services:
     restart: always
 
 
-  postgres:
+  yidu_db:
+    container_name: yidu_db
     container_name: postgres
     image: postgres
     ports:
