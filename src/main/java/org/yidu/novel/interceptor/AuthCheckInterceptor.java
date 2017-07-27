@@ -9,6 +9,10 @@ import org.yidu.novel.action.base.AbstractBaseAction;
 import org.yidu.novel.action.base.AbstractInstallBaseAction;
 import org.yidu.novel.action.base.AbstractPublicBaseAction;
 import org.yidu.novel.action.base.AbstractUserBaseAction;
+
+import org.yidu.novel.action.base.JsonBasePublicAction;
+import org.yidu.novel.action.base.JsonBaseAdminAction;
+
 import org.yidu.novel.constant.YiDuConstants;
 import org.yidu.novel.service.UserService;
 import org.yidu.novel.utils.CookieUtils;
@@ -80,7 +84,7 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
             }
         }
         // 访问管理画面，没登录的话或非管理员的话跳转到登陆画面
-        if (invocation.getAction() instanceof AbstractAdminBaseAction) {
+        if ((invocation.getAction() instanceof AbstractAdminBaseAction) || (invocation.getAction() instanceof JsonBaseAdminAction)) {
             AbstractAdminBaseAction action = (AbstractAdminBaseAction) invocation.getAction();
             if (LoginManager.isLoginFlag()) {
                 if (LoginManager.getLoginUser().getType() == YiDuConstants.UserType.ADMINISTRATOR) {
@@ -95,7 +99,7 @@ public class AuthCheckInterceptor extends AbstractInterceptor {
         }
 
         // 公共画面页面随意访问
-        if (invocation.getAction() instanceof AbstractPublicBaseAction) {
+        if ((invocation.getAction() instanceof AbstractPublicBaseAction) || (invocation.getAction() instanceof JsonBasePublicAction)) {
             return invocation.invoke();
         } else {
             AbstractBaseAction action = (AbstractBaseAction) invocation.getAction();

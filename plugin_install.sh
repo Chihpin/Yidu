@@ -14,6 +14,7 @@ mvn clean
 mvn package
 
 # 打包镜像
+docker build --no-cache=true -t yidu:latest .
 docker build --build-arg --no-cache=true -t yidu:latest .
 
 

@@ -3,6 +3,8 @@
 # Package Files #
 *.war
 *.ear
+.idea
+data
 /jcs_swap
 /log
 /target
@@ -15,3 +17,5 @@
 /target
 /src/main/webapp/reader
 structuringdata
+
+YiDuNovel.iml

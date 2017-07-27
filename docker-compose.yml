@@ -1,10 +1,27 @@
 version: '2'
 services:
 
-  # test:
-  #   image: tomcat:7.0.79-jre7-alpine
-  #   ports: 
-  #     - "8080:8080"
+  test:
+    image: 6fa7aa0a975f # tomcat-debug # tomcat:9.0.0-jre8-alpine
+    ports: 
+      - "8080:8080"
+      - "8000:8000"
+    # links:
+    #   - yidu_db
+    # depends_on:
+    #   - yidu_db
+    # environment:
+    #   - JPDA_ADDRESS="8000"
+    #   - JPDA_TRANSPORT="dt_socket"
+    volumes:
+      - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
+      # - ./target/YiDuNovel.war:/usr/local/tomcat/webapps/ROOT.war
+    restart: always
+
+  
+  # yidu_spider:
+  #   container_name: yidu_spider
+  #   image: 'f498f9d0fa81' #yidu_spider:last
   #   links:
   #     - postgres
   #   depends_on:
@@ -12,64 +29,42 @@ services:
   #   networks:
   #     - yidu-network
   #   volumes:
-  #     - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
+  #     - ./app:/usr/local/spider/ROOT
   #   restart: always
 
-  
-  yidu_spider:
-    container_name: yidu_spider
-    image: 'f498f9d0fa81' #yidu_spider:last
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    networks:
-      - yidu-network
-    volumes:
-      - ./app:/usr/local/spider/ROOT
-    restart: always
 
+  # yidu:
+  #   container_name: yidu
+  #   image: 'f498f9d0fa81' #yidu:last
+  #   ports: 
+  #     - "8080:8080"
+  #   links:
+  #     - yidu_db
+  #   depends_on:
+  #     - yidu_db
+  #   networks:
+  #     - yidu-network
+  #   environment:
+  #     - YIDU_DB_HOST=172.16.1.101 # 本地 局域网 ip 不能用 localhost 127.0.0.1
+  #     - YIDU_DB_PORT=5433
+  #     - YIDU_DB_NAME=yidu
+  #     - YIDU_DB_USER=postgres
+  #     - YIDU_DB_PWD=postgres
+  #   volumes:
+  #     - ./docker/webapps:/usr/local/tomcat/webapps
+  #     - ./docker/yidu:/usr/local/yidu
+  #   restart: always
 
-  yidu:
-    container_name: yidu
-    image: 'f498f9d0fa81' #yidu:last
-    ports: 
-      - "8080:8080"
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    networks:
-      - yidu-network
-    environment:
-      - YIDU_DB_HOST=172.16.1.101.com # 本地 局域网 ip 不能用 localhost 127.0.0.1
-      - YIDU_DB_PORT=5433
-      - YIDU_DB_NAME=yidu
-      - YIDU_DB_USER=postgres
-      - YIDU_DB_PWD=postgres
-    # volumes:
-      # - ./docker/webapps:/usr/local/tomcat/webapps
-      # - ./docker/yidu:/usr/local/yidu
-    restart: always
-
-
-  yidu_db:
-    container_name: yidu_db
-    container_name: postgres
-    image: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - yidu-network
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      # - POSTGRES_DB=postgres
-    volumes:
-      - ./data/:/var/lib/postgresql/data
-    restart: always
-  
-networks:
-  yidu-network:
-    driver: bridge
-
+  # yidu_db:
+  #   container_name: yidu_db
+  #   container_name: postgres
+  #   image: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_DB=postgres
+  #   volumes:
+  #     - ./data/:/var/lib/postgresql/data
+  #   restart: always
