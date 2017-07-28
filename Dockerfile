@@ -31,10 +31,13 @@ ENV YIDU_DB_HOST="localhost" \
     YIDU_DB_PORT="5432" \
     YIDU_DB_NAME="yidu" \
     YIDU_DB_USER="postgres" \
-    YIDU_DB_PWD="postgres"
+    YIDU_DB_PWD="postgres" \
+    YIDU_BOOKS_PATH="books"
 
-VOLUME ["/usr/local/yidu", "/usr/local/tomcat/webapps/ROOT"]
+RUN mkdir -p $CATALINA_HOME/webapps/ROOT/$YIDU_BOOKS_PATH
 
-CMD ["catalina.sh", "run"]
-#CMD ["yidu_run.sh"]
+VOLUME $CATALINA_HOME/webapps/ROOT/$YIDU_BOOKS_PATH
+
+#CMD ["catalina.sh", "run"]
 #CMD ["catalina.sh", "jpda", "run"]
+CMD ["yidu_run.sh"]

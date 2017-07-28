@@ -2,10 +2,10 @@ FROM java:8-jre-alpine
 
 MAINTAINER chihpin@users.noreply.github.com
 
-ENV SPIDER_HOME=/usr/local/spider
-ENV SPIDER_WEBROOT=/usr/local/spider
-ENV PATH $SPIDER_HOME:$PATH
-RUN mkdir -p $SPIDER_HOME && mkdir -p $SPIDER_WEBROOT
+ENV SPIDER_HOME /usr/local/spider
+ENV PATH $SPIDER_HOME:$SPIDER_HOME/scripts:$PATH
+
+RUN mkdir -p $SPIDER_HOME $SPIDER_TXT $SPIDER_COVER
 
 WORKDIR $SPIDER_HOME
 
@@ -17,11 +17,20 @@ ENV YIDU_DB_HOST="localhost" \
     YIDU_DB_USER="postgres" \
     YIDU_DB_PWD="postgres"
 
-ENV SPIDER_SITE_NAME='52YIDU' \
+# -rule demo.xml -ca
+# -rule demo.xml -c 1-78000
+
+ENV SPIDER_RULE='demo' \
+    SPIDER_SITE_NAME='52YIDU' \
     SPIDER_SITE_HOST='http://localhost:8080' \
-    SPIDER_TXT='files/article/txt' \
-    SPIDER_COVER='files/article/cover'
+    SPIDER_RUN='-rule ${SPIDER_RULE}.xml -c 1-78000'
+    
+ENV SPIDER_BOOKS=$SPIDER_HOME/books \
+    SPIDER_TXT="txt" \
+    SPIDER_COVER="cover"
 
-VOLUME ['/usr/local/spider/WEBROOT']
+RUN mkdir -p $SPIDER_BOOKS/$SPIDER_TXT $SPIDER_BOOKS/$SPIDER_COVER
 
-CMD ["./start.sh"]
+VOLUME $SPIDER_BOOKS
+
+CMD ["start.sh"]

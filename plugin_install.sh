@@ -20,3 +20,13 @@ docker build --build-arg --no-cache=true -t yidu:latest .
 
 # 运行容器
 docker-compose up -d
+
+
+# https://forums.docker.com/t/host-path-of-volume/12277/3
+# You need to keep in mind that Docker is still running inside a VM. The system paths are still relative to the VM, and not to your Mac.
+# Only some folders are already mounted from your Mac into the VM. You can get an overview by running this command:
+docker run --rm -it -v /:/vm-root alpine:edge ls -l /vm-root
+
+docker run --rm -it -v /usr/local/yidu:/vm-root alpine:edge ls -l /vm-root
+
+docker run --rm -it -v /var/lib/docker/volumes/yidunovel_yidu_volume/_data:/vm-root alpine:edge ls -l /vm-root
