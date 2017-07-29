@@ -29,17 +29,21 @@ services:
       - yidu
       - yidu_db
     environment:
+      - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      - YIDU_DB_PORT=5432
+      - YIDU_DB_NAME=yidu
+      - YIDU_DB_USER=postgres
+      - YIDU_DB_PWD=postgres
       - SPIDER_SITE_NAME="天天阅读"
-      - SPIDER_SITE_HOST="http://172.16.1.13:8080"
+      - SPIDER_SITE_HOST="http://192.168.202.128:8080"
     # volumes_from:
     #   - yidu
-    # volumes:
-    #   - ./volume/spider:/usr/local/spider
-    #   - ./volume/ROOT/books/txt:/usr/local/books/txt
-    #   - ./volume/ROOT/books/cover:/usr/local/books/cover
     volumes:
-      # - yidu_volume:/usr/local/spider
-      - yidu_volume:/usr/local/spider/books
+      # - ./.volume/spider:/usr/local/spider
+      - ./.volume/app:/usr/local/spider/www
+    # volumes:
+    #   # - yidu_volume:/usr/local/spider
+    #   - yidu_volume:/usr/local/spider/books
     restart: always
 
 
@@ -53,15 +57,17 @@ services:
     depends_on:
       - yidu_db
     environment:
-      - YIDU_DB_HOST=172.16.1.13 # 本地 局域网 ip 不能用 localhost 127.0.0.1
-      - YIDU_DB_PORT=5433
+      - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      - YIDU_DB_PORT=5432
       - YIDU_DB_NAME=yidu
       - YIDU_DB_USER=postgres
       - YIDU_DB_PWD=postgres
     # volumes_from:
     #   - yidu_volume
+    # volumes:
+    #   - yidu_volume:/usr/local/tomcat/webapps/ROOT/books
     volumes:
-      - yidu_volume:/usr/local/tomcat/webapps/ROOT/books
+      - ./.volume/app:/usr/local/tomcat/webapps/ROOT
     restart: always
 
   yidu_db:
@@ -75,10 +81,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     volumes:
-      - ./volume/postgresql:/var/lib/postgresql/data
+      - ./.volume/postgresql:/var/lib/postgresql/data
     restart: always
 
 
-volumes:
-  yidu_volume:
+# volumes:
+#   yidu_volume:
       # - ./volume1

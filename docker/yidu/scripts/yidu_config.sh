@@ -4,12 +4,26 @@
     Clear='\033[0m'
 
     echo -e "${Green}----[Config]----------------------------------------------------------------------------------${Clear}"
+    
+    cd $YIDU_HOME
 
+    # ------------------------------------------------------------------------------------------------------
+    # copy www
+    # ------------------------------------------------------------------------------------------------------
+
+
+    dir=$CATALINA_HOME/webapps/ROOT
+    files=`ls $dir`
+    if [ -z "$files" ]; then
+        echo "Folder 'ROOT' copying ..."
+        mv $YIDU_HOME/ROOT/* $dir/ 
+    else
+        echo "Folder $dir is not empty."
+    fi
 
     # ------------------------------------------------------------------------------------------------------
     # update jdbc properties
     # ------------------------------------------------------------------------------------------------------
-    cd $YIDU_HOME
 
     mkdir -p WEB-INF/classes
     jdbc=WEB-INF/classes/jdbc.properties
@@ -27,19 +41,22 @@
     cat ${jdbc}
     echo '-----'
 
-    ls -l $CATALINA_HOME/webapps/
+    ls -l $CATALINA_HOME/webapps/ROOT
 
     # Not working: jar tool is part of jdk
     # jar -uvf $CATALINA_HOME/webapps/ROOT.war WEB-INF/classes/jdbc.properties
 
     # does not deploy (unpack) ROOT.war
     # ls $CATALINA_HOME/webapps/ROOT
-    # cp ${jdbc} $CATALINA_HOME/webapps/ROOT/WEB-INF/classes/jdbc.properties
-    echo $(whoami)
+    
+    cp ${jdbc} $CATALINA_HOME/webapps/ROOT/WEB-INF/classes/jdbc.properties
+    
+    # echo $(whoami)
 
     # https://stackoverflow.com/questions/45104097/dockerize-tomcat-web-app-with-custom-configuration-via-env
     # https://superuser.com/questions/413888/how-to-update-one-file-located-in-a-zip-subdirectory
-    zip -ur $CATALINA_HOME/webapps/ROOT.war WEB-INF
+    # zip -ur $CATALINA_HOME/webapps/ROOT.war WEB-INF
+
 
     # mkdir test_war
     # cd test_war

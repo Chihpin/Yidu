@@ -29,4 +29,6 @@ docker run --rm -it -v /:/vm-root alpine:edge ls -l /vm-root
 
 docker run --rm -it -v /usr/local/yidu:/vm-root alpine:edge ls -l /vm-root
 
-docker run --rm -it -v /var/lib/docker/volumes/yidunovel_yidu_volume/_data:/vm-root alpine:edge ls -l /vm-root
+docker run --rm -it -v /var/lib/docker/volumes/yidu_yidu_volume/_data:/vm-root alpine:edge ls -l /vm-root
+
+git config --global user.email 'chihpin@users.noreply.github.com'

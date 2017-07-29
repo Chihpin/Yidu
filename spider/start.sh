@@ -7,7 +7,7 @@
 #/usr/java/jdk1.6.0_45/bin/java -jar spider.jar -ca &
 
 cd $SPIDER_HOME
-./scripts/spider_config.sh > logs/conf_log.txt
+./scripts/spider_config.sh
 
 #
 # java -jar spider.jar -ca &

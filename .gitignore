@@ -1,5 +1,6 @@
 *.class
 volume
+.volume
 # Package Files #
 *.war
 *.ear

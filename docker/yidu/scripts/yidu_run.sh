@@ -1,5 +1,5 @@
 #!/bin/bash
 
-yidu_config.sh > ${YIDU_HOME}/log.txt
+yidu_config.sh
 
 catalina.sh run

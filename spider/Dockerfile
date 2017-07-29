@@ -3,14 +3,18 @@ FROM java:8-jre-alpine
 MAINTAINER chihpin@users.noreply.github.com
 
 ENV SPIDER_HOME /usr/local/spider
+ENV SPIDER_WWW /usr/local/spider/www
 ENV PATH $SPIDER_HOME:$SPIDER_HOME/scripts:$PATH
 
-RUN mkdir -p $SPIDER_HOME $SPIDER_TXT $SPIDER_COVER
+RUN mkdir -p $SPIDER_HOME $SPIDER_WWW
 
 WORKDIR $SPIDER_HOME
 
 COPY . $SPIDER_HOME
 
+RUN apk update && apk add bash && rm /var/cache/apk/* \
+        && chmod +x $SPIDER_HOME/scripts/spider_config.sh
+        
 ENV YIDU_DB_HOST="localhost" \
     YIDU_DB_PORT="5432" \
     YIDU_DB_NAME="yidu" \
@@ -25,12 +29,7 @@ ENV SPIDER_RULE='demo' \
     SPIDER_SITE_HOST='http://localhost:8080' \
     SPIDER_RUN='-rule ${SPIDER_RULE}.xml -c 1-78000'
     
-ENV SPIDER_BOOKS=$SPIDER_HOME/books \
-    SPIDER_TXT="txt" \
-    SPIDER_COVER="cover"
-
-RUN mkdir -p $SPIDER_BOOKS/$SPIDER_TXT $SPIDER_BOOKS/$SPIDER_COVER
-
-VOLUME $SPIDER_BOOKS
+ENV SPIDER_TXT=books/txt \
+    SPIDER_COVER=books/cover
 
 CMD ["start.sh"]
