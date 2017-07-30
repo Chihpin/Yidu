@@ -6,12 +6,14 @@
 
 #/usr/java/jdk1.6.0_45/bin/java -jar spider.jar -ca &
 
-cd $SPIDER_HOME
-./scripts/spider_config.sh
+spider_config.sh
 
+cd $SPIDER_HOME
 #
 # java -jar spider.jar -ca &
 
 # 多线程
 
 java -jar spider.jar -m &
+
+tail -f /dev/null

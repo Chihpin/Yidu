@@ -1,5 +1,6 @@
-FROM java:8-jre-alpine
-
+FROM java:8-jre
+# openjdk:7 
+# openjdk-8-jre
 MAINTAINER chihpin@users.noreply.github.com
 
 ENV SPIDER_HOME /usr/local/spider
@@ -12,9 +13,13 @@ WORKDIR $SPIDER_HOME
 
 COPY . $SPIDER_HOME
 
-RUN apk update && apk add bash && rm /var/cache/apk/* \
-        && chmod +x $SPIDER_HOME/scripts/spider_config.sh
+# RUN apk update && apk add bash && rm /var/cache/apk/* \
+#         && chmod +x $SPIDER_HOME/scripts/spider_config.sh
         
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+
+RUN chmod +x $SPIDER_HOME/scripts/spider_config.sh
+
 ENV YIDU_DB_HOST="localhost" \
     YIDU_DB_PORT="5432" \
     YIDU_DB_NAME="yidu" \
@@ -24,10 +29,10 @@ ENV YIDU_DB_HOST="localhost" \
 # -rule demo.xml -ca
 # -rule demo.xml -c 1-78000
 
-ENV SPIDER_RULE='demo' \
+ENV SPIDER_RULE='hk020.com' \
     SPIDER_SITE_NAME='52YIDU' \
     SPIDER_SITE_HOST='http://localhost:8080' \
-    SPIDER_RUN='-rule ${SPIDER_RULE}.xml -c 1-78000'
+    SPIDER_RUN='-c 1-78000'
     
 ENV SPIDER_TXT=books/txt \
     SPIDER_COVER=books/cover

@@ -32,3 +32,9 @@ docker run --rm -it -v /usr/local/yidu:/vm-root alpine:edge ls -l /vm-root
 docker run --rm -it -v /var/lib/docker/volumes/yidu_yidu_volume/_data:/vm-root alpine:edge ls -l /vm-root
 
 git config --global user.email 'chihpin@users.noreply.github.com'
+
+docker run -it --rm --name spider yidu_spider
+
+bash -c "clear && docker exec -it yidu_spider sh"
+
+

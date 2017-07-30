@@ -11,15 +11,10 @@
     # copy www
     # ------------------------------------------------------------------------------------------------------
 
-
+    
     dir=$CATALINA_HOME/webapps/ROOT
-    files=`ls $dir`
-    if [ -z "$files" ]; then
-        echo "Folder 'ROOT' copying ..."
-        mv $YIDU_HOME/ROOT/* $dir/ 
-    else
-        echo "Folder $dir is not empty."
-    fi
+    echo "Folder 'ROOT' copying ..."
+    mv $YIDU_HOME/ROOT/* $dir/
 
     # ------------------------------------------------------------------------------------------------------
     # update jdbc properties

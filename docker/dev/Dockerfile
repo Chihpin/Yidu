@@ -1,4 +1,4 @@
-FROM tomcat:7-jre8
+FROM tomcat:9.0.0-jre8-alpine
 
 MAINTAINER Cihh Pin <xxx.xxx@xxx.com>
 
@@ -9,7 +9,7 @@ ADD tomcat-users.xml $CATALINA_HOME/conf/
 
 
 # create mount point for volume with application
-RUN mkdir $CATALINA_HOME/webapps/yidu
+# RUN mkdir $CATALINA_HOME/webapps/yidu
 
 # add tomcat jpda debugging environmental variables
 #ENV JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
