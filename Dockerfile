@@ -19,9 +19,7 @@ COPY target/YiDuNovel $YIDU_HOME/ROOT
 #        && chmod +x $YIDU_HOME/scripts/yidu_run.sh \
 #        && chmod +x $YIDU_HOME/scripts/yidu_config.sh
 
-
-RUN apk update && apk add bash && rm /var/cache/apk/* \
-        && dos2unix $YIDU_HOME/conf/* \
+RUN dos2unix $YIDU_HOME/conf/* \
         && dos2unix $YIDU_HOME/scripts/* \
         && chmod +rw $YIDU_HOME \
         && chmod +x $YIDU_HOME/scripts/yidu_run.sh \

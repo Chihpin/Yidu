@@ -1,4 +1,4 @@
-    #!/bin/bash
+    #!/bin/sh
 
     Green='\033[0;32m'
     Clear='\033[0m'

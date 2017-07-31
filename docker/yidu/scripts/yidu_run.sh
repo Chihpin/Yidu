@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 yidu_config.sh
 

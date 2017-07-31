@@ -2,23 +2,23 @@ version: '3'
 
 services:
 
-  test:
-    image: tomcat-dev
-    ports: 
-      - "8080:8080"
-      - "8000:8000"
-    # links:
-    #   - yidu_db
-    # depends_on:
-    #   - yidu_db
-    environment:
-      - YIDU_DB_HOST=chihpin.com
-      - YIDU_DB_PORT=3432
-      - YIDU_DB_USER=chih
-      - YIDU_DB_PWD=1Qazxsw2
-    volumes:
-      - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
-    restart: always
+  # test:
+  #   image: tomcat-dev
+  #   ports: 
+  #     - "8080:8080"
+  #     - "8000:8000"
+  #   # links:
+  #   #   - yidu_db
+  #   # depends_on:
+  #   #   - yidu_db
+  #   environment:
+  #     - YIDU_DB_HOST=chihpin.com
+  #     - YIDU_DB_PORT=3432
+  #     - YIDU_DB_USER=chih
+  #     - YIDU_DB_PWD=1Qazxsw2
+  #   volumes:
+  #     - ./target/YiDuNovel:/usr/local/tomcat/webapps/ROOT
+  #   restart: always
 
   
   # yidu_spider:
@@ -46,26 +46,27 @@ services:
   #   restart: always
 
 
-  # yidu:
-  #   container_name: yidu
-  #   image: yidu #'f498f9d0fa81' #yidu
-  #   ports: 
-  #     - "8080:8080"
-  #   links:
-  #     - yidu_db
-  #   depends_on:
-  #     - yidu_db
-  #   environment:
-  #     - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
-  #     - YIDU_DB_PORT=5432
-  #     - YIDU_DB_USER=postgres
-  #     - YIDU_DB_PWD=postgres
-  #   # volumes_from:
-  #     # - yidu_volume
-  #   volumes:
-  #   #   - ./.volume/app:/usr/local/tomcat/webapps/ROOT
-  #     - ./.volume/books:/usr/local/tomcat/webapps/ROOT/books
-  #   restart: always
+  yidu:
+    container_name: yidu
+    image: yidu #'f498f9d0fa81' #yidu
+    ports: 
+      - "8080:8080"
+    # links:
+    #   - yidu_db
+    # depends_on:
+    #   - yidu_db
+    environment:
+      - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      - YIDU_DB_PORT=5432
+      - YIDU_DB_USER=postgres
+      - YIDU_DB_PWD=postgres
+      - YIDU_DB_NAME=yidu2
+    # volumes_from:
+      # - yidu_volume
+    volumes:
+    #   - ./.volume/app:/usr/local/tomcat/webapps/ROOT
+      - ./.volume/books:/usr/local/tomcat/webapps/ROOT/books
+    restart: always
 
   # yidu_db:
   #   container_name: yidu_db
