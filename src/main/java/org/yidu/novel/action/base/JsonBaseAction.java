@@ -1,20 +1,10 @@
 package org.yidu.novel.action.base;
 
 import org.yidu.novel.utils.Pagination;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
 import org.yidu.novel.bean.ResponseBean;
 import org.yidu.novel.constant.YiDuConfig;
 import org.yidu.novel.constant.YiDuConstants;
-import com.google.gson.Gson;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import org.yidu.novel.bean.ResponseBean;
 /**
  * <p>
  * JSON处理的基类
@@ -25,6 +15,44 @@ import org.yidu.novel.bean.ResponseBean;
  * @author shinpa.you
  */
 public abstract class JsonBaseAction extends AbstractBaseAction {
+
+
+    public enum RETCODE {
+        SUCCESS(0),     // 请求成功
+
+        // User:
+        UNLOGIN(1001),   // 请登录
+        LOGIN_PERR(1002), // 用户名或密码错误
+
+        // Subscribe
+        SUB_MAX(2001),
+
+        // Bookcase
+        BOOKCASE_MAX(3001),
+        BOOKCASE_NOTFOUND(3002),
+
+        // Book
+        BOOK_NOTFOUND(4001),
+
+        // 通用
+        PARAM_ERR(-1),   // 参数错误
+        LOGIC_ERR(-2),   // 逻辑错误
+        SERVER_ERR(-3);  // 服务器错误
+
+
+        public final int intValue;
+
+        private RETCODE(int number) {
+            this.intValue = number;
+        }
+
+        public int getIntValue() {
+            return intValue;
+        }
+    }
+
+
+
     /**
      * 串行化版本统一标识符
      */
@@ -66,6 +94,7 @@ public abstract class JsonBaseAction extends AbstractBaseAction {
     @Override
     public String execute() {
         res = loadJsonData();
+
         return JSON_RESULT;
     }
 

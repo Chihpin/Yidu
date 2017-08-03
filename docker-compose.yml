@@ -23,7 +23,7 @@ services:
   
   # yidu_spider:
   #   container_name: yidu_spider
-  #   image: yidu_spider #'f498f9d0fa81' #yidu_spider
+  #   image: yidu-spider #'f498f9d0fa81' #yidu_spider
   #   links:
   #     - yidu_db
   #   depends_on:
@@ -56,11 +56,18 @@ services:
     # depends_on:
     #   - yidu_db
     environment:
-      - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
-      - YIDU_DB_PORT=5432
-      - YIDU_DB_USER=postgres
-      - YIDU_DB_PWD=postgres
+      # - YIDU_DB_HOST=192.168.202.128 # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      # - YIDU_DB_PORT=5432
+      # - YIDU_DB_USER=postgres
+      # - YIDU_DB_PWD=postgres
+      # - YIDU_DB_NAME=yidu2
+
+      - YIDU_DB_HOST=chihpin.com # 本地 局域网 ip 不能用 localhost 127.0.0.1
+      - YIDU_DB_PORT=3432
+      - YIDU_DB_USER=chih
+      - YIDU_DB_PWD=1Qazxsw2
       - YIDU_DB_NAME=yidu2
+    
     # volumes_from:
       # - yidu_volume
     volumes:
@@ -68,18 +75,20 @@ services:
       - ./.volume/books:/usr/local/tomcat/webapps/ROOT/books
     restart: always
 
-  # yidu_db:
-  #   container_name: yidu_db
-  #   container_name: postgres
-  #   image: postgres
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_USER=postgres
-  #   volumes:
-  #     - ./.volume/postgresql:/var/lib/postgresql/data
-  #   restart: always
+  yidu_db:
+    container_name: yidu_db
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./.volume/postgresql:/var/lib/postgresql/data
+      - ./.volume/dbsql/.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./.volume/dbsql/.sql:/docker-entrypoint-initdb.d/2-data.sql
+    restart: always
 
 
 # volumes:

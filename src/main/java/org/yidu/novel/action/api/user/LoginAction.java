@@ -1,4 +1,4 @@
-package org.yidu.novel.action.api;
+package org.yidu.novel.action.api.user;
 
 import java.util.Date;
 
@@ -118,7 +118,7 @@ public class LoginAction extends JsonBasePublicAction {
     protected ResponseBean<?> loadJsonData() {
 
         if (loginid.length() > 32 || loginid.length() == 0 || password.length() > 32 || password.length() == 0) {
-            return new ResponseBean<Object>(1000, null);
+            return new ResponseBean<Object>(RETCODE.LOGIN_PERR.intValue, null);
         }
 
         logger.debug("LoginAction login has been excuted.");
@@ -128,7 +128,7 @@ public class LoginAction extends JsonBasePublicAction {
             if (user.getActivedflag() == null || !user.getActivedflag()) {
                 addActionError(getText("errors.login.actived"));
 
-                return new ResponseBean<Object>(1001, null);
+                return new ResponseBean<Object>(RETCODE.LOGIN_PERR.intValue, null);
             }
             logger.info("user " + loginid + " has logined.");
 
@@ -147,12 +147,11 @@ public class LoginAction extends JsonBasePublicAction {
             addActionError(getText("errors.login.failed"));
             logger.info("user " + loginid + " try to login ,but failed.");
             logger.debug("LoginAction login user is not exist. abnormally end.");
-            return new ResponseBean<Object>(1002, null);
+            return new ResponseBean<Object>(RETCODE.SERVER_ERR.intValue, null);
         }
         ResponseBean<String> responseBean = new ResponseBean<String>();
         Gson gson = new Gson();
         String obj = gson.toJson(user);
-        responseBean.setStatus(0);
         responseBean.setDataObj(obj);
         return responseBean;
     }

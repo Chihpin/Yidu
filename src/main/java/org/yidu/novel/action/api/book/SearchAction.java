@@ -1,4 +1,4 @@
-package org.yidu.novel.action.api;
+package org.yidu.novel.action.api.book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.apache.struts2.convention.annotation.Action;
  * @version 1.1.9
  * @author shinpa.you
  */
-@Action(value = "api/search")
+@Action(value = "api/book/search")
 public class SearchAction extends JsonBasePublicAction {
     /**
      * 串行化版本统一标识符
@@ -161,7 +161,6 @@ public class SearchAction extends JsonBasePublicAction {
         ResponseBean<String> responseBean = new ResponseBean<String>();
         Gson gson = new Gson();
         String obj = gson.toJson(articleList);
-        responseBean.setStatus(0);
         responseBean.setDataObj(obj);
         return responseBean;
     }

@@ -12,25 +12,18 @@ RUN mkdir -p $YIDU_HOME $YIDU_HOME/ROOT \
 COPY docker/yidu $YIDU_HOME
 COPY target/YiDuNovel $YIDU_HOME/ROOT
 
-#RUN apk update && apk add zip bash && rm /var/cache/apk/* \
-#        && dos2unix $YIDU_HOME/conf/* \
-#        && dos2unix $YIDU_HOME/scripts/* \
-#        && chmod +rw $YIDU_HOME \
-#        && chmod +x $YIDU_HOME/scripts/yidu_run.sh \
-#        && chmod +x $YIDU_HOME/scripts/yidu_config.sh
-
-RUN dos2unix $YIDU_HOME/conf/* \
-        && dos2unix $YIDU_HOME/scripts/* \
-        && chmod +rw $YIDU_HOME \
+RUN chmod +rw $YIDU_HOME \
         && chmod +x $YIDU_HOME/scripts/yidu_run.sh \
         && chmod +x $YIDU_HOME/scripts/yidu_config.sh
 
-ENV YIDU_DB_HOST="localhost" \
+ENV YIDU_SITE_TITLE="易读" \
+    YIDU_SITE_DOMAIN="localhost:8080" \
+    YIDU_PATH_TXT="books/txt" \
+    YIDU_PATH_COVER="books/cover" \
+    YIDU_DB_HOST="localhost" \
     YIDU_DB_PORT="5432" \
     YIDU_DB_NAME="yidu" \
     YIDU_DB_USER="postgres" \
     YIDU_DB_PWD="postgres"
 
-#CMD ["catalina.sh", "run"]
-#CMD ["catalina.sh", "jpda", "run"]
 CMD ["yidu_run.sh"]

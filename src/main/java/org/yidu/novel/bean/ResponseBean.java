@@ -1,6 +1,8 @@
 package org.yidu.novel.bean;
 
 
+import org.yidu.novel.action.base.JsonBaseAction;
+
 public class ResponseBean<T> {
 
     private int status;
@@ -8,6 +10,7 @@ public class ResponseBean<T> {
     private T dataObj;
 
     public ResponseBean() {
+        setStatus(JsonBaseAction.RETCODE.SUCCESS.intValue);
     }
 
     public ResponseBean(int status, T dataObj) {

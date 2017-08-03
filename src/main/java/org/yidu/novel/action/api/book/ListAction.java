@@ -1,10 +1,9 @@
-package org.yidu.novel.action.api;
+package org.yidu.novel.action.api.book;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
 import org.yidu.novel.bean.ArticleSearchBean;
 import org.yidu.novel.cache.ArticleCountManager;
@@ -20,6 +19,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.yidu.novel.bean.ResponseBean;
 import org.yidu.novel.action.base.JsonBasePublicAction;
+import org.apache.struts2.convention.annotation.Action;
 
 /**
  * 
@@ -31,8 +31,8 @@ import org.yidu.novel.action.base.JsonBasePublicAction;
  * @version 1.1.9
  * @author shinpa.you
  */
-@Action(value = "api/book_list")
-public class BookListAction extends JsonBasePublicAction {
+@Action(value = "api/book/list")
+public class ListAction extends JsonBasePublicAction {
     /**
      * 串行化版本统一标识符
      */
@@ -276,7 +276,6 @@ public class BookListAction extends JsonBasePublicAction {
         ResponseBean<String> responseBean = new ResponseBean<String>();
         Gson gson = new Gson();
         String obj = gson.toJson(articleList);
-        responseBean.setStatus(0);
         responseBean.setDataObj(obj);
         return responseBean;
     }

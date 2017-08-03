@@ -1,4 +1,4 @@
-package org.yidu.novel.action.api;
+package org.yidu.novel.action.api.chapter;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ import org.yidu.novel.action.base.JsonBasePublicAction;
  * @version 1.1.9
  * @author shinpa.you
  */
-@Action(value = "api/chapter_list")
-public class ChapterListAction extends JsonBasePublicAction {
+@Action(value = "api/chapter/list")
+public class ListAction extends JsonBasePublicAction {
 
     /**
      * 串行化版本统一标识符
@@ -176,16 +176,15 @@ public class ChapterListAction extends JsonBasePublicAction {
 
         } else {
             addActionError(getText("errors.not.exsits.article"));
+            return new ResponseBean<Object>(RETCODE.BOOK_NOTFOUND.intValue, null);
         }
-        if (articleno != 0) {
-            articleService.updateVisitStatistic(articleno);
-        }
+
+        articleService.updateVisitStatistic(articleno);
         logger.debug("loadData normally end.");
         
         ResponseBean<String> responseBean = new ResponseBean<String>();
         Gson gson = new Gson();
         String obj = gson.toJson(chapterList);
-        responseBean.setStatus(0);
         responseBean.setDataObj(obj);
         return responseBean;
     }

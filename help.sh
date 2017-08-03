@@ -37,4 +37,7 @@ docker run -it --rm --name spider yidu_spider
 
 bash -c "clear && docker exec -it yidu_spider sh"
 
+bash -c "clear && docker exec -it yidu sh"
+
+dos2unix 
 
