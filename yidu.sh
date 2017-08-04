@@ -53,7 +53,8 @@ function build
         docker build . -t yidu-spider:latest
         cd ..
     fi
-    mvn clean && mvn package && docker build . -t yidu:latest
+    package
+    docker build . -t yidu:latest
 }
 
 

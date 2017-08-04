@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "yidu",
+            "type": "bashdb",
+            "request": "launch",
+            "scriptPath": "${workspaceRoot}/yidu.sh",
+            "commandLineArguments": "",
+            "windows": {
+                "bashPath": "C:\\Windows\\sysnative\\bash.exe"
+            },
+            "linux": {
+                "bashPath": "bash"
+            },
+            "osx": {
+                "bashPath": "bash"
+            }
+        }
+    ]
+}
